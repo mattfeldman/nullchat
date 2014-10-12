@@ -1,0 +1,8 @@
+<template name="roomView">
+    <div class="col-md-12 roomContainer">
+        {{#each messages}}
+            {{> message}}
+        {{/each}}
+    </div>
+    {{> newMessage}}
+</template>
