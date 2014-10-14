@@ -1,0 +1,7 @@
+<template name="roomList">
+    <ul>
+        {{#each this}}
+        <li><a href="/room/{{_id}}">{{name}}</a></li>
+        {{/each}}
+    </ul>
+</template>
