@@ -1,0 +1,29 @@
+div,body,html{
+    padding: 0px;
+    margin: 0px;
+}
+#container{
+    background: purple;
+    height:500px;
+}
+#users{
+    background: pink;
+    min-height: 50px;
+}
+#room_list{
+    width: 20%;
+    min-height:110px;
+    background: black;
+}
+#message_list{
+    overflow-y: scroll;
+    background:green;
+    height: 500px;
+}
+#some_messages{
+    height:1000px;
+}
+#message_entry{
+    height:30px;
+    background:orange;
+}
