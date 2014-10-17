@@ -3,5 +3,5 @@ Meteor.publish('messages', function() {
 });
 
 Meteor.publish('rooms',function(){
-   return Rooms.find();
+   return Rooms.find({users:this.userId});
 });

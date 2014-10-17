@@ -255,4 +255,3 @@ Meteor.setInterval(function () {
     var now = new Date().getTime();
     generateMessage(now);
 },3000);
-
