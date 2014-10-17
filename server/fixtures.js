@@ -226,7 +226,12 @@ for (var i = 0; i < roomNames.length; i++) {
     var existingRoom = Rooms.findOne({name: roomNames[i]});
     if (!existingRoom){
         var roomId = Rooms.insert({
-            name: roomNames[i]
+            name: roomNames[i],
+            topic: "Test Topic",
+            isPrivate: false,
+            ownerId: users[0]._id,
+            invited: [],
+            users: _.map(users,function(user){return userId})
         });
     }
     rooms.push(existingRoom || Rooms.findOne(roomId));
