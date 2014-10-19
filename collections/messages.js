@@ -11,8 +11,12 @@ Meteor.methods({
             throw new Meteor.Error(401, "You must specify a message");
         if(!room)
             throw new Meteor.Error(401, "You must specify a valid room");
-        if(room.isPrivate && !_.contains(room.invited,user._id))
+        if(room.isPrivate === true && !_.contains(room.invited,user._id))
             throw new Meteor.Error(401, "You must be invited to send a message to this room.");
+
+        if(messageStub.message[0]=='/'){
+            return processCommand(messageStub);
+        }
 
         message = {
             author: user.username,
