@@ -15,7 +15,7 @@ Meteor.methods({
             throw new Meteor.Error(401, "You must be invited to send a message to this room.");
 
         if(messageStub.message[0]=='/'){
-            return processCommand(messageStub);
+            return processCommand({message:messageStub.message,room:room});
         }
 
         message = {
