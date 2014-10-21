@@ -1,7 +1,7 @@
 <template name="roomList">
     <ul>
         {{#each this}}
-        <li><a href="/room/{{_id}}">{{name}}</a></li>
+        <li><a href="/room/{{_id}}">{{locked}}{{name}}</a></li>
         {{/each}}
     </ul>
 </template>
