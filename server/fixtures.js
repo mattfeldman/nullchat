@@ -212,10 +212,10 @@ var lines = ['You were like a brother to me. Do you remember? We used played in 
 
 var users = [];
 for (var i = 0; i < userNames.length; i++) {
-    var existingUser = Meteor.users.findOne({profile:{name:userNames[i]}});
+    var existingUser = Meteor.users.findOne({username:userNames[i]});
     if (!existingUser) {
         var userId = Meteor.users.insert({
-            profile: {name: userNames[i]}
+            username: userNames[i]
         });
     }
     users.push(existingUser || Meteor.users.findOne(userId));
@@ -245,7 +245,7 @@ if (Messages.find().count() === 0) {
 function generateMessage(time) {
     var now = new Date().getTime();
     Messages.insert({
-        author: randomElement(users).profile.name,
+        authorId: randomElement(users)._id,
         timestamp: time,
         message: randomElement(lines),
         roomId: randomElement(rooms)._id

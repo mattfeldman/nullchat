@@ -19,7 +19,7 @@ Meteor.methods({
         }
 
         message = {
-            author: user.username,
+            authorId: user._id,
             message: messageStub.message,
             roomId: room._id,
             timestamp: new Date().getTime()
