@@ -7,5 +7,14 @@ Template.message.helpers({
     },
     avatar: function(){
         return Meteor.users.findOne({_id:this.authorId}).profile.avatar;
+    },
+    color: function(){
+        user = Meteor.users.findOne({_id:this.authorId});
+        if(user && user.profile.color){
+            return "border-left: 3px solid"+user.profile.color;
+        }
+        else{
+            return "border-left: 3px solid transparent";
+        }
     }
 });
