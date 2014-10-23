@@ -1,5 +1,5 @@
-Meteor.publish('messages', function () {
-    return Messages.find();
+Meteor.publish('messages', function (roomId,limit) {
+    return Messages.find({roomId:roomId},{limit:limit,sort:{timestamp:-1}});
 });
 Meteor.publish('currentRooms', function () {
     //return Rooms.find({users: this.userId});

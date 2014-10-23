@@ -1,6 +1,7 @@
 <template name="roomView">
     <a href="/">room list</a>
     <div class="col-md-12 roomContainer">
+        <a href="#" id="loadMore">load more</a>
         {{#each messages}}
             {{> message}}
         {{/each}}
