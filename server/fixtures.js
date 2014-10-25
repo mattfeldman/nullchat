@@ -238,8 +238,8 @@ for (var i = 0; i < roomNames.length; i++) {
 }
 if (Messages.find().count() === 0) {
     var now = new Date().getTime();
-    for (var i = 0; i < 100; i++) {
-        generateMessage(now - i*3600);
+    for (var i = 0; i < 1000000; i++) {
+        generateMessage(now - i*360);
     }
 }
 function generateMessage(time) {
