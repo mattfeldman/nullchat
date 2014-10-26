@@ -8,7 +8,9 @@ Template.joinRoom.helpers({
                 {
                     collection:Rooms,
                     field: "name",
-                    template: Template.roomPill
+                    template: Template.roomPill,
+                    matchAll:true,
+                    callback:function(doc,ele){Meteor.call('joinRoom',doc._id);}
                 }
             ],
             rooms:function(){
