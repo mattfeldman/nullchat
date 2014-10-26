@@ -238,7 +238,7 @@ for (var i = 0; i < roomNames.length; i++) {
 }
 if (Messages.find().count() === 0) {
     var now = new Date().getTime();
-    for (var i = 0; i < 1000000; i++) {
+    for (var i = 0; i < 100000; i++) {
         generateMessage(now - i*360);
     }
 }

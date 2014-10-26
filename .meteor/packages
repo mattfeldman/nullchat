@@ -8,3 +8,5 @@ mrt:accounts-ui-bootstrap-dropdown
 accounts-password
 iron:router
 sacha:spin
+mizzao:autocomplete
+
