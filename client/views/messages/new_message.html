@@ -1,10 +1,10 @@
 <template name="newMessage">
-    <form class="main row">
-        <div class="control-group col-md-12">
-            <label class="control-label" for="message">Message</label>
-            <div class="controls">
-                <input name="message" id="message" type="text" value="" placeholder="dont be shy..."/>
+    <form class="main row" style="position:absolute; width:80%;height:50px;bottom:0px;">
+        <div style="padding:10px">
+            <div style="position: absolute; absolute; left:5px;right:80px;">
+                <textarea style="width:100%; resize:none; border:1px solid black;height:25px" name="message" id="message" placeholder="dont be shy..."></textarea>
             </div>
+            <input style="position:absolute;right:0px; width:70px;height:25px" type="submit" value="submit"/>
         </div>
     </form>
 </template>

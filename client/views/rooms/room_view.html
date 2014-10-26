@@ -1,10 +1,14 @@
 <template name="roomView">
-    <a href="/">room list</a>
-    <div class="col-md-12 roomContainer">
-        <a href="#" id="loadMore">load more</a>
-        {{#each messages}}
-            {{> message}}
-        {{/each}}
+    <div style="position:absolute; float:left;width:80%;top:100px;bottom:50px;overflow: auto;" class="col-md-12 roomContainer">
+        <div style="">
+            {{#each messages}}
+                {{> message}}
+            {{/each}}
+        </div>
+    </div>
+    <div style="position:absolute;right:0;width: 20%">
+        {{> joinRoom}}
+        {{> roomList currentRooms}}
     </div>
     {{> newMessage}}
 </template>

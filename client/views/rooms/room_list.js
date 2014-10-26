@@ -3,3 +3,6 @@ Template.roomList.helpers({
         return this.isPrivate ? "[LOCKED] -" : "";
     }
 });
+//Template.roomList.created = function(){
+//    console.log(this);
+//};
