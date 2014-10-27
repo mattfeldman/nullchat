@@ -1,12 +1,15 @@
 <template name="roomView">
-    <div style="position:absolute; float:left;width:80%;top:100px;bottom:50px;overflow: auto;" class="col-md-12 roomContainer">
+    <div style="position: absolute;width:80%;top:150px;height:50px">
+        <span style="font-size:36px">{{room.name}}</span>
+    </div>
+    <div style="position:absolute; float:left;width:80%;top:200px;bottom:50px;overflow: auto;" class="col-md-12 roomContainer">
         <div style="">
             {{#each messages}}
                 {{> message}}
             {{/each}}
         </div>
     </div>
-    <div style="position:absolute;right:0;width: 20%">
+    <div style="position:absolute;right:0;top:200px;width: 20%">
         {{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
     </div>
