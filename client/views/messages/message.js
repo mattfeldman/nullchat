@@ -9,7 +9,7 @@ Template.message.helpers({
         return Meteor.users.findOne({_id:this.authorId});
     },
     color: function(){
-        user = Meteor.users.findOne({_id:this.authorId});
+        var user = Meteor.users.findOne({_id:this.authorId});
         if(user && user.profile && user.profile.color){
             return "border-left: 3px solid"+user.profile.color;
         }

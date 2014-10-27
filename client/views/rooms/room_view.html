@@ -13,6 +13,7 @@
     <div style="position:absolute;right:0;top:200px;width: 20%">
         {{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
+        {{> userList room.users}}
     </div>
     {{> newMessage}}
 </template>

@@ -27,8 +27,3 @@ Template.joinRoom.helpers({
         }
     }
 });
-
-
-Template.joinRoom.created = function(){
-    console.log(Rooms.find().fetch());
-};
