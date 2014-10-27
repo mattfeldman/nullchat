@@ -1,21 +1,15 @@
 Template.message.created=function(){
-    this.user = Meteor.users.findOne({_id:this.data.authorId});
+
 };
 Template.message.helpers({
     myMessage: function(){
         return this.authorId === Meteor.userId() ? "my-message" : ""; // TODO: Be better
     },
-    userName: function(){
-        user = Template.instance().user;
-        return user && user.username;
-    },
-    avatar: function(){
-        user = Template.instance().user;
-        if(user && user.profile && user.profile.avatar)
-            return user.profile.avatar;
+    user: function(){
+        return Meteor.users.findOne({_id:this.authorId});
     },
     color: function(){
-        user = Template.instance().user;
+        user = Meteor.users.findOne({_id:this.authorId});
         if(user && user.profile && user.profile.color){
             return "border-left: 3px solid"+user.profile.color;
         }
