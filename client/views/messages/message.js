@@ -18,6 +18,7 @@ Template.message.helpers({
         }
     },
     showTimestamp:function(){
-        return new Date(this.timestamp);
+        var d = new Date(this.timestamp);
+        return d.getHours()+":"+ d.getMinutes()+":"+ d.getSeconds();
     }
 });
