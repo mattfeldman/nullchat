@@ -10,7 +10,15 @@ Template.joinRoom.helpers({
                     field: "name",
                     template: Template.roomPill,
                     matchAll:true,
-                    callback:function(doc,ele){Meteor.call('joinRoom',doc._id);}
+                    callback:function(doc,ele){
+                        Meteor.call('joinRoom',doc._id,function(err,data){
+                            if(!err){
+                                Router.go('roomView',{_id:data});
+                                ele.val('');
+                                $("#message").focus();
+                            }
+                        });
+                    }
                 }
             ],
             rooms:function(){

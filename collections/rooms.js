@@ -16,5 +16,8 @@ Meteor.methods({
             throw new Meteor.Error("you are not allowed in this room");
 
         Rooms.update({_id:room._id}, {$addToSet: {users: userId}});
+
+        return room._id;
+        //TODO: Set your current room to new room
     }
 });
