@@ -9,4 +9,5 @@ accounts-password
 iron:router
 sacha:spin
 mizzao:autocomplete
+mizzao:user-status
 
