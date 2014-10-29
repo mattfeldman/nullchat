@@ -1,6 +1,18 @@
 Template.userElement.helpers({
-    user:function(){
-        var user =  Meteor.users.findOne({_id:this.toString()});
-        return user;
+    statusColor: function(){
+        var status = this.status;
+        if(!status){
+            return "black";
+        }
+        else if(status.idle){ // ordering is important as online can be true at the same time
+            return "orange";
+        }
+        else if(status.online){
+            return "green";
+        }
+        else{
+            return "red";
+        }
+
     }
 });
