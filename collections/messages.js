@@ -33,13 +33,12 @@ Meteor.methods({
             var richMessage = {
                 authorId: user._id,
                 roomId: room._id,
-                timestamp: timestamp,
+                timestamp: timestamp+1,
                 type: "rich",
                 layout: contentMessage.layout,
                 data: contentMessage.data
             };
             Messages.insert(richMessage);
-            console.log(richMessage);
         }
 
         return messageId; // Why, not used...
@@ -51,9 +50,7 @@ function runContentProcessors(messageStub) {
         processor = contentProcessors[i];
         match = processor.regex.exec(messageStub.message);
         if (match) {
-            console.log("match");
             var returnval = processor.execute(match);
-            console.log(returnval);
             return returnval;
         }
     }

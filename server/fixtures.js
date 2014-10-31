@@ -243,7 +243,6 @@ if (Messages.find().count() === 0) {
     }
 }
 function generateMessage(time) {
-    console.log("test");
     var now = new Date().getTime();
     Messages.insert({
         authorId: randomElement(users)._id,
