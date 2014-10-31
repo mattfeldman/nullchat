@@ -20,5 +20,11 @@ Template.message.helpers({
     showTimestamp:function(){
         var d = new Date(this.timestamp);
         return d.getHours()+":"+ d.getMinutes()+":"+ d.getSeconds();
+    },
+    isPlain: function(){
+        return this.type === "plain";
+    },
+    isImage: function(){
+        return this.type === "image";
     }
 });

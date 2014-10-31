@@ -1,3 +1,11 @@
 <template name="message">
-    <div class="row {{myMessage}}" style="border-left: 3px solid transparent;{{color}}">{{>messageUser user}}{{message}}{{showTimestamp}}</div>
+    <div class="row {{myMessage}}" style="border-left: 3px solid transparent;{{color}}">
+        {{>messageUser user}}
+        {{#if isPlain}}
+            {{message}}
+        {{else}}{{#if isImage}}
+            <img src="{{data}}" width="500px" height="500px"/>
+        {{/if}}{{/if}}
+        {{showTimestamp}}
+    </div>
 </template>

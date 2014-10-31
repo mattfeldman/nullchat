@@ -238,17 +238,19 @@ for (var i = 0; i < roomNames.length; i++) {
 }
 if (Messages.find().count() === 0) {
     var now = new Date().getTime();
-    for (var i = 0; i < 100000; i++) {
+    for (var i = 0; i < 1000; i++) {
         generateMessage(now - i*360);
     }
 }
 function generateMessage(time) {
+    console.log("test");
     var now = new Date().getTime();
     Messages.insert({
         authorId: randomElement(users)._id,
         timestamp: time,
         message: randomElement(lines),
-        roomId: randomElement(rooms)._id
+        roomId: randomElement(rooms)._id,
+        type:"plain"
     });
 }
 Meteor.setInterval(function () {

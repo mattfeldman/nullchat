@@ -1,31 +1,73 @@
 Messages = new Meteor.Collection('messages');
 
 Meteor.methods({
-    'message':function(messageStub){
+    'message': function (messageStub) {
         user = Meteor.user();
         room = Rooms.findOne(messageStub.roomId);
 
-        if(!user)
+        if (!user)
             throw new Meteor.Error(401, "You need to login to send messages");
-        if(!messageStub.message) //TODO: Empty Stringss
+        if (!messageStub.message) //TODO: Empty Stringss
             throw new Meteor.Error(401, "You must specify a message");
-        if(!room)
+        if (!room)
             throw new Meteor.Error(401, "You must specify a valid room");
-        if(room.isPrivate === true && !_.contains(room.invited,user._id))
+        if (room.isPrivate === true && !_.contains(room.invited, user._id))
             throw new Meteor.Error(401, "You must be invited to send a message to this room.");
 
-        if(messageStub.message[0]=='/'){
-            return processCommand({message:messageStub.message,room:room});
+        if (messageStub.message[0] == '/') {
+            return processCommand({message: messageStub.message, room: room});
         }
 
+        var timestamp = new Date().getTime();
         message = {
             authorId: user._id,
-            message: messageStub.message,
             roomId: room._id,
-            timestamp: new Date().getTime()
+            timestamp: timestamp,
+            type: "plain",
+            message: messageStub.message
+        };
+        var messageId = Messages.insert(message);
+
+        contentMessage = runContentProcessors(messageStub);
+        if (contentMessage) {
+            var richMessage = {
+                authorId: user._id,
+                roomId: room._id,
+                timestamp: timestamp,
+                type: "rich",
+                layout: contentMessage.layout,
+                data: contentMessage.data
+            };
+            Messages.insert(richMessage);
+            console.log(richMessage);
         }
 
-        var messageId = Messages.insert(message);
-        return messageId;
+        return messageId; // Why, not used...
+
     }
 });
+function runContentProcessors(messageStub) {
+    for(var i=0;i<contentProcessors.length;i++){
+        processor = contentProcessors[i];
+        match = processor.regex.exec(messageStub.message);
+        if (match) {
+            console.log("match");
+            var returnval = processor.execute(match);
+            console.log(returnval);
+            return returnval;
+        }
+    }
+}
+var contentProcessors = [
+    {
+        name: "Image Processor",
+        regex: /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?/,   //From http://stackoverflow.com/questions/169625/regex-to-check-if-valid-url-that-ends-in-jpg-png-or-gif
+        execute: function (regexMatch) {
+            return {
+                layout: "image",
+                data: regexMatch[0]
+            };
+        }
+    }
+];
+
