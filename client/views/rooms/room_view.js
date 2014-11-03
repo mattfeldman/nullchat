@@ -14,3 +14,7 @@ Template.roomView.events({
         Session.set('messageLimit', Session.get('messageLimit')+20);
     }
 });
+
+Template.roomView.rendered = function(){
+    Meteor.call('setSeen',Session.get('currentRoom'));
+};
