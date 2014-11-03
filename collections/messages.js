@@ -14,10 +14,12 @@ Meteor.methods({
         if (room.isPrivate === true && !_.contains(room.invited, user._id))
             throw new Meteor.Error(401, "You must be invited to send a message to this room.");
 
+        // Process commands
         if (messageStub.message[0] == '/') {
             return processCommand({message: messageStub.message, room: room});
         }
 
+        // Create regular message
         var timestamp = new Date().getTime();
         message = {
             authorId: user._id,
@@ -28,12 +30,13 @@ Meteor.methods({
         };
         var messageId = Messages.insert(message);
 
+        // Create content message
         contentMessage = runContentProcessors(messageStub);
         if (contentMessage) {
             var richMessage = {
                 authorId: user._id,
                 roomId: room._id,
-                timestamp: timestamp+1,
+                timestamp: timestamp + 1,
                 type: "rich",
                 layout: contentMessage.layout,
                 data: contentMessage.data
@@ -41,12 +44,30 @@ Meteor.methods({
             Messages.insert(richMessage);
         }
 
+        // Check for mentions
+        var roomUsers = Meteor.users.find({_id:{$in:room.users}}); // TODO: Remove the need to query this
+        roomUsers.forEach(function (user) {
+            //TODO: self-check: if(user._id == message.authorId) return;
+            if(message.message.indexOf(user.username) > -1){ // TODO: should be tokenized name either " name " or "@user"
+                var notification = {
+                    authorId: message.authorId,
+                    roomId: room._id,
+                    messageId: messageId,
+                    userId: user._id,
+                    seen: false,
+                    // Properties needed for sending a summary
+                    timestamp: message.timestamp,
+                    message: message.message,
+                    roomName: room.name
+                };
+                Notifications.insert(notification);
+            }
+        });
         return messageId; // Why, not used...
-
     }
 });
 function runContentProcessors(messageStub) {
-    for(var i=0;i<contentProcessors.length;i++){
+    for (var i = 0; i < contentProcessors.length; i++) {
         processor = contentProcessors[i];
         match = processor.regex.exec(messageStub.message);
         if (match) {

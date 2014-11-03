@@ -4,6 +4,10 @@ Template.roomList.helpers({
     },
     selected: function(){
         return this._id === Session.get("currentRoom") ? "background: yellow;" : "";
+    },
+    notificationString: function(){
+        var count =  Notifications.find({roomId:this._id,seen:false}).count();
+        return count ? "("+count+")" : "";
     }
 });
 //Template.roomList.created = function(){

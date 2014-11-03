@@ -10,3 +10,6 @@ Meteor.publish('availableRooms', function () {
 Meteor.publish('users',function(){
    return Meteor.users.find({},{fields:{_id:1,username:1,profile:1,status:1}});
 });
+Meteor.publish('notifications',function(){
+    return Notifications.find({userId:this.userId});
+});
