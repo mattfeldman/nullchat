@@ -26,5 +26,8 @@ Template.message.helpers({
     },
     isImage: function(){
         return this.type === "rich" && this.layout === "image";
+    },
+    isFeedback: function(){
+        return this.type === "feedback";
     }
 });

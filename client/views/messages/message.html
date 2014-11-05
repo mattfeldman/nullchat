@@ -1,11 +1,14 @@
 <template name="message">
     <div class="row {{myMessage}}" style="border-left: 3px solid transparent;{{color}}">
-        {{>messageUser user}}
         {{#if isPlain}}
+            {{>messageUser user}}
             {{message}}
         {{else}}{{#if isImage}}
+            {{>messageUser user}}
             <img src="{{data}}" width="500px" height="500px"/>
-        {{/if}}{{/if}}
+        {{else}}{{#if isFeedback}}
+            <span class="feedback-message" style="background: lightblue">{{message}}</span>
+        {{/if}}{{/if}}{{/if}}
         {{showTimestamp}}
     </div>
 </template>
