@@ -1,5 +1,8 @@
 Meteor.publish('messages', function (roomId,limit) {
-    return Messages.find({roomId:roomId},{limit:limit,sort:{timestamp:-1}}); //TODO: Figure out how to secure this from publishing Messages a user should not see
+    return Messages.find({roomId:roomId,type:{$ne:'feedback'}},{limit:limit,sort:{timestamp:-1}}); //TODO: Figure out how to secure this from publishing Messages a user should not see
+});
+Meteor.publish('feedbackMessages',function(roomId,limit){
+    return Messages.find({roomId:roomId,type:'feedback',userId:this.userId},{limit:limit,sort:{timestamp:-1}});
 });
 Meteor.publish('currentRooms', function (){
     return Rooms.find({users:this.userId});//
