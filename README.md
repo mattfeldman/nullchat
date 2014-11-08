@@ -11,3 +11,12 @@ nullchat
 ## Packages used:
 - [mizzao:autocomplete](https://github.com/mizzao/meteor-autocomplete)
 - [mizzao:user-status](https://github.com/mizzao/meteor-user-status)
+
+
+## Adding packages
+```
+cd /vagrant/nullchat
+meteor add some:package
+cp -f /vagrant/nullchat/.meteor/packages /vagrant2/nullchat/.meteor/
+meteor
+```
