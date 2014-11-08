@@ -1,5 +1,4 @@
 Template.joinRoom.helpers({
-    //TODO: AUtocomplete
     settings:function() {
         return {
             position: "top",

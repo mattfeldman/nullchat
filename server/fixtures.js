@@ -231,7 +231,8 @@ for (var i = 0; i < roomNames.length; i++) {
             isPrivate: false,
             ownerId: users[0]._id,
             invited: [],
-            users: _.map(users,function(user){return user._id})
+            users: _.map(users,function(user){return user._id}),
+            moderators: []
         });
     }
     rooms.push(existingRoom || Rooms.findOne(roomId));
