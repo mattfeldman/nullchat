@@ -5,23 +5,28 @@ Meteor.methods({
         user = Meteor.user();
         room = Rooms.findOne(messageStub.roomId);
         try {
-            if (!user)
+            if (!user) {
                 throw new Meteor.Error(401, "You need to login to send messages");
+            }
             if (!messageStub.message) //TODO: Empty Stringss
+            {
                 throw new Meteor.Error(401, "You must specify a message");
-            if (!room)
+            }
+            if (!room) {
                 throw new Meteor.Error(401, "You must specify a valid room");
-            if (room.isPrivate === true && !_.contains(room.invited, user._id))
+            }
+            if (room.isPrivate === true && !_.contains(room.invited, user._id)) {
                 throw new Meteor.Error(401, "You must be invited to send a message to this room.");
+            }
 
             // Process commands
             if (messageStub.message[0] == '/') {
                 return processCommand({message: messageStub.message, room: room});
             }
         }
-        catch(e){
-            if(e.errorType === "Meteor.Error"){
-                sendFeedback(e.error,user,room);
+        catch (e) {
+            if (e.errorType === "Meteor.Error") {
+                sendFeedback(e.error, user, room);
             }
             return;
         }
@@ -51,7 +56,7 @@ Meteor.methods({
             Messages.insert(richMessage);
         }
 
-        if(Meteor.isServer) {
+        if (Meteor.isServer) {
             // Check for mentions
             var roomUsers = Meteor.users.find({_id: {$in: room.users}}); // TODO: Remove the need to query this
             roomUsers.forEach(function (user) {
@@ -122,17 +127,17 @@ var contentProcessors = [
         }
     }
 ];
-if(Meteor.isServer){
-    function sendFeedback(message,user,room){
-        if(!room) return; //TODO: Global feedback when feedback is about room? Maybe default to current room?
-        if(!message) return;
-        if(!user) return;
+if (Meteor.isServer) {
+    function sendFeedback(message, user, room) {
+        if (!room) return; //TODO: Global feedback when feedback is about room? Maybe default to current room?
+        if (!message) return;
+        if (!user) return;
         var feedbackMessage = {
             roomId: room._id,
             timestamp: new Date().getTime(),
             type: "feedback",
             message: message,
-            userId:user._id
+            userId: user._id
         };
         Messages.insert(feedbackMessage);
     }

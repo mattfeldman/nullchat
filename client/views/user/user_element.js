@@ -1,16 +1,16 @@
 Template.userElement.helpers({
-    statusColor: function(){
+    statusColor: function () {
         var status = this.status;
-        if(!status){
+        if (!status) {
             return "black";
         }
-        else if(status.idle){ // ordering is important as online can be true at the same time
+        else if (status.idle) { // ordering is important as online can be true at the same time
             return "orange";
         }
-        else if(status.online){
+        else if (status.online) {
             return "green";
         }
-        else{
+        else {
             return "red";
         }
 

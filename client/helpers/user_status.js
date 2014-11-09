@@ -1,5 +1,5 @@
-Deps.autorun(function(c){
-    try{
+Deps.autorun(function (c) {
+    try {
         UserStatus.startMonitor({
             threshold: 30000,
             interval: 1000,
@@ -7,5 +7,6 @@ Deps.autorun(function(c){
         });
         c.stop();
     }
-    catch(Exception){};
+    catch (Exception) {}
+    ;
 });

@@ -1,7 +1,7 @@
 var randomElement = function (array) {
     return array[Math.floor(Math.random() * array.length)];
 };
-var userNames = ['Data', 'Picard', 'Geordi', 'Worf', 'Riker','Wesley'];
+var userNames = ['Data', 'Picard', 'Geordi', 'Worf', 'Riker', 'Wesley'];
 var roomNames = ['The Bridge', 'Ten Forward', 'Sickbay', 'The Holodeck'];
 var lines = ['You were like a brother to me. Do you remember? We used played in the park near the lake.',
     'Yes, of course. Every summer, you came to Bergerac.',
@@ -212,7 +212,7 @@ var lines = ['You were like a brother to me. Do you remember? We used played in 
 
 var users = [];
 for (var i = 0; i < userNames.length; i++) {
-    var existingUser = Meteor.users.findOne({username:userNames[i]});
+    var existingUser = Meteor.users.findOne({username: userNames[i]});
     if (!existingUser) {
         var userId = Meteor.users.insert({
             username: userNames[i]
@@ -224,14 +224,16 @@ for (var i = 0; i < userNames.length; i++) {
 var rooms = [];
 for (var i = 0; i < roomNames.length; i++) {
     var existingRoom = Rooms.findOne({name: roomNames[i]});
-    if (!existingRoom){
+    if (!existingRoom) {
         var roomId = Rooms.insert({
             name: roomNames[i],
             topic: "Test Topic",
             isPrivate: false,
             ownerId: users[0]._id,
             invited: [],
-            users: _.map(users,function(user){return user._id}),
+            users: _.map(users, function (user) {
+                return user._id
+            }),
             moderators: []
         });
     }
@@ -240,7 +242,7 @@ for (var i = 0; i < roomNames.length; i++) {
 if (Messages.find().count() === 0) {
     var now = new Date().getTime();
     for (var i = 0; i < 1000; i++) {
-        generateMessage(now - i*360);
+        generateMessage(now - i * 360);
     }
 }
 function generateMessage(time) {
@@ -250,10 +252,10 @@ function generateMessage(time) {
         timestamp: time,
         message: randomElement(lines),
         roomId: randomElement(rooms)._id,
-        type:"plain"
+        type: "plain"
     });
 }
 Meteor.setInterval(function () {
     var now = new Date().getTime();
     generateMessage(now);
-},3000);
+}, 3000);

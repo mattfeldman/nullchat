@@ -1,32 +1,39 @@
-div,body,html{
+div, body, html {
     padding: 0px;
     margin: 0px;
 }
-#container{
+
+#container {
     background: purple;
-    height:500px;
+    height: 500px;
 }
-#users{
+
+#users {
     background: pink;
     min-height: 50px;
 }
-#room_list{
+
+#room_list {
     width: 20%;
-    min-height:110px;
+    min-height: 110px;
     background: black;
 }
-#message_list{
+
+#message_list {
     overflow-y: scroll;
-    background:green;
+    background: green;
     height: 500px;
 }
-#some_messages{
-    height:1000px;
+
+#some_messages {
+    height: 1000px;
 }
-#message_entry{
-    height:30px;
-    background:orange;
+
+#message_entry {
+    height: 30px;
+    background: orange;
 }
-.my-message{
-    background:yellow;
+
+.my-message {
+    background: yellow;
 }

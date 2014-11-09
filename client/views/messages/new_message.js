@@ -1,4 +1,4 @@
-var sendMessage = function(e){
+var sendMessage = function (e) {
     e.preventDefault();
     var messageStub = {
         message: $("#message").val(),
@@ -16,8 +16,8 @@ Template.newMessage.events({
     'submit form': function (e) {
         sendMessage(e);
     },
-    'keypress textarea':function(e){
-        if(e.keyCode === 13){
+    'keypress textarea': function (e) {
+        if (e.keyCode === 13) {
             sendMessage(e);
         }
     }
