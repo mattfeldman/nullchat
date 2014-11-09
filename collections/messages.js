@@ -2,8 +2,8 @@ Messages = new Meteor.Collection('messages');
 
 Meteor.methods({
     'message': function (messageStub) {
-        user = Meteor.user();
-        room = Rooms.findOne(messageStub.roomId);
+        var user = Meteor.user();
+        var room = Rooms.findOne(messageStub.roomId);
         try {
             if (!user) {
                 throw new Meteor.Error(401, "You need to login to send messages");
@@ -20,7 +20,7 @@ Meteor.methods({
             }
 
             // Process commands
-            if (messageStub.message[0] == '/') {
+            if (messageStub.message[0] === '/') {
                 return processCommand({message: messageStub.message, room: room});
             }
         }
@@ -33,7 +33,7 @@ Meteor.methods({
 
         // Create regular message
         var timestamp = new Date().getTime();
-        message = {
+        var message = {
             authorId: user._id,
             roomId: room._id,
             timestamp: timestamp,
@@ -43,7 +43,7 @@ Meteor.methods({
         var messageId = Messages.insert(message);
 
         // Create content message
-        contentMessage = runContentProcessors(messageStub);
+        var contentMessage = runContentProcessors(messageStub);
         if (contentMessage) {
             var richMessage = {
                 authorId: user._id,
@@ -77,7 +77,7 @@ Meteor.methods({
                     Notifications.insert(notification);
 
                     if (user.profile && user.profile.number) {
-                        smsBody = notification.userName + ': ' + notification.message + ' #' + notification.roomName;
+                        var smsBody = notification.userName + ': ' + notification.message + ' #' + notification.roomName;
 
                         try {
                             var twilio = Meteor.npmRequire('twilio')('AC370ea0996237c09f9dfdfc36d4c08e63', 'd1c6df072dbe1fe7279cd6a951fcab5a');
@@ -107,8 +107,8 @@ Meteor.methods({
 });
 function runContentProcessors(messageStub) {
     for (var i = 0; i < contentProcessors.length; i++) {
-        processor = contentProcessors[i];
-        match = processor.regex.exec(messageStub.message);
+        var processor = contentProcessors[i];
+        var match = processor.regex.exec(messageStub.message);
         if (match) {
             var returnval = processor.execute(match);
             return returnval;
@@ -127,19 +127,20 @@ var contentProcessors = [
         }
     }
 ];
-if (Meteor.isServer) {
-    function sendFeedback(message, user, room) {
-        if (!room) return; //TODO: Global feedback when feedback is about room? Maybe default to current room?
-        if (!message) return;
-        if (!user) return;
-        var feedbackMessage = {
-            roomId: room._id,
-            timestamp: new Date().getTime(),
-            type: "feedback",
-            message: message,
-            userId: user._id
-        };
-        Messages.insert(feedbackMessage);
+
+function sendFeedback(message, user, room) {
+    //TODO: Global feedback when feedback is about room? Maybe default to current room?
+    if (!room || !message || !user) {
+        return;
     }
+
+    var feedbackMessage = {
+        roomId: room._id,
+        timestamp: new Date().getTime(),
+        type: "feedback",
+        message: message,
+        userId: user._id
+    };
+    Messages.insert(feedbackMessage);
 }
 

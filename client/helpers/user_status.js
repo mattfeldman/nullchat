@@ -8,5 +8,4 @@ Deps.autorun(function (c) {
         c.stop();
     }
     catch (Exception) {}
-    ;
 });

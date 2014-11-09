@@ -2,7 +2,7 @@ Template.roomView.helpers({
     room: function () {
         return Rooms.findOne({_id: Session.get('currentRoom')});
     },
-    roomUsers: function (users) {
+    roomUsers: function () {
         var room = Rooms.findOne({_id: Session.get('currentRoom')});
         return Meteor.users.find({_id: {$in: room.users}});
     }

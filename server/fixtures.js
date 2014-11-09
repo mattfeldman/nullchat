@@ -221,6 +221,9 @@ for (var i = 0; i < userNames.length; i++) {
     users.push(existingUser || Meteor.users.findOne(userId));
 }
 
+var userIds = _.map(users, function (user) {
+    return user._id;
+});
 var rooms = [];
 for (var i = 0; i < roomNames.length; i++) {
     var existingRoom = Rooms.findOne({name: roomNames[i]});
@@ -231,9 +234,7 @@ for (var i = 0; i < roomNames.length; i++) {
             isPrivate: false,
             ownerId: users[0]._id,
             invited: [],
-            users: _.map(users, function (user) {
-                return user._id
-            }),
+            users: userIds,
             moderators: []
         });
     }
@@ -246,7 +247,6 @@ if (Messages.find().count() === 0) {
     }
 }
 function generateMessage(time) {
-    var now = new Date().getTime();
     Messages.insert({
         authorId: randomElement(users)._id,
         timestamp: time,
