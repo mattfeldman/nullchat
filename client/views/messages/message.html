@@ -2,7 +2,7 @@
     <div class="row {{myMessage}}" style="border-left: 3px solid transparent;{{color}}">
         {{#if isPlain}}
             {{>messageUser user}}
-            {{message}}
+            {{{emojifiedMessage}}}
         {{else}}{{#if isImage}}
             {{>messageUser user}}
             <img src="{{data}}" width="500px" height="500px"/>

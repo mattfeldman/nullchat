@@ -29,5 +29,8 @@ Template.message.helpers({
     },
     isFeedback: function () {
         return this.type === "feedback";
+    },
+    emojifiedMessage: function(){
+        return emojify.replace(this.message);
     }
 });
