@@ -132,6 +132,8 @@
       // Global Collections
       "Messages":false,
       "Rooms":false,
-      "Notifications":false
+      "Notifications":false,
+      "Emojis":false,
+      "emojify":false
     }
 }

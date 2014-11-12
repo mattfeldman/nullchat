@@ -34,6 +34,29 @@ Template.newMessage.helpers({
 
             return users + " currently typing...";
         }
+    },
+    settings: function () {
+        return {
+            position: "top",
+            limit: 5,
+            rules: [
+                {
+                    collection: Emojis,
+                    field: "name",
+                    template: Template.emojiPill,
+                    token: ':',
+                    matchAll: false,
+                    callback: function (doc, element) {
+                        var text = $(element).val();
+                        var newText = text.replace(':'+doc.name+' ',':'+doc.name+': '); // Add trailing :
+                        $(element).val(newText);
+                    }
+                }
+            ],
+            rooms: function () {
+                return Rooms.find();
+            }
+        };
     }
 });
 
