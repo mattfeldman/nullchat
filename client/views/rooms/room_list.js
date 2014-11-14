@@ -10,6 +10,3 @@ Template.roomList.helpers({
         return count ? "(" + count + ")" : "";
     }
 });
-//Template.roomList.created = function(){
-//    console.log(this);
-//};
