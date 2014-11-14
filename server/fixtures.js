@@ -215,7 +215,8 @@ for (var i = 0; i < userNames.length; i++) {
     var existingUser = Meteor.users.findOne({username: userNames[i]});
     if (!existingUser) {
         var userId = Meteor.users.insert({
-            username: userNames[i]
+            username: userNames[i],
+            profile:{color:"#FF0000"}
         });
     }
     users.push(existingUser || Meteor.users.findOne(userId));
