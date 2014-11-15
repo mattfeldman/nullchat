@@ -11,6 +11,7 @@ var sendMessage = function (e) {
     $("#roomContainer").scrollTop(100000); //TODO: This looks like an ugly hack
 };
 
+
 var _typingDep = new Deps.Dependency;
 Template.newMessage.helpers({
     typingUsers: function () {
@@ -60,14 +61,39 @@ Template.newMessage.helpers({
     }
 });
 
+var recallMessageWithNewOffset = function(offsetDelta){
+    var offset = Session.get("offset");
+    var findParams = {authorId:Meteor.userId(),type:'plain'};
+    if(offset === Messages.find(findParams).count() && offsetDelta > 0) return;
+    if(offset === 0 && offsetDelta < 0) return;
+    offset = offset+offsetDelta || 0;
+    Session.set("offset",offset);
+
+    var message = Messages.findOne(findParams,{skip:offset,limit:1, sort: {timestamp: -1}});
+    if(message) {
+        $("#message").val(message.message);
+    }
+}
+
 Template.newMessage.events({
     'submit form': function (e) {
         sendMessage(e);
     },
-    'keypress textarea': function (e) {
+    'keydown textarea': function (e) {
         throttledLastTyping();
-        if (e.keyCode === 13) {
-            sendMessage(e);
+
+        switch(e.keyCode){
+            case 13: // Return Key
+                sendMessage(e);
+                break;
+            case 38: // Up Arrow Key
+                recallMessageWithNewOffset(1);
+                break;
+            case 40: // Down Arrow Key
+                recallMessageWithNewOffset(-1);
+                break;
+            default:
+                break;
         }
     }
 });
