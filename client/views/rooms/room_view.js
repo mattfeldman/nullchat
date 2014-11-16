@@ -10,11 +10,15 @@ Template.roomView.helpers({
 
 Template.roomView.events({
     'click #loadMore': function (e) {
-        e.preventDefault();
         Session.set('messageLimit', Session.get('messageLimit') + 20);
+        e.preventDefault();
     }
 });
 
 Template.roomView.rendered = function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
+};
+
+Template.roomView.created = function(){
+    Deps.autorun(function(){Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'));});
 };
