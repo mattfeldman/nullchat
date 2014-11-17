@@ -7,7 +7,6 @@ Template.roomView.helpers({
         return Meteor.users.find({_id: {$in: room.users}});
     }
 });
-
 Template.roomView.events({
     'click #loadMore': function (e) {
         Session.set('messageLimit', Session.get('messageLimit') + 20);
@@ -17,8 +16,10 @@ Template.roomView.events({
 
 Template.roomView.rendered = function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
+    Meteor.setTimeout(scrollChatToBottom,100);
 };
-
-Template.roomView.created = function(){
-    Deps.autorun(function(){Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'));});
+Template.roomView.created = function () {
+    Deps.autorun(function () {
+        Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'));
+    });
 };

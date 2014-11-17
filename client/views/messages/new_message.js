@@ -8,7 +8,7 @@ var sendMessage = function (e) {
 
     });
     $("#message").val('');
-    $("#roomContainer").scrollTop(100000); //TODO: This looks like an ugly hack
+    scrollChatToBottom(); //TODO: This looks like an ugly hack
 };
 
 
