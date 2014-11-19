@@ -52,6 +52,16 @@ Template.newMessage.helpers({
                         var newText = text.replace(':'+doc.name+' ',':'+doc.name+': '); // Add trailing :
                         $(element).val(newText);
                     }
+                },
+                {
+                    collection: Meteor.users,
+                    field: "username",
+                    template: Template.userPill,
+                    token: '@',
+                    matchAll: false,
+                    callback: function (doc, element) {
+                        //$(element).val(newText);
+                    }
                 }
             ],
             rooms: function () {
