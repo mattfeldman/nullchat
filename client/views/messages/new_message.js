@@ -49,7 +49,7 @@ Template.newMessage.helpers({
                     matchAll: false,
                     callback: function (doc, element) {
                         var text = $(element).val();
-                        var newText = text.replace(':'+doc.name+' ',':'+doc.name+': '); // Add trailing :
+                        var newText = text.replace(':' + doc.name + ' ', ':' + doc.name + ': '); // Add trailing :
                         $(element).val(newText);
                     }
                 },
@@ -71,19 +71,25 @@ Template.newMessage.helpers({
     }
 });
 
-var recallMessageWithNewOffset = function(offsetDelta){
-    var offset = Session.get("offset");
-    var findParams = {authorId:Meteor.userId(),type:'plain'};
-    if(offset === Messages.find(findParams).count() && offsetDelta > 0) return;
-    if(offset === 0 && offsetDelta < 0) return;
-    offset = offset+offsetDelta || 0;
-    Session.set("offset",offset);
+var recallMessageWithNewOffset = function (offsetDelta) {
+    var messageElement = $("#message");
 
-    var message = Messages.findOne(findParams,{skip:offset,limit:1, sort: {timestamp: -1}});
-    if(message) {
-        $("#message").val(message.message);
+    var offset = Session.get("offset") || 0;
+    var findParams = {authorId: Meteor.userId(), type: 'plain'};
+    if ((offset !== Messages.find(findParams).count() && offsetDelta > 0) || (offset !== 0 && offsetDelta < 0)) {
+        offset = offset + offsetDelta;
     }
-}
+    Session.set("offset", offset);
+
+    var message = Messages.findOne(findParams, {skip: offset, limit: 1, sort: {timestamp: -1}});
+    if (message) {
+        var currentVal = messageElement.val();
+        if (Session.equals('lastmessage',currentVal) || currentVal === ""){
+            messageElement.val(message.message);
+            Session.set('lastmessage',message.message);
+        }
+    }
+};
 
 Template.newMessage.events({
     'submit form': function (e) {
@@ -92,7 +98,7 @@ Template.newMessage.events({
     'keydown textarea': function (e) {
         throttledLastTyping();
 
-        switch(e.keyCode){
+        switch (e.keyCode) {
             case 13: // Return Key
                 sendMessage(e);
                 break;
@@ -110,3 +116,6 @@ Template.newMessage.events({
 var throttledLastTyping = _.throttle(function () {
     Meteor.call('updateTypingActivity', Session.get('currentRoom'));
 }, 1000);
+Template.newMessage.created = function(){
+    Session.get("offset");
+}
