@@ -16,8 +16,7 @@ var _typingDep = new Deps.Dependency;
 Template.newMessage.helpers({
     typingUsers: function () {
         _typingDep.depend();
-
-        var cutoff = new Date(new Date().getTime() - 15 * 1000); // This timeout is odd; possible latency compensation at play?
+        var cutoff = new Date(new Date().getTime() - 5 * 1000);
         var typingUsers = Meteor.users.find({
             "status.lastActiveRoom": Session.get("currentRoom"),
             "status.lastTyping": {$gte: cutoff}
