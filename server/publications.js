@@ -1,4 +1,5 @@
 Meteor.publish('messages', function (roomId, limit) {
+    Meteor._sleepForMs(200);
     return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}}); //TODO: Figure out how to secure this from publishing Messages a user should not see
 });
 Meteor.publish('feedbackMessages', function (roomId) {
