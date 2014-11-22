@@ -1,5 +1,5 @@
 scrollChatToBottom = function() {
-    $("#roomContainer").scrollTop($("#roomContainer").height());
+    $("#roomContainer").scrollTop(100000);
 };
 
 scrollToMessage = function(messageId){

@@ -7,12 +7,8 @@
     </div>
     <div id="roomContainer" style="position:absolute; float:left;width:80%;top:200px;bottom:50px;overflow: auto;"
          class="col-md-12 roomContainer">
-        <a href="#" id="loadMore">load more</a>
-
-        <div style="">
-            {{#each messages}}
-                {{> message}}
-            {{/each}}
+        <div id="scrollContainer" style="">
+            {{> messageList messages}}
         </div>
     </div>
     <div style="position:absolute;right:0;top:200px;width: 20%">
