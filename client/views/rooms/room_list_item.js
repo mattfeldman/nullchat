@@ -14,8 +14,12 @@ Template.roomListItem.helpers({
     }
 });
 Template.roomListItem.events({
-    'click #leaveRoomLink':function(event, template){
+    'click .leaveRoomButton':function(event, template){
         event.preventDefault();
         Meteor.call('leaveRoom',template.data._id);
+    },
+    'click .setRoomLink':function(event,template){
+        event.preventDefault();
+        setCurrentRoom(template.data._id);
     }
 })

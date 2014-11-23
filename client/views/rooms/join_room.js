@@ -12,7 +12,7 @@ Template.joinRoom.helpers({
                     callback: function (doc, ele) {
                         Meteor.call('joinRoom', doc._id, function (err, data) {
                             if (!err) {
-                                Router.go('roomView', {_id: data});
+                                setCurrentRoom(data);
                                 ele.val('');
                                 $("#message").focus();
                             }

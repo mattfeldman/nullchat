@@ -9,3 +9,7 @@ scrollToMessage = function(messageId){
         container.scrollTop(container.scrollTop() + message.offset().top);
     }
 };
+
+setCurrentRoom = function(roomId){
+    Session.set('currentRoom',roomId);
+}

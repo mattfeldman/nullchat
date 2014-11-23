@@ -1,20 +1,19 @@
 <template name="roomView">
-    <input type="button" onclick="Meteor.logout()" value="logout"/>
-
-    <div style="position: absolute;width:80%;top:150px;height:50px">
+    <div style="position: absolute;width:80%;;height:50px">
         <span style="font-size:36px">{{room.name}}</span>
         <span style="font-size:12px">{{room.topic}}</span>
     </div>
-    <div id="roomContainer" style="position:absolute; float:left;width:80%;top:200px;bottom:50px;overflow: auto;"
+    <div id="roomContainer" style="position:absolute; float:left;width:80%;top:50px;bottom:50px;overflow: auto;"
          class="col-md-12 roomContainer">
         <div id="scrollContainer" style="">
             {{> messageList messages}}
         </div>
     </div>
-    <div style="position:absolute;right:0;top:200px;width: 20%">
+    <div style="position:absolute;right:0;top:0px;width: 20%">
         {{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
         {{> userList roomUsers}}
+        <input type="button" onclick="Meteor.logout()" value="logout"/>
     </div>
     {{> newMessage}}
 </template>
