@@ -3,6 +3,8 @@
         {{#if isPlain}}
             {{>messageUser user}}
             {{{emojifiedMessage}}}
+            <a class="likeMessageLink" href="#">+1</a>
+            ({{likedBy.length}})
         {{else}}{{#if isImage}}
             {{>messageUser user}}
             <img src="{{data}}" width="500px" height="500px"/>

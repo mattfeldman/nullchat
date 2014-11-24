@@ -34,3 +34,9 @@ Template.message.helpers({
         return emojify.replace(this.message);
     }
 });
+Template.message.events({
+    "click .likeMessageLink":function(event,template){
+        console.log(template);
+        Meteor.call('likeMessage',template.data._id);
+    }
+});

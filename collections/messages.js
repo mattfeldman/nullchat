@@ -1,6 +1,10 @@
 Messages = new Meteor.Collection('messages');
 
 Meteor.methods({
+    'likeMessage': function(id){
+        // TODO: Validations
+        Messages.update({_id:id},{$addToSet:{likedBy:Meteor.userId()}});
+    },
     'message': function (messageStub) {
         var user = Meteor.user();
         var room = Rooms.findOne(messageStub.roomId);
@@ -38,7 +42,9 @@ Meteor.methods({
             roomId: room._id,
             timestamp: timestamp,
             type: "plain",
-            message: messageStub.message
+            message: messageStub.message,
+            seenBy: [],
+            likedBy: []
         };
         var messageId = Messages.insert(message);
 
@@ -51,7 +57,9 @@ Meteor.methods({
                 timestamp: timestamp + 1,
                 type: "rich",
                 layout: contentMessage.layout,
-                data: contentMessage.data
+                data: contentMessage.data,
+                seenBy: [],
+                likedBy: []
             };
             Messages.insert(richMessage);
         }

@@ -253,7 +253,9 @@ function generateMessage(time) {
         timestamp: time,
         message: randomElement(lines),
         roomId: randomElement(rooms)._id,
-        type: "plain"
+        type: "plain",
+        seenBy: [],
+        likedBy: []
     });
 }
 Meteor.setInterval(function () {
