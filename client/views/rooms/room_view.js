@@ -9,6 +9,9 @@ Template.roomView.helpers({
     currentRooms: function () {
         return Rooms.find({users: Meteor.userId()});
     },
+    currentRoom: function () {
+        return Session.get('currentRoom');
+    },
     availableRooms: function () {
         return Rooms.find();
     }

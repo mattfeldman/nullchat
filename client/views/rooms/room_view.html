@@ -5,9 +5,13 @@
     </div>
     <div id="roomContainer" style="position:absolute; float:left;width:80%;top:50px;bottom:50px;overflow: auto;"
          class="col-md-12 roomContainer">
-        <div id="scrollContainer" style="">
-            {{> messageList messages}}
-        </div>
+        {{#if currentRoom}}
+            <div id="scrollContainer" style="">
+                {{> messageList messages}}
+            </div>
+        {{else}}
+            {{> noRoom }}
+        {{/if}}
     </div>
     <div style="position:absolute;right:0;top:0px;width: 20%">
         {{> joinRoom availableRooms}}
