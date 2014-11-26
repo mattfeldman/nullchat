@@ -1,3 +1,19 @@
+function roomLinks(message){
+    if(!message) return;
+    var loc = message.indexOf("#");
+    var rooms = Rooms.find({}).fetch();
+    for(var i =0; i < rooms.length; i++){
+        var roomName = rooms[i].name;
+        if(message.indexOf(rooms[i].name,loc) > 0){
+            var leftHalf = message.substring(0,loc);
+            var middle = '<a href="#" class="roomLink" data-roomId="'+rooms[i]._id+'">#'+roomName+'</a>';
+            var rightHalf = message.substring(loc+roomName.length+1,message.length+middle.length);
+            message = leftHalf + middle + rightHalf;
+            console.log(message);
+        }
+    }
+    return message;
+}
 Template.message.created = function () {
 
 };
@@ -30,13 +46,19 @@ Template.message.helpers({
     isFeedback: function () {
         return this.type === "feedback";
     },
+    finalMessageBody: function(){
+        return emojify.replace(roomLinks(this.message));
+    },
     emojifiedMessage: function(){
-        return emojify.replace(this.message);
     }
 });
 Template.message.events({
     "click .likeMessageLink":function(event,template){
         console.log(template);
         Meteor.call('likeMessage',template.data._id);
+    },
+    "click .roomLink":function(event,template){
+        var roomId = $(event.target).data("roomid");
+        setCurrentRoom(roomId);
     }
 });
