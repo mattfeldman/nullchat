@@ -27,7 +27,6 @@ Template.newMessage.helpers({
         }).join(',');
 
         if (users) {
-
             Meteor.setTimeout(function () {
                 _typingDep.changed();
             }, 5000);
@@ -61,6 +60,13 @@ Template.newMessage.helpers({
                     callback: function (doc, element) {
                         //$(element).val(newText);
                     }
+                },
+                {
+                    collection: Rooms,
+                    field: "name",
+                    template: Template.roomPill,
+                    token: '#',
+                    matchAll: false,
                 }
             ],
             rooms: function () {
