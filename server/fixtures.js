@@ -1,6 +1,7 @@
-var randomElement = function (array) {
+/*var randomElement = function (array) {
     return array[Math.floor(Math.random() * array.length)];
 };
+
 var userNames = ['Data', 'Picard', 'Geordi', 'Worf', 'Riker', 'Wesley'];
 var roomNames = ['The Bridge', 'Ten Forward', 'Sickbay', 'The Holodeck'];
 var lines = ['You were like a brother to me. Do you remember? We used played in the park near the lake.',
@@ -262,3 +263,16 @@ Meteor.setInterval(function () {
     var now = new Date().getTime();
     generateMessage(now);
 }, 3000);
+*/
+var room =Rooms.findOne({name:"welcome"});
+if(!room) {
+    var currentRoom = Rooms.insert({
+        name: "welcome",
+        topic: "welcome",
+        isPrivate: false,
+        ownerId: 0,
+        invited: [],
+        users: [],
+        moderators: []
+    });
+}
