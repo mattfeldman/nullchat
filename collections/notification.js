@@ -1,4 +1,4 @@
-Notifications = new Meteor.Collection('notifications');
+Notifications = new Meteor.Collection('notifications'); // jshint ignore:line
 
 Meteor.methods({
     'setSeen': function (roomId) {

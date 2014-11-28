@@ -4,9 +4,7 @@ var sendMessage = function (e) {
         message: $("#message").val(),
         roomId: Session.get('currentRoom')
     };
-    Meteor.call('message', messageStub, function (error, id) {
-
-    });
+    Meteor.call('message', messageStub);
     $("#message").val('');
     scrollChatToBottom(); //TODO: This looks like an ugly hack
 };
@@ -57,9 +55,6 @@ Template.newMessage.helpers({
                     template: Template.userPill,
                     token: '@',
                     matchAll: false,
-                    callback: function (doc, element) {
-                        //$(element).val(newText);
-                    }
                 },
                 {
                     collection: Rooms,

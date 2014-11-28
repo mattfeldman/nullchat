@@ -1,4 +1,4 @@
-Messages = new Meteor.Collection('messages');
+Messages = new Meteor.Collection('messages'); // jshint ignore:line
 
 Meteor.methods({
     'likeMessage': function(id){

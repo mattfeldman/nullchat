@@ -1,4 +1,4 @@
-Emojis = new Meteor.Collection("emojis");
+Emojis = new Meteor.Collection("emojis"); // jshint ignore:line
 
 // Populate emojis
 if (Meteor.isServer) {

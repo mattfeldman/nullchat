@@ -266,7 +266,7 @@ Meteor.setInterval(function () {
 */
 var room =Rooms.findOne({name:"welcome"});
 if(!room) {
-    var currentRoom = Rooms.insert({
+    Rooms.insert({
         name: "welcome",
         topic: "welcome",
         isPrivate: false,

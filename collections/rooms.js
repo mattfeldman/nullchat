@@ -1,4 +1,4 @@
-Rooms = new Meteor.Collection('rooms');
+Rooms = new Meteor.Collection('rooms'); // jshint ignore:line
 
 
 Meteor.methods({

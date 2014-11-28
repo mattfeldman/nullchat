@@ -1,5 +1,7 @@
 function roomLinks(message){
-    if(!message) return;
+    if(!message) {
+        return;
+    }
     var loc = message.indexOf("#");
     var rooms = Rooms.find({}).fetch();
     for(var i =0; i < rooms.length; i++){
