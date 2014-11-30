@@ -5,6 +5,5 @@ Template.messageList.helpers({
 });
 
 Template.messageList.created = function(){
-    console.log("rendered");
     scrollChatToBottom();
 };

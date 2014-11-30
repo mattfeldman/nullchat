@@ -37,3 +37,6 @@ div, body, html {
 .my-message {
     background: yellow;
 }
+.has-mention{
+   background: red;
+}

@@ -1,5 +1,5 @@
 <template name="message">
-    <div id="{{_id}}" class="row {{myMessage}}" style="border-left: 3px solid transparent;{{color}}">
+    <div id="{{_id}}" class="row {{myMessage}} {{hasMention}}" style="border-left: 3px solid transparent;{{color}}">
         {{#if isPlain}}
             {{>messageUser user}}
             {{{finalMessageBody}}}

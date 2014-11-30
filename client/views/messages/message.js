@@ -1,7 +1,4 @@
-function roomLinks(message){
-    if(!message) {
-        return;
-    }
+function parseRoomLinks(message){
     var loc = message.indexOf("#");
     var rooms = Rooms.find({}).fetch();
     for(var i =0; i < rooms.length; i++){
@@ -11,20 +8,23 @@ function roomLinks(message){
             var middle = '<a href="#" class="roomLink" data-roomId="'+rooms[i]._id+'">#'+roomName+'</a>';
             var rightHalf = message.substring(loc+roomName.length+1,message.length+middle.length);
             message = leftHalf + middle + rightHalf;
-            console.log(message);
         }
     }
     return message;
 }
-Template.message.created = function () {
+function hasUserMentions(message){
+    if(!message || typeof  message !== "string") return false;
+    var regex = new RegExp("[@\\s]+("+Meteor.user().username+")($|[\\s!.?]+)");
+    var regexMatch = message.match(regex);
 
-};
+    return regexMatch && regexMatch.length > 0;
+}
 Template.message.helpers({
     myMessage: function () {
-        return this.authorId === Meteor.userId() ? "my-message" : ""; // TODO: Be better
+        return this.authorId === Meteor.userId() ? "my-message" : "";
     },
     user: function () {
-        return Meteor.users.findOne({_id: this.authorId});
+        return Meteor.users.findOne({_id: this.authorId}); //TODO: This is causing a lot of updates
     },
     color: function () {
         var user = Meteor.users.findOne({_id: this.authorId});
@@ -48,8 +48,13 @@ Template.message.helpers({
     isFeedback: function () {
         return this.type === "feedback";
     },
+    hasMention: function(){
+        return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
+    },
     finalMessageBody: function(){
-        return emojify.replace(roomLinks(this.message));
+        if(this.message && typeof  this.message === "string") {
+            return emojify.replace(parseRoomLinks(this.message));
+        }
     },
     emojifiedMessage: function(){
     }
