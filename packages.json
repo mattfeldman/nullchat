@@ -1,3 +1,5 @@
 {
-  "twilio" : "1.7.0"
+  "twilio" : "1.7.0",
+  "canvas" : "1.1.6",
+  "identicon" : "1.1.0"
 }

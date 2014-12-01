@@ -12,4 +12,11 @@ mizzao:autocomplete
 mizzao:user-status
 mrt:moment
 meteorhacks:npm
+meteorhacks:subs-manager
+
+
+npm-container
+mrt:underscore-string-latest
+cfs:standard-packages
+cfs:filesystem
 
