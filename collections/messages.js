@@ -34,6 +34,8 @@ Meteor.methods({
             }
             return;
         }
+        
+        messageStub.message = htmlEscape(messageStub.message);
 
         // Create regular message
         var timestamp = new Date().getTime();
@@ -150,5 +152,15 @@ function sendFeedback(message, user, room) {
         userId: user._id
     };
     Messages.insert(feedbackMessage);
+}
+
+// From http://stackoverflow.com/a/7124052
+function htmlEscape(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
 }
 
