@@ -20,3 +20,6 @@ meteor add some:package
 cp -f /vagrant/nullchat/.meteor/packages /vagrant2/nullchat/.meteor/
 meteor
 ```
+
+## Other resources
+- Meteor Security (http://www.slideshare.net/emilystark/meteor-meets-mallory)
