@@ -1,5 +1,8 @@
 <template name="messageList">
-  {{#each messages}}
-    {{> message}}
-  {{/each}}
+    {{#if shouldShowLoadMore}}
+      <a href="#" class="loadMore">load more</a>
+    {{/if}}
+    {{#each messages}}
+        {{> message}}
+    {{/each}}
 </template>
