@@ -1,5 +1,6 @@
 var sendMessage = function (e) {
     e.preventDefault();
+    if(!$("#message").val()) return;
     var messageStub = {
         message: $("#message").val(),
         roomId: Session.get('currentRoom')
