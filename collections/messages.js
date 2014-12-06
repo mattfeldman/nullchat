@@ -69,30 +69,34 @@ Meteor.methods({
         if (Meteor.isServer) {
             // Check for mentions
             var roomUsers = Meteor.users.find({_id: {$in: room.users}}); // TODO: Remove the need to query this
-            roomUsers.forEach(function (user) {
+            roomUsers.forEach(function (roomUser) {
                 //TODO: self-check: if(user._id == message.authorId) return;
-                if (message.message.indexOf(user.username) > -1) { // TODO: should be tokenized name either " name " or "@user"
+
+                var regex = new RegExp("[@\\s]+(" + roomUser.username + ")($|[\\s!.?]+)");
+                var regexMatch = message.message.match(regex);
+
+                if (regexMatch && regexMatch.length > 0) { // TODO: should be tokenized name either " name " or "@user"
                     var notification = {
                         authorId: message.authorId,
                         roomId: room._id,
                         messageId: messageId,
-                        userId: user._id,
+                        userId: roomUser._id,
                         seen: false,
                         // Properties needed for sending a summary
                         timestamp: message.timestamp,
                         message: message.message,
                         roomName: room.name,
-                        userName: user.username
+                        authorName: user.username
                     };
                     Notifications.insert(notification);
 
-                    if (user.profile && user.profile.number) {
-                        var smsBody = notification.userName + ': ' + notification.message + ' #' + notification.roomName;
+                    if (roomUser.profile && roomUser.profile.number) {
+                        var smsBody = notification.authorName + ': ' + notification.message + ' #' + notification.roomName;
 
                         try {
                             var twilio = Meteor.npmRequire('twilio')('AC370ea0996237c09f9dfdfc36d4c08e63', 'd1c6df072dbe1fe7279cd6a951fcab5a');
                             twilio.sendMessage({
-                                to: user.profile.number, // Any number Twilio can deliver to
+                                to: roomUser.profile.number, // Any number Twilio can deliver to
                                 from: '+14259678789', // A number you bought from Twilio and can use for outbound communication
                                 body: smsBody// body of the SMS message
                             }, function (err, responseData) { //this function is executed when a response is received from Twilio
@@ -100,8 +104,8 @@ Meteor.methods({
                                     // "responseData" is a JavaScript object containing data received from Twilio.
                                     // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
                                     // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-                                    console.log(responseData.from); // outputs "+14506667788"
-                                    console.log(responseData.body); // outputs "word to your mother."
+                                    //console.log(responseData.from); // outputs "+14506667788"
+                                    //console.log(responseData.body); // outputs "word to your mother."
                                 }
                             });
                         }
