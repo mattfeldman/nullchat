@@ -72,7 +72,7 @@ Meteor.methods({
             roomUsers.forEach(function (roomUser) {
                 //TODO: self-check: if(user._id == message.authorId) return;
 
-                var regex = new RegExp("[@\\s]+(" + roomUser.username + ")($|[\\s!.?]+)");
+                var regex = new RegExp("[@\\s]?(" + roomUser.username + ")($|[\\s!.?]+)");
                 var regexMatch = message.message.match(regex);
 
                 if (regexMatch && regexMatch.length > 0) { // TODO: should be tokenized name either " name " or "@user"
