@@ -12,4 +12,5 @@ scrollToMessage = function(messageId){
 
 setCurrentRoom = function(roomId){
     Session.set('currentRoom',roomId);
+    Meteor.call('setSeen',roomId);
 }
