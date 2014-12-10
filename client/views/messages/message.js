@@ -1,5 +1,6 @@
 function parseRoomLinks(message) {
     var rooms = Rooms.find({}).fetch();
+    rooms = _.sortBy(rooms,function(room){return -room.name.length;}); // TODO: Not this every message
     var loc = -1;
     while ((loc = message.indexOf("#", loc + 1)) >= 0) {
         for (var i = 0; i < rooms.length; i++) {
