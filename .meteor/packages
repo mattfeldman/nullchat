@@ -14,9 +14,10 @@ mrt:moment
 meteorhacks:npm
 meteorhacks:subs-manager
 
-
-npm-container
 mrt:underscore-string-latest
 cfs:standard-packages
 cfs:filesystem
+
+matb33:collection-hooks
+brentjanderson:buzz
 
