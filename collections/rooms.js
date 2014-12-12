@@ -40,5 +40,8 @@ Meteor.methods({
         Rooms.update({_id: room._id}, {$pull: {users: userId}});
         return room._id;
 
+    },
+    'setCurrentRoom': function(roomId){
+        Meteor.users.update({_id:Meteor.userId()},{$set:{"status.currentRoom":roomId}});
     }
 });
