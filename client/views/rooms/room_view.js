@@ -32,9 +32,16 @@ Template.roomView.rendered = function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
     Meteor.setTimeout(scrollChatToBottom, 100);
 };
+
 Template.roomView.created = function () {
     Deps.autorun(function () {
         Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'));
         Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
+    });
+
+    var clickSound = new buzz.sound('/sounds/click_04.wav');
+
+    Messages.after.insert(function (userId, doc) {
+        clickSound.play();
     });
 };
