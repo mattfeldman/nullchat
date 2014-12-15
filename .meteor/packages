@@ -18,6 +18,9 @@ mrt:underscore-string-latest
 cfs:standard-packages
 cfs:filesystem
 
+
+npm-container
 matb33:collection-hooks
 brentjanderson:buzz
+jparker:gravatar
 
