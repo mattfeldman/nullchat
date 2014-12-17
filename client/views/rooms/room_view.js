@@ -34,14 +34,37 @@ Template.roomView.rendered = function () {
 };
 
 Template.roomView.created = function () {
+    var isReady = {};
+    isReady.notifications = false;
+    isReady.messages = false;
+
     Deps.autorun(function () {
-        Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'));
+        isReady.messages = false;
+        Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'),{
+            onReady:function(){
+                isReady.messages = true;
+            }
+        });
         Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
     });
 
     var clickSound = new buzz.sound('/sounds/click_04.wav');
+    var chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
-    Messages.after.insert(function (userId, doc) {
-        clickSound.play();
+    Notifications.find().observe({
+        added: function(document){
+            if(isReady.notifications) {
+                chimeSound.play();
+            }
+        }
     });
+    Messages.find().observe({
+        added: function(document) {
+            if(isReady.messages && document && document.type !=='feedback') {
+                clickSound.play();
+            }
+        }
+    });
+
+    isReady.notifications = true;
 };

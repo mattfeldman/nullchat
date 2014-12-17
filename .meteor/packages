@@ -20,10 +20,8 @@ cfs:filesystem
 
 
 npm-container
-matb33:collection-hooks
 brentjanderson:buzz
 jparker:gravatar
 accounts-github
 service-configuration
 aldeed:autoform
-
