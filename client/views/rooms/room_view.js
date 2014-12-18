@@ -33,8 +33,9 @@ Template.roomView.rendered = function () {
     Meteor.setTimeout(scrollChatToBottom, 100);
 };
 
+var isReady = {};
 Template.roomView.created = function () {
-    var isReady = {};
+
     isReady.notifications = false;
     isReady.messages = false;
 
@@ -68,3 +69,7 @@ Template.roomView.created = function () {
 
     isReady.notifications = true;
 };
+Template.roomView.destroyed = function(){
+    isReady.notifications = false;
+    isReady.messages = false;
+}
