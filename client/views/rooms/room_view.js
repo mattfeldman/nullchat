@@ -56,6 +56,17 @@ Template.roomView.created = function () {
         added: function(document){
             if(isReady.notifications) {
                 chimeSound.play();
+                var permission = notify.permissionLevel();
+                if(permission === notify.PERMISSION_DEFAULT) {
+                    notify.requestPermission();
+                }
+                if(permission === notify.PERMISSION_GRANTED)
+                {
+                    var title = document.authorName+"(#"+document.roomName+")";
+                    var user = Meteor.users.findOne({_id:document.authorId},{fields:{"profile.avatar":1}});
+                    var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                    notify.createNotification(title,{body:document.message,icon:avatar});
+                }
             }
         }
     });
