@@ -50,6 +50,9 @@ Template.message.helpers({
     isImage: function () {
         return this.type === "rich" && this.layout === "image";
     },
+    isYoutube: function () {
+        return this.type === "rich" && this.layout === "youtube";
+    },
     isFeedback: function () {
         return this.type === "feedback";
     },

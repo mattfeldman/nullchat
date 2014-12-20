@@ -124,8 +124,10 @@ function runContentProcessors(messageStub) {
         var processor = contentProcessors[i];
         var match = processor.regex.exec(messageStub.message);
         if (match) {
-            var returnval = processor.execute(match);
-            return returnval;
+            if(!processor.validMatch || processor.validMatch(match)) {
+                var returnval = processor.execute(match);
+                return returnval;
+            }
         }
     }
 }
@@ -137,6 +139,19 @@ var contentProcessors = [
             return {
                 layout: "image",
                 data: regexMatch[0]
+            };
+        },
+    },
+    {
+        name: "YouTube Processor",
+        regex: /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/i,
+        validMatch: function(regexMatch){
+            return regexMatch.length >= 2 && regexMatch[1];
+        },
+        execute: function(regexMatch){
+            return {
+                layout: "youtube",
+                data: regexMatch[1]
             };
         }
     }
