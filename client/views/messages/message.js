@@ -47,11 +47,11 @@ Template.message.helpers({
     isPlain: function () {
         return this.type === "plain";
     },
-    isImage: function () {
-        return this.type === "rich" && this.layout === "image";
+    isRich: function () {
+        return this.type === "rich";
     },
-    isYoutube: function () {
-        return this.type === "rich" && this.layout === "youtube";
+    layoutName : function(){
+        return this.layout+"Message";
     },
     isFeedback: function () {
         return this.type === "feedback";

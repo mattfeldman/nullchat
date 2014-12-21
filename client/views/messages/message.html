@@ -5,15 +5,12 @@
             {{{finalMessageBody}}}
             <a class="likeMessageLink" href="#">+1</a>
             ({{likedBy.length}})
-        {{else}}{{#if isImage}}
+        {{else}}{{#if isRich}}
             {{>messageUser user}}
-            <img src="{{data}}" width="500px" height="500px"/>
-        {{else}}{{#if isYoutube}}
-            {{>messageUser user}}
-            <iframe width="560" height="315" src="//www.youtube.com/embed/{{data}}" frameborder="0" allowfullscreen></iframe>
+            {{> UI.dynamic template=layoutName data=data}}
         {{else}}{{#if isFeedback}}
             <span class="feedback-message" style="background: lightblue">{{{message}}}</span>
-        {{/if}}{{/if}}{{/if}}{{/if}}
+        {{/if}}{{/if}}{{/if}}
         {{showTimestamp}}
     </div>
 </template>
