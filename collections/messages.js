@@ -50,23 +50,25 @@ Meteor.methods({
         };
         var messageId = Messages.insert(message);
 
-        // Create content message
-        var contentMessage = runContentProcessors(messageStub);
-        if (contentMessage) {
-            var richMessage = {
-                authorId: user._id,
-                roomId: room._id,
-                timestamp: timestamp + 1,
-                type: "rich",
-                layout: contentMessage.layout,
-                data: contentMessage.data,
-                seenBy: [],
-                likedBy: []
-            };
-            Messages.insert(richMessage);
-        }
 
         if (Meteor.isServer) {
+            // Create content message
+            var contentMessage = runContentProcessors(messageStub);
+            if (contentMessage) {
+                var richMessage = {
+                    authorId: user._id,
+                    roomId: room._id,
+                    timestamp: timestamp + 1,
+                    type: "rich",
+                    layout: contentMessage.layout,
+                    data: contentMessage.data,
+                    seenBy: [],
+                    likedBy: []
+                };
+                Messages.insert(richMessage);
+
+            }
+
             // Check for mentions
             var roomUsers = Meteor.users.find({_id: {$in: room.users}}); // TODO: Remove the need to query this
             roomUsers.forEach(function (roomUser) {
@@ -153,6 +155,23 @@ var contentProcessors = [
                 layout: "youtube",
                 data: regexMatch[1]
             };
+        }
+    },
+    {
+        name: "Noembed",
+        regex: SimpleSchema.RegEx.Url,
+        execute: function (regexMatch) {
+            var response = Meteor.http.get("http://noembed.com/embed",{params:{url:regexMatch[0]},timeout:30000});
+            if(response.statusCode === 200 && !response.data.error)
+            {
+                return {
+                    layout: "noembed",
+                    data: response.data
+                };
+            }
+            else{
+                return false;
+            }
         }
     }
 ];
