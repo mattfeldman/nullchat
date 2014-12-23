@@ -23,3 +23,6 @@ Meteor.publish('notifications', function () {
 Meteor.publish('emojis',function(){
     return Emojis.find();
 });
+Meteor.publish('memes',function(){
+    return Memes.find();
+});

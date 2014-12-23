@@ -63,6 +63,16 @@ Template.newMessage.helpers({
                     template: Template.roomPill,
                     token: '#',
                     matchAll: false,
+                },
+                {
+                    collection: Memes,
+                    field: "name",
+                    template: Template.memePill,
+                    token: '/meme ',
+                    matchAll: true,
+                    callback: function(doc,element){
+                        $(element).val("/meme "+doc.id+" ");
+                    }
                 }
             ],
             rooms: function () {
