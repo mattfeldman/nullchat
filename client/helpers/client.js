@@ -1,5 +1,5 @@
 scrollChatToBottom = function() {
-    $("#roomContainer").scrollTop(100000);
+    $("#roomContainer").scrollTop($("#scrollContainer").height());
 };
 
 scrollToMessage = function(messageId){
@@ -11,7 +11,12 @@ scrollToMessage = function(messageId){
 };
 
 setCurrentRoom = function(roomId){
+    Session.set('messageLimit', 10);
     Session.set('currentRoom',roomId);
     Meteor.call('setCurrentRoom',roomId);
     Meteor.call('setSeen',roomId);
 };
+
+incMessageLimit = function(inc){
+    Session.set("messageLimit",Session.get("messageLimit")+inc);
+}

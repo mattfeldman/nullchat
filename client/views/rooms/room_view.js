@@ -19,31 +19,51 @@ Template.roomView.helpers({
     },
     availableRooms: function () {
         return Rooms.find();
+    },
+    messageLimit: function(){
+        return Session.get('messageLimit');
     }
 });
 Template.roomView.events({
     'click #loadMore': function (e) {
         Session.set('messageLimit', Session.get('messageLimit') + 20);
         e.preventDefault();
+    },
+    'scroll #roomContainer':function(e){
+        var room = $("#roomContainer");
+        if(room.scrollTop() < 50 && !scroll.needScroll && isReady.messages){
+            scroll.needScroll = true;
+            scroll.previousHeight = $("#scrollContainer").height();
+            incMessageLimit(5);
+        }
     }
 });
 
 Template.roomView.rendered = function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
-    Meteor.setTimeout(scrollChatToBottom, 100);
 };
 
 var isReady = {};
+var scroll = {};
 Template.roomView.created = function () {
-
     isReady.notifications = false;
     isReady.messages = false;
 
+    Session.setDefault('messageLimit', 10);
     Deps.autorun(function () {
         isReady.messages = false;
         Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'),{
             onReady:function(){
                 isReady.messages = true;
+                if(scroll.needScroll){
+                    var room = $("#roomContainer");
+                    scroll.needScroll = false;
+                    var offset = $("#scrollContainer").height() - scroll.previousHeight;
+                    room.scrollTop(room.scrollTop()+offset);
+                }
+                else{
+                    scrollChatToBottom();
+                }
             }
         });
         Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
@@ -74,6 +94,12 @@ Template.roomView.created = function () {
         added: function(document) {
             if(isReady.messages && document && document.type !=='feedback') {
                 clickSound.play();
+            }
+            if(isReady.messages){
+                incMessageLimit(1);
+            }
+            if(!isReady.messages && !scroll.needScroll){
+                scrollChatToBottom();
             }
         }
     });
