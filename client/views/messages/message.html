@@ -1,12 +1,12 @@
 <template name="message">
     <div id="{{_id}}" class="row {{myMessage}} {{hasMention}}" style="border-left: 3px solid transparent;{{color}}">
         {{#if isPlain}}
-            {{>messageUser user}}
+            {{>messageUser authorId}}
             {{{finalMessageBody}}}
             <a class="likeMessageLink" href="#">+1</a>
             ({{likedBy.length}})
         {{else}}{{#if isRich}}
-            {{>messageUser user}}
+            {{>messageUser authorId}}
             {{> UI.dynamic template=layoutName data=data}}
         {{else}}{{#if isFeedback}}
             <span class="feedback-message" style="background: lightblue">{{{message}}}</span>

@@ -28,9 +28,6 @@ Template.message.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
     },
-    user: function () {
-        return Meteor.users.findOne({_id: this.authorId}); //TODO: This is causing a lot of updates
-    },
     color: function () {
         var user = Meteor.users.findOne({_id: this.authorId});
         if (user && user.profile && user.profile.color) {
