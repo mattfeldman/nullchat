@@ -1,6 +1,12 @@
 Meteor.publish('messages', function (roomId, limit) {
     Meteor._sleepForMs(200);
-    return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}}); //TODO: Figure out how to secure this from publishing Messages a user should not see
+    var room = Rooms.findOne({_id: roomId});
+    if (room && (!room.isPrivate || _(room.invited).contains(this.userId))){
+        return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}});
+    }
+    else {
+        throw new Meteor.Error(503, 'No soup for you hackerpants.');
+    }
 });
 Meteor.publish('feedbackMessages', function (roomId) {
     return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId}, {
@@ -20,9 +26,9 @@ Meteor.publish('users', function () {
 Meteor.publish('notifications', function () {
     return Notifications.find({userId: this.userId});
 });
-Meteor.publish('emojis',function(){
+Meteor.publish('emojis', function () {
     return Emojis.find();
 });
-Meteor.publish('memes',function(){
+Meteor.publish('memes', function () {
     return Memes.find();
 });
