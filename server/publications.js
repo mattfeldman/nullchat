@@ -1,7 +1,7 @@
 Meteor.publish('messages', function (roomId, limit) {
     Meteor._sleepForMs(200);
     var room = Rooms.findOne({_id: roomId});
-    if (room && (!room.isPrivate || _(room.invited).contains(this.userId))){
+    if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
         return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}});
     }
     else {
@@ -13,6 +13,17 @@ Meteor.publish('feedbackMessages', function (roomId) {
         limit: 10,
         sort: {timestamp: -1}
     });
+});
+Meteor.publish('message',function(messageId){
+   return Messages.find({_id:messageId});
+});
+Meteor.publish('messageContextAbove', function (messageId) {
+    var message = Messages.findOne({_id: messageId});
+    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$gt: message.timestamp}}, {limit: 5, sort: {timestamp: 1}})];
+});
+Meteor.publish('messageContextBelow', function (messageId) {
+    var message = Messages.findOne({_id: messageId});
+    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$lt: message.timestamp}}, {limit: 5, sort: {timestamp: -1}})];
 });
 Meteor.publish('currentRooms', function () {
     return Rooms.find({users: this.userId});//
