@@ -19,11 +19,11 @@ Meteor.publish('message',function(messageId){
 });
 Meteor.publish('messageContextAbove', function (messageId) {
     var message = Messages.findOne({_id: messageId});
-    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$gt: message.timestamp}}, {limit: 5, sort: {timestamp: 1}})];
+    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$gt: message.timestamp}}, {limit: 2, sort: {timestamp: 1}})];
 });
 Meteor.publish('messageContextBelow', function (messageId) {
     var message = Messages.findOne({_id: messageId});
-    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$lt: message.timestamp}}, {limit: 5, sort: {timestamp: -1}})];
+    return [Messages.find({roomId: message.roomId, type: {$ne: 'feedback'},timestamp:{$lt: message.timestamp}}, {limit: 2, sort: {timestamp: -1}})];
 });
 Meteor.publish('currentRooms', function () {
     return Rooms.find({users: this.userId});//

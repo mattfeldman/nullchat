@@ -1,9 +1,19 @@
 Messages = new Meteor.Collection('messages'); // jshint ignore:line
 
 Meteor.methods({
-    'likeMessage': function(id){
+    'likeMessage': function (id) {
         // TODO: Validations
-        Messages.update({_id:id},{$addToSet:{likedBy:Meteor.userId()}});
+        Messages.update({_id: id}, {$addToSet: {likedBy: Meteor.userId()}});
+    },
+    'editMessage': function (editMessageStub) {
+        var message = Messages.findOne({_id: editMessageStub._id});
+        if (!message) {
+            throw new Meteor.Error("Couldn't find message to edit.");
+        }
+        if (Meteor.userId() !== message.authorId) {
+            throw new Meteor.Error("Can't edit a message you didn't author.");
+        }
+        Messages.update({_id: editMessageStub._id}, {$set: {message: editMessageStub.message}});
     },
     'message': function (messageStub) {
         var user = Meteor.user();
@@ -34,7 +44,7 @@ Meteor.methods({
             }
             return;
         }
-        
+
         messageStub.message = htmlEscape(messageStub.message);
 
         // Create regular message
@@ -126,7 +136,7 @@ function runContentProcessors(messageStub) {
         var processor = contentProcessors[i];
         var match = processor.regex.exec(messageStub.message);
         if (match) {
-            if(!processor.validMatch || processor.validMatch(match)) {
+            if (!processor.validMatch || processor.validMatch(match)) {
                 var returnval = processor.execute(match);
                 return returnval;
             }
@@ -147,10 +157,10 @@ var contentProcessors = [
     {
         name: "YouTube Processor",
         regex: /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/i,
-        validMatch: function(regexMatch){
+        validMatch: function (regexMatch) {
             return regexMatch.length >= 2 && regexMatch[1];
         },
-        execute: function(regexMatch){
+        execute: function (regexMatch) {
             return {
                 layout: "youtube",
                 data: regexMatch[1]
@@ -161,15 +171,14 @@ var contentProcessors = [
         name: "Noembed",
         regex: SimpleSchema.RegEx.Url,
         execute: function (regexMatch) {
-            var response = Meteor.http.get("http://noembed.com/embed",{params:{url:regexMatch[0]},timeout:30000});
-            if(response.statusCode === 200 && !response.data.error)
-            {
+            var response = Meteor.http.get("http://noembed.com/embed", {params: {url: regexMatch[0]}, timeout: 30000});
+            if (response.statusCode === 200 && !response.data.error) {
                 return {
                     layout: "noembed",
                     data: response.data
                 };
             }
-            else{
+            else {
                 return false;
             }
         }

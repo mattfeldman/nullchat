@@ -2,8 +2,16 @@
     <div id="{{_id}}" class="row {{myMessage}} {{hasMention}}" style="border-left: 3px solid transparent;{{color}}">
         {{#if isPlain}}
             {{>messageUser authorId}}
-            {{{finalMessageBody}}}
+                {{#if isUnderEdit}}
+                        <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
+                        <button class="messageEditSubmit">save</button>
+                {{else}}
+                    <span class="clickableMessageBody">
+                        {{{finalMessageBody}}}
+                    </span>
+                {{/if}}
             <a class="likeMessageLink" href="#">+1</a>
+            <a class="messagePermaLink" href="/message/{{_id}}">link</a>
             ({{likedBy.length}})
         {{else}}{{#if isRich}}
             {{>messageUser authorId}}

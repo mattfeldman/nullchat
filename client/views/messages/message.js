@@ -53,6 +53,9 @@ Template.message.helpers({
     isFeedback: function () {
         return this.type === "feedback";
     },
+    isUnderEdit: function(){
+        return Session.get('editingId') === this._id;
+    },
     hasMention: function () {
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
@@ -72,5 +75,15 @@ Template.message.events({
     "click .roomLink": function (event, template) {
         var roomId = $(event.target).data("roomid");
         setCurrentRoom(roomId);
+    },
+    "mousedown .clickableMessageBody":function(event, template){
+        Session.set('editingId',template.data._id);
+    },
+    "click .messageEditSubmit":function(event,template){
+        event.preventDefault();
+        var newMessage = template.find('input[name=newMessageText]').value;
+
+        Meteor.call('editMessage',{_id:template.data._id,message:newMessage});
+        Session.set('editingId',"");
     }
 });
