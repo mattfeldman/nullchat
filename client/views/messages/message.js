@@ -1,6 +1,8 @@
 function parseRoomLinks(message) {
     var rooms = Rooms.find({}).fetch();
-    rooms = _.sortBy(rooms,function(room){return -room.name.length;}); // TODO: Not this every message
+    rooms = _.sortBy(rooms, function (room) {
+        return -room.name.length;
+    }); // TODO: Not this every message
     var loc = -1;
     while ((loc = message.indexOf("#", loc + 1)) >= 0) {
         for (var i = 0; i < rooms.length; i++) {
@@ -24,6 +26,27 @@ function hasUserMentions(message) {
 
     return regexMatch && regexMatch.length > 0;
 }
+Template.message.created = function () {
+    Messages.find({_id: this.data._id}).observeChanges({
+        changed: function (id, fields) {
+            if (fields.message) {
+                var animateElement = $("#" + id + " .clickableMessageBody");
+                animateElement.removeClass('animated flipInX');
+                Meteor.setTimeout(function () {
+                    animateElement.addClass('animated flipInX');
+                },1);
+            }
+            if(fields.likedBy){
+                var animateElement = $("#" + id + " .likedBy");
+                //animateElement.removeClass('animated tada');
+                //Meteor.setTimeout(function () {
+                //    animateElement.addClass('animated tada');
+                //},1);
+                triggerCssAnimation(animateElement,'flipInY');
+            }
+        }
+    });
+};
 Template.message.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
@@ -37,6 +60,13 @@ Template.message.helpers({
             return "border-left: 3px solid transparent";
         }
     },
+    hasEdits: function(){
+        return this.lastedited;
+    },
+    lastEditTime:function(){
+        if(!this.lastedited) return;
+        return moment(this.lastedited).format("h:mm:ss a");
+    },
     showTimestamp: function () {
         var d = new Date(this.timestamp);
         return d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
@@ -47,13 +77,13 @@ Template.message.helpers({
     isRich: function () {
         return this.type === "rich";
     },
-    layoutName : function(){
-        return this.layout+"Message";
+    layoutName: function () {
+        return this.layout + "Message";
     },
     isFeedback: function () {
         return this.type === "feedback";
     },
-    isUnderEdit: function(){
+    isUnderEdit: function () {
         return Session.get('editingId') === this._id;
     },
     hasMention: function () {
@@ -69,21 +99,31 @@ Template.message.helpers({
 });
 Template.message.events({
     "click .likeMessageLink": function (event, template) {
-        console.log(template);
+        event.preventDefault();
+        var element = $("#" + template.data._id + " .likedBy");
+        triggerCssAnimation(element,'flipInY');
         Meteor.call('likeMessage', template.data._id);
     },
     "click .roomLink": function (event, template) {
         var roomId = $(event.target).data("roomid");
         setCurrentRoom(roomId);
     },
-    "mousedown .clickableMessageBody":function(event, template){
-        Session.set('editingId',template.data._id);
+    "mousedown .clickableMessageBody": function (event, template) {
+        Session.set('editingId', template.data._id);
     },
-    "click .messageEditSubmit":function(event,template){
+    "click .messageEditSubmit": function (event, template) {
         event.preventDefault();
         var newMessage = template.find('input[name=newMessageText]').value;
 
-        Meteor.call('editMessage',{_id:template.data._id,message:newMessage});
-        Session.set('editingId',"");
+        Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
+        Session.set('editingId', "");
     }
 });
+
+triggerCssAnimation = function(element,animation){
+    var animateElement = element;
+    animateElement.removeClass('animated '+animation);
+    Meteor.setTimeout(function () {
+        animateElement.addClass('animated '+animation);
+    },1);
+};

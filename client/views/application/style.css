@@ -35,8 +35,14 @@ div, body, html {
 }
 
 .my-message {
-    background: yellow;
+    background-color: #f2f2f2;
 }
 .has-mention{
-   background: red;
+   background: lightgoldenrodyellow;
+}
+.lastEditTime{
+    font-size: 0.7em;
+    color: dimgray;
+    background: lightgray;
+    padding: 0.15em;
 }

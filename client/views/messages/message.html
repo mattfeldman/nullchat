@@ -1,18 +1,22 @@
 <template name="message">
-    <div id="{{_id}}" class="row {{myMessage}} {{hasMention}}" style="border-left: 3px solid transparent;{{color}}">
+    <div id="{{_id}}" class="row {{myMessage}} {{hasMention}} animated fadeIn"
+         style="border-left: 3px solid transparent;{{color}}">
         {{#if isPlain}}
             {{>messageUser authorId}}
-                {{#if isUnderEdit}}
-                        <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
-                        <button class="messageEditSubmit">save</button>
-                {{else}}
-                    <span class="clickableMessageBody">
-                        {{{finalMessageBody}}}
-                    </span>
-                {{/if}}
+            {{#if isUnderEdit}}
+                <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
+                <button class="messageEditSubmit">save</button>
+            {{else}}
+                <span class="clickableMessageBody">
+                    {{{finalMessageBody}}}
+                </span>
+            {{/if}}
+            {{#if hasEdits}}
+                <span class="lastEditTime">Edited {{lastEditTime}}</span>
+            {{/if}}
             <a class="likeMessageLink" href="#">+1</a>
             <a class="messagePermaLink" href="/message/{{_id}}">link</a>
-            ({{likedBy.length}})
+            <span class="likedBy">({{likedBy.length}})</span>
         {{else}}{{#if isRich}}
             {{>messageUser authorId}}
             {{> UI.dynamic template=layoutName data=data}}

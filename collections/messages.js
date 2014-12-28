@@ -13,7 +13,7 @@ Meteor.methods({
         if (Meteor.userId() !== message.authorId) {
             throw new Meteor.Error("Can't edit a message you didn't author.");
         }
-        Messages.update({_id: editMessageStub._id}, {$set: {message: editMessageStub.message}});
+        Messages.update({_id: editMessageStub._id}, {$set: {message: editMessageStub.message,lastedited:new Date().getTime()}});
     },
     'message': function (messageStub) {
         var user = Meteor.user();
