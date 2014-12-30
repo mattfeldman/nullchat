@@ -1,5 +1,4 @@
 Meteor.publish('messages', function (roomId, limit) {
-    Meteor._sleepForMs(200);
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
         return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}});
