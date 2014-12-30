@@ -66,13 +66,13 @@ Template.newMessage.helpers({
                 },
                 {
                     collection: Memes,
-                    field: "name",
+                    field: "searchName",
                     template: Template.memePill,
                     token: '/meme ',
                     matchAll: true,
                     callback: function(doc,element){
                         $(element).val("/meme "+doc.id+" ");
-                    }
+                    },
                 }
             ],
             rooms: function () {

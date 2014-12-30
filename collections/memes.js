@@ -7,6 +7,7 @@ if (Meteor.isServer) {
     {
         var data = JSON.parse(response.content);
         _(data.data.memes).each(function(meme){
+            meme.searchName = meme.name.split(' ').join('');
             // Note: id here is the foreign meme id, not _id the document id
             Memes.upsert({id:meme.id},meme);
         });
