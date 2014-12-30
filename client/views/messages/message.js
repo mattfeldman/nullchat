@@ -108,8 +108,10 @@ Template.message.events({
         var roomId = $(event.target).data("roomid");
         setCurrentRoom(roomId);
     },
-    "mousedown .clickableMessageBody": function (event, template) {
-        Session.set('editingId', template.data._id);
+    "click .clickableMessageBody": function (event, template) {
+        if(template.data.authorId === Meteor.userId()) {
+            Session.set('editingId', template.data._id);
+        }
     },
     "click .messageEditSubmit": function (event, template) {
         event.preventDefault();
