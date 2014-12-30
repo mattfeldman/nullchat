@@ -117,6 +117,9 @@ Template.message.events({
 
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
         Session.set('editingId', "");
+    },
+    "click .canceleEditSubmit": function(event, template){
+        Session.set('editingId', "");
     }
 });
 

@@ -6,6 +6,7 @@
             {{#if isUnderEdit}}
                 <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
                 <button class="messageEditSubmit">save</button>
+                <button class="canceleEditSubmit">cancel</button>
             {{else}}
                 <span class="clickableMessageBody">
                     {{{finalMessageBody}}}
