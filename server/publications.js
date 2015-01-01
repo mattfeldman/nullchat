@@ -31,7 +31,7 @@ Meteor.publish('availableRooms', function () {
     return Rooms.find({$or: [{isPrivate: false}, {isPrivate: true, invited: this.userId}]});
 });
 Meteor.publish('users', function () {
-    return Meteor.users.find({}, {fields: {_id: 1, username: 1, profile: 1, "status.idle": 1,"status.offline": 1,"status.online": 1,"status.lastTyping": 1,"status.lastActiveRoom": 1}});
+    return Meteor.users.find({}, {fields: {_id: 1, username: 1, profile: 1, "status.idle": 1,"status.offline": 1,"status.online": 1,"status.lastTyping": 1,"status.lastActiveRoom": 1, "status.currentRoom": 1}});
 });
 Meteor.publish('notifications', function () {
     return Notifications.find({userId: this.userId});
