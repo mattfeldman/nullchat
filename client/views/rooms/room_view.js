@@ -98,9 +98,10 @@ Template.roomView.created = function () {
             if(isReady.messages){
                 incMessageLimit(1);
             }
-            if(!isReady.messages && !scroll.needScroll){
+            if(!scroll.needScroll){
                 scrollChatToBottom();
             }
+
         }
     });
 
