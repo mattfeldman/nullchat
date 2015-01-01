@@ -8,6 +8,6 @@ Template.messageUser.helpers({
     },
     'avatar': function () {
         var user = Meteor.users.findOne({_id:this.toString()},{fields:{"profile.avatar":1}});
-        return user.profile.avatar;
+        return (user && user.profile && user.profile.avatar) || "/images/logo64.png";
     }
 });
