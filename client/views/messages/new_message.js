@@ -72,7 +72,7 @@ Template.newMessage.helpers({
                     matchAll: true,
                     callback: function(doc,element){
                         $(element).val("/meme "+doc.id+" ");
-                    },
+                    }
                 }
             ],
             rooms: function () {
