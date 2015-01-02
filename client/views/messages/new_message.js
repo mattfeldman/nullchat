@@ -18,7 +18,8 @@ Template.newMessage.helpers({
         var cutoff = new Date(new Date().getTime() - 5 * 1000);
         var typingUsers = Meteor.users.find({
             "status.lastActiveRoom": Session.get("currentRoom"),
-            "status.lastTyping": {$gte: cutoff}
+            "status.lastTyping": {$gte: cutoff},
+            "_id" : {$ne: Meteor.user()._id}
         }).fetch();
 
         var users = _.map(typingUsers, function (user) {
@@ -126,7 +127,7 @@ Template.newMessage.events({
 });
 var throttledLastTyping = _.throttle(function () {
     Meteor.call('updateTypingActivity', Session.get('currentRoom'));
-}, 1000);
+}, 1000, {trailing: false});
 Template.newMessage.created = function(){
     Session.get("offset");
 }

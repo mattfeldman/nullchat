@@ -79,6 +79,12 @@ Meteor.methods({
 
             }
 
+            Meteor.users.update({_id: user._id}, {
+                $set: {
+                    "status.lastTyping": 0,
+                }
+            });
+
             // Check for mentions
             var roomUsers = Meteor.users.find({_id: {$in: room.users}}); // TODO: Remove the need to query this
             roomUsers.forEach(function (roomUser) {
