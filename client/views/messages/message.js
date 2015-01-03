@@ -90,8 +90,9 @@ Template.message.helpers({
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
     finalMessageBody: function () {
-        if (this.message && typeof  this.message === "string") {
-            return emojify.replace(parseRoomLinks(this.message));
+        if (this.message && typeof(this.message)=== "string") {
+            var emojiString = emojify.replace(parseRoomLinks(this.message));
+            return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
         }
     },
     emojifiedMessage: function () {

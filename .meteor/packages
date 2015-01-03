@@ -18,8 +18,11 @@ mrt:underscore-string-latest
 cfs:standard-packages
 cfs:filesystem
 
+
+npm-container
 brentjanderson:buzz
 jparker:gravatar
 accounts-github
 service-configuration
 aldeed:autoform
+copleykj:autolinker
