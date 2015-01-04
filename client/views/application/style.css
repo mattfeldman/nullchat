@@ -46,3 +46,10 @@ div, body, html {
     background: lightgray;
     padding: 0.15em;
 }
+
+.editMessageButton{
+    display: none;
+}
+.message:hover .editMessageButton{
+    display:inline-block;
+}

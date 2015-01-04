@@ -86,6 +86,9 @@ Template.message.helpers({
     isUnderEdit: function () {
         return Session.get('editingId') === this._id;
     },
+    canEdit:function(){
+        return this.authorId === Meteor.userId();
+    },
     hasMention: function () {
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
@@ -109,7 +112,7 @@ Template.message.events({
         var roomId = $(event.target).data("roomid");
         setCurrentRoom(roomId);
     },
-    "click .clickableMessageBody": function (event, template) {
+    "click .editMessageButton": function (event, template) {
         if(template.data.authorId === Meteor.userId()) {
             Session.set('editingId', template.data._id);
         }
