@@ -37,19 +37,98 @@ div, body, html {
 .my-message {
     background-color: #f2f2f2;
 }
-.has-mention{
-   background: lightgoldenrodyellow;
+
+.has-mention {
+    background: lightgoldenrodyellow;
 }
-.lastEditTime{
+
+.lastEditTime {
     font-size: 0.7em;
     color: dimgray;
     background: lightgray;
     padding: 0.15em;
 }
 
-.editMessageButton{
+.editMessageButton {
     display: none;
 }
-.message:hover .editMessageButton{
-    display:inline-block;
+
+.message:hover .editMessageButton {
+    display: inline-block;
+}
+
+.feedback-message {
+    background: lightblue;
+}
+
+.message {
+    border-left: 3px solid transparent;
+}
+
+.meme-pill-image {
+    max-width: 50px;
+    max-height: 50px;
+    padding: 5px;
+}
+
+.user-pill-status-bar {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: black;
+    display: inline-block;
+}
+
+.image-message-image {
+    min-height: 100px;
+    min-width: 100px;
+    max-height: 600px;
+    max-width: 600px;
+}
+
+.new-message-outer-container {
+    position: absolute;
+    width: 80%;
+    height: 60px;
+    bottom: 0;
+}
+
+.new-message-inner-container {
+    padding: 10px;
+}
+
+.new-message-text-container {
+    position: absolute;
+    left: 5px;
+    right: 80px;
+}
+
+.new-message-submit {
+    position: absolute;
+    right: 0;
+    width: 70px;
+    height: 25px;
+}
+
+.room-header {
+    position: absolute;
+    width: 80%;
+    height: 50px;
+}
+
+.room-name {
+    font-size: 36px;
+}
+
+.room-topic {
+    font-size: 12px;
+}
+
+.room-container {
+    position: absolute;
+    float: left;
+    width: 80%;
+    top: 50px;
+    bottom: 50px;
+    overflow: auto;
 }

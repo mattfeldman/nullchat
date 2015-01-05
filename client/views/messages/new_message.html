@@ -1,11 +1,13 @@
 <template name="newMessage">
-    <form class="main row" style="position:absolute; width:80%;height:60px;bottom:0;">
-        {{typingUsers}}
-        <div style="padding:10px">
-            <div style="position: absolute; absolute; left:5px;right:80px;">
-                {{>textareaAutocomplete settings=settings style="width:100%; resize:none; border:1px solid black;height:25px" name="message" id="message" placeholder="don't be shy..."}}
+    <div class="new-message-outer-container">
+        <form>
+            {{typingUsers}}
+            <div class="new-message-inner-container">
+                <div class="new-message-text-container">
+                    {{>textareaAutocomplete settings=settings style="width:100%; resize:none; border:1px solid black;height:25px" name="message" id="message" placeholder="don't be shy..."}}
+                </div>
+                <input class="new-message-submit" type="submit" value="submit"/>
             </div>
-            <input style="position:absolute;right:0; width:70px;height:25px" type="submit" value="submit"/>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>

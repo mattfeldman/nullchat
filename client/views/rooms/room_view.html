@@ -1,10 +1,9 @@
 <template name="roomView">
-    <div style="position: absolute;width:80%;;height:50px">
-        <span style="font-size:36px">{{room.name}}</span>
-        <span style="font-size:12px">{{room.topic}}</span>
+    <div class="room-header">
+        <span class="room-name">{{room.name}}</span>
+        <span class="room-topic">{{room.topic}}</span>
     </div>
-    <div id="roomContainer" style="position:absolute; float:left;width:80%;top:50px;bottom:50px;overflow: auto;"
-         class="col-md-12 roomContainer">
+    <div id="roomContainer" class="room-container">
         {{#if currentRoom}}
             <div id="scrollContainer" style="">
                 {{> messageList messages}}

@@ -1,6 +1,6 @@
 <template name="message">
     <div id="{{_id}}" class="row message {{myMessage}} {{hasMention}} animated fadeIn"
-         style="border-left: 3px solid transparent;{{color}}">
+         style="{{color}}">
         {{#if isPlain}}
             {{>messageUser authorId}}:
             {{#if isUnderEdit}}
@@ -25,7 +25,7 @@
             {{>messageUser authorId}}:
             {{> UI.dynamic template=layoutName data=data}}
         {{else}}{{#if isFeedback}}
-            <span class="feedback-message" style="background: lightblue">{{{message}}}</span>
+            <span class="feedback-message">{{{message}}}</span>
         {{/if}}{{/if}}{{/if}}
         {{showTimestamp}}
     </div>
