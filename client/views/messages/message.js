@@ -94,7 +94,7 @@ Template.message.helpers({
     },
     finalMessageBody: function () {
         if (this.message && typeof(this.message) === "string") {
-            var emojiString = emojify.replace(parseRoomLinks(this.message));
+            var emojiString = emojify.replace(parseRoomLinks(_s.escapeHTML(this.message)));
             return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
         }
     },
