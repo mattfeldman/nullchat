@@ -2,12 +2,12 @@ Template.roomListItem.helpers({
     locked: function () {
         return this.isPrivate ? "[LOCKED] -" : "";
     },
-    selected: function () {
-        return this._id === Session.get("currentRoom") ? "background: yellow;" : "";
+    isSelectedClass: function () {
+        return this._id === Session.get("currentRoom") ? "selected-room" : "";
     },
-    notificationString: function () {
+    notificationCount: function () {
         var count = Notifications.find({userId: Meteor.userId(), roomId: this._id, seen: false}).count();
-        return count ? "(" + count + ")" : "";
+        return count || "";
     },
     leaveLinkEnabled: function(){
         return this.ownerId === Meteor.userId() || Session.equals("currentRoom",this._id) ? "disabled" : "";

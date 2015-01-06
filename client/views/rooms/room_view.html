@@ -1,18 +1,18 @@
 <template name="roomView">
     <div class="room-header">
-        <span class="room-name">{{room.name}}</span>
-        <span class="room-topic">{{room.topic}}</span>
+        <span class="room-header-name">{{room.name}}</span>
+        <span class="room-header-topic">{{room.topic}}</span>
     </div>
     <div id="roomContainer" class="room-container">
         {{#if currentRoom}}
-            <div id="scrollContainer" style="">
+            <div id="scrollContainer" class="scroll-container" style="">
                 {{> messageList messages}}
             </div>
         {{else}}
             {{> noRoom }}
         {{/if}}
     </div>
-    <div style="position:absolute;right:0;top:0px;width: 20%">
+    <div class="sidebar">
         {{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
         {{> userList roomUsers}}

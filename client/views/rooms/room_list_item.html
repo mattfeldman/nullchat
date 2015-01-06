@@ -1,3 +1,8 @@
 <template name="roomListItem">
-  <li style="{{selected}}"><a href="#" class="setRoomLink">{{notificationString}}{{locked}}{{name}}</a> <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton">[x]</button> </li>
+    <div class="room-element {{isSelectedClass}}">
+        <a href="#" class="setRoomLink">
+            <div class="room-notification-container"><p class="room-notification-count">{{notificationCount}}</p>
+            </div>{{locked}}<p class="room-name">{{name}}</p></a>
+        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton">[x]</button>
+    </div>
 </template>

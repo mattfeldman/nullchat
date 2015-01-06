@@ -116,11 +116,11 @@ div, body, html {
     height: 50px;
 }
 
-.room-name {
+.room-header-name {
     font-size: 36px;
 }
 
-.room-topic {
+.room-header-topic {
     font-size: 12px;
 }
 
@@ -131,4 +131,14 @@ div, body, html {
     top: 50px;
     bottom: 50px;
     overflow: auto;
+}
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 20%;
+}
+.selected-room{
+    background: lightblue;
 }
