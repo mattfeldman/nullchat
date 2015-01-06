@@ -19,7 +19,7 @@ Template.newMessage.helpers({
         var typingUsers = Meteor.users.find({
             "status.lastActiveRoom": Session.get("currentRoom"),
             "status.lastTyping": {$gte: cutoff},
-            "_id" : {$ne: Meteor.user()._id}
+            "_id" : {$ne: Meteor.userId()}
         }).fetch();
 
         var users = _.map(typingUsers, function (user) {
