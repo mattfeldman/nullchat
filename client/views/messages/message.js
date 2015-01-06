@@ -34,15 +34,15 @@ Template.message.created = function () {
                 animateElement.removeClass('animated flipInX');
                 Meteor.setTimeout(function () {
                     animateElement.addClass('animated flipInX');
-                },1);
+                }, 1);
             }
-            if(fields.likedBy){
+            if (fields.likedBy) {
                 var animateElement = $("#" + id + " .likedBy");
                 //animateElement.removeClass('animated tada');
                 //Meteor.setTimeout(function () {
                 //    animateElement.addClass('animated tada');
                 //},1);
-                triggerCssAnimation(animateElement,'flipInY');
+                triggerCssAnimation(animateElement, 'flipInY');
             }
         }
     });
@@ -60,11 +60,11 @@ Template.message.helpers({
             return "border-left: 3px solid transparent";
         }
     },
-    hasEdits: function(){
+    hasEdits: function () {
         return this.lastedited;
     },
-    lastEditTime:function(){
-        if(!this.lastedited) return;
+    lastEditTime: function () {
+        if (!this.lastedited) return;
         return moment(this.lastedited).format("h:mm:ss a");
     },
     showTimestamp: function () {
@@ -86,14 +86,14 @@ Template.message.helpers({
     isUnderEdit: function () {
         return Session.get('editingId') === this._id;
     },
-    canEdit:function(){
+    canEdit: function () {
         return this.authorId === Meteor.userId();
     },
     hasMention: function () {
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
     finalMessageBody: function () {
-        if (this.message && typeof(this.message)=== "string") {
+        if (this.message && typeof(this.message) === "string") {
             var emojiString = emojify.replace(parseRoomLinks(this.message));
             return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
         }
@@ -105,15 +105,19 @@ Template.message.events({
     "click .likeMessageLink": function (event, template) {
         event.preventDefault();
         var element = $("#" + template.data._id + " .likedBy");
-        triggerCssAnimation(element,'flipInY');
+        triggerCssAnimation(element, 'flipInY');
         Meteor.call('likeMessage', template.data._id);
     },
     "click .roomLink": function (event, template) {
         var roomId = $(event.target).data("roomid");
+        var room = Rooms.findOne({_id: roomId});
+        if (room && !_(room.users).contains(Meteor.userId())) {
+            Meteor.call('joinRoom', roomId);
+        }
         setCurrentRoom(roomId);
     },
     "click .editMessageButton": function (event, template) {
-        if(template.data.authorId === Meteor.userId()) {
+        if (template.data.authorId === Meteor.userId()) {
             Session.set('editingId', template.data._id);
         }
     },
@@ -124,15 +128,15 @@ Template.message.events({
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
         Session.set('editingId', "");
     },
-    "click .canceleEditSubmit": function(event, template){
+    "click .canceleEditSubmit": function (event, template) {
         Session.set('editingId', "");
     }
 });
 
-triggerCssAnimation = function(element,animation){
+triggerCssAnimation = function (element, animation) {
     var animateElement = element;
-    animateElement.removeClass('animated '+animation);
+    animateElement.removeClass('animated ' + animation);
     Meteor.setTimeout(function () {
-        animateElement.addClass('animated '+animation);
-    },1);
+        animateElement.addClass('animated ' + animation);
+    }, 1);
 };
