@@ -2,16 +2,16 @@ Template.userPill.helpers({
     statusColor: function () {
         var status = this.status;
         if (!status) {
-            return "grey";
+            return "unknown";
         }
         else if (status.idle) { // ordering is important as online can be true at the same time
-            return "orange";
+            return "idle";
         }
         else if (status.online) {
-            return "green";
+            return "online";
         }
         else {
-            return "darkred";
+            return "offline";
         }
 
     },

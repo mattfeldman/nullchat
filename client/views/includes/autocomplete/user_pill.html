@@ -1,6 +1,6 @@
 <template name="userPill">
     <div style="padding: 0; margin: 0;{{userColor}}">
         <img src="{{profile.avatar}}" style="max-height:30px;max-width:30px"/>
-        {{username}} <div style="background: {{statusColor}};"></div>
+        {{username}} <div class="user-pill-status" data-status="{{statusColor}}"></div>
     </div>
 </template>

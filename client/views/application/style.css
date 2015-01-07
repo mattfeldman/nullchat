@@ -71,12 +71,28 @@ div, body, html {
     padding: 5px;
 }
 
-.user-pill-status-bar {
+.user-pill-status {
     width: 10px;
     height: 10px;
     border-radius: 10px;
     background: black;
     display: inline-block;
+}
+
+.user-pill-status[data-status="online"]{
+    background: #008000;
+}
+
+.user-pill-status[data-status="offline"]{
+    background: darkred;
+}
+
+.user-pill-status[data-status="idle"]{
+    background: orange;
+}
+
+.user-pill-status[data-status="unknown"]{
+    background: #808080;
 }
 
 .image-message-image {
