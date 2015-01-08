@@ -13,7 +13,7 @@
         {{/if}}
     </div>
     <div class="sidebar">
-        {{> joinRoom availableRooms}}
+        <i class="fa fa-search"></i>{{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
         {{> userList roomUsers}}
         <input type="button" onclick="Meteor.logout()" value="logout"/>
