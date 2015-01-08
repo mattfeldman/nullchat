@@ -99,6 +99,9 @@ Template.message.helpers({
         }
     },
     emojifiedMessage: function () {
+    },
+    starIcon : function(){
+        return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     }
 });
 Template.message.events({
@@ -106,7 +109,14 @@ Template.message.events({
         event.preventDefault();
         var element = $("#" + template.data._id + " .likedBy");
         triggerCssAnimation(element, 'flipInY');
-        Meteor.call('likeMessage', template.data._id);
+
+        if(!_(this.likedBy).contains(Meteor.userId())){
+            Meteor.call('likeMessage', template.data._id);
+        }
+        else{
+            Meteor.call('unlikeMessage',template.data._id);
+        }
+
     },
     "click .roomLink": function (event, template) {
         var roomId = $(event.target).data("roomid");

@@ -1,8 +1,7 @@
 <template name="roomListItem">
-    <div class="room-element {{isSelectedClass}}">
-        <a href="#" class="setRoomLink">
-            <div class="room-notification-container"><p class="room-notification-count">{{notificationCount}}</p>
-            </div>{{locked}}<p class="room-name">{{name}}</p></a>
-        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton">[x]</button>
+    <div class="room-element {{isSelectedClass}} setRoomLink">
+        <div class="room-notification-container"><p class="room-notification-count">{{notificationCount}}</p>
+        </div>{{locked}}<p class="room-name">{{name}}</p>
+        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton"><i class="fa fa-sign-out"></i></button>
     </div>
 </template>

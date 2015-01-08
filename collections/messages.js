@@ -2,8 +2,10 @@ Messages = new Meteor.Collection('messages'); // jshint ignore:line
 
 Meteor.methods({
     'likeMessage': function (id) {
-        // TODO: Validations
         Messages.update({_id: id}, {$addToSet: {likedBy: Meteor.userId()}});
+    },
+    'unlikeMessage': function (id) {
+        Messages.update({_id: id}, {$pull: {likedBy: Meteor.userId()}});
     },
     'editMessage': function (editMessageStub) {
         var message = Messages.findOne({_id: editMessageStub._id});

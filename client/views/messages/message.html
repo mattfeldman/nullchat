@@ -18,9 +18,8 @@
             {{#if hasEdits}}
                 <span class="lastEditTime">Edited {{lastEditTime}}</span>
             {{/if}}
-            <a class="likeMessageLink" href="#">+1</a>
             <a class="messagePermaLink" href="/message/{{_id}}">link</a>
-            <span class="likedBy">({{likedBy.length}})</span>
+            <a class="likeMessageLink" href="#"><i class="fa {{starIcon}}"></i><span class="likedBy">{{likedBy.length}}</span></a>
         {{else}}{{#if isRich}}
             {{>messageUser authorId}}:
             {{> UI.dynamic template=layoutName data=data}}

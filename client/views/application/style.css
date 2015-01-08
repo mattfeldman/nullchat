@@ -79,19 +79,19 @@ div, body, html {
     display: inline-block;
 }
 
-.user-pill-status[data-status="online"]{
+.user-pill-status[data-status="online"] {
     background: #008000;
 }
 
-.user-pill-status[data-status="offline"]{
+.user-pill-status[data-status="offline"] {
     background: darkred;
 }
 
-.user-pill-status[data-status="idle"]{
+.user-pill-status[data-status="idle"] {
     background: orange;
 }
 
-.user-pill-status[data-status="unknown"]{
+.user-pill-status[data-status="unknown"] {
     background: #808080;
 }
 
@@ -155,6 +155,7 @@ div, body, html {
     top: 0px;
     width: 20%;
 }
-.selected-room{
+
+.selected-room {
     background: lightblue;
 }
