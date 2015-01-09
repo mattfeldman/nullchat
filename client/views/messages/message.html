@@ -3,6 +3,7 @@
          style="{{color}}">
         {{#if isPlain}}
             {{>messageUser authorId}}:
+        <div class="message-content">
             {{#if isUnderEdit}}
                 <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
                 <button class="messageEditSubmit">save</button>
@@ -11,21 +12,26 @@
                 <span class="clickableMessageBody">
                     {{{finalMessageBody}}}
                 </span>
-                {{#if canEdit}}
-                    <button class="editMessageButton">edit</button>
-                {{/if}}
+                <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} hvr-icon-fade"></i><span class="likedBy">{{likedBy.length}}</span></a>
             {{/if}}
             {{#if hasEdits}}
                 <span class="lastEditTime">Edited {{lastEditTime}}</span>
             {{/if}}
-            <a class="messagePermaLink" href="/message/{{_id}}">link</a>
-            <a class="likeMessageLink" href="#"><i class="fa {{starIcon}}"></i><span class="likedBy">{{likedBy.length}}</span></a>
+            <span class="message-extras">
+                {{#if canEdit}}
+                    <a href="#" class="editMessageButton">edit</a>
+                {{/if}}
+                <a class="messagePermaLink" href="/message/{{_id}}">permalink</a>
+            </span>
+        </div>
         {{else}}{{#if isRich}}
             {{>messageUser authorId}}:
+        <div class="message-content">
             {{> UI.dynamic template=layoutName data=data}}
+        </div>
         {{else}}{{#if isFeedback}}
             <span class="feedback-message">{{{message}}}</span>
         {{/if}}{{/if}}{{/if}}
-        {{showTimestamp}}
+        <div class="message-timestamp">{{showTimestamp}}</div>
     </div>
 </template>

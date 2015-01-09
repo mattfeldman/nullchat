@@ -54,10 +54,10 @@ Template.message.helpers({
     color: function () {
         var user = Meteor.users.findOne({_id: this.authorId});
         if (user && user.profile && user.profile.color) {
-            return "border-left: 3px solid" + user.profile.color;
+            return "border-left: 5px solid" + user.profile.color;
         }
         else {
-            return "border-left: 3px solid transparent";
+            return "border-left: 5px solid transparent";
         }
     },
     hasEdits: function () {
