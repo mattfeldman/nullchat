@@ -1,12 +1,14 @@
 <template name="newMessage">
     <div class="new-message-outer-container">
         <form>
-            {{typingUsers}}
             <div class="new-message-inner-container">
                 <div class="new-message-text-container">
-                    {{>textareaAutocomplete settings=settings style="width:100%; resize:none; border:1px solid black;height:25px" name="message" id="message" placeholder="don't be shy..."}}
+                    {{>textareaAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
                 </div>
                 <input class="new-message-submit" type="submit" value="submit"/>
+            </div>
+            <div class="new-message-typing-users">
+               {{typingUsers}}
             </div>
         </form>
     </div>

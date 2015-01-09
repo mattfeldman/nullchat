@@ -49,11 +49,11 @@ div, body, html {
     padding: 0.15em;
 }
 
-.editMessageButton {
+.message-extras {
     display: none;
 }
 
-.message:hover .editMessageButton {
+.message:hover .message-extras {
     display: inline-block;
 }
 
@@ -105,12 +105,12 @@ div, body, html {
 .new-message-outer-container {
     position: absolute;
     width: 80%;
-    height: 60px;
+    height: 50px;
     bottom: 0;
 }
 
 .new-message-inner-container {
-    padding: 10px;
+    padding-top: 5px;
 }
 
 .new-message-text-container {
@@ -124,6 +124,12 @@ div, body, html {
     right: 0;
     width: 70px;
     height: 25px;
+}
+
+.new-message-typing-users{
+    top: 30px;
+    left: 5px;
+    position: absolute;
 }
 
 .room-header {
@@ -158,4 +164,23 @@ div, body, html {
 
 .selected-room {
     background: lightblue;
+}
+
+.message-content {
+    display: inline-block;
+}
+
+.message-user {
+    display: inline-block;
+}
+
+.message-timestamp {
+    display: inline-block;
+    right: 5px;
+}
+
+#message {
+    width: 100%;
+    resize: none;
+    height: 19px
 }
