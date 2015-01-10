@@ -152,8 +152,9 @@ function runContentProcessors(messageStub) {
 var contentProcessors = [
     {
         name: "Image Processor",
-        regex: /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?/,   //From http://stackoverflow.com/questions/169625/regex-to-check-if-valid-url-that-ends-in-jpg-png-or-gif
+        regex: /https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|jpeg|gif|png)/,   //From http://stackoverflow.com/questions/169625/regex-to-check-if-valid-url-that-ends-in-jpg-png-or-gif
         execute: function (regexMatch) {
+            console.log(regexMatch);
             return {
                 layout: "image",
                 data: regexMatch[0]
