@@ -1,4 +1,4 @@
 <template name="roomPill">
-    <p><b>{{isPrivate}}</b>{{name}}</p>
+    <p>{{#if isPrivate}}<i class="fa fa-lock"></i>{{/if}} {{name}}</p>
     <span>{{topic}}</span>
 </template>
