@@ -91,9 +91,15 @@ Template.roomView.created = function () {
         }
     });
     Messages.find().observe({
-        added: function(document) {
-            if(isReady.messages && document && document.type !=='feedback') {
+        added: function(doc) {
+            if(isReady.messages && doc && doc.type !=='feedback') {
                 clickSound.play();
+
+                if(!document.hasFocus()) {
+                    var currentUnreadMessageCount = Session.get('unreadMessages');
+                    currentUnreadMessageCount += 1;
+                    Session.set('unreadMessages', currentUnreadMessageCount);
+                }
             }
             if(isReady.messages){
                 incMessageLimit(1);
@@ -101,7 +107,6 @@ Template.roomView.created = function () {
             if(!scroll.needScroll){
                 scrollChatToBottom();
             }
-
         }
     });
 
