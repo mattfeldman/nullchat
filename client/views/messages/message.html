@@ -12,10 +12,13 @@
                 <span class="clickableMessageBody">
                     {{{finalMessageBody}}}
                 </span>
-                <a class="likeMessageLink" href="#"><i class="fa {{starIcon}}"></i><span class="likedBy">{{likedBy.length}}</span></a>
+                <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span class="likedBy">{{likedBy.length}}</span></a>
             {{/if}}
             {{#if hasEdits}}
                 <span class="lastEditTime">Edited {{lastEditTime}}</span>
+            {{/if}}
+            {{#if fromMobile}}
+                <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
             {{/if}}
             <span class="message-extras">
                 {{#if canEdit}}

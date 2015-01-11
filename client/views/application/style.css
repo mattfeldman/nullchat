@@ -184,3 +184,9 @@ div, body, html {
     resize: none;
     height: 19px
 }
+.message-star-icon{
+    color: rgb(255, 184, 0);
+}
+.message-sms-indicator{
+    color: rgb(0, 168, 255);
+}
