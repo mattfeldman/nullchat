@@ -24,15 +24,15 @@ Meteor.methods({
         var room = Rooms.findOne({_id: id});
         var userId = Meteor.userId();
 
-        if(!room){
+        if (!room) {
             throw new Meteor.Error("Room invalid");
         }
 
-        if(room.ownerId === userId) {
+        if (room.ownerId === userId) {
             throw new Meteor.Error("You can't leave a room you own. Sorry bub.");
         }
 
-        if(usersCurrentRoom === room._id) {
+        if (usersCurrentRoom === room._id) {
             // TODO: Select a next best candidate
             throw new Meteor.Error("Can't leave your current room");
         }
@@ -41,7 +41,33 @@ Meteor.methods({
         return room._id;
 
     },
-    'setCurrentRoom': function(roomId){
-        Meteor.users.update({_id:Meteor.userId()},{$set:{"status.currentRoom":roomId}});
+    'setCurrentRoom': function (roomId) {
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {"status.currentRoom": roomId}});
+    },
+    'createRoom': function (roomStub) {
+        check(roomStub, Schemas.createRoom);
+
+        var roomName = roomStub.name;
+        var roomNameRegex = new RegExp("^" + roomName + "$", "i"); // case insensitivity
+
+        if (!Schemas.regex.room.test(roomName)) {
+            throw new Meteor.Error("room name must be alphanumeric");
+        }
+        if (Rooms.findOne({name: roomNameRegex})) {
+            throw new Meteor.Error("room exists");
+        }
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("Must be logged in");
+        }
+
+        Rooms.insert({
+            name: roomName,
+            topic: "",
+            isPrivate: false,
+            ownerId: Meteor.userId(),
+            invited: [Meteor.userId()],
+            users: [Meteor.userId()],
+            moderators: [Meteor.userId()]
+        });
     }
 });

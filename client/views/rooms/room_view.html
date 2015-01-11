@@ -15,6 +15,7 @@
     <div class="sidebar">
         <i class="fa fa-search"></i>{{> joinRoom availableRooms}}
         {{> roomList currentRooms}}
+        {{> createRoom }}
         {{> userList roomUsers}}
         <input type="button" onclick="Meteor.logout()" value="logout"/>
     </div>
