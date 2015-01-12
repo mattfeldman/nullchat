@@ -1,0 +1,12 @@
+<template name="createRoom">
+    {{#if creatingRoom}}
+        {{#autoForm schema="Schemas.createRoom" id="createRoomForm" type="method" meteormethod="createRoom"}}
+            {{> afQuickField name='name'}}
+            {{afFieldMessage name='name'}}
+            <button type="submit" class="create-room-button">Create</button>
+            <a href="#" class="create-room-cancel">Cancel</a>
+        {{/autoForm}}
+    {{else}}
+        <a href="#" class="create-room-link">Create room...</a>
+    {{/if}}
+</template>
