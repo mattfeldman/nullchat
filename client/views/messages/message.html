@@ -20,6 +20,9 @@
             {{#if fromMobile}}
                 <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
             {{/if}}
+            {{#if crosspost}}
+                <i class="fa fa-random fa-lg message-crosspost-indicator" title="Message was cross posted using #tags"></i>
+            {{/if}}
             <span class="message-extras">
                 {{#if canEdit}}
                     <a href="#" class="editMessageButton">edit</a>
