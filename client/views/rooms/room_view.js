@@ -91,9 +91,15 @@ Template.roomView.created = function () {
         }
     });
     Messages.find().observe({
-        added: function(document) {
-            if(isReady.messages && document && document.type !=='feedback') {
+        added: function(doc) {
+            if(isReady.messages && doc && doc.type !=='feedback') {
                 clickSound.play();
+
+                if(!document.hasFocus()) {
+                    var currentUnreadMessageCount = Session.get('unreadMessages');
+                    currentUnreadMessageCount += 1;
+                    Session.set('unreadMessages', currentUnreadMessageCount);
+                }
             }
             if(isReady.messages){
                 incMessageLimit(1);
@@ -101,7 +107,24 @@ Template.roomView.created = function () {
             if(!scroll.needScroll){
                 scrollChatToBottom();
             }
+        }
+    });
 
+    Session.set('unreadMessages', 0);
+    Deps.autorun(function() {
+        var numberOfUnreadMessages = Session.get('unreadMessages');
+        var currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
+
+        var currentRoomString = '';
+
+        if(currentRoom) {
+            currentRoomString = '#' + currentRoom.name + ' ';
+        }
+
+        if(numberOfUnreadMessages > 0) {
+            document.title = "(" + numberOfUnreadMessages + ")" + " " + currentRoomString + window.location.hostname;
+        } else {
+            document.title = currentRoomString + window.location.hostname;
         }
     });
 

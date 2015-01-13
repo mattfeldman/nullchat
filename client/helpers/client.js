@@ -19,4 +19,4 @@ setCurrentRoom = function(roomId){
 
 incMessageLimit = function(inc){
     Session.set("messageLimit",Session.get("messageLimit")+inc);
-}
+};

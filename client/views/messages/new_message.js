@@ -123,6 +123,9 @@ Template.newMessage.events({
             default:
                 break;
         }
+    },
+    'focus': function(e) {
+        Session.set('unreadMessages', 0);
     }
 });
 var throttledLastTyping = _.throttle(function () {
