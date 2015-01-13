@@ -110,6 +110,24 @@ Template.roomView.created = function () {
         }
     });
 
+    Session.set('unreadMessages', 0);
+    Deps.autorun(function() {
+        var numberOfUnreadMessages = Session.get('unreadMessages');
+        var currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
+
+        var currentRoomString = '';
+
+        if(currentRoom) {
+            currentRoomString = '#' + currentRoom.name + ' ';
+        }
+
+        if(numberOfUnreadMessages > 0) {
+            document.title = "(" + numberOfUnreadMessages + ")" + " " + currentRoomString + window.location.hostname;
+        } else {
+            document.title = currentRoomString + window.location.hostname;
+        }
+    });
+
     isReady.notifications = true;
 };
 Template.roomView.destroyed = function(){
