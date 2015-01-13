@@ -17,6 +17,7 @@
         {{> roomList currentRooms}}
         {{> createRoom }}
         {{> userList roomUsers}}
+        <input type="button" id="editUserProfile" value="Edit User Profile"/>
         <input type="button" onclick="Meteor.logout()" value="logout"/>
     </div>
     {{> newMessage}}

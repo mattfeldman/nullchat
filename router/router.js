@@ -57,15 +57,6 @@ Router.map(function () {
         }
     });
 
-    this.route('user', {
-        path: 'user',
-        data: function () {
-            if (this.ready()) {
-                return Meteor.user().profile;
-            }
-        }
-    });
-
     this.route('messageContext', {
         name: 'messageContext',
         path: 'message/:messageId',

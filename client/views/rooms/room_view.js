@@ -36,6 +36,11 @@ Template.roomView.events({
             scroll.previousHeight = $("#scrollContainer").height();
             incMessageLimit(5);
         }
+    },
+    'click #editUserProfile': function(e) {
+        var options = {};
+        options.data = function() { return Meteor.user().profile; };
+        AntiModals.overlay("user", options);
     }
 });
 

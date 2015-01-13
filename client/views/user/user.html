@@ -1,3 +1,18 @@
 <template name="user">
-  {{>quickForm schema="Schemas.userProfile" doc=this id="userProfileForm" type="method" meteormethod="updateProfile"}}
+    <div class="anti-modal-box">
+        <div class="anti-modal-header">
+            <div class="anti-modal-title">Edit User Profile</div>
+            <div class="anti-modal-closer">&times;</div>
+        </div>
+        {{#autoForm schema="Schemas.userProfile" doc=this id="userProfileForm" type="method" meteormethod="updateProfile"}}
+        <div class="anti-modal-body">
+          {{> afQuickField name='color'}}
+          {{> afQuickField name='avatar'}}
+          {{> afQuickField name='number'}}
+        </div>
+        <div class="anti-modal-footer">
+            <button type="submit" class="anti-modal-button anti-modal-button-action">Save</button>
+        </div>
+        {{/autoForm}}
+    </div>
 </template>
