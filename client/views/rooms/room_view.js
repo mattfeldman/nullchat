@@ -65,6 +65,7 @@ Template.roomView.created = function () {
             }
         });
         Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
+        Meteor.subscribe('images');
     });
 
     var clickSound = new buzz.sound('/sounds/click_04.wav');

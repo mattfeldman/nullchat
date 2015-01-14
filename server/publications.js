@@ -75,6 +75,7 @@ Meteor.publish('emojis', function () {
 Meteor.publish('memes', function () {
     return Memes.find();
 });
+
 Meteor.publish('newMessages', function () {
     // TODO: Reactivity
     var rooms = Rooms.find({users: this.userId}).fetch();
@@ -84,9 +85,13 @@ Meteor.publish('newMessages', function () {
     var now = new Date().getTime();
     return Messages.find({roomId: {$in: roomIds}, type: {$ne: 'feedback'}, timestamp: {$gt: now}});
 });
+
 Meteor.publish('roomInvitations',function(){
     return RoomInvitations.find({
         active: true,
         invitedUser: this.userId
     });
+
+Meteor.publish('images', function() {
+    return Images.find();
 });

@@ -126,6 +126,23 @@ Template.newMessage.events({
     },
     'focus': function(e) {
         Session.set('unreadMessages', 0);
+    },
+    'paste': function(e) {
+        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+
+        if(items[0].type.indexOf("image") === 0) {
+            var blob = items[0].getAsFile();
+
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var options = {};
+                options.data = {};
+                options.data.pasteImageUrl = event.target.result;
+                AntiModals.overlay("pasteImageModal", options);
+            };
+
+            reader.readAsDataURL(blob);
+        }
     }
 });
 var throttledLastTyping = _.throttle(function () {
