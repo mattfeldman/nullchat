@@ -1,7 +1,6 @@
 <template name="userList">
-    <ul>
-        {{#each this}}
-            <li>{{> userPill this}}</li>
-        {{/each}}
-    </ul>
+    {{#each filteredUsers}}
+        {{> userPill this}}
+    {{/each}}
+    <label><input type="checkbox" class="hide-offline-users" {{isChecked}}/>Hide offline users.</label>
 </template>
