@@ -96,6 +96,9 @@ Template.roomView.created = function () {
                     currentUnreadMessageCount += 1;
                     Session.set('unreadMessages', currentUnreadMessageCount);
                 }
+                if(doc.roomId !== Session.get('currentRoom')){
+                    incRoomUnread(doc.roomId);
+                }
             }
             if(isReady.messages){
                 incMessageLimit(1);
@@ -124,6 +127,7 @@ Template.roomView.created = function () {
         }
     });
 
+    Meteor.subscribe('newMessages');
     isReady.notifications = true;
 };
 Template.roomView.destroyed = function(){

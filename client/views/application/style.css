@@ -190,3 +190,18 @@ div, body, html {
 .message-sms-indicator{
     color: rgb(0, 168, 255);
 }
+.room-notification-container{
+    display:inline-block;
+}
+.room-notification-count{
+    display: inline-block;
+    line-height: 20px;
+    min-width:20px;
+    margin: 2px auto;
+    height:20px;
+    text-align: center;
+    background: lightgray;
+}
+.room-notification-count:empty{
+    background: transparent;
+}

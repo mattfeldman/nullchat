@@ -15,8 +15,14 @@ setCurrentRoom = function(roomId){
     Session.set('currentRoom',roomId);
     Meteor.call('setCurrentRoom',roomId);
     Meteor.call('setSeen',roomId);
+    Session.set('unread_'+roomId,"");
 };
 
 incMessageLimit = function(inc){
     Session.set("messageLimit",Session.get("messageLimit")+inc);
+};
+
+incRoomUnread = function(roomId) {
+    var key = 'unread_'+roomId;
+    Session.set(key,(Session.get(key) || 0) +1);
 };

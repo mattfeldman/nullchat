@@ -1,10 +1,10 @@
 <template name="roomListItem">
     <div class="room-element {{isSelectedClass}} setRoomLink">
-        <div class="room-notification-container"><p class="room-notification-count">{{notificationCount}}</p></div>
+        <div class="room-notification-container"><p class="room-notification-count">{{unreadCount}}</p></div>
         {{#if isPrivate}}
             <i class="fa fa-lock"></i>
         {{/if}}
         <span class="room-name">{{name}}</span>
-        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton"><i class="fa fa-sign-out"></i></button>
+        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton" alt="Leave #{{name}}."><i class="fa fa-sign-out"></i></button>
     </div>
 </template>

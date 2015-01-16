@@ -11,6 +11,9 @@ Template.roomListItem.helpers({
     },
     leaveLinkEnabled: function(){
         return this.ownerId === Meteor.userId() || Session.equals("currentRoom",this._id) ? "disabled" : "";
+    },
+    unreadCount:function(){
+        return Session.get('unread_'+this._id);
     }
 });
 Template.roomListItem.events({
