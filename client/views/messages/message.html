@@ -1,9 +1,8 @@
 <template name="message">
-    <div id="{{_id}}" class="row message {{myMessage}} {{hasMention}} animated fadeIn"
-         style="{{color}}">
+    <div id="{{_id}}" class="row message {{myMessage}} {{hasMention}} animated fadeIn">
         {{#if isPlain}}
-            {{>messageUser authorId}}:
-        <div class="message-content">
+            {{>messageUser authorId}}
+        <div class="message-content" style="{{color}}">
             {{#if isUnderEdit}}
                 <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
                 <button class="messageEditSubmit">save</button>
@@ -31,8 +30,8 @@
             </span>
         </div>
         {{else}}{{#if isRich}}
-            {{>messageUser authorId}}:
-        <div class="message-content">
+            {{>messageUser authorId}}
+        <div class="message-content" style="{{color}}">
             {{> UI.dynamic template=layoutName data=data}}
         </div>
         {{else}}{{#if isFeedback}}
