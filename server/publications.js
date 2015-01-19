@@ -1,7 +1,12 @@
 Meteor.publish('messages', function (roomId, limit) {
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
-        return Messages.find({roomId: roomId, type: {$ne: 'feedback'}}, {limit: limit, sort: {timestamp: -1}});
+        var query = {roomId: roomId, type: {$ne: 'feedback'}};
+        var thresholdMessage = Messages.findOne(query, {skip: limit, sort: {timestamp: -1}});
+        if(thresholdMessage && thresholdMessage.timestamp){
+            query.timestamp = {$gt:thresholdMessage.timestamp};
+        }
+        return Messages.find(query, {sort: {timestamp: -1}});
     }
     else {
         throw new Meteor.Error(503, 'No soup for you hackerpants.');

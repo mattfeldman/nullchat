@@ -100,9 +100,6 @@ Template.roomView.created = function () {
                     incRoomUnread(doc.roomId);
                 }
             }
-            if(isReady.messages){
-                incMessageLimit(1);
-            }
             if(!scroll.needScroll){
                 scrollChatToBottom();
             }
