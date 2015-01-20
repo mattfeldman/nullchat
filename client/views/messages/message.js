@@ -19,6 +19,29 @@ function parseRoomLinks(message) {
     }
     return message;
 }
+function parseNameMentions(message) {
+    var users = Meteor.users.find({}).fetch();
+    users = _(users).sortBy(function (user) {
+        return -user.username.length;
+    }); // TODO: Not this every message
+    var loc = -1;
+    while ((loc = message.indexOf("@", loc + 1)) >= 0) {
+        for (var i = 0; i < users.length; i++) {
+            var userName = users[i].username;
+            if (message.indexOf(userName, loc) === loc + 1) {
+                var leftHalf = message.substring(0, loc);
+                var userColor = (users[i].profile && users[i].profile.color) || "black";
+                var styleString = 'style="border-bottom: 2px solid ' + userColor + ';' + 'background: ' + tinycolor(userColor).setAlpha(0.075).toRgbString() + ';"';
+                var middle = '<span class="message-user-mention" ' + styleString + ' data-userId="' + users[i]._id + '">@' + userName + '</span>';
+                var rightHalf = message.substring(loc + userName.length + 1, message.length + middle.length);
+                message = leftHalf + middle + rightHalf;
+                loc = loc + middle.length - 1;
+                break;
+            }
+        }
+    }
+    return message;
+}
 function hasUserMentions(message) {
     if (!message || typeof  message !== "string") return false;
     var regex = new RegExp("[@\\s]+(" + Meteor.user().username + ")($|[\\s!.?]+)");
@@ -94,13 +117,13 @@ Template.message.helpers({
     },
     finalMessageBody: function () {
         if (this.message && typeof(this.message) === "string") {
-            var emojiString = emojify.replace(parseRoomLinks(_s.escapeHTML(this.message)));
+            var emojiString = emojify.replace(parseRoomLinks(parseNameMentions(_s.escapeHTML(this.message))));
             return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
         }
     },
     emojifiedMessage: function () {
     },
-    starIcon : function(){
+    starIcon: function () {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     }
 });
@@ -110,11 +133,11 @@ Template.message.events({
         var element = $("#" + template.data._id + " .likedBy");
         triggerCssAnimation(element, 'flipInY');
 
-        if(!_(this.likedBy).contains(Meteor.userId())){
+        if (!_(this.likedBy).contains(Meteor.userId())) {
             Meteor.call('likeMessage', template.data._id);
         }
-        else{
-            Meteor.call('unlikeMessage',template.data._id);
+        else {
+            Meteor.call('unlikeMessage', template.data._id);
         }
 
     },

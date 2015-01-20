@@ -196,6 +196,13 @@ div, body, html {
     vertical-align: middle;
 }
 
+.message-user-mention{
+    padding: 3px;
+}
+.message-user-mention:hover{
+    transition: 0.1s;
+    padding: 4px;
+}
 .clickableMessageBody{    
     line-height:normal;
     vertical-align: middle;
