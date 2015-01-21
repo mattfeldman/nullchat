@@ -1,0 +1,8 @@
+<template name="rooms">
+    <label class="hide-my-rooms-label"><input type="checkbox" class="hide-my-rooms" {{isChecked}}/>Hide my current rooms.</label>
+    <div class="rooms">
+        {{#each rooms}}
+            {{>roomTile this}}
+        {{/each}}
+    </div>
+</template>

@@ -34,7 +34,19 @@ Router.map(function () {
             this.go('chat');
         }
     });
-
+    this.route('rooms', {
+        path: '/rooms',
+        subscriptions: function () {
+            return [
+                Meteor.subscribe('availableRooms'),
+                Meteor.subscribe('currentRooms'),
+                Meteor.subscribe('notifications')
+            ];
+        },
+        action: function () {
+            this.render('rooms');
+        }
+    });
     this.route('chat', {
         path: '/',
         subscriptions: function () {

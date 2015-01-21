@@ -1,0 +1,7 @@
+<template name="roomTile">
+    <div class="room-tile">
+        {{#if isPrivate}}<i class="fa fa-lock"></i>{{/if}}
+        <span class="room-tile-name">{{name}}</span><span class="room-tile-count">{{users.length}} <i class="fa fa-user room-tile-icon"></i></span>
+        <span class="room-tile-topic">{{topic}}</span>
+    </div>
+</template>

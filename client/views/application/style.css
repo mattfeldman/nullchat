@@ -200,8 +200,7 @@ div, body, html {
     padding: 3px;
 }
 .message-user-mention:hover{
-    transition: 0.1s;
-    padding: 4px;
+    opacity: 0.8;
 }
 .clickableMessageBody{    
     line-height:normal;
@@ -239,4 +238,33 @@ div, body, html {
     display:inline-block;
     position:absolute;
     right:0;
+}
+.room-tile{
+    padding: 1%;
+    width: 20%;
+    float: left;
+    margin: 1%;
+    background-color: #F0F0F0;
+    transition: 0.1s;
+    position: relative;
+}
+.room-tile:hover {
+    background-color: rgb(232, 226, 245);
+    transition: 0.3s;
+}
+.room-tile:active {
+    background-color: rgb(166, 64, 226);
+    transition: 0.3s;
+}
+span.room-tile-count {
+    position: absolute;
+    right: 1%;
+}
+.room-tile-icon{
+    color:gray;
+    margin: 3px 0;
+}
+.room-tile-topic{
+    display:inline-block;
+    color:darkgray;
 }
