@@ -268,3 +268,8 @@ span.room-tile-count {
     display:inline-block;
     color:darkgray;
 }
+.my-room{
+    border: 1px solid #f0f0f0;
+    background-color: white;
+    transition:0.3s;
+}
