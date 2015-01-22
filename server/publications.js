@@ -76,3 +76,9 @@ Meteor.publish('newMessages', function () {
     var now = new Date().getTime();
     return Messages.find({roomId: {$in: roomIds}, type: {$ne: 'feedback'}, timestamp: {$gt: now}});
 });
+Meteor.publish('roomInvitations',function(){
+    return RoomInvitations.find({
+        active: true,
+        invitedUser: this.userId
+    });
+});

@@ -1,4 +1,9 @@
 <template name="rooms">
+    <div class="room-invitations">
+        {{#each roomInvitations}}
+            {{>roomInvitation this}}
+        {{/each}}
+    </div>
     <label class="hide-my-rooms-label"><input type="checkbox" class="hide-my-rooms" {{isChecked}}/>Hide my current rooms.</label>
     <div class="rooms">
         {{#each rooms}}

@@ -40,7 +40,8 @@ Router.map(function () {
             return [
                 Meteor.subscribe('availableRooms'),
                 Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('notifications')
+                Meteor.subscribe('notifications'),
+                Meteor.subscribe('roomInvitations')
             ];
         },
         action: function () {
