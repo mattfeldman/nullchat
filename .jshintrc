@@ -128,12 +128,19 @@
       "_": false,               // Underscore.js
       "$": false,               // jQuery
       "Router": false,           // iron-router
+      "_s":false,               // Underscore string
 
       // Global Collections
       "Messages":false,
       "Rooms":false,
       "Notifications":false,
       "Emojis":false,
-      "emojify":false
+      "Memes":false,
+      "RoomInvitations":false,
+      "Schemas":false,
+
+      // packages
+      "emojify":false,
+      "SimpleSchema":false
     }
 }
