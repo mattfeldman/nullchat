@@ -206,6 +206,7 @@ div, body, html {
     line-height:normal;
     vertical-align: middle;
     display: inline-block;
+    transition: 0.3s;
 }
 
 #message {

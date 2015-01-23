@@ -8,7 +8,7 @@
                 <button class="messageEditSubmit">save</button>
                 <button class="canceleEditSubmit">cancel</button>
             {{else}}
-                <span class="clickableMessageBody">
+                <span class="clickableMessageBody" style="{{starSizingStyle}}">
                     {{{finalMessageBody}}}
                 </span>
                 <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span class="likedBy">{{likedBy.length}}</span></a>

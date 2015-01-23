@@ -125,6 +125,19 @@ Template.message.helpers({
     },
     starIcon: function () {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
+    },
+    starSizingStyle: function () {
+        if(this.likedBy.length === 0){
+            return "";
+        }
+        var room = Rooms.findOne({_id: this.roomId}, {fields: {users: 1}});
+        if (!room || !room.users || room.users.length < 1) {
+            return "";
+        }
+        var scale = this.likedBy.length / (room.users.length / 1.5);
+        var bonus = 400;
+        var total = 100+_.min([bonus*scale,400]);
+        return "font-size: "+total+"%;";
     }
 });
 Template.message.events({
