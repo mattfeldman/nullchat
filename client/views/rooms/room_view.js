@@ -88,7 +88,7 @@ Template.roomView.created = function () {
     });
     Messages.find().observe({
         added: function(doc) {
-            if(isReady.messages && doc && doc.type !=='feedback') {
+            if(isReady.messages && doc && doc.type !=='feedback' && doc.authorId !== Meteor.userId()) {
                 clickSound.play();
 
                 if(!document.hasFocus()) {
