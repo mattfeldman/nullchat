@@ -11,7 +11,7 @@ Template.roomView.helpers({
     availableRooms: function () {
         return Rooms.find();
     },
-    messageLimit: function(){
+    messageLimit: function () {
         return Session.get('messageLimit');
     }
 });
@@ -20,17 +20,19 @@ Template.roomView.events({
         Session.set('messageLimit', Session.get('messageLimit') + 20);
         e.preventDefault();
     },
-    'scroll #roomContainer':function(e){
+    'scroll #roomContainer': function (e) {
         var room = $("#roomContainer");
-        if(room.scrollTop() < 50 && !scroll.needScroll && isReady.messages){
+        if (room.scrollTop() < 50 && !scroll.needScroll && isReady.messages) {
             scroll.needScroll = true;
             scroll.previousHeight = $("#scrollContainer").height();
             incMessageLimit(5);
         }
     },
-    'click #editUserProfile': function(e) {
+    'click #editUserProfile': function (e) {
         var options = {};
-        options.data = function() { return Meteor.user().profile; };
+        options.data = function () {
+            return Meteor.user().profile;
+        };
         AntiModals.overlay("user", options);
     }
 });
@@ -48,16 +50,16 @@ Template.roomView.created = function () {
     Session.setDefault('messageLimit', 10);
     Deps.autorun(function () {
         isReady.messages = false;
-        Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'),{
-            onReady:function(){
+        Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'), {
+            onReady: function () {
                 isReady.messages = true;
-                if(scroll.needScroll){
+                if (scroll.needScroll) {
                     var room = $("#roomContainer");
                     scroll.needScroll = false;
                     var offset = $("#scrollContainer").height() - scroll.previousHeight;
-                    room.scrollTop(room.scrollTop()+offset);
+                    room.scrollTop(room.scrollTop() + offset);
                 }
-                else{
+                else {
                     scrollChatToBottom();
                 }
             }
@@ -68,66 +70,86 @@ Template.roomView.created = function () {
     var clickSound = new buzz.sound('/sounds/click_04.wav');
     var chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
+    var permission = notify.permissionLevel();
+    if (permission === notify.PERMISSION_DEFAULT) {
+        notify.requestPermission();
+    }
+    notify.config({pageVisibility: false, autoClose: 5000});
+
     Notifications.find().observe({
-        added: function(document){
-            if(isReady.notifications) {
+        added: function (document) {
+            if (isReady.notifications) {
                 chimeSound.play();
-                var permission = notify.permissionLevel();
-                if(permission === notify.PERMISSION_DEFAULT) {
-                    notify.requestPermission();
-                }
-                if(permission === notify.PERMISSION_GRANTED)
-                {
-                    var title = document.authorName+"(#"+document.roomName+")";
-                    var user = Meteor.users.findOne({_id:document.authorId},{fields:{"profile.avatar":1}});
+                if (permission === notify.PERMISSION_GRANTED) {
+                    var title = document.authorName + "(#" + document.roomName + ")";
+                    var user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
                     var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
-                    notify.createNotification(title,{body:document.message,icon:avatar});
+                    notify.createNotification(title, {body: document.message, icon: avatar, tag: document._id});
                 }
             }
         }
     });
     Messages.find().observe({
-        added: function(doc) {
-            if(isReady.messages && doc && doc.type !=='feedback' && doc.authorId !== Meteor.userId()) {
+        added: function (doc) {
+            if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
                 clickSound.play();
 
-                if(!document.hasFocus()) {
+                if (!document.hasFocus()) {
                     var currentUnreadMessageCount = Session.get('unreadMessages');
                     currentUnreadMessageCount += 1;
                     Session.set('unreadMessages', currentUnreadMessageCount);
                 }
-                if(doc.roomId !== Session.get('currentRoom')){
+                if (doc.roomId !== Session.get('currentRoom')) {
                     incRoomUnread(doc.roomId);
                 }
             }
-            if(!scroll.needScroll){
+            if (!scroll.needScroll) {
                 scrollChatToBottom();
             }
         }
     });
 
+    Messages.find({authorId: Meteor.userId()}).observe({
+        changed: function (newDoc, oldDoc) {
+            if (newDoc.likedBy.length - oldDoc.likedBy.length === 1) {
+                var likedBy = _.difference(newDoc.likedBy, oldDoc.likedBy)[0];
+                if (likedBy === Meteor.userId()) {return;}
+                if (permission === notify.PERMISSION_GRANTED) {
+                    var user = Meteor.users.findOne({_id: likedBy}, {fields: {"profile.avatar": 1, "username": 1}});
+                    if (!user) {return;}
+                    var avatar = user.profile && user.profile.avatar || '/images/logo64.png';
+                    var title = user.username + " gave you a star.";
+                    var body = "For \"" + newDoc.message + "\"";
+                    notify.createNotification(title, {body: body, icon: avatar, tag: newDoc._id});
+                }
+            }
+        }
+    });
+
     Session.set('unreadMessages', 0);
-    Deps.autorun(function() {
+    Deps.autorun(function () {
         var numberOfUnreadMessages = Session.get('unreadMessages');
         var currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
 
         var currentRoomString = '';
 
-        if(currentRoom) {
+        if (currentRoom) {
             currentRoomString = '#' + currentRoom.name + ' ';
         }
 
-        if(numberOfUnreadMessages > 0) {
+        if (numberOfUnreadMessages > 0) {
             document.title = "(" + numberOfUnreadMessages + ")" + " " + currentRoomString + window.location.hostname;
-        } else {
+        }
+        else {
             document.title = currentRoomString + window.location.hostname;
         }
     });
 
     Meteor.subscribe('newMessages');
     isReady.notifications = true;
-};
-Template.roomView.destroyed = function(){
+}
+;
+Template.roomView.destroyed = function () {
     isReady.notifications = false;
     isReady.messages = false;
 }
