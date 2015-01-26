@@ -19,7 +19,6 @@ cfs:standard-packages
 cfs:filesystem
 
 
-npm-container
 brentjanderson:buzz
 jparker:gravatar
 accounts-github
@@ -30,3 +29,5 @@ linto:fontawesome
 reactive-var
 anti:modals
 aramk:tinycolor
+meteorhacks:aggregate
+maazalik:highcharts

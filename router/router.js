@@ -48,6 +48,14 @@ Router.map(function () {
             this.render('rooms');
         }
     });
+    this.route('userMetrics', {
+        path: '/userMetrics',
+        subscriptions: function () {
+        },
+        action: function () {
+            this.render('userMetrics');
+        }
+    });
     this.route('chat', {
         path: '/',
         subscriptions: function () {
