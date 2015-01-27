@@ -56,6 +56,22 @@ Router.map(function () {
             this.render('userMetrics');
         }
     });
+    this.route('roomMetrics', {
+        path: '/room/:roomId/metrics',
+        subscriptions: function () {
+            return [
+                Meteor.subscribe('availableRooms'),
+                Meteor.subscribe('currentRooms'),
+                Meteor.subscribe('availableRooms')
+            ];
+        },
+        data: function () {
+            return {roomId: this.params.roomId};
+        },
+        action: function () {
+            this.render('roomMetrics');
+        }
+    });
     this.route('chat', {
         path: '/',
         subscriptions: function () {
@@ -108,15 +124,15 @@ Router.map(function () {
                     if (user) {
                         var message = this.request.body.Body;
                         var roomMatch = /#([\w]+)/.exec(message);
-                        if(roomMatch && roomMatch[1]) {
+                        if (roomMatch && roomMatch[1]) {
                             var roomName = roomMatch[1];
                             var room = Rooms.findOne({name: roomName});
                             if (room) {
                                 console.log("From " + fromNumber + " : " + message + " for " + room.name);
-                                insertMessage(user,room,{message:message,roomId:room._id},{fromMobile:true});
+                                insertMessage(user, room, {message: message, roomId: room._id}, {fromMobile: true});
                             }
                             else {
-                                console.log("From " + fromNumber + " : " + message + " can't find room: "+ roomName);
+                                console.log("From " + fromNumber + " : " + message + " can't find room: " + roomName);
                             }
                         }
                         else {
