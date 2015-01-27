@@ -49,8 +49,11 @@ Router.map(function () {
         }
     });
     this.route('userMetrics', {
-        path: '/userMetrics',
+        path: '/user/:userId/metrics',
         subscriptions: function () {
+        },
+        data: function () {
+            return {userId: this.params.userId};
         },
         action: function () {
             this.render('userMetrics');

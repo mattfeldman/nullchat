@@ -24,12 +24,12 @@ Meteor.methods({
         var userId = userId || Meteor.userId();
         if (Meteor.isServer) {
             var milisecondsInWeek = 60 * 1000 * 60 * 24;
-            var milisecondsIn15Minutes = 60 * 1000 * 15;
+            var milisecondsIn5Minutes = 60 * 1000 * 5;
             var pipeline = [
                 {$match: {authorId: userId, type: "plain"}},
                 {
                     $project: {
-                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn15Minutes]},
+                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn5Minutes]},
                     }
                 },
                 {
