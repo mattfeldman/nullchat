@@ -104,7 +104,10 @@ Template.roomView.created = function () {
                 }
             }
             if (!scroll.needScroll) {
-                scrollChatToBottom();
+                // rougly percentage towards the top fo the scrollbar; less than 5% sticky scroll to bottom
+                if((($("#scrollContainer").height()-$("#roomContainer").scrollTop() - $("#roomContainer").height())/$("#scrollContainer").height()) < 0.05) {
+                    setTimeout(scrollChatToBottom, 100);
+                }
             }
         }
     });
