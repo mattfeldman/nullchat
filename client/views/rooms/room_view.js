@@ -13,6 +13,14 @@ Template.roomView.helpers({
     },
     messageLimit: function () {
         return Session.get('messageLimit');
+    },
+    'currentRoomPreference': function () {
+        var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: "preferences"});
+        if (user.preferences) {
+            var currentPreference = user.preferences[Session.get('currentRoom')];
+            return currentPreference || {playMessageSound: true};
+        }
+        return {playMessageSound: true};
     }
 });
 Template.roomView.events({
