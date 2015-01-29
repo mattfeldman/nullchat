@@ -2,6 +2,7 @@
     <div class="room-header">
         <span class="room-header-name">{{room.name}}</span>
         <span class="room-header-topic">{{room.topic}}</span>
+        {{>roomPreferences}}
     </div>
     <div id="roomContainer" class="room-container">
         {{#if currentRoom}}

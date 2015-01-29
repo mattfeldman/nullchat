@@ -13,12 +13,35 @@ Meteor.methods({
         check(profile, Schemas.userProfile);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile': profile}});
     },
-    'updateRoomPreferences': function (room, roomPreferences) {
-        //TODO CHeck room
-        console.log(roomPreferences);
-        check(roomPreferences, Schemas.roomPreference);
-        var roomPreferenceKey = 'preferences.' + room;
-        Meteor.users.update({_id: Meteor.userId()}, {$set: {roomPreferenceKey: roomPreferences}});
+    'updateRoomPreferences': function (roomPreference) {
+        if(!Match.test(roomPreference, Schemas.roomPreference)){
+            throw new Meteor.Error(roomPreference+" did not match schema.");
+        }
+
+        var preferenceUser = Meteor.user();
+        var preferences = {};
+        var roomPreferences = [];
+        if(preferenceUser && preferenceUser.preferences){
+            preferences = preferenceUser.preferences;
+            if(preferenceUser.preferences.room){
+                roomPreferences =preferenceUser.preferences.room;
+            }
+        }
+
+        var i;
+        for(i=0;i<roomPreferences.length;i++){
+            if(roomPreferences[i].roomId === roomPreference.roomId){
+                roomPreferences[i] = roomPreference;
+                break;
+            }
+        }
+        // No current preference found
+        if(i===roomPreferences.length){
+            roomPreferences.push(roomPreference);
+        }
+
+        preferences.room = roomPreferences;
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {"preferences": preferences}});
     },
     'punchcard': function (userId) {
         var userId = userId || Meteor.userId();

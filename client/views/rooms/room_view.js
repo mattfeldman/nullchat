@@ -43,13 +43,13 @@ Template.roomView.rendered = function () {
 
 var isReady = {};
 var scroll = {};
+
 Template.roomView.created = function () {
     isReady.notifications = false;
     isReady.messages = false;
 
     Session.setDefault('messageLimit', 10);
     Deps.autorun(function () {
-        isReady.messages = false;
         Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'), {
             onReady: function () {
                 isReady.messages = true;
@@ -92,7 +92,9 @@ Template.roomView.created = function () {
     Messages.find().observe({
         added: function (doc) {
             if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
-                clickSound.play();
+                if(roomPreferencesOrDefault(doc.roomId).playMessageSound) {
+                    clickSound.play();
+                }
 
                 if (!document.hasFocus()) {
                     var currentUnreadMessageCount = Session.get('unreadMessages');
