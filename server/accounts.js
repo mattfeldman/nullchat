@@ -37,16 +37,7 @@ var imageStore = new FS.Store.S3("nullchat", {
     accessKeyId: "",
     secretAccessKey: "",
     bucket: "nullchat",
-    ACL: 'public-read',
-    beforeWrite: function(fileObject) {
-        console.log(fileObject);
-        fileObject.extension('png', {store:'nullchat', save:false});
-        /*return {
-            extension: 'png',
-            type: 'image/png',
-            name: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);})
-        };*/
-    },
+    ACL: 'public-read'
 });
 
 Images = new FS.Collection("images", {
@@ -54,16 +45,16 @@ Images = new FS.Collection("images", {
 });
 
 Images.allow({
-    insert: function() {
-        return true;
+    insert: function(userId, doc) {
+        return userId;
     },
-    update: function() {
-        return true;
+    update: function(userId, doc, fields, modifier) {
+        return userId;
     },
-    remove: function() {
-        return true;
+    remove: function(userId, doc) {
+        return userId;
     },
-    download: function() {
-        return true;
+    download: function(userId, doc) {
+        return userId;
     }
 });

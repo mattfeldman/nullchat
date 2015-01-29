@@ -129,12 +129,17 @@ Template.newMessage.events({
     },
     'paste': function(e) {
         var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        var blob;
 
-        if(items[0].type.indexOf("image") === 0) {
-            var blob = items[0].getAsFile();
+        for(var i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf("image") === 0) {
+                blob = items[i].getAsFile();
+            }
+        }
 
+        if(blob !== null) {
             var reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 var options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;

@@ -92,7 +92,3 @@ Meteor.publish('roomInvitations',function(){
         invitedUser: this.userId
     });
 });
-
-Meteor.publish('images', function() {
-    return Images.find();
-});
