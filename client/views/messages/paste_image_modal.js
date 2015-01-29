@@ -21,14 +21,25 @@ Template.pasteImageModal.events({
         // write the ArrayBuffer to a blob, and you're done
         var blob = new Blob([ab], {type: mimeString});
 
-        Images.insert(blob, function(err, fileObj) {
-            var messageStub = {
-                message: "upload://" + fileObj._id,
-                roomId: Session.get('currentRoom')
-            };
-            console.log(fileObj);
-            Meteor.call('message', messageStub);
-            scrollChatToBottom(); //TODO: This looks like an ugly hack
+        var file = new FS.File(blob);
+        file.name("test.png");
+
+        Images.insert(file, function(err, fileObj) {
+            // Super ugly hack. This callback files when the image has been inserted.
+            // However, it appears the image is not always available quite yet on AWS.
+            // This causes the error image to be shown, and the only way to get the full image is to refresh the page
+            // Pause a couple seconds to allow AWS to make the image link available.
+            // Not sure what the correct solution is here. The code is already in the only callback we have available.
+            setTimeout(function() {
+                var fileKey = "https://s3-us-west-2.amazonaws.com/nullchat/" + fileObj.collectionName + '/' + fileObj._id + '-' + fileObj.name();
+                var messageStub = {
+                    message: fileKey,
+                    roomId: Session.get('currentRoom')
+                };
+
+                Meteor.call('message', messageStub);
+                scrollChatToBottom(); //TODO: This looks like an ugly hack
+            }, 2000);
         });
         AntiModals.dismissOverlay(e.target, null, null);
     },

@@ -91,6 +91,7 @@ Meteor.publish('roomInvitations',function(){
         active: true,
         invitedUser: this.userId
     });
+});
 
 Meteor.publish('images', function() {
     return Images.find();

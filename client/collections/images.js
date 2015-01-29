@@ -1,4 +1,4 @@
-var imageStore = new FS.Store.S3("nullchat");
+imageStore = new FS.Store.S3("nullchat");
 
 Images = new FS.Collection("images", {
     stores: [imageStore],
