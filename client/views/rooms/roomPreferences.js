@@ -1,7 +1,6 @@
 Template.roomPreferences.helpers({
-    playMessageSound:function(){
-        console.log("playMessageSound) is now "+Session.get('currentRoomSettings_playMessageSound') );
-        return Session.get('currentRoomSettings_playMessageSound') ? "checked" : "";
+    playMessageSound: function () {
+        return Template.instance().playMessageSound.get() ? "checked" : "";
     }
 });
 Template.roomPreferences.events({
@@ -14,18 +13,20 @@ Template.roomPreferences.events({
     }
 });
 Template.roomPreferences.created = function () {
+    var instance = this;
+    instance.playMessageSound = new ReactiveVar();
     Deps.autorun(function () {
-        Session.set('currentRoomSettings_playMessageSound', false);
-        var prefUser = Meteor.users.findOne({_id:Meteor.userId()},{fields:{"preferences":1}});
+        instance.playMessageSound.set(true);
+        var prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
         var currentRoom = Session.get('currentRoom');
-        if(prefUser && prefUser.preferences && prefUser.preferences.room) {
-            console.log(prefUser.preferences.room);
-            var currentPreferences = _(prefUser.preferences.room).find(function(p){console.log(p);return p.roomId === currentRoom;});
-            Session.set('currentRoomSettings_playMessageSound', currentPreferences.playMessageSound);
+        if (prefUser && prefUser.preferences && prefUser.preferences.room) {
+            var currentPreferences = _(prefUser.preferences.room).find(function (p) {
+                return p.roomId === currentRoom;
+            });
+            if (currentPreferences) {
+
+                instance.playMessageSound.set(currentPreferences.playMessageSound);
+            }
         }
-        else{
-            // Populate from defaults somewhere
-        }
-        console.log("currentPreferences.playMessageSound) is now "+Session.get('currentRoomSettings_playMessageSound') );
     });
 };
