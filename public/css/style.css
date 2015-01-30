@@ -166,32 +166,32 @@ div, body, html {
     border-left: 3px solid transparent;
     display: block;
     width: 100%;
-    min-height: 50px;     
+    min-height: 50px;
 }
 
 .message-content {
-    display: inline-block;    
+    display: inline-block;
     width: 80%;
     padding-left: 5px;
-    min-height: 50px;    
+    min-height: 50px;
     line-height: 50px;
 }
 
 .message-user {
     height:50px;
-    display: inline-block;    
-    vertical-align: middle;    
+    display: inline-block;
+    vertical-align: middle;
     float: left;
     width: 125px;
 }
 
 .message-user-username{
-    line-height: 50px;    
-    width:75px;    
-    float:right;        
+    line-height: 50px;
+    width:75px;
+    float:right;
 }
 
-.message-timestamp {    
+.message-timestamp {
     display: inline-block;
     vertical-align: middle;
 }
@@ -202,7 +202,7 @@ div, body, html {
 .message-user-mention:hover{
     opacity: 0.8;
 }
-.clickableMessageBody{    
+.clickableMessageBody{
     line-height:normal;
     vertical-align: middle;
     display: inline-block;
@@ -240,11 +240,33 @@ div, body, html {
     position:absolute;
     right:0;
 }
+.discover-room-button{
+  position:relative;
+}
+.discover-room-button[data-unread]:after {
+   content:attr(data-unread);
+   position:absolute;
+   top:-10px;
+   right:-10px;
+   font-size:.7em;
+   background:red;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
+.discover-rooms-container{
+  margin: 3%; 
+  padding: 1%;
+  background-color: #ddd
+}
 .room-tile{
     padding: 1%;
-    width: 20%;
-    float: left;
-    margin: 1%;
+    width: 21%;
+    display:inline-block;    
+    margin: 0.5%;
     background-color: #F0F0F0;
     transition: 0.1s;
     position: relative;
@@ -270,7 +292,7 @@ span.room-tile-count {
     color:darkgray;
 }
 .my-room{
-    border: 1px solid #f0f0f0;
-    background-color: white;
+    border: 1px solid #333;
+    background-color: #aaa;
     transition:0.3s;
 }
