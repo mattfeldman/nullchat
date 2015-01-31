@@ -76,7 +76,8 @@ Template.roomView.created = function () {
     }
     notify.config({pageVisibility: false, autoClose: 5000});
 
-    Notifications.find().observe({
+    var nowTimestamp = new Date().getTime();
+    Notifications.find({timestamp:{$gt:nowTimestamp}}).observe({
         added: function (document) {
             if (isReady.notifications) {
                 chimeSound.play();
@@ -89,7 +90,7 @@ Template.roomView.created = function () {
             }
         }
     });
-    Messages.find().observe({
+    Messages.find({timestamp:{$gt:nowTimestamp}}).observe({
         added: function (doc) {
             if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
                 if(roomPreferencesOrDefault(doc.roomId).playMessageSound) {
