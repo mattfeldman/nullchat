@@ -243,7 +243,7 @@ div, body, html {
 .discover-room-button{
   position:relative;
 }
-.discover-room-button[data-unread]:after {
+.room-invitation-unread[data-unread]:after {
    content:attr(data-unread);
    position:absolute;
    top:-10px;
