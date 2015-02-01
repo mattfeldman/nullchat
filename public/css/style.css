@@ -167,22 +167,22 @@ div, body, html {
     display: block;
     width: 100%;
     min-height: 50px;
+    position: relative;
 }
 
 .message-content {
-    display: inline-block;
-    width: 80%;
     padding-left: 5px;
     min-height: 50px;
     line-height: 50px;
+    display: inline-block;
 }
 
 .message-user {
-    height:50px;
     display: inline-block;
     vertical-align: middle;
     float: left;
     width: 125px;
+    height: 50px;
 }
 
 .message-user-username{
@@ -192,8 +192,11 @@ div, body, html {
 }
 
 .message-timestamp {
-    display: inline-block;
+    position: absolute;
     vertical-align: middle;
+    display: inline-block;
+    right: 10px;
+    line-height: 50px;;
 }
 
 .message-user-mention{
@@ -243,7 +246,7 @@ div, body, html {
 .discover-room-button{
   position:relative;
 }
-.room-invitation-unread[data-unread]:after {
+.discover-room-button[data-unread]:after {
    content:attr(data-unread);
    position:absolute;
    top:-10px;
@@ -295,4 +298,12 @@ span.room-tile-count {
     border: 1px solid #333;
     background-color: #aaa;
     transition:0.3s;
+}
+.room-invitation-unread[data-unread]:after {
+    content: "103";
+    font-size: .8em;
+    box-shadow: 0 0 1px #333;
+    right: -10px;
+    top: -10px;
+    position: absolute;
 }
