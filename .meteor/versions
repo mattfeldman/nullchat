@@ -36,6 +36,7 @@ check@1.0.4-win.0
 coffeescript@1.0.6-winr.2
 copleykj:autolinker@1.0.2
 dandv:caret-position@2.1.0-3
+dburles:mongo-collection-instances@0.2.6
 ddp@1.0.14-winr.4
 deps@1.0.7-winr.2
 ejson@1.0.6-winr.2
@@ -99,6 +100,7 @@ reactive-var@1.0.5-winr.2
 reload@1.1.3-winr.3
 retry@1.0.3-winr.2
 routepolicy@1.0.4-winr.4
+rubaxa:sortable@1.0.1
 sacha:spin@2.0.4
 service-configuration@1.0.4-winr.2
 session@1.0.6-winr.2

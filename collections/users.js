@@ -13,6 +13,9 @@ Meteor.methods({
         check(profile, Schemas.userProfile);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile': profile}});
     },
+    'updateRoomOrder':function(roomOrderArr){
+        Meteor.users.update({_id:Meteor.userId()},{$set:{"preferences.roomOrder":roomOrderArr}});
+    },
     'updateRoomPreferences': function (roomPreference) {
         if(!Match.test(roomPreference, Schemas.roomPreference)){
             throw new Meteor.Error(roomPreference+" did not match schema.");

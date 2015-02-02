@@ -1,5 +1,5 @@
 <template name="roomListItem">
-    <div class="room-element {{isSelectedClass}} setRoomLink">
+    <div class="room-element {{isSelectedClass}} setRoomLink" data-id="{{_id}}">
         <div class="room-notification-container"><p class="room-notification-count">{{unreadCount}}</p></div>
         {{#if isPrivate}}
             <i class="fa fa-lock"></i>
