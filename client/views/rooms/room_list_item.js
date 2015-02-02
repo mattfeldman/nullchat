@@ -30,7 +30,7 @@ Template.roomListItem.events({
                         return;
                     }
                 }
-                Session.set('currentRoom',newRoom._id);
+                setCurrentRoom(newRoom._id);
             }
             Meteor.call('leaveRoom', leaveRoomId);
         }
