@@ -10,16 +10,30 @@ Template.roomListItem.helpers({
         return count || "";
     },
     leaveLinkEnabled: function(){
-        return this.ownerId === Meteor.userId() || Session.equals("currentRoom",this._id) ? "disabled" : "";
+        return this.ownerId !== Meteor.userId() ? "room-leave-link-enabled" : "";
     },
     unreadCount:function(){
         return Session.get('unread_'+this._id);
     }
 });
 Template.roomListItem.events({
-    'click .leaveRoomButton':function(event, template){
+    'click .room-leave-link-enabled':function(event, template){
         event.preventDefault();
-        Meteor.call('leaveRoom',template.data._id);
+        var leaveRoomId =template.data._id;
+        if(leaveRoomId) {
+            if(Session.equals('currentRoom',leaveRoomId)){
+                // Find a different room
+                var newRoom = Rooms.findOne({_id:{$ne:leaveRoomId},users:Meteor.userId()});
+                if(!newRoom){
+                    newRoom = Rooms.findOne({name:"welcome"});
+                    if(!newRoom){
+                        return;
+                    }
+                }
+                Session.set('currentRoom',newRoom._id);
+            }
+            Meteor.call('leaveRoom', leaveRoomId);
+        }
     },
     'click .setRoomLink':function(event,template){
         event.preventDefault();

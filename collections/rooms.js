@@ -20,7 +20,7 @@ Meteor.methods({
         }
         return room._id;
     },
-    'leaveRoom': function (id, usersCurrentRoom) {
+    'leaveRoom': function (id) {
         var room = Rooms.findOne({_id: id});
         var userId = Meteor.userId();
 
@@ -30,11 +30,6 @@ Meteor.methods({
 
         if (room.ownerId === userId) {
             throw new Meteor.Error("You can't leave a room you own. Sorry bub.");
-        }
-
-        if (usersCurrentRoom === room._id) {
-            // TODO: Select a next best candidate
-            throw new Meteor.Error("Can't leave your current room");
         }
 
         Rooms.update({_id: room._id}, {$pull: {users: userId}});

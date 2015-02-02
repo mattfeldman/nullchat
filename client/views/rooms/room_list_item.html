@@ -4,7 +4,7 @@
         {{#if isPrivate}}
             <i class="fa fa-lock"></i>
         {{/if}}
-        <span class="room-name">{{name}}</span>
-        <button href="#" {{leaveLinkEnabled}} class="leaveRoomButton" alt="Leave #{{name}}."><i class="fa fa-sign-out"></i></button>
+        <span class="room-name">#{{name}}</span>
+        <a href="#" class="room-leave-link {{leaveLinkEnabled}}" alt="Leave #{{name}}."><i class="fa fa-remove"></i></a>
     </div>
 </template>

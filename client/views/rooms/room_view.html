@@ -3,6 +3,8 @@
         <span class="room-header-name">{{room.name}}</span>
         <span class="room-header-topic">{{room.topic}}</span>
         {{>roomPreferences}}
+        <input type="button" id="editUserProfile" value="Edit User Profile"/>
+        <input type="button" onclick="Meteor.logout()" value="logout"/>
     </div>
     <div id="roomContainer" class="room-container">
         {{#if currentRoom}}
@@ -14,13 +16,10 @@
         {{/if}}
     </div>
     <div class="sidebar">
-        <i class="fa fa-search"></i>{{> joinRoom availableRooms}}
+        <i class="fa fa-search"></i>{{> joinRoom availableRooms}}{{> discoverRooms}}
         {{> roomList currentRooms}}
         {{> createRoom }}
         {{> userList }}
-        {{> discoverRooms}}
-        <input type="button" id="editUserProfile" value="Edit User Profile"/>
-        <input type="button" onclick="Meteor.logout()" value="logout"/>
     </div>
     {{> newMessage}}
 </template>

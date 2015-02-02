@@ -1,39 +1,3 @@
-div, body, html {
-    padding: 0;
-    margin: 0;
-}
-
-#container {
-    background: purple;
-    height: 500px;
-}
-
-#users {
-    background: pink;
-    min-height: 50px;
-}
-
-#room_list {
-    width: 20%;
-    min-height: 110px;
-    background: black;
-}
-
-#message_list {
-    overflow-y: scroll;
-    background: green;
-    height: 500px;
-}
-
-#some_messages {
-    height: 1000px;
-}
-
-#message_entry {
-    height: 30px;
-    background: orange;
-}
-
 .my-message {
     background-color: #f2f2f2;
 }
@@ -154,12 +118,18 @@ div, body, html {
 .sidebar {
     position: absolute;
     right: 0;
-    top: 0px;
+    top: 0;
+    bottom: 0;
     width: 20%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .selected-room {
-    background: lightblue;
+    font-weight: 900;
+    transition: 0.4s;
+    background: rgb(237, 237, 237);
+    padding-left: 1%;;;
 }
 
 .message {
@@ -224,41 +194,38 @@ div, body, html {
     color: rgb(0, 168, 255);
 }
 .room-notification-container{
-    display:inline-block;
+    display: inline-block;
 }
 .room-notification-count{
     display: inline-block;
     line-height: 20px;
-    min-width:20px;
     margin: 2px auto;
     height:20px;
     text-align: center;
     background: lightgray;
+    min-width: 20px;
 }
 .room-notification-count:empty{
-    background: transparent;
+    background: transparent;    
 }
-.leaveRoomButton{
-    display:inline-block;
-    position:absolute;
-    right:0;
+.selected-room .room-notification-count {
+  min-width: 0px;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
 }
 .discover-room-button{
   position:relative;
 }
-.discover-room-button[data-unread]:after {
+.room-invitation-unread[data-unread]:before {
    content:attr(data-unread);
-   position:absolute;
-   top:-10px;
-   right:-10px;
-   font-size:.7em;
    background:red;
-   color:white;
-   width:18px;height:18px;
-   text-align:center;
-   line-height:18px;
-   border-radius:50%;
-   box-shadow:0 0 1px #333;
+   color:white;  
+   display:inline-block;
+   padding:3px;
+   margin-right:2px;
+   width:18px;
+   height:18px;
+   line-height:150%;
 }
 .discover-rooms-container{
   margin: 3%; 
@@ -299,11 +266,33 @@ span.room-tile-count {
     background-color: #aaa;
     transition:0.3s;
 }
-.room-invitation-unread[data-unread]:after {
-    content: "103";
-    font-size: .8em;
-    box-shadow: 0 0 1px #333;
-    right: -10px;
-    top: -10px;
-    position: absolute;
+
+div, body, html {
+    padding: 0;
+    margin: 0;
+}
+.room-element{
+  line-height: 200%;
+}
+.room-element:hover{
+  background: lightblue;
+}
+.room-element:hover .room-leave-link{
+  display:inline-block;  
+}
+.room-leave-link{
+  display:none;
+  position: absolute;
+  right: 3px;
+  cursor:default;
+  color:grey;
+}
+.room-leave-link-enabled{
+  cursor:pointer;
+  color:black;
+}
+.room-leave-link-enabled:hover{
+  color:red;
+  transform: scale(1.3);  
+  transition-duration: 0.2s;  
 }
