@@ -92,8 +92,8 @@
 }
 
 .room-header {
-    position: absolute;
     width: 80%;
+    position: absolute;
     height: 50px;
 }
 
@@ -137,7 +137,7 @@
     display: block;
     width: 100%;
     min-height: 50px;
-    position: relative;
+    position: relative;;
 }
 
 .message-content {
@@ -145,6 +145,7 @@
     min-height: 50px;
     line-height: 50px;
     display: inline-block;
+    position: relative;
 }
 
 .message-user {
@@ -216,7 +217,7 @@
 .discover-room-button{
   position:relative;
 }
-.room-invitation-unread[data-unread]:before {
+.notification-button-unread[data-unread]:before, .room-invitation-unread[data-unread]:before {
    content:attr(data-unread);
    background:red;
    color:white;  
@@ -295,4 +296,17 @@ div, body, html {
   color:red;
   transform: scale(1.3);  
   transition-duration: 0.2s;  
+}
+.notification-container{
+  margin: 5% 10%; 
+  padding: 1%;
+  background-color: #ddd;
+}
+.notification-item{
+  background-color:white;
+  padding: 1em;
+  margin: 1em;
+}
+.notification-item-author{
+  font-weight: 900;
 }
