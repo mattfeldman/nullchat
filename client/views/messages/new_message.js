@@ -126,6 +126,25 @@ Template.newMessage.events({
     },
     'focus': function(e) {
         Session.set('unreadMessages', 0);
+    },
+    'paste': function(e) {
+        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        var blob;
+
+        var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0});
+
+        if(blobItem !== null) {
+            blob = blobItem.getAsFile();
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var options = {};
+                options.data = {};
+                options.data.pasteImageUrl = event.target.result;
+                AntiModals.overlay("pasteImageModal", options);
+            };
+
+            reader.readAsDataURL(blob);
+        }
     }
 });
 var throttledLastTyping = _.throttle(function () {
