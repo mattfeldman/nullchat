@@ -4,6 +4,8 @@ Template.pasteImageModal.events({
     },
     'click .anti-modal-button-action': function(e, t) {
         var dataURI = this.pasteImageUrl;
+        // Below taken from http://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
+
         // convert base64 to raw binary data held in a string
         // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
         var byteString = atob(dataURI.split(',')[1]);
@@ -30,7 +32,7 @@ Template.pasteImageModal.events({
             // This causes the error image to be shown, and the only way to get the full image is to refresh the page
             // Pause a couple seconds to allow AWS to make the image link available.
             // Not sure what the correct solution is here. The code is already in the only callback we have available.
-            setTimeout(function() {
+            Meteor.setTimeout(function() {
                 var fileKey = "https://s3-us-west-2.amazonaws.com/nullchat/" + fileObj.collectionName + '/' + fileObj._id + '-' + fileObj.name();
                 var messageStub = {
                     message: fileKey,

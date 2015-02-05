@@ -1,19 +1,33 @@
-/*
+var imageStore;
+if(Meteor.isServer) {
+    console.log(Meteor.settings);
+    console.log(Meteor.settings.accessKeyId);
+    console.log(Meteor.settings.secretAccessKey);
+    imageStore = new FS.Store.S3("nullchat", {
+        accessKeyId: Meteor.settings.accessKeyId,
+        secretAccessKey: Meteor.settings.secretAccessKey,
+        bucket: "nullchat",
+        ACL: 'public-read'
+    });
+} else {
+    imageStore = new FS.Store.S3("nullchat");
+}
+
 Images = new FS.Collection("images", {
-    stores: [new FS.Store.FileSystem("images", {path: "~/uploads"})]
+    stores: [imageStore],
 });
+
 Images.allow({
-    insert: function() {
-        return true;
+    insert: function(userId, doc) {
+        return userId;
     },
-    update: function() {
-        return true;
+    update: function(userId, doc, fields, modifier) {
+        return userId;
     },
-    remove: function() {
-        return true;
+    remove: function(userId, doc) {
+        return userId;
     },
-    download: function() {
-        return true;
+    download: function(userId, doc) {
+        return userId;
     }
 });
-*/

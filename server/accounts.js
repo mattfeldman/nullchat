@@ -32,29 +32,3 @@ Accounts.onCreateUser(function(options, user) {
 
     return user;
 });
-
-var imageStore = new FS.Store.S3("nullchat", {
-    accessKeyId: "",
-    secretAccessKey: "",
-    bucket: "nullchat",
-    ACL: 'public-read'
-});
-
-Images = new FS.Collection("images", {
-    stores: [imageStore],
-});
-
-Images.allow({
-    insert: function(userId, doc) {
-        return userId;
-    },
-    update: function(userId, doc, fields, modifier) {
-        return userId;
-    },
-    remove: function(userId, doc) {
-        return userId;
-    },
-    download: function(userId, doc) {
-        return userId;
-    }
-});

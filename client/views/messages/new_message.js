@@ -131,13 +131,10 @@ Template.newMessage.events({
         var items = (event.clipboardData || event.originalEvent.clipboardData).items;
         var blob;
 
-        for(var i = 0; i < items.length; i++) {
-            if (items[i].type.indexOf("image") === 0) {
-                blob = items[i].getAsFile();
-            }
-        }
+        var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0});
 
-        if(blob !== null) {
+        if(blobItem !== null) {
+            blob = blobItem.getAsFile();
             var reader = new FileReader();
             reader.onload = function (event) {
                 var options = {};
