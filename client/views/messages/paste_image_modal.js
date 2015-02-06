@@ -27,21 +27,14 @@ Template.pasteImageModal.events({
         file.name("nullchat.png");
 
         Images.insert(file, function(err, fileObj) {
-            // Super ugly hack. This callback files when the image has been inserted.
-            // However, it appears the image is not always available quite yet on AWS.
-            // This causes the error image to be shown, and the only way to get the full image is to refresh the page
-            // Pause a couple seconds to allow AWS to make the image link available.
-            // Not sure what the correct solution is here. The code is already in the only callback we have available.
-            Meteor.setTimeout(function() {
-                var fileKey = "https://s3-us-west-2.amazonaws.com/nullchat/" + fileObj.collectionName + '/' + fileObj._id + '-' + fileObj.name();
-                var messageStub = {
-                    message: fileKey,
-                    roomId: Session.get('currentRoom')
-                };
+            var fileKey = "https://s3-us-west-2.amazonaws.com/nullchat/" + fileObj.collectionName + '/' + fileObj._id + '-' + fileObj.name();
+            var messageStub = {
+                message: fileKey,
+                roomId: Session.get('currentRoom')
+            };
 
-                Meteor.call('message', messageStub);
-                scrollChatToBottom(); //TODO: This looks like an ugly hack
-            }, 2000);
+            Meteor.call('message', messageStub);
+            scrollChatToBottom(); //TODO: This looks like an ugly hack
         });
         AntiModals.dismissOverlay(e.target, null, null);
     },
