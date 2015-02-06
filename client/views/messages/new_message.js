@@ -128,7 +128,7 @@ Template.newMessage.events({
         Session.set('unreadMessages', 0);
     },
     'paste': function(e) {
-        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        var items = (e.clipboardData || e.originalEvent.clipboardData).items;
         var blob;
 
         var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0});
