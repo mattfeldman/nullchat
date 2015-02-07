@@ -54,7 +54,9 @@ Meteor.publish('users', function () {
             "status.online": 1,
             "status.lastTyping": 1,
             "status.lastActiveRoom": 1,
-            "status.currentRoom": 1
+            "status.currentRoom": 1,
+            "status.lastActivity": 1,
+            "status.lastLogin.date": 1
         }
     });
 });

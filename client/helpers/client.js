@@ -26,3 +26,8 @@ incRoomUnread = function(roomId) {
     var key = 'unread_'+roomId;
     Session.set(key,(Session.get(key) || 0) +1);
 };
+
+// Set up a now session variable to allow for easy reactivity for date calculations involving 'now'
+Meteor.setInterval(function(){
+    Session.set("now",new Date());
+},500);
