@@ -13,7 +13,8 @@ Meteor.publish('messages', function (roomId, limit) {
     }
 });
 Meteor.publish('feedbackMessages', function (roomId) {
-    return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId}, {
+    var now = new Date().getTime();
+    return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId,timestamp:{$gt:now}}, {
         limit: 10,
         sort: {timestamp: -1}
     });
