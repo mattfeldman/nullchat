@@ -91,8 +91,9 @@ Template.message.helpers({
         return moment(this.lastedited).format("h:mm:ss a");
     },
     showTimestamp: function () {
-        var d = new Date(this.timestamp);
-        return d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        var m = moment(new Date(this.timestamp));
+        var user = Meteor.users.findOne({_id:Meteor.userId()},{fields:{"profile.use24HrTime":1}});
+        return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
     isPlain: function () {
         return this.type === "plain";

@@ -194,6 +194,7 @@
 .message-sms-indicator{
     color: rgb(0, 168, 255);
 }
+
 .room-notification-container{
     display: inline-block;
 }
@@ -307,6 +308,12 @@ div, body, html {
   padding: 1em;
   margin: 1em;
 }
-.notification-item-author{
-  font-weight: 900;
+.notification-item-author {
+    font-weight: 900;
+}
+#img-upload-preview {
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    max-height: 300;
 }

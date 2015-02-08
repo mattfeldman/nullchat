@@ -13,7 +13,8 @@ Meteor.publish('messages', function (roomId, limit) {
     }
 });
 Meteor.publish('feedbackMessages', function (roomId) {
-    return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId}, {
+    var now = new Date().getTime();
+    return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId,timestamp:{$gt:now}}, {
         limit: 10,
         sort: {timestamp: -1}
     });
@@ -54,7 +55,9 @@ Meteor.publish('users', function () {
             "status.online": 1,
             "status.lastTyping": 1,
             "status.lastActiveRoom": 1,
-            "status.currentRoom": 1
+            "status.currentRoom": 1,
+            "status.lastActivity": 1,
+            "status.lastLogin.date": 1
         }
     });
 });
@@ -75,6 +78,7 @@ Meteor.publish('emojis', function () {
 Meteor.publish('memes', function () {
     return Memes.find();
 });
+
 Meteor.publish('newMessages', function () {
     // TODO: Reactivity
     var rooms = Rooms.find({users: this.userId}).fetch();
@@ -84,6 +88,7 @@ Meteor.publish('newMessages', function () {
     var now = new Date().getTime();
     return Messages.find({roomId: {$in: roomIds}, type: {$ne: 'feedback'}, timestamp: {$gt: now}});
 });
+
 Meteor.publish('roomInvitations',function(){
     return RoomInvitations.find({
         active: true,
