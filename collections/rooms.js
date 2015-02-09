@@ -34,7 +34,6 @@ Meteor.methods({
 
         Rooms.update({_id: room._id}, {$pull: {users: userId}});
         return room._id;
-
     },
     'setCurrentRoom': function (roomId) {
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"status.currentRoom": roomId}});
@@ -48,9 +47,11 @@ Meteor.methods({
         if (!Schemas.regex.room.test(roomName)) {
             throw new Meteor.Error("room name must be alphanumeric");
         }
+
         if (Rooms.findOne({name: roomNameRegex})) {
             throw new Meteor.Error("room exists");
         }
+
         if (!Meteor.userId()) {
             throw new Meteor.Error("Must be logged in");
         }
@@ -64,5 +65,31 @@ Meteor.methods({
             users: [Meteor.userId()],
             moderators: [Meteor.userId()]
         });
+    },
+    'kickUserFromRoom' : function(targetUserId, targetRoomId){
+        var targetUser = Meteor.users.findOne(targetUserId);
+        var room = Rooms.findOne(targetRoomId);
+
+        if (!room) {
+            throw new Meteor.Error("Room could not be found.");
+        }
+
+        if (!targetUser) {
+            throw new Meteor.Error("User could not be found.");
+        }
+
+        if (room.ownerId !== Meteor.userId() && !_(room.moderators).contains(Meteor.userId())){
+            throw new Meteor.Error("You do not have permission to kick in this room.");
+        }
+
+        if(!_(room.users).contains(targetUser._id)){
+            throw new Meteor.Error("Room does not contain target user.");
+        }
+
+        if(room.ownerId === targetUser._id){
+            throw new Meteor.Error("Can not kick the owner of a room.");
+        }
+
+        Rooms.update({_id:room._id},{$pull:{users:targetUser._id}});
     }
 });
