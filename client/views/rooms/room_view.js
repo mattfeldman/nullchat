@@ -77,24 +77,41 @@ Template.roomView.created = function () {
     notify.config({pageVisibility: false, autoClose: 5000});
 
     var nowTimestamp = new Date().getTime();
-    Notifications.find({timestamp:{$gt:nowTimestamp}}).observe({
+    Notifications.find({timestamp: {$gt: nowTimestamp}}).observe({
         added: function (document) {
             if (isReady.notifications) {
                 chimeSound.play();
-                if (permission === notify.PERMISSION_GRANTED) {
-                    var title = document.authorName + "(#" + document.roomName + ")";
-                    var user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
-                    var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
-                    notify.createNotification(title, {body: document.message, icon: avatar, tag: document._id});
+                if (roomPreferencesOrDefault(document.roomId).desktopNotificationMention) {
+                    if (permission === notify.PERMISSION_GRANTED) {
+                        var title = document.authorName + "(#" + document.roomName + ")";
+                        var user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
+                        var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                        notify.createNotification(title, {body: document.message, icon: avatar, tag: document._id});
+                    }
                 }
             }
         }
     });
-    Messages.find({timestamp:{$gt:nowTimestamp}}).observe({
+    Messages.find({timestamp: {$gt: nowTimestamp}}).observe({
         added: function (doc) {
             if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
-                if(roomPreferencesOrDefault(doc.roomId).playMessageSound) {
+                if (roomPreferencesOrDefault(doc.roomId).playMessageSound) {
                     clickSound.play();
+                }
+
+                if (roomPreferencesOrDefault(doc.roomId).desktopNotificationAllMessages && doc.type !== 'rich') {
+                    if (permission === notify.PERMISSION_GRANTED) {
+                        var user = Meteor.users.findOne({_id: doc.authorId}, {
+                            fields: {
+                                "profile.avatar": 1,
+                                "username": 1
+                            }
+                        });
+                        var room = Rooms.findOne({_id: doc.roomId});
+                        var title = user.username + "(#" + room.name + ")";
+                        var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                        notify.createNotification(title, {body: doc.message, icon: avatar, tag: doc._id});
+                    }
                 }
 
                 if (!document.hasFocus()) {
@@ -102,13 +119,14 @@ Template.roomView.created = function () {
                     currentUnreadMessageCount += 1;
                     Session.set('unreadMessages', currentUnreadMessageCount);
                 }
+
                 if (doc.roomId !== Session.get('currentRoom')) {
                     incRoomUnread(doc.roomId);
                 }
             }
             if (!scroll.needScroll) {
                 // rougly percentage towards the top fo the scrollbar; less than 5% sticky scroll to bottom
-                if((($("#scrollContainer").height()-$("#roomContainer").scrollTop() - $("#roomContainer").height())/$("#scrollContainer").height()) < 0.05) {
+                if ((($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height()) < 0.05) {
                     setTimeout(scrollChatToBottom, 100);
                 }
             }
