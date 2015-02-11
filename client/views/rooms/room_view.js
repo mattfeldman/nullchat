@@ -80,13 +80,14 @@ Template.roomView.created = function () {
     Notifications.find({timestamp: {$gt: nowTimestamp}}).observe({
         added: function (document) {
             if (isReady.notifications) {
+
                 chimeSound.play();
                 if (roomPreferencesOrDefault(document.roomId).desktopNotificationMention) {
                     if (permission === notify.PERMISSION_GRANTED) {
                         var title = document.authorName + "(#" + document.roomName + ")";
                         var user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
                         var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
-                        notify.createNotification(title, {body: document.message, icon: avatar, tag: document._id});
+                        notify.createNotification(title, {body: document.message, icon: avatar, tag: document.messageId});
                     }
                 }
             }
@@ -169,10 +170,9 @@ Template.roomView.created = function () {
         }
     });
 
-    Meteor.subscribe('newMessages');
+    Meteor.subscribe('newMessages',{onError:function(e){alert("critical bug found, PLEASE tell @matt, details in F12 console.");console.log(e);}});
     isReady.notifications = true;
-}
-;
+};
 Template.roomView.destroyed = function () {
     isReady.notifications = false;
     isReady.messages = false;
