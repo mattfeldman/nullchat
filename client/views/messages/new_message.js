@@ -131,9 +131,9 @@ Template.newMessage.events({
         var items = (e.clipboardData || e.originalEvent.clipboardData).items;
         var blob;
 
-        var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0});
+        var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0;});
 
-        if(blobItem !== null) {
+        if(blobItem) {
             blob = blobItem.getAsFile();
             var reader = new FileReader();
             reader.onload = function (event) {
