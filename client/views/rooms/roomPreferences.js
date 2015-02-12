@@ -1,3 +1,12 @@
+Template.roomPreferences.rendered = function () {
+    this.$('.room-settings-button').popup({
+        inline: true,
+        hoverable: true,
+        position: 'bottom left',
+        delay: {show: 300, hide: 300}
+    });
+    this.$('.ui.checkbox').checkbox();
+};
 Template.roomPreferences.helpers({
     playMessageSound: function () {
         return Template.instance().playMessageSound.get() ? "checked" : "";
