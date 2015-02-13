@@ -1,14 +1,9 @@
 <template name="newMessage">
     <div class="new-message-outer-container">
         <form>
-            <div class="new-message-inner-container">
-                <div class="new-message-text-container">
-                    {{>textareaAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
-                </div>
-                <input class="new-message-submit" type="submit" value="submit"/>
-            </div>
-            <div class="new-message-typing-users">
-               {{typingUsers}}
+            <div class="ui fluid action input">
+                {{>inputAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
+                <div class="ui button" type="submit">Send</div>
             </div>
         </form>
     </div>

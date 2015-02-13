@@ -1,5 +1,14 @@
 <template name="roomList">
-    <div class="room-list">
+    <div class="ui large vertical fluid menu">
+        <div class="item">
+            <div class="ui icon input">
+                <i class="search icon"></i>
+                {{> joinRoom availableRooms}}
+            </div>
+        </div>
+        <div class="item">
+            {{> discoverRooms}}
+        </div>
         {{#each this}}
             {{>roomListItem this}}
         {{/each}}

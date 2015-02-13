@@ -3,7 +3,7 @@ Template.roomListItem.helpers({
         return this.isPrivate ? "[LOCKED] -" : "";
     },
     isSelectedClass: function () {
-        return this._id === Session.get("currentRoom") ? "selected-room" : "";
+        return this._id === Session.get("currentRoom") ? "active" : "";
     },
     notificationCount: function () {
         var count = Notifications.find({userId: Meteor.userId(), roomId: this._id, seen: false}).count();

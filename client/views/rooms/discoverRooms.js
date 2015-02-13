@@ -1,12 +1,6 @@
 Template.discoverRooms.helpers({
-    unreadCountBadge: function () {
+    unreadCount: function () {
         return RoomInvitations.find({invitedUser: Meteor.userId(), active: true}).count();
-    },
-    hasUnreadClass: function(){
-        var count = RoomInvitations.find({invitedUser: Meteor.userId(), active: true}).count();
-        if(count && count > 0){
-            return "room-invitation-unread";
-        }
     }
 });
 
