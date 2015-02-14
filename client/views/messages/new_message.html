@@ -1,10 +1,12 @@
 <template name="newMessage">
     <div class="new-message-outer-container">
-        <form>
-            <div class="ui fluid action input">
-                {{>inputAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
-                <div class="ui button" type="submit">Send</div>
-            </div>
-        </form>
+        <div class="item">
+            <form>
+                <div class="ui fluid action input">
+                    {{>inputAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
+                    <div class="ui button" type="submit">Send</div>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
