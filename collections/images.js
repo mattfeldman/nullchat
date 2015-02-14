@@ -1,8 +1,8 @@
 var imageStore;
 if(Meteor.isServer) {
     imageStore = new FS.Store.S3("nullchat", {
-        accessKeyId: Meteor.settings.S3accessKeyId,
-        secretAccessKey: Meteor.settings.S3secretAccessKey,
+        accessKeyId: Meteor.settings.S3.appId,
+        secretAccessKey: Meteor.settings.S3.appSecret,
         bucket: "nullchat",
         ACL: 'public-read'
     });
