@@ -6,7 +6,8 @@ Template.discoverRooms.helpers({
 
 Template.discoverRooms.events({
     'click #discoverRooms': function (event, template) {
-        AntiModals.overlay("rooms");
+        //AntiModals.overlay("rooms");
+        showModal("rooms");
     }
 });
 

@@ -1,15 +1,16 @@
-<template name="pasteImageModal">
-    <div class="anti-modal-box">
-        <div class="anti-modal-header">
-            <div class="anti-modal-title">Upload Image</div>
-            <div class="anti-modal-closer">&times;</div>
+<template name="pasteImage">
+    <div class="ui pasteImage modal">
+        <div class="header">
+            Upload Image
         </div>
-        <div class="anti-modal-body">
-            <img id="img-upload-preview" src="{{pasteImageUrl}}"/>
+        <div class="content">
+            <div class="image">
+                <img id="img-upload-preview" src="{{pasteImageUrl}}"/>
+            </div>
         </div>
-        <div class="anti-modal-footer">
-            <button class="anti-modal-button anti-modal-button-action">Upload</button>
-            <button class="anti-modal-button anti-modal-button-cancel">Cancel</button>
+        <div class="actions">
+            <button class="ui left labeled icon green upload button ok"><i class="upload icon"></i>Upload</button>
+            <button class="ui left labeled icon button cancel"><i class="close icon"></i>Cancel</button>
         </div>
     </div>
 </template>

@@ -140,7 +140,7 @@ Template.newMessage.events({
                 var options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;
-                AntiModals.overlay("pasteImageModal", options);
+                showModal("pasteImage", options.data);
             };
 
             reader.readAsDataURL(blob);

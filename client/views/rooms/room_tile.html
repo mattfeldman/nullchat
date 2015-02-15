@@ -1,7 +1,14 @@
 <template name="roomTile">
-    <div class="room-tile {{myRoomClass}}">
-        {{#if isPrivate}}<i class="fa fa-lock"></i>{{/if}}
-        <span class="room-tile-name">{{name}}</span><span class="room-tile-count">{{users.length}} <i class="fa fa-user room-tile-icon"></i></span>
-        <span class="room-tile-topic">{{topic}}</span>
+    <div class="ui room card {{myRoomClass}}">
+        <div class="content">
+            {{#if isPrivate}}<i class="right floated lock icon"></i>{{/if}}
+            <span class="header">{{name}}</span>
+            <div class="description">
+                {{topic}}
+            </div>
+        </div>
+        <div class="extra content">
+            <i class="user icon"></i> {{users.length}} Users
+        </div>
     </div>
 </template>

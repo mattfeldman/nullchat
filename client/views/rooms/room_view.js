@@ -33,7 +33,7 @@ Template.roomView.events({
         options.data = function () {
             return Meteor.user().profile;
         };
-        showModal('user',options);
+        showModal('user',options.data);
     }
 });
 

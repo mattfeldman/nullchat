@@ -1,8 +1,7 @@
-Template.pasteImageModal.events({
-    'click .anti-modal-button-cancel, click .anti-modal-closer': function(e, t) {
-        AntiModals.dismissOverlay(e.target, null, null);
-    },
-    'click .anti-modal-button-action': function(e, t) {
+Template.pasteImage.events({
+    'click .upload': function(e, t) {
+        if(this.alreadyUploaded) {return;}
+        this.alreadyUploaded = true;
         var dataURI = this.pasteImageUrl;
         // Below taken from http://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
 
@@ -36,6 +35,5 @@ Template.pasteImageModal.events({
             Meteor.call('message', messageStub);
             scrollChatToBottom(); //TODO: This looks like an ugly hack
         });
-        AntiModals.dismissOverlay(e.target, null, null);
     },
 });

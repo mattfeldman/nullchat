@@ -1,5 +1,5 @@
 <template name="rooms">
-    <div class="discover-rooms-container">
+    <div class="ui rooms modal">
         {{#if roomInvitations}}
         <h1 class="">Room Invitations</h1>
         <div class="room-invitations">
@@ -10,7 +10,7 @@
         {{/if}}
         <h1 class="">Discover Rooms</h1>
         <label class="hide-my-rooms-label"><input type="checkbox" class="hide-my-rooms" {{isChecked}}/>Hide my current rooms.</label>
-        <div class="rooms">
+        <div class="ui cards">
             {{#each rooms}}
                 {{>roomTile this}}
             {{/each}}
