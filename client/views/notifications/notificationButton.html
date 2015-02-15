@@ -1,3 +1,10 @@
 <template name="notificationButton">
-    <button data-unread={{unreadCount}} class="notification-button {{unreadClass}}">Notifications</button>
+    {{#if unreadCount}}
+        <div class="ui small compact red basic button notification-button">
+            <div class="ui red label">{{unreadCount}}</div>
+            Notifications
+        </div>
+    {{else}}
+        <div class="ui compact red basic button notification-button"> Notifications</div>
+    {{/if}}
 </template>

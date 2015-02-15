@@ -6,12 +6,9 @@ Template.notificationButton.events({
 
 Template.notificationButton.helpers({
     'unreadCount':function(){
-        return Notifications.find({seen:false}).count();
-    },
-    'unreadClass':function(){
         var count = Notifications.find({seen:false}).count();
-        return count ? "notification-button-unread" : "";
-    }
+        return count ? count : false;
+    },
 });
 
 Template.notificationButton.created = function(){

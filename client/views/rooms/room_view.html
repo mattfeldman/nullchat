@@ -3,9 +3,9 @@
         <span class="room-header-name">{{room.name}}</span>
         <span class="room-header-topic">{{room.topic}}</span>
         {{>roomPreferences}}
-        <input type="button" id="editUserProfile" value="Edit User Profile"/>
-        <input type="button" onclick="Meteor.logout()" value="logout"/>
+        <div id="editUserProfile" class="ui compact left labeled icon basic red button"><i class="user icon"></i>User Profile</div>
         {{>notificationButton}}
+        <div class="ui compact left labeled basic red button" onclick="Meteor.logout()"><i class="sign out icon"></i>Logout</div>
     </div>
     <div id="roomContainer" class="room-container">
         {{#if currentRoom}}
