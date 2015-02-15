@@ -107,7 +107,7 @@ Template.newMessage.events({
     'submit form': function (e) {
         sendMessage(e);
     },
-    'keydown textarea': function (e) {
+    'keydown input': function (e) {
         throttledLastTyping();
 
         switch (e.keyCode) {

@@ -17,10 +17,12 @@
         {{/if}}
     </div>
     <div class="sidebar">
-        <i class="fa fa-search"></i>{{> joinRoom availableRooms}}{{> discoverRooms}}
         {{> roomList currentRooms}}
         {{> createRoom }}
         {{> userList }}
     </div>
     {{> newMessage}}
+    <div class="modal-container">
+
+    </div>
 </template>

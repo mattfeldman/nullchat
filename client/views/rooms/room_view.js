@@ -33,7 +33,7 @@ Template.roomView.events({
         options.data = function () {
             return Meteor.user().profile;
         };
-        AntiModals.overlay("user", options);
+        showModal('user',options);
     }
 });
 

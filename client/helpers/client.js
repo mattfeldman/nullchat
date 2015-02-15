@@ -31,3 +31,13 @@ incRoomUnread = function(roomId) {
 Meteor.setInterval(function(){
     Session.set("now",new Date());
 },500);
+
+
+// Assumes .templateName.modal modal container naming
+showModal = function(templateName, data, options){
+    var ModalContainer = $('.modal-container')[0];
+    var modal = Blaze.renderWithData(Template[templateName],data,ModalContainer);
+    $('.'+templateName+'.modal').modal({
+        onHidden:function(){Blaze.remove(modal);},
+    }).modal('show');
+}

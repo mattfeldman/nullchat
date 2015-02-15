@@ -1,5 +1,9 @@
 <template name="roomPreferences">
-    <label><input id="playMessageSound" type="checkbox" {{playMessageSound}}/>Play Message Click</label>
-    <label><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}/>Desktop Notifications for @mentions</label>
-    <label><input id="desktopNotificationAllMessages" type="checkbox" {{desktopNotificationAllMessages}}/>Desktop Notifications for all messages</label>
+    <div class="ui icon button room-settings-button"><i class="settings icon"></i></div>
+    <div class="ui wide large popup">
+        <div class="header">Room Settings</div>
+        <div class="ui checkbox"><input id="playMessageSound" type="checkbox" {{playMessageSound}}><label for="playMessageSound">Play Message Click</label></div>
+        <div class="ui checkbox"><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}><label for="desktopNotificationMention">Desktop Notifications for @mentions</label></div>
+        <div class="ui checkbox"><input id="desktopNotificationAllMessages" type="checkbox" {{desktopNotificationAllMessages}}><label for="desktopNotificationAllMessages">Desktop Notifications for all messages</label></div>
+    </div>
 </template>
