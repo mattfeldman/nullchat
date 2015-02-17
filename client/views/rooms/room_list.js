@@ -1,7 +1,7 @@
 Template.roomList.rendered = function(){
     var roomList = Sortable.create(this.$(".room-list").get()[0],{
         group: "roomOrder",
-        draggable: ".room-element",
+        draggable: ".draggableRoomItem",
         ghostClass: "room-item-ghost",
         store:{
             get:function(sortable){

@@ -9,8 +9,10 @@
         <div class="item">
             {{> discoverRooms}}
         </div>
-        {{#each this}}
-            {{>roomListItem this}}
-        {{/each}}
+        <div class="room-list">
+            {{#each this}}
+                {{>roomListItem this}}
+            {{/each}}
+        </div>
     </div>
 </template>
