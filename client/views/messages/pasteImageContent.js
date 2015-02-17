@@ -1,7 +1,5 @@
-Template.pasteImage.events({
+Template.pasteImageContent.events({
     'click .upload': function(e, t) {
-        if(this.alreadyUploaded) {return;}
-        this.alreadyUploaded = true;
         var dataURI = this.pasteImageUrl;
         // Below taken from http://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
 

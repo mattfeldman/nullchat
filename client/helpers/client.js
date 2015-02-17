@@ -38,7 +38,6 @@ showModal = function(templateName, data, options){
     var ModalContainer = $('.modal-container')[0];
     var modal = Blaze.renderWithData(Template[templateName],data,ModalContainer);
     $('.'+templateName+'.modal').modal({
-        detachable: false,
         onHidden:function(){Blaze.remove(modal);},
     }).modal('show');
 }
