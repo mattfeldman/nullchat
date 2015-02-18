@@ -141,6 +141,7 @@
 
       // packages
       "emojify":false,
-      "SimpleSchema":false
+      "SimpleSchema":false,
+      "Sortable":false
     }
 }
