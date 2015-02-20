@@ -1,8 +1,5 @@
 <template name="notifications">
-    <div class="notification-container">
-        {{#each unseenNotifications}}
-            {{> notificationItem this}}
-        {{/each}}
-        <button class="notifications-dismiss-all">dismiss all</button>
+    <div class="ui notifications modal">
+        {{> notificationsContent this}}
     </div>
 </template>

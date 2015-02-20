@@ -1,6 +1,6 @@
 Template.notificationButton.events({
     'click .notification-button':function(event,template){
-        AntiModals.overlay("notifications",{});
+        showModal("notifications",{});
     }
 });
 

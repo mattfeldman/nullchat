@@ -1,10 +1,10 @@
-Template.notifications.helpers({
+Template.notificationsContent.helpers({
     'unseenNotifications':function(){
         return Notifications.find({seen:false});
     }
 });
 
-Template.notifications.events({
+Template.notificationsContent.events({
     'click .notifications-dismiss-all':function(event,template){
         Meteor.call("setAllNotificationsSeen");
     }

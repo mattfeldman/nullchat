@@ -1,0 +1,13 @@
+<template name="notificationsContent">
+    <div class="header">
+        Notifications
+    </div>
+  <div class="ui comments content">
+    {{#each unseenNotifications}}
+      {{> notificationItem this}}
+    {{/each}}
+  </div>
+  <div class="actions">
+    <button class="ui primary button notifications-dismiss-all">dismiss all</button>
+  </div>
+</template>
