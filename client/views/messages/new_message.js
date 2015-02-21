@@ -104,7 +104,7 @@ var recallMessageWithNewOffset = function (offsetDelta) {
 };
 
 Template.newMessage.events({
-    'submit form': function (e) {
+    'click .send': function (e) {
         sendMessage(e);
     },
     'keydown input': function (e) {
