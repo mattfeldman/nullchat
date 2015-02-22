@@ -6,46 +6,20 @@ Router.configure({
     }
 });
 Router.map(function () {
-    this.route('roomView', {
-        name: 'roomView',
-        path: '/room/:_id',
-        subscriptions: function () {
-            Session.set('messageLimit', 10);
-            return [
-                Meteor.subscribe('availableRooms'),
-                Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('notifications'),
-                Meteor.subscribe('emojis'),
-            ];
+    this.route('/room/:_id', {
+        subscriptions: function(){
+            return [Meteor.subscribe('availableRooms'), Meteor.subscribe('currentRooms')]
         },
-        action: function () {
-            Session.set('currentRoom', this.params._id);
+        onBeforeAction: function () {
             var room = Rooms.findOne({_id: this.params._id});
             if (!room) {
                 Router.go('roomList');
             }
-            if (!_.contains(room.users, Meteor.userId())) {
-                Meteor.call('joinRoom', room._id, function (err, id) {
-                    if (err) {
-                        Router.go('roomList');
-                    }
-                }); //TODO: on error goto fail
-            }
-            this.go('chat');
-        }
-    });
-    this.route('rooms', {
-        path: '/rooms',
-        subscriptions: function () {
-            return [
-                Meteor.subscribe('availableRooms'),
-                Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('notifications'),
-                Meteor.subscribe('roomInvitations')
-            ];
+            Meteor.call('setCurrentRoom',this.params._id);
+            this.next();
         },
-        action: function () {
-            this.render('rooms');
+        action:function(){
+            Router.go('chat');
         }
     });
     this.route('userMetrics', {
@@ -64,8 +38,7 @@ Router.map(function () {
         subscriptions: function () {
             return [
                 Meteor.subscribe('availableRooms'),
-                Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('availableRooms')
+                Meteor.subscribe('currentRooms')
             ];
         },
         data: function () {

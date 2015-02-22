@@ -9,7 +9,7 @@ function parseRoomLinks(message) {
             var roomName = rooms[i].name;
             if (message.indexOf(rooms[i].name, loc) === loc + 1) {
                 var leftHalf = message.substring(0, loc);
-                var middle = '<a href="#" class="roomLink" data-roomId="' + rooms[i]._id + '">#' + roomName + '</a>';
+                var middle = '<a href="room/'+rooms[i]._id+'" class="roomLink" >#' + roomName + '</a>';
                 var rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
                 message = leftHalf + middle + rightHalf;
                 loc = loc + middle.length - 1;
@@ -154,14 +154,6 @@ Template.message.events({
             Meteor.call('unlikeMessage', template.data._id);
         }
 
-    },
-    "click .roomLink": function (event, template) {
-        var roomId = $(event.target).data("roomid");
-        var room = Rooms.findOne({_id: roomId});
-        if (room && !_(room.users).contains(Meteor.userId())) {
-            Meteor.call('joinRoom', roomId);
-        }
-        setCurrentRoom(roomId);
     },
     "click .editMessageButton": function (event, template) {
         if (template.data.authorId === Meteor.userId()) {
