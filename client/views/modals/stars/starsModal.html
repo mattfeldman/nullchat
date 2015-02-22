@@ -1,0 +1,19 @@
+<template name="starsModal">
+    <div class="ui starsModal modal">
+        <div class="header">
+            <h1 class="">Starred Messages</h1>
+        </div>
+        <div class="content">
+            <div class="ui {{#unless ready}}active inverted dimmer{{/unless}}">
+              {{#if ready}}
+                {{>starsModalContent}}
+              {{else}}
+                  <div class="ui text loader">Loading</div>
+              {{/if}}
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui close button">close</div>
+        </div>
+    </div>
+</template>
