@@ -4,8 +4,7 @@ nullchat
 - [Meteor for Windows Preview](https://github.com/meteor/meteor/wiki/Preview-of-Meteor-on-Windows)
 
 ## Working in OS X
-- Install via homebrew, and you should be good to go.
-- `brew install meteor`
+- `curl https://install.meteor.com/ | sh`
 
 ## Running the app locally
 - `meteor --settings example-settings.json`
