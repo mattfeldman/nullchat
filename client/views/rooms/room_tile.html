@@ -2,6 +2,9 @@
     <div class="ui room card {{myRoomClass}}">
         <div class="content">
             {{#if isPrivate}}<i class="right floated lock icon"></i>{{/if}}
+            <span class="right floated">
+                <a href="/room/{{_id}}/metrics" target="_blank">Stats</a>
+            </span>
             <span class="header">{{name}}</span>
             <div class="description">
                 {{topic}}
@@ -10,5 +13,16 @@
         <div class="extra content">
             <i class="user icon"></i> {{users.length}} Users
         </div>
+        {{#if inRoom}}
+            <div class="ui bottom attached red leave button">
+                <i class="sign out icon"></i>
+                Leave
+            </div>
+        {{else}}
+            <div class="ui bottom attached green join button">
+                <i class="add icon"></i>
+                Join
+            </div>
+        {{/if}}
     </div>
 </template>

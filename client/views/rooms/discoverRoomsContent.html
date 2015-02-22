@@ -1,0 +1,11 @@
+<template name="discoverRoomsContent">
+    <div class="ui checkbox">
+        <input type="checkbox" id="hideMyRooms"/>
+        <label for="hideMyRooms">Hide my current rooms.</label>
+    </div>
+    <div class="ui three cards">
+      {{#each rooms}}
+        {{>roomTile this}}
+      {{/each}}
+    </div>
+</template>

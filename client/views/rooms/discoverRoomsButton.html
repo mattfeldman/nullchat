@@ -1,0 +1,9 @@
+<template name="discoverRoomsButton" xmlns="http://www.w3.org/1999/html">
+    <a id="discoverRooms" class="ui grey fluid button">
+        {{#if unreadCount}}
+            <div class="ui red label">{{unreadCount}}</div> Room Invites
+        {{else}}
+            Discover Rooms
+        {{/if}}
+    </a>
+</template>

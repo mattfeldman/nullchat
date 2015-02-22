@@ -1,9 +1,21 @@
-<template name="discoverRooms" xmlns="http://www.w3.org/1999/html">
-    <a id="discoverRooms" class="ui grey fluid button">
-        {{#if unreadCount}}
-            <div class="ui red label">{{unreadCount}}</div> Room Invites
-        {{else}}
-            Discover Rooms
+<template name="discoverRooms">
+    <div class="ui discoverRooms modal">
+        {{#if invitationCount}}
+            <div class="header">
+                <h1 class="">Room Invitations ({{invitationCount}})</h1>
+            </div>
+            <div class="content">
+                {{#each roomInvitations}}
+                    {{>roomInvitation this}}
+                {{/each}}
+            </div>
         {{/if}}
-    </a>
+        <div class="header">Discover Rooms</div>
+        <div class="content">
+            {{>discoverRoomsContent}}
+        </div>
+        <div class="actions">
+            <div class="ui close button">close</div>
+        </div>
+    </div>
 </template>
