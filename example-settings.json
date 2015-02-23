@@ -6,9 +6,5 @@
     "S3" : {
 	"appId": "key",
     	"appSecret": "secret"
-    },
-    "kadira": { 
-        "appId": "key",
-        "appSecret": "secret"
     }
 }
