@@ -64,7 +64,7 @@
 .new-message-outer-container {
     position: absolute;
     width: 80%;
-    height: 50px;
+    height: 60px;
     bottom: 0;
 }
 
@@ -110,7 +110,7 @@
     float: left;
     width: 80%;
     top: 50px;
-    bottom: 50px;
+    bottom: 60px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -188,7 +188,6 @@
 .message-sms-indicator{
     color: rgb(0, 168, 255);
 }
-1
 .room-notification-container{
     display: inline-block;
 }
@@ -263,10 +262,10 @@ span.room-tile-count {
     transition:0.3s;
 }
 
-div, body, html {
+/*div, body, html {
     padding: 0;
     margin: 0;
-}
+}*/
 .room-element{
   line-height: 200%;
 }
