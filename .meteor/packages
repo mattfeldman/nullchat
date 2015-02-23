@@ -3,6 +3,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
+grigio:babel
 meteor-platform
 mrt:accounts-ui-bootstrap-dropdown
 accounts-password
@@ -39,6 +40,7 @@ cfs:s3
 meteorhacks:kadira
 meteorhacks:zones
 
-npm-container
 lbee:lunr
-grigio:babel
+
+
+npm-container
