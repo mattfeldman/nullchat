@@ -46,6 +46,7 @@ fastclick@1.0.3-winr.2
 follower-livedata@1.0.4-winr.2
 geojson-utils@1.0.3-winr.2
 github@1.1.3-winr.2
+grigio:babel@0.0.5
 html-tools@1.0.3-winr.3
 htmljs@1.0.4-winr.2
 http@1.0.10-winr.5
