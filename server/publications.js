@@ -97,6 +97,5 @@ Meteor.publish('roomInvitations',function(){
 });
 
 Meteor.publish('starredMessages',function(){
-    Meteor._sleepForMs(1000);
    return Messages.find({likedBy:this.userId}); // TODO: Security check
 });
