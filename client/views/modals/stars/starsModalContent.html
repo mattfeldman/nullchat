@@ -1,4 +1,8 @@
 <template name="starsModalContent">
+    <div class="ui fluid icon input">
+        <input type="text" placeholder="Search..." class="search" value="{{search}}">
+        <i class="search icon"></i>
+    </div>
     {{#each starredMessages}}
         {{> message this}}
     {{/each}}
