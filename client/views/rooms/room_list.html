@@ -1,18 +1,28 @@
 <template name="roomList">
     <div class="ui large vertical fluid menu">
+        <div class="header item">
+            rooms
+        </div>
         <div class="item">
             <div class="ui icon input">
                 <i class="search icon"></i>
                 {{> joinRoom availableRooms}}
             </div>
         </div>
-        <div class="item">
-            {{> discoverRoomsButton}}
-        </div>
         <div class="room-list">
             {{#each this}}
                 {{>roomListItem this}}
             {{/each}}
         </div>
+    </div>
+    <div class="ui vertical vertically fitted red active fluid text menu">
+        <div class="header item">
+            actions
+        </div>
+        {{> starsModalButton }}
+        {{> discoverRoomsButton}}
+        {{> notificationButton}}
+        {{> userProfileButton}}
+        {{> userLogoutButton}}
     </div>
 </template>

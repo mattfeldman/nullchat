@@ -2,38 +2,40 @@
     <div id="{{_id}}" class="row message {{myMessage}} {{hasMention}} animated fadeIn">
         {{#if isPlain}}
             {{>messageUser authorId}}
-        <div class="message-content" style="{{color}}">
-            {{#if isUnderEdit}}
-                <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
-                <button class="messageEditSubmit">save</button>
-                <button class="canceleEditSubmit">cancel</button>
-            {{else}}
-                <span class="clickableMessageBody" style="{{starSizingStyle}}">
-                    {{{finalMessageBody}}}
-                </span>
-                <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span class="likedBy">{{likedBy.length}}</span></a>
-            {{/if}}
-            {{#if hasEdits}}
-                <span class="lastEditTime">Edited {{lastEditTime}}</span>
-            {{/if}}
-            {{#if fromMobile}}
-                <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
-            {{/if}}
-            {{#if crosspost}}
-                <i class="fa fa-random fa-lg message-crosspost-indicator" title="Message was cross posted using #tags"></i>
-            {{/if}}
-            <span class="message-extras">
-                {{#if canEdit}}
-                    <a href="#" class="editMessageButton">edit</a>
+            <div class="message-content" style="{{color}}">
+                {{#if isUnderEdit}}
+                    <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
+                    <button class="messageEditSubmit">save</button>
+                    <button class="canceleEditSubmit">cancel</button>
+                {{else}}
+                    <span class="clickableMessageBody" style="{{starSizingStyle}}">
+                        {{{finalMessageBody}}}
+                    </span>
+                    <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span
+                            class="likedBy">{{likedBy.length}}</span></a>
                 {{/if}}
-                <a class="messagePermaLink" href="/message/{{_id}}">permalink</a>
-            </span>
-        </div>
+                {{#if hasEdits}}
+                    <span class="lastEditTime">Edited {{lastEditTime}}</span>
+                {{/if}}
+                {{#if fromMobile}}
+                    <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
+                {{/if}}
+                {{#if crosspost}}
+                    <i class="fa fa-random fa-lg message-crosspost-indicator"
+                       title="Message was cross posted using #tags"></i>
+                {{/if}}
+                <span class="message-extras">
+                    {{#if canEdit}}
+                        <a href="#" class="editMessageButton">edit</a>
+                    {{/if}}
+                    <a class="messagePermaLink" href="/message/{{_id}}">permalink</a>
+                </span>
+            </div>
         {{else}}{{#if isRich}}
             {{>messageUser authorId}}
-        <div class="message-content" style="{{color}}">
-            {{> UI.dynamic template=layoutName data=data}}
-        </div>
+            <div class="message-content" style="{{color}}">
+                {{> UI.dynamic template=layoutNa1me data=data}}
+            </div>
         {{else}}{{#if isFeedback}}
             <span class="feedback-message">{{{message}}}</span>
         {{/if}}{{/if}}{{/if}}

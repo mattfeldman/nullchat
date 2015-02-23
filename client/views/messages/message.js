@@ -128,6 +128,10 @@ Template.message.helpers({
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     },
     starSizingStyle: function () {
+        var parentContext = Template.instance().parentTemplate();
+        if(parentContext && parentContext.supressStarSizing) {
+            return "";
+        }
         if(this.likedBy.length === 0){
             return "";
         }
@@ -178,4 +182,24 @@ triggerCssAnimation = function (element, animation) {
     Meteor.setTimeout(function () {
         animateElement.addClass('animated ' + animation);
     }, 1);
+};
+
+
+/**
+ * Get the parent template instance
+ * @param {Number} [levels] How many levels to go up. Default is 1
+ * @returns {Blaze.TemplateInstance}
+ */
+
+Blaze.TemplateInstance.prototype.parentTemplate = function (levels) {
+    var view = Blaze.currentView;
+    if (typeof levels === "undefined") {
+        levels = 1;
+    }
+    while (view) {
+        if (view.name.substring(0, 9) === "Template." && !(levels--)) {
+            return view.templateInstance();
+        }
+        view = view.parentView;
+    }
 };

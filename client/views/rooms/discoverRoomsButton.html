@@ -1,7 +1,8 @@
 <template name="discoverRoomsButton" xmlns="http://www.w3.org/1999/html">
-    <a id="discoverRooms" class="ui grey fluid button">
+    <a id="discoverRooms" class="vertically fitted item">
+        <i class="home icon"></i>
         {{#if unreadCount}}
-            <div class="ui red label">{{unreadCount}}</div> Room Invites
+            Room Invites <div class="ui red label">{{unreadCount}}</div>
         {{else}}
             Discover Rooms
         {{/if}}
