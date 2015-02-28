@@ -1,3 +1,15 @@
+/**
+ * Creates the timestamp popup
+ * @param timestamp
+ */
+function createTimestampPopup(timestamp) {
+    var m = moment(timestamp);
+    this.$('.message-timestamp').popup({
+        title: m.fromNow(),
+        content: m.format("dddd, MMMM Do YYYY"),
+        position: "top right",
+    });
+}
 function parseRoomLinks(message) {
     var rooms = Rooms.find({}).fetch();
     rooms = _.sortBy(rooms, function (room) {
@@ -9,7 +21,7 @@ function parseRoomLinks(message) {
             var roomName = rooms[i].name;
             if (message.indexOf(rooms[i].name, loc) === loc + 1) {
                 var leftHalf = message.substring(0, loc);
-                var middle = '<a href="room/'+rooms[i]._id+'" class="roomLink" >#' + roomName + '</a>';
+                var middle = '<a href="room/' + rooms[i]._id + '" class="roomLink" >#' + roomName + '</a>';
                 var rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
                 message = leftHalf + middle + rightHalf;
                 loc = loc + middle.length - 1;
@@ -69,6 +81,7 @@ Template.message.created = function () {
             }
         }
     });
+    createTimestampPopup(this.data.timestamp);
 };
 Template.message.helpers({
     myMessage: function () {
@@ -92,7 +105,7 @@ Template.message.helpers({
     },
     showTimestamp: function () {
         var m = moment(new Date(this.timestamp));
-        var user = Meteor.users.findOne({_id:Meteor.userId()},{fields:{"profile.use24HrTime":1}});
+        var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
     isPlain: function () {
@@ -129,10 +142,10 @@ Template.message.helpers({
     },
     starSizingStyle: function () {
         var parentContext = Template.instance().parentTemplate();
-        if(parentContext && parentContext.supressStarSizing) {
+        if (parentContext && parentContext.supressStarSizing) {
             return "";
         }
-        if(this.likedBy.length === 0){
+        if (this.likedBy.length === 0) {
             return "";
         }
         var room = Rooms.findOne({_id: this.roomId}, {fields: {users: 1}});
@@ -141,8 +154,8 @@ Template.message.helpers({
         }
         var scale = this.likedBy.length / (room.users.length / 1.5);
         var bonus = 400;
-        var total = 100+_.min([bonus*scale,400]);
-        return "font-size: "+total+"%;";
+        var total = 100 + _.min([bonus * scale, 400]);
+        return "font-size: " + total + "%;";
     }
 });
 Template.message.events({
