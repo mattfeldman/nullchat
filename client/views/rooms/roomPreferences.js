@@ -16,6 +16,9 @@ Template.roomPreferences.helpers({
     },
     desktopNotificationAllMessages: function () {
         return Template.instance().desktopNotificationAllMessages.get() ? "checked" : "";
+    },
+    smsAllMessages: function () {
+        return Template.instance().smsAllMessages.get() ? "checked" : "";
     }
 });
 Template.roomPreferences.events({
@@ -24,7 +27,8 @@ Template.roomPreferences.events({
             roomId: Session.get('currentRoom'),
             playMessageSound: $("#playMessageSound").is(":checked"),
             desktopNotificationMention: $("#desktopNotificationMention").is(":checked"),
-            desktopNotificationAllMessages: $("#desktopNotificationAllMessages").is(":checked")
+            desktopNotificationAllMessages: $("#desktopNotificationAllMessages").is(":checked"),
+            smsAllMessages: $("#smsAllMessages").is(":checked"),
         };
 
         if (userPreferences.desktopNotificationMention || userPreferences.desktopNotificationAllMessages) {
@@ -42,10 +46,12 @@ Template.roomPreferences.created = function () {
     instance.playMessageSound = new ReactiveVar();
     instance.desktopNotificationMention = new ReactiveVar();
     instance.desktopNotificationAllMessages = new ReactiveVar();
+    instance.smsAllMessages = new ReactiveVar();
     Deps.autorun(function () {
         instance.playMessageSound.set(Schemas.roomPreferenceDefault.playMessageSound);
         instance.desktopNotificationMention.set(Schemas.roomPreferenceDefault.desktopNotificationMention);
         instance.desktopNotificationAllMessages.set(Schemas.roomPreferenceDefault.desktopNotificationAllMessages);
+        instance.smsAllMessages.set(Schemas.roomPreferenceDefault.smsAllMessages);
         var prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
         var currentRoom = Session.get('currentRoom');
         if (prefUser && prefUser.preferences && prefUser.preferences.room) {
@@ -56,6 +62,7 @@ Template.roomPreferences.created = function () {
                 instance.playMessageSound.set(currentPreferences.playMessageSound);
                 instance.desktopNotificationMention.set(currentPreferences.desktopNotificationMention);
                 instance.desktopNotificationAllMessages.set(currentPreferences.desktopNotificationAllMessages);
+                instance.smsAllMessages.set(currentPreferences.smsAllMessages);
             }
         }
     });
