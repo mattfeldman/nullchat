@@ -11,7 +11,7 @@ function createTimestampPopup(timestamp) {
     });
 }
 function parseRoomLinks(message) {
-    var rooms = Rooms.find({}).fetch();
+    var rooms = Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
     rooms = _.sortBy(rooms, function (room) {
         return -room.name.length;
     }); // TODO: Not this every message
@@ -32,7 +32,7 @@ function parseRoomLinks(message) {
     return message;
 }
 function parseNameMentions(message) {
-    var users = Meteor.users.find({}).fetch();
+    var users = Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
     users = _(users).sortBy(function (user) {
         return -user.username.length;
     }); // TODO: Not this every message
@@ -55,32 +55,13 @@ function parseNameMentions(message) {
     return message;
 }
 function hasUserMentions(message) {
-    if (!message || typeof  message !== "string") return false;
-    var regex = new RegExp("[@\\s]+(" + Meteor.user().username + ")($|[\\s!.?]+)");
+    if (!message || typeof  message !== "string") {return false;}
+    var regex = new RegExp("[@\\s]+(" + Meteor.user({}, {fields: {'username': 1}}).username + ")($|[\\s!.?]+)");
     var regexMatch = message.match(regex);
 
     return regexMatch && regexMatch.length > 0;
 }
 Template.message.created = function () {
-    Messages.find({_id: this.data._id}).observeChanges({
-        changed: function (id, fields) {
-            if (fields.message) {
-                var animateElement = $("#" + id + " .clickableMessageBody");
-                animateElement.removeClass('animated flipInX');
-                Meteor.setTimeout(function () {
-                    animateElement.addClass('animated flipInX');
-                }, 1);
-            }
-            if (fields.likedBy) {
-                var animateElement = $("#" + id + " .likedBy");
-                //animateElement.removeClass('animated tada');
-                //Meteor.setTimeout(function () {
-                //    animateElement.addClass('animated tada');
-                //},1);
-                triggerCssAnimation(animateElement, 'flipInY');
-            }
-        }
-    });
     createTimestampPopup(this.data.timestamp);
 };
 Template.message.helpers({
@@ -88,7 +69,7 @@ Template.message.helpers({
         return this.authorId === Meteor.userId() ? "my-message" : "";
     },
     color: function () {
-        var user = Meteor.users.findOne({_id: this.authorId});
+        var user = Meteor.users.findOne({_id: this.authorId}, {fields: {'profile.color': 1}});
         if (user && user.profile && user.profile.color) {
             return "border-left: 3px solid" + user.profile.color;
         }
@@ -162,7 +143,6 @@ Template.message.events({
     "click .likeMessageLink": function (event, template) {
         event.preventDefault();
         var element = $("#" + template.data._id + " .likedBy");
-        triggerCssAnimation(element, 'flipInY');
 
         if (!_(this.likedBy).contains(Meteor.userId())) {
             Meteor.call('likeMessage', template.data._id);
@@ -188,31 +168,3 @@ Template.message.events({
         Session.set('editingId', "");
     }
 });
-
-triggerCssAnimation = function (element, animation) {
-    var animateElement = element;
-    animateElement.removeClass('animated ' + animation);
-    Meteor.setTimeout(function () {
-        animateElement.addClass('animated ' + animation);
-    }, 1);
-};
-
-
-/**
- * Get the parent template instance
- * @param {Number} [levels] How many levels to go up. Default is 1
- * @returns {Blaze.TemplateInstance}
- */
-
-Blaze.TemplateInstance.prototype.parentTemplate = function (levels) {
-    var view = Blaze.currentView;
-    if (typeof levels === "undefined") {
-        levels = 1;
-    }
-    while (view) {
-        if (view.name.substring(0, 9) === "Template." && !(levels--)) {
-            return view.templateInstance();
-        }
-        view = view.parentView;
-    }
-};
