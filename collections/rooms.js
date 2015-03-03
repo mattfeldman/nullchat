@@ -36,9 +36,9 @@ Meteor.methods({
         return room._id;
     },
     'setCurrentRoom': function (roomId) {
-        var room = Rooms.findOne({_id:roomId});
-        if(!room){
-            throw new Meteor.Error("Can not find room with id "+roomId);
+        var room = Rooms.findOne({_id: roomId});
+        if (!room) {
+            throw new Meteor.Error("Can not find room with id " + roomId);
         }
 
         if (!_.contains(room.users, Meteor.userId())) {
@@ -103,5 +103,23 @@ Meteor.methods({
         }
 
         Rooms.update({_id: room._id}, {$pull: {users: targetUser._id}});
+    },
+    'setRoomPrivacy': function (targetRoomId, isPrivate) {
+        var room = Rooms.findOne(targetRoomId);
+        var user = Meteor.user();
+
+        if (!room) {
+            throw new Meteor.Error("Room could not be found.");
+        }
+
+        if (room.ownerId !== user._id) {
+            throw new Meteor.Error("you must be owner");
+        }
+        // TODO: Consider if moderators should be able to set privacy
+        var updateQuery = {$set:{isPrivate: isPrivate}};
+        if (isPrivate) {
+            updateQuery.$push = {invited: room.users};
+        }
+        Rooms.update({_id: room._id}, updateQuery);
     }
 });
