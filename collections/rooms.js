@@ -118,7 +118,7 @@ Meteor.methods({
         // TODO: Consider if moderators should be able to set privacy
         var updateQuery = {$set:{isPrivate: isPrivate}};
         if (isPrivate) {
-            updateQuery.$push = {invited: room.users};
+            updateQuery.$addToSet = {invited: {$each:room.users}};
         }
         Rooms.update({_id: room._id}, updateQuery);
     }
