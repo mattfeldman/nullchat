@@ -10,6 +10,12 @@ function createTimestampPopup(timestamp) {
         position: "top right",
     });
 }
+
+/**
+ * Parses out #room mentions in message
+ * @param message
+ * @returns message with html room replacements
+ */
 function parseRoomLinks(message) {
     var rooms = Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
     rooms = _.sortBy(rooms, function (room) {
@@ -31,6 +37,12 @@ function parseRoomLinks(message) {
     }
     return message;
 }
+
+/**
+ * Parses @mentions in messages
+ * @param message
+ * @returns message with html name replacements
+ */
 function parseNameMentions(message) {
     var users = Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
     users = _(users).sortBy(function (user) {
@@ -54,6 +66,12 @@ function parseNameMentions(message) {
     }
     return message;
 }
+
+/**
+ * Determines if message contains current users username
+ * @param message
+ * @returns true if message contains current username, false otherwise
+ */
 function hasUserMentions(message) {
     if (!message || typeof  message !== "string") {return false;}
     var regex = new RegExp("[@\\s]+(" + Meteor.user({}, {fields: {'username': 1}}).username + ")($|[\\s!.?]+)");
@@ -61,9 +79,11 @@ function hasUserMentions(message) {
 
     return regexMatch && regexMatch.length > 0;
 }
+
 Template.message.created = function () {
     createTimestampPopup(this.data.timestamp);
 };
+
 Template.message.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
@@ -81,7 +101,9 @@ Template.message.helpers({
         return this.lastedited;
     },
     lastEditTime: function () {
-        if (!this.lastedited) return;
+        if (!this.lastedited) {
+            return;
+        }
         return moment(this.lastedited).format("h:mm:ss a");
     },
     showTimestamp: function () {
@@ -116,8 +138,6 @@ Template.message.helpers({
             return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
         }
     },
-    emojifiedMessage: function () {
-    },
     starIcon: function () {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     },
@@ -139,10 +159,10 @@ Template.message.helpers({
         return "font-size: " + total + "%;";
     }
 });
+
 Template.message.events({
     "click .likeMessageLink": function (event, template) {
         event.preventDefault();
-        var element = $("#" + template.data._id + " .likedBy");
 
         if (!_(this.likedBy).contains(Meteor.userId())) {
             Meteor.call('likeMessage', template.data._id);
@@ -164,7 +184,7 @@ Template.message.events({
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
         Session.set('editingId', "");
     },
-    "click .canceleEditSubmit": function (event, template) {
+    "click .canceleEditSubmit": function () {
         Session.set('editingId', "");
     }
 });

@@ -142,6 +142,9 @@
       // packages
       "emojify":false,
       "SimpleSchema":false,
-      "Sortable":false
+      "Sortable":false,
+      "moment": false,
+      "Autolinker": false,
+      "tinycolor": false
     }
 }
