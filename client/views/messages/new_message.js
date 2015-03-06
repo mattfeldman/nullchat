@@ -1,6 +1,6 @@
 var sendMessage = function (e) {
     e.preventDefault();
-    if(!$("#message").val()) return;
+    if (!$("#message").val()) { return;}
     var messageStub = {
         message: $("#message").val(),
         roomId: Session.get('currentRoom')
@@ -19,7 +19,7 @@ Template.newMessage.helpers({
         var typingUsers = Meteor.users.find({
             "status.lastActiveRoom": Session.get("currentRoom"),
             "status.lastTyping": {$gte: cutoff},
-            "_id" : {$ne: Meteor.userId()}
+            "_id": {$ne: Meteor.userId()}
         }).fetch();
 
         var users = _.map(typingUsers, function (user) {
@@ -71,8 +71,8 @@ Template.newMessage.helpers({
                     template: Template.memePill,
                     token: '/meme ',
                     matchAll: true,
-                    callback: function(doc,element){
-                        $(element).val("/meme "+doc.id+" ");
+                    callback: function (doc, element) {
+                        $(element).val("/meme " + doc.id + " ");
                     }
                 }
             ],
@@ -96,9 +96,9 @@ var recallMessageWithNewOffset = function (offsetDelta) {
     var message = Messages.findOne(findParams, {skip: offset, limit: 1, sort: {timestamp: -1}});
     if (message) {
         var currentVal = messageElement.val();
-        if (Session.equals('lastmessage',currentVal) || currentVal === ""){
+        if (Session.equals('lastmessage', currentVal) || currentVal === "") {
             messageElement.val(message.message);
-            Session.set('lastmessage',message.message);
+            Session.set('lastmessage', message.message);
         }
     }
 };
@@ -124,16 +124,18 @@ Template.newMessage.events({
                 break;
         }
     },
-    'focus': function(e) {
+    'focus': function (e) {
         Session.set('unreadMessages', 0);
     },
-    'paste': function(e) {
+    'paste': function (e) {
         var items = (e.clipboardData || e.originalEvent.clipboardData).items;
         var blob;
 
-        var blobItem = _(items).find(function(item){return item.type.indexOf("image")===0;});
+        var blobItem = _(items).find(function (item) {
+            return item.type.indexOf("image") === 0;
+        });
 
-        if(blobItem) {
+        if (blobItem) {
             blob = blobItem.getAsFile();
             var reader = new FileReader();
             reader.onload = function (event) {
@@ -147,9 +149,11 @@ Template.newMessage.events({
         }
     }
 });
+
 var throttledLastTyping = _.throttle(function () {
     Meteor.call('updateTypingActivity', Session.get('currentRoom'));
 }, 1000, {trailing: false});
-Template.newMessage.created = function(){
+
+Template.newMessage.created = function () {
     Session.get("offset");
 }
