@@ -11,7 +11,7 @@
                     <span class="clickableMessageBody" style="{{starSizingStyle}}">
                         {{{finalMessageBody}}}
                     </span>
-                    <a class="likeMessageLink" href="#"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span
+                    <a class="likeMessageLink" href="#" data-content="{{starPopupContent}}"><i class="fa {{starIcon}} fa-lg message-star-icon"></i><span
                             class="likedBy">{{likedBy.length}}</span></a>
                 {{/if}}
                 {{#if hasEdits}}
