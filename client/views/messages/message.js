@@ -7,7 +7,10 @@ function createTimestampPopup(timestamp) {
     this.$('.message-timestamp').popup({
         title: m.fromNow(),
         content: m.format("dddd, MMMM Do YYYY"),
-        position: "top right",
+        //popup: '.timestampPopup',
+        position: "top right"
+        //hoverable: true,
+        //movePopup: true
     });
 }
 
@@ -84,6 +87,10 @@ Template.message.created = function () {
     createTimestampPopup(this.data.timestamp);
 };
 
+Template.message.rendered = function(){
+    //this.$('.likeMessageLink').popup();
+};
+
 Template.message.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
@@ -157,6 +164,14 @@ Template.message.helpers({
         var bonus = 400;
         var total = 100 + _.min([bonus * scale, 400]);
         return "font-size: " + total + "%;";
+    },
+    starPopupContent: function(){
+        var likedBy = this.likedBy;
+        console.log(likedBy);
+        var usernames = Meteor.users.find({_id:{$in:likedBy}},{fields:{'username':1}}).fetch();
+        usernames = _(usernames).map(function(user){return user.username;});
+        console.log(usernames);
+        return usernames.join('</br>') || "No users stared this.";
     }
 });
 
@@ -186,5 +201,6 @@ Template.message.events({
     },
     "click .canceleEditSubmit": function () {
         Session.set('editingId', "");
-    }
+    },
+    //'mouseover .messsageTimestamp'
 });
