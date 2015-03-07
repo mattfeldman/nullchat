@@ -1,17 +1,18 @@
 /**
  * Creates the timestamp popup
- * @param timestamp
+ * @param target is a dom element to show the popup on
+ * @param timestamp is the timestamp to use for the popup
  */
-function createTimestampPopup(timestamp) {
+function createTimestampPopup(target,timestamp) {
     var m = moment(timestamp);
-    this.$('.message-timestamp').popup({
+    $(target).popup({
         title: m.fromNow(),
         content: m.format("dddd, MMMM Do YYYY"),
         //popup: '.timestampPopup',
         position: "top right"
         //hoverable: true,
         //movePopup: true
-    });
+    }).popup('show');
 }
 
 /**
@@ -84,7 +85,7 @@ function hasUserMentions(message) {
 }
 
 Template.message.created = function () {
-    createTimestampPopup(this.data.timestamp);
+    //createTimestampPopup(this.data.timestamp);
 };
 
 Template.message.rendered = function(){
@@ -167,10 +168,8 @@ Template.message.helpers({
     },
     starPopupContent: function(){
         var likedBy = this.likedBy;
-        console.log(likedBy);
         var usernames = Meteor.users.find({_id:{$in:likedBy}},{fields:{'username':1}}).fetch();
         usernames = _(usernames).map(function(user){return user.username;});
-        console.log(usernames);
         return usernames.join('</br>') || "No users stared this.";
     }
 });
@@ -202,5 +201,7 @@ Template.message.events({
     "click .canceleEditSubmit": function () {
         Session.set('editingId', "");
     },
-    //'mouseover .messsageTimestamp'
+    'mouseenter .message-timestamp':function(event,template){
+        createTimestampPopup(event.target, template.data.timestamp);
+    }
 });
