@@ -41,3 +41,20 @@ showModal = function(templateName, data, options){
         onHidden:function(){Blaze.remove(modal);},
     }).modal('show');
 }
+
+showPopup = function(targetNode, templateName, data, options){
+    var PopupContainer = this.$('.popup-container')[0];
+    var popup = Blaze.renderWithData(Template[templateName],data,PopupContainer);
+    $(targetNode).popup({
+        popup:'.'+templateName,
+        //position: "right center",
+        onHidden:function(){Blaze.remove(popup);},
+        hoverable: true,
+        closable: true,
+        movePopup: true,
+        delay: {
+            show: 300,
+            hide: 500
+        }
+    });//.popup('show');
+};
