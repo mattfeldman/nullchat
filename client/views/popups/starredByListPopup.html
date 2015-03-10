@@ -1,0 +1,16 @@
+<template name="starredByListPopup">
+    <div class="ui starredByListPopup popup">
+        <div class="header">Starred By</div>
+        <div class="ui content list">
+            {{#unless usernames}}
+                Be the first to star this :)
+            {{else}}
+                {{#each usernames}}
+                    <div clas="item">
+                        {{this}}
+                    </div>
+                {{/each}}
+            {{/unless}}
+        </div>
+    </div>
+</template>

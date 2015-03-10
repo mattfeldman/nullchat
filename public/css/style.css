@@ -314,3 +314,9 @@ span.room-tile-count {
     max-height: 2.5em;
     max-width: 2.5em;
 }
+
+html, body { height: 100%; }
+.popup{
+    line-height:initial;
+    z-index: 500;
+}

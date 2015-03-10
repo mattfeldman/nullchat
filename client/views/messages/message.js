@@ -209,5 +209,9 @@ Template.message.events({
     'mouseenter .message-user-mention': function (event, template) {
         var userId = $(event.target).data("userid");
         showPopup(event.target, "userProfileCard", userId);
+    },
+    'mouseenter .likeMessageLink' : function(event, template){
+        var userId = $(event.target).data("userid");
+        showPopup(event.target, "starredByListPopup", template.data._id);
     }
 });
