@@ -32,25 +32,39 @@ Meteor.setInterval(function () {
     Session.set("now", new Date());
 }, 500);
 
-
-// Assumes .templateName.modal modal container naming
+/**
+ * Shows a modal
+ * @param templateName - template to render and make modal
+ * @param data - data for template
+ * @param options - options to render the modal with
+ *
+ * Assumes .templateName.modal modal container naming
+ */
 showModal = function (templateName, data, options) {
     var ModalContainer = $('.modal-container')[0];
     var modal = Blaze.renderWithData(Template[templateName], data, ModalContainer);
-    $('.' + templateName + '.modal').modal({
+    options = _.extend(options || {}, {
         onHidden: function () {
             Blaze.remove(modal);
-        },
-    }).modal('show');
+        }
+    });
+    $('.' + templateName + '.modal').modal(options).modal('show');
 };
 
+/**
+ * Shows a popup
+ * @param targetNode - node to trigger and spawnpopup from
+ * @param templateName - template to render as popup
+ * @param data - data for template
+ * @param options - options to render the popup with
+ */
 showPopup = function (targetNode, templateName, data, options) {
     var PopupContainer = this.$('.popup-container')[0];
 
     $("." + templateName).remove();
     var popup = Blaze.renderWithData(Template[templateName], data, PopupContainer);
 
-    $(targetNode).popup({
+    options = _.extend(options || {}, {
         popup: '.' + templateName,
         onHidden: function () {
             Blaze.remove(popup);
@@ -62,5 +76,6 @@ showPopup = function (targetNode, templateName, data, options) {
             show: 300,
             hide: 500
         }
-    }).popup('show');
+    });
+    $(targetNode).popup(options).popup('show');
 };

@@ -3,7 +3,7 @@ Template.roomPreferences.rendered = function () {
         inline: true,
         hoverable: true,
         position: 'bottom left',
-        delay: {show: 300, hide: 300}
+        delay: {show: 100, hide: 300}
     });
     this.$('.ui.checkbox').checkbox();
 };
