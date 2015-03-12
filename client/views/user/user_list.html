@@ -1,6 +1,9 @@
 <template name="userList">
+    <h4 class="ui horizontal header divider">Users</h4>
+    <div class="ui checkbox item"><input id="hideOfflineUsers" type="checkbox"
+                                         class="hide-offline-users" {{isChecked}}/><label for="hideOfflineUsers">Hide
+        offline users.</label></div>
     {{#each filteredUsers}}
         {{> userPill this}}
     {{/each}}
-    <label><input type="checkbox" class="hide-offline-users" {{isChecked}}/>Hide offline users.</label>
 </template>

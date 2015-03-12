@@ -315,6 +315,7 @@ span.room-tile-count {
     max-width: 2.5em;
 }
 
+/* Informal Semantic UI Dev Overrides */
 html, body { height: 100%; }
 .popup{
     line-height:initial;
