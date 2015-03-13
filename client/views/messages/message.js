@@ -165,14 +165,6 @@ Template.message.helpers({
         var bonus = 400;
         var total = 100 + _.min([bonus * scale, 400]);
         return "font-size: " + total + "%;";
-    },
-    starPopupContent: function () {
-        var likedBy = this.likedBy;
-        var usernames = Meteor.users.find({_id: {$in: likedBy}}, {fields: {'username': 1}}).fetch();
-        usernames = _(usernames).map(function (user) {
-            return user.username;
-        });
-        return usernames.join('</br>') || "No users stared this.";
     }
 });
 
