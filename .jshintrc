@@ -138,6 +138,7 @@
       "Memes":false,
       "RoomInvitations":false,
       "Schemas":false,
+      "Changelogs":false,
 
       // packages
       "emojify":false,

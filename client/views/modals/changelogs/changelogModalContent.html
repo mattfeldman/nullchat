@@ -1,0 +1,16 @@
+<template name="changelogModalContent">
+    <div class="ui grid">
+        {{#each changelogs}}
+            <div class="row">
+                <div class="three wide right aligned column">
+                    <div class="date">{{timeago timestamp}}</div>
+                </div>
+                <div class="nine wide column">
+                    <div class="description">
+                        {{{md message}}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</template>

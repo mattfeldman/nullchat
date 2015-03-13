@@ -46,6 +46,10 @@ showModal = function (templateName, data, options) {
     options = _.extend(options || {}, {
         onHidden: function () {
             Blaze.remove(modal);
+        },
+        onVisible: function () {
+            // Hack for scroll height from: https://github.com/Semantic-Org/Semantic-UI/issues/165
+            $('.' + templateName + '.modal').modal("refresh");
         }
     });
     $('.' + templateName + '.modal').modal(options).modal('show');

@@ -99,3 +99,7 @@ Meteor.publish('roomInvitations',function(){
 Meteor.publish('starredMessages',function(){
    return Messages.find({likedBy:this.userId}); // TODO: Security check
 });
+
+Meteor.publish('changelogs',function(){
+   return Changelogs.find({});
+});
