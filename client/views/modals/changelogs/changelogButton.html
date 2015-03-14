@@ -1,5 +1,8 @@
 <template name="changelogButton">
     <a class="item changelogButton">
         <i class="browser icon"></i> Changelog
+        {{#if unreadCount}}
+            <div class="ui green label">{{unreadCount}}</div>
+        {{/if}}
     </a>
 </template>

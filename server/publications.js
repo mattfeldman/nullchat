@@ -69,6 +69,14 @@ Meteor.publish('myPreferences',function(){
        }
    });
 });
+Meteor.publish('myCursors',function(){
+    return Meteor.users.find({_id:this.userId},{
+        fields:{
+            _id: 1,
+            cursors: 1,
+        }
+    });
+});
 Meteor.publish('notifications', function () {
     return Notifications.find({userId: this.userId});
 });

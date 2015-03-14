@@ -16,7 +16,7 @@ Schemas.changelog = new SimpleSchema({
 
 Meteor.methods({
     'updateChangelogCursor': function () {
-        Meteor.users.update({_id: Meteor.userId()}, {$set: {'changelogCursor': new Date()}});
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {'cursors.changelog': new Date()}});
     },
     'addChangelog': function (message) {
         if(Meteor.user().admin !== true) throw new Meteor.Error("TODO: Better Admin roles, but in anycase you don't have permission.");
