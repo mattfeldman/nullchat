@@ -29,6 +29,5 @@ Accounts.onCreateUser(function(options, user) {
         }
         user.username = user.services.github.username;
     }
-    user.cursors = {changelog : new Date()};
     return user;
 });
