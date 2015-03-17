@@ -1,11 +1,25 @@
 <template name="changelogModalContent">
     <div class="ui grid">
+        {{#if debugDisplay}}
+        <div class="row">
+            <div class="ui column form">
+                <div class="field">
+                    <label>Change</label>
+                    <textarea class="markdownInput"></textarea>
+                    <span class="markdown">
+
+                    </span>
+                </div>
+                <div class="ui primary post button">Post</div>
+            </div>
+        </div>
+        {{/if}}
         {{#each changelogs}}
             <div class="row">
                 <div class="three wide right aligned column">
                     <div class="date">{{timeago timestamp}}</div>
                 </div>
-                <div class="nine wide column">
+                <div class="thirteen wide column">
                     <div class="description">
                         {{{md message}}}
                     </div>

@@ -6,3 +6,7 @@ Template.registerHelper('timeago', function (datetime) {
 Template.registerHelper('md', function (message) {
     return marked(message);
 });
+
+Template.registerHelper('debugDisplay',function(){
+    return Session.get("debugDisplay") || false;
+});
