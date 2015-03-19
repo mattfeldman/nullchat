@@ -44,12 +44,7 @@ Template.newMessage.helpers({
                     field: "name",
                     template: Template.emojiPill,
                     token: ':',
-                    matchAll: false,
-                    callback: function (doc, element) {
-                        var text = $(element).val();
-                        var newText = text.replace(':' + doc.name + ' ', ':' + doc.name + ': '); // Add trailing :
-                        $(element).val(newText);
-                    }
+                    matchAll: false
                 },
                 {
                     collection: Meteor.users,
@@ -66,14 +61,18 @@ Template.newMessage.helpers({
                     matchAll: false,
                 },
                 {
+                    collection: Rooms,
+                    field: "name",
+                    template: Template.roomPill,
+                    token: '@#',
+                    matchAll: false,
+                },
+                {
                     collection: Memes,
                     field: "searchName",
                     template: Template.memePill,
                     token: '/meme ',
-                    matchAll: true,
-                    callback: function (doc, element) {
-                        $(element).val("/meme " + doc.id + " ");
-                    }
+                    matchAll: true
                 }
             ],
             rooms: function () {
@@ -146,6 +145,22 @@ Template.newMessage.events({
             };
 
             reader.readAsDataURL(blob);
+        }
+    },
+    'autocompleteselect input':function(event, template, doc) {
+        // This is a hack that uses unique properties to sort callbacks
+        // because mizzao:meteor-autocomplete removed support for explicit callbacks
+        // For now it seems all of the callbacks get shoved into this single event
+        //
+        // doc.searchName is defined IFF the callback is a meme autocomplete
+        // doc.html is defined IFF the callback is a emoji autocomplete
+        if(doc.searchName){
+            template.$(event.target).val("/meme " + doc.id + " ");
+        }
+        else if(doc.html){
+            var text = template.$(event.target).val();
+            var newText = text.replace(':' + doc.name + ' ', ':' + doc.name + ': '); // Add trailing :
+            template.$(event.target).val(newText);
         }
     }
 });
