@@ -29,3 +29,13 @@ Template.joinRoom.events({
         });
     }
 });
+
+Template.joinRoom.rendered = function() {
+    jQuery.hotkeys.options.filterInputAcceptingElements = false;
+    jQuery.hotkeys.options.filterTextInputs = false;
+
+    var self = this;
+    $(document).bind('keydown','ctrl+q',function(){
+        self.$('input').focus();
+    });
+}
