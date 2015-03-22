@@ -35,7 +35,6 @@ maazalik:highcharts
 
 
 rubaxa:sortable
-nooitaf:semantic-ui
 cfs:s3
 meteorhacks:kadira
 meteorhacks:zones
@@ -45,3 +44,5 @@ lbee:lunr
 
 npm-container
 chuangbo:marked
+semantic:ui-css
+http

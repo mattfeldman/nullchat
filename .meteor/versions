@@ -93,7 +93,6 @@ mongo-livedata@1.0.8-rc.0
 mrt:accounts-ui-bootstrap-dropdown@0.8.3
 mrt:moment@2.8.1
 mrt:underscore-string-latest@2.3.3
-nooitaf:semantic-ui@1.10.4
 npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 oauth@1.1.4-rc.0
@@ -109,6 +108,7 @@ retry@1.0.3-rc.0
 routepolicy@1.0.5-rc.0
 rubaxa:sortable@1.1.0
 sacha:spin@2.0.4
+semantic:ui-css@1.11.4
 service-configuration@1.0.4-rc.0
 session@1.1.0-rc.0
 sha@1.0.3-rc.0

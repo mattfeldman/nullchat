@@ -162,7 +162,11 @@ Template.newMessage.events({
             var newText = text.replace(':' + doc.name + ' ', ':' + doc.name + ': '); // Add trailing :
             template.$(event.target).val(newText);
         }
+    },
+    'click .gif.button':function(event,template){
+        showModal("giphyModal");
     }
+
 });
 
 var throttledLastTyping = _.throttle(function () {
