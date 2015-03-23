@@ -11,7 +11,7 @@ Template.giphyModalContent.helpers({
 });
 
 var debouncedSearch = _.debounce(function(search,template) {
-    HTTP.get("http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, function (error, result) {
+    HTTP.get("https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, function (error, result) {
         if (!error) {
             template.searchResults.set(result.data.data);
         }
