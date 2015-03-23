@@ -4,10 +4,6 @@ Template.giphyModalContent.created = function () {
     instance.searchResults = new ReactiveVar([]);
 };
 
-Template.giphyModalContent.rendered = function () {
-    var instance = this;
-};
-
 Template.giphyModalContent.helpers({
     searchResults:function(){
         return Template.instance().searchResults.get();
@@ -15,7 +11,7 @@ Template.giphyModalContent.helpers({
 });
 
 var debouncedSearch = _.debounce(function(search,template) {
-    HTTP.get("http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=10", {}, function (error, result) {
+    HTTP.get("http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, function (error, result) {
         if (!error) {
             template.searchResults.set(result.data.data);
         }
@@ -26,7 +22,12 @@ Template.giphyModalContent.events({
     'keyup .search, change .search': function (event, template) {
         var search;
         search = event.target.value;
+
+        // Prevent unneeded recomputation
+        if(template.searchText.get() === search) { return; }
+
         template.searchText.set(search);
         debouncedSearch(search,template);
+        template.searchResults.set([]);
     }
 });
