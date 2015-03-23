@@ -2,6 +2,8 @@ accounts-base@1.2.0-rc.0
 accounts-github@1.0.4-rc.0
 accounts-oauth@1.1.4-rc.0
 accounts-password@1.1.0-win.1
+accounts-ui@1.1.5-rc.0
+accounts-ui-unstyled@1.1.7-rc.0
 aldeed:autoform@4.2.2
 aldeed:simple-schema@1.1.0
 anti:modals@0.4.0
@@ -65,6 +67,7 @@ jquery@1.11.3-rc.0_2
 json@1.0.3-rc.0
 launch-screen@1.0.2-rc.0
 lbee:lunr@0.5.7_1
+less@1.0.13-rc.2
 linto:fontawesome@4.2.6
 livedata@1.0.13-rc.0
 localstorage@1.0.3-rc.0
@@ -90,7 +93,6 @@ mobile-status-bar@1.0.3-rc.0
 momentjs:moment@2.8.4
 mongo@1.1.0-rc.0
 mongo-livedata@1.0.8-rc.0
-mrt:accounts-ui-bootstrap-dropdown@0.8.3
 mrt:moment@2.8.1
 mrt:underscore-string-latest@2.3.3
 npm-bcrypt@0.7.8_2
