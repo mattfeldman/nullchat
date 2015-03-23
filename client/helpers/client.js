@@ -73,6 +73,7 @@ showPopup = function (targetNode, templateName, data, options) {
         onHidden: function () {
             Blaze.remove(popup);
         },
+        content:'Loading...',
         hoverable: true,
         closable: true,
         movePopup: true,
@@ -81,5 +82,6 @@ showPopup = function (targetNode, templateName, data, options) {
             hide: 500
         }
     });
+
     $(targetNode).popup(options).popup('show');
 };
