@@ -165,6 +165,9 @@ Template.newMessage.events({
     },
     'click .gif.button':function(event,template){
         showModal("giphyModal");
+    },
+    'click .meme.button':function(event,template){
+        showModal("memeModal");
     }
 
 });

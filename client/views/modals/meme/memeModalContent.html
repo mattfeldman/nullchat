@@ -1,0 +1,26 @@
+<template name="memeModalContent">
+    <div class="ui fluid search selection dropdown">
+        <input type="hidden" name="selectedMeme">
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Meme Base</div>
+        <div class="menu">
+            {{#each memes}}
+                <div class="item" data-value="{{_id}}"><img class="ui tiny image" src="{{url}}"/>{{name}}</div>
+            {{/each}}
+        </div>
+    </div>
+    {{#if selectedMeme}}
+        <div class="ui fluid input">
+            <input type="text" name="top" placeholder="Top Line">
+        </div>
+        <div class="center aligned">
+            <img src="{{currentMemeUrl}}" height="{{selectedMeme.height}}" width="{{selectedMeme.width}}"/>
+        </div>
+        <div class="ui fluid input">
+            <input type="text" name="bottom" placeholder="Bottom Line">
+        </div>
+        <div class="ui primary insert button">
+            insert
+        </div>
+    {{/if}}
+</template>

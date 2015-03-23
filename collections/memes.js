@@ -13,3 +13,26 @@ if (Meteor.isServer) {
         });
     }
 }
+Meteor.methods({
+    'createMeme':function(memeStub){
+        var response = Meteor.http.post("https://api.imgflip.com/caption_image", {
+            params: {
+                template_id:memeStub.id,
+                username: "decaprime",
+                password: "9pSajDXjYTLh",
+                text0: memeStub.topLine,
+                text1: memeStub.bottomLine
+            }
+        });
+
+        if (!response || response.statusCode !== 200) {
+            throw new Meteor.Error("Error creating meme.");
+        }
+        var responseContent = JSON.parse(response.content);
+        if (!responseContent.success) {
+            throw new Meteor.Error("Error creating meme.");
+        }
+        return responseContent.data.url;
+
+    }
+})
