@@ -11,12 +11,14 @@ Template.giphyModalContent.helpers({
 });
 
 var debouncedSearch = _.debounce(function(search,template) {
+    template.searchResults.set([]);
     HTTP.get("https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, function (error, result) {
         if (!error) {
             template.searchResults.set(result.data.data);
         }
     });
 },300);
+
 Template.giphyModalContent.events({
     //update the search session when the search input changes
     'keyup .search, change .search': function (event, template) {
@@ -28,6 +30,5 @@ Template.giphyModalContent.events({
 
         template.searchText.set(search);
         debouncedSearch(search,template);
-        template.searchResults.set([]);
     }
 });
