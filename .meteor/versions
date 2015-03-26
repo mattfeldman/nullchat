@@ -47,7 +47,7 @@ email@1.0.6-rc.0
 fastclick@1.0.3-rc.0
 geojson-utils@1.0.3-rc.0
 github@1.1.3-rc.0
-grigio:babel@0.0.11
+grigio:babel@0.0.12
 html-tools@1.0.4-rc.0
 htmljs@1.0.4-rc.0
 http@1.1.0-rc.0
@@ -81,7 +81,7 @@ meteorhacks:collection-utils@1.2.0
 meteorhacks:inject-initial@1.0.2
 meteorhacks:kadira@2.20.1
 meteorhacks:meteorx@1.3.1
-meteorhacks:npm@1.2.2
+meteorhacks:npm@1.3.0
 meteorhacks:subs-manager@1.3.0
 meteorhacks:zones@1.4.0
 minifiers@1.1.4-win.0
@@ -96,7 +96,6 @@ mongo-livedata@1.0.8-rc.0
 mrt:moment@2.8.1
 mrt:underscore-string-latest@2.3.3
 npm-bcrypt@0.7.8_2
-npm-container@1.0.0
 oauth@1.1.4-rc.0
 oauth2@1.1.3-rc.0
 observe-sequence@1.0.5-win.0
@@ -110,7 +109,7 @@ retry@1.0.3-rc.0
 routepolicy@1.0.5-rc.0
 rubaxa:sortable@1.1.0
 sacha:spin@2.0.4
-semantic:ui-css@1.11.4
+semantic:ui-css@1.11.5
 service-configuration@1.0.4-rc.0
 session@1.1.0-rc.0
 sha@1.0.3-rc.0
