@@ -205,5 +205,9 @@ Template.message.events({
     'mouseenter .likeMessageLink' : function(event, template){
         var userId = $(event.target).data("userid");
         showPopup(event.target, "starredByListPopup", template.data._id);
-    }
+    },
+    'click .removeMessageButton': function (event, template) {
+        event.preventDefault();
+        Meteor.call('removeMessage', template.data._id);
+    },
 });

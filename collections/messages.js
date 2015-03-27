@@ -22,6 +22,16 @@ Meteor.methods({
             }
         });
     },
+    'removeMessage': function (id) {
+        var message = Messages.findOne({_id: id});
+        if (!message) {
+            throw new Meteor.Error("Couldn't find message to edit.");
+        }
+        if (Meteor.userId() !== message.authorId) {
+            throw new Meteor.Error("Can't remove a message you didn't author.");
+        }
+        Messages.remove({_id: id});
+    },
     'message': function (messageStub) {
         var user = Meteor.user();
         var room = Rooms.findOne(messageStub.roomId);
