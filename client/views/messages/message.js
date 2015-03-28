@@ -84,14 +84,6 @@ function hasUserMentions(message) {
     return regexMatch && regexMatch.length > 0;
 }
 
-Template.message.created = function () {
-    //createTimestampPopup(this.data.timestamp);
-};
-
-Template.message.rendered = function () {
-    //this.$('.likeMessageLink').popup();
-};
-
 Template.message.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
