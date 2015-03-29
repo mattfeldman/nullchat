@@ -173,7 +173,15 @@ Template.roomView.created = function () {
         }
     });
 
-    Meteor.subscribe('newMessages',{onError:function(e){alert("critical bug found, PLEASE tell @matt, details in F12 console.");console.log(e); throw e;}});
+    Deps.autorun(function(){
+        var rooms = Rooms.find({users:Meteor.userId()},{fields:{_id:1}}).fetch();
+        if(rooms){
+            for(var i=0;i<rooms.length;i++){
+                var roomId = rooms[i]._id;
+                Meteor.subscribe('newMessagesForRoom', roomId);
+            }
+        }
+    });
     isReady.notifications = true;
 };
 Template.roomView.destroyed = function () {
