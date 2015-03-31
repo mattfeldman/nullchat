@@ -49,7 +49,8 @@ Meteor.publish('users', function () {
         fields: {
             _id: 1,
             username: 1,
-            profile: 1,
+            "profile.avatar":1,
+            "profile.color":1,
             "status.idle": 1,
             "status.offline": 1,
             "status.online": 1,
@@ -66,6 +67,7 @@ Meteor.publish('myPreferences', function () {
         fields: {
             _id: 1,
             preferences: 1,
+            profile: 1
         }
     });
 });
