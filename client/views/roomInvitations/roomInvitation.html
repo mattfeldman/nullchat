@@ -1,6 +1,11 @@
 <template name="roomInvitation">
-    <div class="room-invitation">
-        {{user.username}} invited you to join #{{room.name}} <span class="room-invitation-ago-text">{{agoText}}</span>
-        <a href="#" class="room-invitation-accept">accept</a> <a href="#" class="room-invitation-dismiss">dismiss</a>
+    <div class="item">
+        <div class="room-invitation-dismiss ui right floated red compact button">dismiss</div>
+        <div class="room-invitation-accept ui right floated green compact button">accept</div>
+        <img class="ui avatar image" src="{{avatarForUserId user._id}}"/>
+        <div class="content">
+            <div class="header">{{user.username}} invited you to join #{{room.name}}</div>
+            <span class="room-invitation-ago-text">{{agoText}}</span>
+        </div>
     </div>
 </template>
