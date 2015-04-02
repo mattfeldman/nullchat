@@ -124,23 +124,3 @@ Meteor.publish('starredMessages', function () {
 Meteor.publish('changelogs', function () {
     return Changelogs.find({});
 });
-
-
-// Following leak information cross private room boundary
-// -- Leaks starred given count
-Meteor.publish('starsGivenCount', function (userId) {
-    Counts.publish(this, 'starsGivenCount', Messages.find({likedBy: userId}));
-    this.ready();
-});
-
-// Following leak information cross private room boundary
-// -- Leaks starred received count
-Meteor.publish('starsReceivedCount', function (userId) {
-    Counts.publish(this, 'starsReceived', Messages.find({authorId: userId,'likedBy.0':{$exists:true}})/*, {countFromFieldLength: 'likedBy', nonReactive: true}*/);
-});
-
-// Following leak information cross private room boundary
-// -- Leaks message sent count
-Meteor.publish('messagesSentCount', function (userId) {
-    Counts.publish(this, 'messagesSentCount', Messages.find({authorId: userId}));
-});
