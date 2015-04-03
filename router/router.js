@@ -1,6 +1,6 @@
 Router.configure({
     layoutTemplate: 'layout',
-    //loadingTemplate: 'loading',
+    loadingTemplate: 'loading',
     waitOn: function () {
         return [Meteor.subscribe('users'),Meteor.subscribe('myPreferences')];
     }
