@@ -16,6 +16,9 @@ Meteor.methods({
         if (room.isPrivate && !_(room.invited).contains(Meteor.userId())) {
             throw new Meteor.Error("You don't have permission to invite to that room.");
         }
+        if (_(room.users).contains(targetUser._id)){
+            throw new Meteor.Error("User in that room.");
+        }
 
         var roomInvitation = {
             invitingUser: Meteor.userId(),
@@ -33,8 +36,6 @@ Meteor.methods({
             active: true // NOTE: This could be harassed, reconsider later
         });
         if (existingInvitation) {
-            console.log("Existing invitation");
-            console.log(existingInvitation);
             throw new Meteor.Error("You've already invited that user to that room.");
         }
         RoomInvitations.insert(roomInvitation);

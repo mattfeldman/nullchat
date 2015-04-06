@@ -17,6 +17,13 @@ Meteor.methods({
         }
         if (!_.contains(room.users, userId)) {
             Rooms.update({_id: room._id}, {$addToSet: {users: userId}});
+            RoomInvitations.update({invitedUser: userId, roomId:room._id, active:true}, {
+                $set: {
+                    didAccept: true,
+                    completedTime: new Date(),
+                    active: false
+                }
+            },{multi:true});
         }
         return room._id;
     },
