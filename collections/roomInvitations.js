@@ -54,7 +54,7 @@ function updateRoomInvitation(id,accepted){
     if(!roomInvitation){
         throw new Meteor.Error("Can't find room invitation.");
     }
-    if(!roomInvitation.invitedUser === Meteor.userId()){
+    if(roomInvitation.invitedUser !== Meteor.userId()){
         throw new Meteor.Error("Can only update your own invitations.");
     }
 
