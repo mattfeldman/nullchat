@@ -1,8 +1,10 @@
 <template name="notificationItem">
-    <div class="notification-item">
-        <span class="notification-item-author">{{authorName}}</span>
-        <span class="notification-item-message">{{message}}</span>
-        <span class="notification-item-room"><a href="room/{{roomId}}">#{{roomName}}</a></span>
-        <button class="notification-item-dismiss">dismiss</button>
+    <div class="item">
+        <div class="notification-item-dismiss ui right floated compact button">dismiss</div>
+        <div class="content">
+            <span class="notification-item-author">{{authorName}}</span>
+            <span class="notification-item-message">{{message}}</span>
+            <a href="room/{{roomId}}">#{{roomName}}</a>
+        </div>
     </div>
 </template>
