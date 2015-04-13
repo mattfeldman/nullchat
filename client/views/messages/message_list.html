@@ -2,7 +2,16 @@
     {{#if shouldShowLoadMore}}
       <a href="#" class="loadMore">load more</a>
     {{/if}}
-    {{#each messages}}
-        {{> message}}
-    {{/each}}
+
+    {{#if rwindow.screen 'lte' 'small'}}
+        <div class="ui threaded comments">
+            {{#each messages}}
+                {{> smallMessage}}
+            {{/each}}
+        </div>
+    {{else}}
+        {{#each messages}}
+            {{> message}}
+        {{/each}}
+    {{/if}}
 </template>

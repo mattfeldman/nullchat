@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <template name="layout">
-    <div class="container">
+    {{#if rwindow.screen 'lte' 'small'}}
+        <div class="ui right vertical sidebar menu">
+            {{> roomList}}
+            {{> userList }}
+        </div>
+    {{/if}}
+    <div class="pusher">
         {{> header}}
         <div id="main" class="row-fluid">
             {{> yield}}

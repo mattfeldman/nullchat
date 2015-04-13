@@ -53,3 +53,4 @@ sanjo:jasmine@0.13.0-rc.4
 npm-container
 velocity:html-reporter
 velocity:console-reporter
+gadicohen:reactive-window

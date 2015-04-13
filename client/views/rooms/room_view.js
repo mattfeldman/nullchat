@@ -2,9 +2,6 @@ Template.roomView.helpers({
     room: function () {
         return Rooms.findOne({_id: Session.get('currentRoom')});
     },
-    currentRooms: function () {
-        return Rooms.find({users: Meteor.userId()});
-    },
     currentRoom: function () {
         return Session.get('currentRoom');
     },
@@ -27,6 +24,9 @@ Template.roomView.events({
             scroll.previousHeight = $("#scrollContainer").height();
             incMessageLimit(20);
         }
+    },
+    'click .launch':function(event,template){
+        $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
     }
 });
 

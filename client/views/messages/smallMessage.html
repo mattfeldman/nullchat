@@ -1,0 +1,49 @@
+<template name="smallMessage">
+    <div id="{{_id}}" class="ui comment">
+        <a class="avatar">
+            <img src="{{avatarForUserId authorId}}"/>
+        </a>
+
+        <div class="content">
+            <a class="author">{{usernameForUserId authorId}}</a>
+            <div class="metadata">
+                <span class="date">{{showTimestamp}}</span>
+                <span class="rating">
+                    <a class="likeMessageLink" href="#">
+                        <i class="fa {{starIcon}} fa-lg message-star-icon"></i>
+                        <span class="likedBy">{{likedBy.length}}</span>
+                    </a>
+                </span>
+            </div>
+            <div class="text">
+                {{{finalMessageBody}}}
+                {{#if isUnderEdit}}
+                    <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
+                    <button class="messageEditSubmit">save</button>
+                    <button class="canceleEditSubmit">cancel</button>
+                {{else}}
+                    <span class="clickableMessageBody" style="{{starSizingStyle}}">
+
+                    </span>
+                {{/if}}
+                {{#if hasEdits}}
+                    <span class="lastEditTime">Edited {{lastEditTime}}</span>
+                {{/if}}
+                {{#if fromMobile}}
+                    <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
+                {{/if}}
+                {{#if crosspost}}
+                    <i class="fa fa-random fa-lg message-crosspost-indicator"
+                       title="Message was cross posted using #tags"></i>
+                {{/if}}
+            </div>
+            <div class="actions">
+                {{#if canEdit}}
+                    <a href="#" class="editMessageButton">edit</a>
+                    <a href="#" class="removeMessageButton">remove</a>
+                {{/if}}
+                <a class="messagePermaLink" href="/message/{{_id}}">permalink</a>
+            </div>
+        </div>
+    </div>
+</template>

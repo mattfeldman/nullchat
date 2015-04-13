@@ -17,4 +17,9 @@ Template.roomList.rendered = function(){
         scrollSensitivity: 50,
         scrollSpeed:4
     });
-}
+};
+Template.roomList.helpers({
+    currentRooms: function () {
+        return Rooms.find({users: Meteor.userId()});
+    }
+});

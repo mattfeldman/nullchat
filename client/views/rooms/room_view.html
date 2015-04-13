@@ -1,23 +1,50 @@
 <template name="roomView">
-    <div class="room-header">
-        <span class="room-header-name">{{room.name}}</span>
-        <span class="room-header-topic">{{room.topic}}</span>
-        {{>roomPreferences}}
-    </div>
-    <div id="roomContainer" class="room-container">
-        {{#if currentRoom}}
-            <div id="scrollContainer" class="scroll-container" style="">
-                {{> messageList messages}}
+    {{#if rwindow.screen 'lte' 'small'}}
+        <div class="container">
+            <div class="ui sticky fixed bottom">
+                {{> newMessage}}
             </div>
-        {{else}}
-            {{> noRoom }}
-        {{/if}}
-    </div>
-    <div class="sidebar">
-        {{> roomList currentRooms}}
-        {{> userList }}
-    </div>
-    {{> newMessage}}
+        </div>
+        <div class="ui fixed main menu">
+            <div class="container">
+                <div class="title item">
+                    #{{room.name}}
+                </div>
+                <div class="title item">
+                    {{room.topic}}
+                </div>
+                <div class="right menu">
+                    <a class="launch item">
+                        Rooms
+                        <i class="content icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="ui threaded comments">
+            {{> messageList messages}}
+        </div>
+    {{else}}
+        <div class="room-header">
+            <span class="room-header-name">{{room.name}}</span>
+            <span class="room-header-topic">{{room.topic}}</span>
+            {{>roomPreferences}}
+        </div>
+        <div id="roomContainer" class="room-container">
+            {{#if currentRoom}}
+                <div id="scrollContainer" class="scroll-container" style="">
+                    {{> messageList messages}}
+                </div>
+            {{else}}
+                {{> noRoom }}
+            {{/if}}
+        </div>
+        <div class="sidebar">
+            {{> roomList }}
+            {{> userList }}
+        </div>
+        {{> newMessage}}
+    {{/if}}
     <div class="modal-container">
 
     </div>
