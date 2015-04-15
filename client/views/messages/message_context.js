@@ -1,11 +1,11 @@
-Template.messageContext.helpers({
-    'messages':function(){
-        return Messages.find({},{sort:{timestamp:1}});
-    }
+Template.messageContext.onCreated(function () {
+    this.subscribe('message', this.data.messageId);
+    this.subscribe('messageContextAbove', this.data.messageId);
+    this.subscribe('messageContextBelow', this.data.messageId);
 });
 
-Template.messageContext.created = function(){
-   Meteor.subscribe('message',this.data.messageId);
-    Meteor.subscribe('messageContextAbove',this.data.messageId);
-    Meteor.subscribe('messageContextBelow',this.data.messageId);
-};
+Template.messageContext.helpers({
+    'messages': function () {
+        return Messages.find({}, {sort: {timestamp: 1}});
+    }
+});

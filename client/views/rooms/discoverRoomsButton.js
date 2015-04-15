@@ -1,3 +1,7 @@
+Template.discoverRoomsButton.onCreated(function () {
+    this.subscribe("roomInvitations");
+});
+
 Template.discoverRoomsButton.helpers({
     unreadCount: function () {
         return RoomInvitations.find({invitedUser: Meteor.userId(), active: true}).count();
@@ -9,15 +13,3 @@ Template.discoverRoomsButton.events({
         showModal("discoverRooms");
     }
 });
-
-Template.discoverRoomsButton.created = function () {
-    var instance = this;
-    instance.roomInvitationsSub = Meteor.subscribe("roomInvitations");
-};
-
-Template.discoverRoomsButton.destroyed = function () {
-    var instance = this;
-    if (instance.roomInvitationsSub) {
-        instance.roomInvitationsSub.stop();
-    }
-};

@@ -1,3 +1,15 @@
+Template.changelogButton.onCreated(function () {
+    this.subscribe("changelogs");
+    this.subscribe("myCursors", {
+        onReady: function () {
+            var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {'cursors.changelog': 1}});
+            if (user && (!user.cursors || !user.cursors.changelog)) {
+                Meteor.call('updateChangelogCursor');
+            }
+        }
+    });
+});
+
 Template.changelogButton.events({
     'click .changelogButton': function (event, template) {
         event.preventDefault();
@@ -14,19 +26,6 @@ Template.changelogButton.helpers({
         return count ? count : false;
     },
 });
-
-Template.changelogButton.created = function () {
-    var self = this;
-    self.changelogSubscription = Meteor.subscribe("changelogs");
-    self.cursorSubscription = Meteor.subscribe("myCursors", {
-        onReady: function () {
-            var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {'cursors.changelog': 1}});
-            if (user && (!user.cursors || !user.cursors.changelog)) {
-                Meteor.call('updateChangelogCursor');
-            }
-        }
-    });
-};
 
 Template.changelogButton.destroyed = function () {
     var self = this;
