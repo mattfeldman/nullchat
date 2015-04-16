@@ -67,9 +67,12 @@
     height: 60px;
     bottom: 0;
 }
-
-.new-message-inner-container {
-    padding-top: 5px;
+@media (max-width: 975px) {
+    .new-message-outer-container {
+        width: 100%;
+        background-color: rgba(247, 247, 247, 0.94);
+        position: fixed;
+    }
 }
 
 .new-message-text-container {
