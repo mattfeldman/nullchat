@@ -1,5 +1,6 @@
 .noembed-wrapper {
     display: inline-block;
+    line-height: normal;
 }
 
 .noembed-embed-inner {
