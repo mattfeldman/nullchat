@@ -38,15 +38,7 @@
                 {{> UI.dynamic template=layoutName data=data}}
             </div>
         {{else}}{{#if isFeedback}}
-            <div class="ui info icon message">
-                <i class="info circle icon"></i>
-                <div class="content">
-                    <div class="header">
-                        Info
-                    </div>
-                    {{{message}}}
-                </div>
-            </div>
+            {{> feedbackMessage this}}
         {{/if}}{{/if}}{{/if}}
         <div class="message-timestamp">{{showTimestamp}}</div>
     </div>
