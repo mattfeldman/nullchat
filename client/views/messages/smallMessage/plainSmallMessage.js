@@ -84,7 +84,7 @@ function hasUserMentions(message) {
     return regexMatch && regexMatch.length > 0;
 }
 
-Template.smallMessage.helpers({
+Template.plainSmallMessage.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
     },
@@ -110,18 +110,6 @@ Template.smallMessage.helpers({
         var m = moment(new Date(this.timestamp));
         var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
-    },
-    isPlain: function () {
-        return this.type === "plain";
-    },
-    isRich: function () {
-        return this.type === "rich";
-    },
-    layoutName: function () {
-        return this.layout + "Message";
-    },
-    isFeedback: function () {
-        return this.type === "feedback";
     },
     isUnderEdit: function () {
         return Session.get('editingId') === this._id;
@@ -160,7 +148,7 @@ Template.smallMessage.helpers({
     }
 });
 
-Template.smallMessage.events({
+Template.plainSmallMessage.events({
     "click .likeMessageLink": function (event, template) {
         event.preventDefault();
 
@@ -202,4 +190,7 @@ Template.smallMessage.events({
         event.preventDefault();
         Meteor.call('removeMessage', template.data._id);
     },
+});
+Template.plainSmallMessage.onRendered(function(){
+    this.$('.ui.accordion').accordion();
 });

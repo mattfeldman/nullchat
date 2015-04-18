@@ -324,3 +324,7 @@ html, body { height: 100%; }
     line-height:initial;
     z-index: 500;
 }
+
+.smallMessageList{
+    padding-bottom: 60px;
+}

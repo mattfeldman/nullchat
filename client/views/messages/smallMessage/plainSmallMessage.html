@@ -1,9 +1,8 @@
-<template name="smallMessage">
+<template name="plainSmallMessage">
     <div id="{{_id}}" class="ui comment">
         <a class="avatar">
             <img src="{{avatarForUserId authorId}}"/>
         </a>
-
         <div class="content">
             <a class="author">{{usernameForUserId authorId}}</a>
             <div class="metadata">
@@ -16,14 +15,13 @@
                 </span>
             </div>
             <div class="text">
-                {{{finalMessageBody}}}
                 {{#if isUnderEdit}}
                     <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
                     <button class="messageEditSubmit">save</button>
                     <button class="canceleEditSubmit">cancel</button>
                 {{else}}
                     <span class="clickableMessageBody" style="{{starSizingStyle}}">
-
+                        {{{finalMessageBody}}}
                     </span>
                 {{/if}}
                 {{#if hasEdits}}
@@ -37,12 +35,17 @@
                        title="Message was cross posted using #tags"></i>
                 {{/if}}
             </div>
-            <div class="actions">
+            <div class="ui accordion actions">
+                <div class="title">
+                    Actions
+                </div>
+                <div class="ui segment content">
                 {{#if canEdit}}
-                    <a href="#" class="editMessageButton">edit</a>
-                    <a href="#" class="removeMessageButton">remove</a>
+                    <a href="#" class="ui button editMessageButton">edit</a>
+                    <a href="#" class="ui button removeMessageButton">remove</a>
                 {{/if}}
-                <a class="messagePermaLink" href="/message/{{_id}}">permalink</a>
+                <a class="ui button messagePermaLink" href="/message/{{_id}}">permalink</a>
+                </div>
             </div>
         </div>
     </div>
