@@ -5,6 +5,7 @@
         </a>
         <div class="content">
             <a class="author">{{usernameForUserId authorId}}</a>
+
             <div class="metadata">
                 <span class="date">{{showTimestamp}}</span>
                 <span class="rating">
@@ -13,6 +14,18 @@
                         <span class="likedBy">{{likedBy.length}}</span>
                     </a>
                 </span>
+                <div class="author">
+                    {{#if fromMobile}}
+                        <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
+                    {{/if}}
+                    {{#if crosspost}}
+                        <i class="fa fa-random fa-lg message-crosspost-indicator"
+                           title="Message was cross posted using #tags"></i>
+                    {{/if}}
+                    {{#if hasEdits}}
+                        <span class="lastEditTime">Edited {{lastEditTime}}</span>
+                    {{/if}}
+                </div>
             </div>
             <div class="text">
                 {{#if isUnderEdit}}
@@ -24,27 +37,17 @@
                         {{{finalMessageBody}}}
                     </span>
                 {{/if}}
-                {{#if hasEdits}}
-                    <span class="lastEditTime">Edited {{lastEditTime}}</span>
-                {{/if}}
-                {{#if fromMobile}}
-                    <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
-                {{/if}}
-                {{#if crosspost}}
-                    <i class="fa fa-random fa-lg message-crosspost-indicator"
-                       title="Message was cross posted using #tags"></i>
-                {{/if}}
             </div>
             <div class="ui accordion actions">
                 <div class="title">
                     Actions
                 </div>
                 <div class="ui segment content">
-                {{#if canEdit}}
-                    <a href="#" class="ui button editMessageButton">edit</a>
-                    <a href="#" class="ui button removeMessageButton">remove</a>
-                {{/if}}
-                <a class="ui button messagePermaLink" href="/message/{{_id}}">permalink</a>
+                    {{#if canEdit}}
+                        <a href="#" class="ui button editMessageButton">edit</a>
+                        <a href="#" class="ui button removeMessageButton">remove</a>
+                    {{/if}}
+                    <a class="ui button messagePermaLink" href="/message/{{_id}}">permalink</a>
                 </div>
             </div>
         </div>
