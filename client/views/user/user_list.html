@@ -5,6 +5,8 @@
         <label for="showOfflineUsers">Show offline users.</label>
     </div>
     {{#each filteredUsers}}
-        {{> userPill this}}
+        <div class="ui compact item">
+            {{> userPill this}}
+        </div>
     {{/each}}
 </template>
