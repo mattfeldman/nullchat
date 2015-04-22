@@ -1,3 +1,9 @@
+Meteor.users.deny({
+    update: function() {
+        return true;
+    }
+});
+
 Meteor.methods({
     'updateTypingActivity': function (room) {
         //TODO: Validate room
