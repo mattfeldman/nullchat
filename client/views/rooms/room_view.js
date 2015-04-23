@@ -27,6 +27,9 @@ Template.roomView.events({
     },
     'click .launch':function(event,template){
         $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+    },
+    'click, scroll':function(){
+        Session.set('unreadMessages', 0);
     }
 });
 
