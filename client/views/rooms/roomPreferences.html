@@ -1,12 +1,27 @@
 <template name="roomPreferences">
-    <div class="ui red basic compact labeled icon button room-settings-button"><i class="settings icon"></i>Room Settings</div>
-    <div class="ui wide large popup">
-        <div class="header">Room Settings</div>
-        <div class="content ui list">
-            <div class="ui checkbox item"><input id="playMessageSound" type="checkbox" {{playMessageSound}}><label for="playMessageSound">Play Message Click</label></div>
-            <div class="ui checkbox item"><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}><label for="desktopNotificationMention">Desktop Notifications for @mentions</label></div>
-            <div class="ui checkbox item"><input id="desktopNotificationAllMessages" type="checkbox" {{desktopNotificationAllMessages}}><label for="desktopNotificationAllMessages">Desktop Notifications for all messages</label></div>
-            <div class="ui checkbox item"><input id="smsAllMessages" type="checkbox" {{smsAllMessages}}><label for="smsAllMessages">SMS Notifications for all messages</label></div>
+    {{#if rwindow.screen 'lte' 'small'}}
+        <div class="ui dropdown item room-settings-button">
+            Room Settings <i class="dropdown icon"></i>
         </div>
-    </div>
+        <div class="ui wide large popup">
+            <div class="header">Room Settings</div>
+            <div class="content ui list">
+                <div class="ui checkbox item"><input id="playMessageSound" type="checkbox" {{playMessageSound}}><label for="playMessageSound">Play Message Click</label></div>
+                <div class="ui checkbox item"><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}><label for="desktopNotificationMention">Desktop Notifications for @mentions</label></div>
+                <div class="ui checkbox item"><input id="desktopNotificationAllMessages" type="checkbox" {{desktopNotificationAllMessages}}><label for="desktopNotificationAllMessages">Desktop Notifications for all messages</label></div>
+                <div class="ui checkbox item"><input id="smsAllMessages" type="checkbox" {{smsAllMessages}}><label for="smsAllMessages">SMS Notifications for all messages</label></div>
+            </div>
+        </div>
+    {{else}}
+        <div class="ui red basic compact labeled icon button room-settings-button"><i class="settings icon"></i>Room Settings</div>
+        <div class="ui wide large popup">
+            <div class="header">Room Settings</div>
+            <div class="content ui list">
+                <div class="ui checkbox item"><input id="playMessageSound" type="checkbox" {{playMessageSound}}><label for="playMessageSound">Play Message Click</label></div>
+                <div class="ui checkbox item"><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}><label for="desktopNotificationMention">Desktop Notifications for @mentions</label></div>
+                <div class="ui checkbox item"><input id="desktopNotificationAllMessages" type="checkbox" {{desktopNotificationAllMessages}}><label for="desktopNotificationAllMessages">Desktop Notifications for all messages</label></div>
+                <div class="ui checkbox item"><input id="smsAllMessages" type="checkbox" {{smsAllMessages}}><label for="smsAllMessages">SMS Notifications for all messages</label></div>
+            </div>
+        </div>
+    {{/if}}
 </template>
