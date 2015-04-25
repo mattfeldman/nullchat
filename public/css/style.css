@@ -328,3 +328,7 @@ html, body { height: 100%; }
 .smallMessageList{
     padding-bottom: 60px;
 }
+.smallMessage{
+    border-left: 2px solid transparent;;
+    padding-left: 2px;
+}

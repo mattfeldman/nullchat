@@ -88,15 +88,6 @@ Template.plainSmallMessage.helpers({
     myMessage: function () {
         return this.authorId === Meteor.userId() ? "my-message" : "";
     },
-    color: function () {
-        var user = Meteor.users.findOne({_id: this.authorId}, {fields: {'profile.color': 1}});
-        if (user && user.profile && user.profile.color) {
-            return "border-left: 3px solid" + user.profile.color;
-        }
-        else {
-            return "border-left: 3px solid transparent";
-        }
-    },
     hasEdits: function () {
         return this.lastedited;
     },
@@ -111,6 +102,7 @@ Template.plainSmallMessage.helpers({
         var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
+
     isUnderEdit: function () {
         return Session.get('editingId') === this._id;
     },
