@@ -168,7 +168,10 @@ Template.newMessage.events({
     },
     'click .meme.button':function(event,template){
         showModal("memeModal");
-    }
+    },
+    'mouseenter .emoji' : function(event, template){
+        showPopup(event.target, "starredByListPopup");
+    },
 
 });
 
