@@ -16,33 +16,6 @@ function createTimestampPopup(target, timestamp) {
 }
 
 /**
- * Parses out #room mentions in message
- * @param message
- * @returns message with html room replacements
- */
-function parseRoomLinks(message) {
-    var rooms = Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
-    rooms = _.sortBy(rooms, function (room) {
-        return -room.name.length;
-    }); // TODO: Not this every message
-    var loc = -1;
-    while ((loc = message.indexOf("#", loc + 1)) >= 0) {
-        for (var i = 0; i < rooms.length; i++) {
-            var roomName = rooms[i].name;
-            if (message.indexOf(rooms[i].name, loc) === loc + 1) {
-                var leftHalf = message.substring(0, loc);
-                var middle = '<a href="room/' + rooms[i]._id + '" class="roomLink" >#' + roomName + '</a>';
-                var rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
-                message = leftHalf + middle + rightHalf;
-                loc = loc + middle.length - 1;
-                break;
-            }
-        }
-    }
-    return message;
-}
-
-/**
  * Parses @mentions in messages
  * @param message
  * @returns message with html name replacements
