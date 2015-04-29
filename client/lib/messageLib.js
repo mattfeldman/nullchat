@@ -33,6 +33,7 @@ parseRoomLinks = function (message) {
  * @returns message with html name replacements
  */
 parseNameMentions = function (message) {
+    if (!message) {return message;}
     var users = Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
     users = _(users).sortBy(function (user) {
         return -user.username.length;
@@ -41,7 +42,7 @@ parseNameMentions = function (message) {
     while ((loc = message.indexOf("@", loc + 1)) >= 0) {
         for (var i = 0; i < users.length; i++) {
             var userName = users[i].username;
-            if (message.indexOf(userName, loc) === loc + 1) {
+            if (message.toLowerCase().indexOf(userName.toLowerCase(), loc) === loc + 1) {
                 var leftHalf = message.substring(0, loc);
                 var userColor = (users[i].profile && users[i].profile.color) || "black";
                 var styleString = 'style="border-bottom: 2px solid ' + userColor + ';' + 'background: ' + tinycolor(userColor).setAlpha(0.075).toRgbString() + ';"';
