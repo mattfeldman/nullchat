@@ -117,6 +117,14 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+@media (max-width: 975px) {
+    .room-container.ui.comments {
+        max-width: 100%;
+        width: 100%;
+        top: 20px;
+        bottom: 50px;
+    }
+}
 
 .sidebar {
     position: absolute;

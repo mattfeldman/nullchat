@@ -22,8 +22,10 @@
                 </div>
             </div>
         </div>
-        <div class="ui threaded comments">
-            {{> messageList messages}}
+        <div class="ui threaded comments room-container" id="roomContainer">
+            <div id="scrollContainer" class="scroll-container">
+                {{> messageList messages}}
+            </div>
         </div>
     {{else}}
         <div class="room-header">
