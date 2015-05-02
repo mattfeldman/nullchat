@@ -103,6 +103,9 @@ var recallMessageWithNewOffset = function (offsetDelta) {
 };
 
 Template.newMessage.events({
+    'mouseover .smile':function(event, template){
+        showPopup(event.target, "emojiPopup");
+    },
     'click .send': function (e) {
         sendMessage(e);
     },
@@ -168,11 +171,7 @@ Template.newMessage.events({
     },
     'click .meme.button':function(event,template){
         showModal("memeModal");
-    },
-    'mouseenter .emoji' : function(event, template){
-        showPopup(event.target, "starredByListPopup");
-    },
-
+    }
 });
 
 var throttledLastTyping = _.throttle(function () {

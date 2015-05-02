@@ -85,3 +85,13 @@ showPopup = function (targetNode, templateName, data, options) {
 
     $(targetNode).popup(options).popup('show');
 };
+
+/**
+ * Adds text to the message input
+ * @param {string} text - text to append
+ *
+ */
+addTextToInput = function(text){
+    var currentInput = $("#message").val();
+    $("#message").val(currentInput + text);
+}

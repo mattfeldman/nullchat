@@ -1,0 +1,18 @@
+<template name="emojiPopupContent">
+    <div class="content">
+        <a class="header">emojis</a>
+
+        <div class="meta">
+            <span class="date">click to add</span>
+        </div>
+        <div class="description emojiSelector">
+            {{#each emojis}}
+                {{{this.html}}}
+            {{/each}}
+        </div>
+    </div>
+    <div class="extra content">
+        <div class="ui left-arrow icon button"><i class="ui left arrow icon"></i></div>
+        <div class="ui right-arrow icon button"><i class="ui right arrow icon"></i></div>
+    </div>
+</template>
