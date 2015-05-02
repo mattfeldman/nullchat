@@ -340,3 +340,8 @@ html, body { height: 100%; }
     border-left: 2px solid transparent;;
     padding-left: 2px;
 }
+.emojiCategory{
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

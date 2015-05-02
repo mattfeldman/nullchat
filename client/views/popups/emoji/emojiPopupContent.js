@@ -5,6 +5,9 @@ Template.emojiPopupContent.helpers({
         return Emojis.find({}, {sort: {name: 1}, limit: pageSize, skip: page*pageSize});
     },
 });
+Template.emojiPopupContent.onRendered(function(){
+    this.$(".menu .item").tab();
+});
 Template.emojiPopupContent.onCreated(function () {
     var self = this;
     self.currentPage = new ReactiveVar(0);
