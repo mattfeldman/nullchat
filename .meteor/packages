@@ -46,11 +46,12 @@ semantic:ui-css
 http
 accounts-ui
 accounts-ui-unstyled
-sanjo:karma@1.5.1
-sanjo:jasmine@0.13.0-rc.4
+#sanjo:karma
+#sanjo:jasmine
 
 
 npm-container
-velocity:html-reporter
-velocity:console-reporter
+#velocity:html-reporter
+#velocity:console-reporter
 gadicohen:reactive-window
+chriswessels:hammer
