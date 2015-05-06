@@ -10,3 +10,7 @@ Template.registerHelper('md', function (message) {
 Template.registerHelper('debugDisplay',function(){
     return Session.get("debugDisplay") || false;
 });
+
+Template.registerHelper('inSmallView',function(){
+    return rwindow.$width() <= 768;
+});

@@ -3,7 +3,7 @@
       <a href="#" class="loadMore">load more</a>
     {{/if}}
 
-    {{#if rwindow.screen 'lte' 'small'}}
+    {{#if inSmallView}}
         <div class="ui threaded comments smallMessageList">
             {{#each messages}}
                 {{> smallMessage}}

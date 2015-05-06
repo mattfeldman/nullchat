@@ -67,7 +67,7 @@
     height: 60px;
     bottom: 0;
 }
-@media (max-width: 975px) {
+@media (max-width: 768px) {
     .new-message-outer-container {
         width: 100%;
         background-color: rgba(247, 247, 247, 0.94);
@@ -117,7 +117,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-@media (max-width: 975px) {
+@media (max-width: 768px) {
     .room-container.ui.comments {
         max-width: 100%;
         width: 100%;
