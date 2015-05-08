@@ -8,11 +8,16 @@
         <div class="ui fixed main menu">
             <div class="container">
                 <div class="title item">
+                    {{#if room.isPrivate}}
+                        <i class="ui lock icon"></i>
+                    {{/if}}
                     #{{room.name}}
                 </div>
-                <div class="title item">
-                    {{room.topic}}
-                </div>
+                {{#if room.topic}}
+                    <div class="title item">
+                        {{room.topic}}
+                    </div>
+                {{/if}}
                 {{>roomPreferences}}
                 <div class="right menu">
                     <a class="launch item">
@@ -29,7 +34,12 @@
         </div>
     {{else}}
         <div class="room-header">
-            <span class="room-header-name">{{room.name}}</span>
+            <span class="room-header-name">
+                {{#if room.isPrivate}}
+                    <i class="ui lock icon"></i>
+                {{/if}}
+                #{{room.name}}
+            </span>
             <span class="room-header-topic">{{room.topic}}</span>
             {{>roomPreferences}}
         </div>
