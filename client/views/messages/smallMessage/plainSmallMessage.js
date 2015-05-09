@@ -44,10 +44,7 @@ Template.plainSmallMessage.helpers({
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
     finalMessageBody: function () {
-        if (this.message && typeof(this.message) === "string") {
-            var emojiString = emojify.replace(parseRoomLinks(parseNameMentions(_s.escapeHTML(this.message))));
-            return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
-        }
+        return renderMessage(this.message);
     },
     starIcon: function () {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";

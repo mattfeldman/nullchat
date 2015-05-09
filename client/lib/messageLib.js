@@ -70,3 +70,9 @@ hasUserMentions = function (message) {
 
     return regexMatch && regexMatch.length > 0;
 };
+
+renderMessage = function (message){
+    check(message,String);
+    var emojiString = emojify.replace(parseNameMentions(parseRoomLinks(_s.escapeHTML(message))));
+    return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
+}
