@@ -57,7 +57,6 @@ parseNameMentions = function (message) {
     return message;
 };
 
-
 /**
  * Determines if message contains current users username
  * @param message
@@ -68,7 +67,7 @@ hasUserMentions = function (message) {
     var regex = new RegExp("[@\\s]+(" + Meteor.user({}, {fields: {'username': 1}}).username + ")($|[\\s!.?]+)");
     var regexMatch = message.match(regex);
 
-    return regexMatch && regexMatch.length > 0;
+    return regexMatch && regexMatch.length > 0 ? true : false;
 };
 
 renderMessage = function (message){
