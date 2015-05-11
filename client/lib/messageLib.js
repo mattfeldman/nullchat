@@ -5,7 +5,7 @@
  */
 parseRoomLinks = function (message) {
     if (!message) { return message;}
-    var rooms = Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
+    var rooms = getRoomNames();
     rooms = _.sortBy(rooms, function (room) {
         return -room.name.length;
     }); // TODO: Not this every message
@@ -25,6 +25,14 @@ parseRoomLinks = function (message) {
         }
     }
     return message;
+};
+
+/**
+ * Factored out room name query
+ * @returns array of room id's and names
+ */
+getRoomNames = function(){
+    return Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
 };
 
 /**
