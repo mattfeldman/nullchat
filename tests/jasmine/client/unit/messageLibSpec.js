@@ -13,6 +13,7 @@ describe('hasUserMentions', function () {
         expect(hasUserMentions("hey @falseuser")).toBe(false);
     });
 });
+
 describe('parseRoomLinks', function () {
     it('should handle unexpected values', function () {
         expect(parseRoomLinks("")).toBe("");
@@ -26,10 +27,7 @@ describe('parseRoomLinks', function () {
         spyOn(window, "getRoomNames").and.returnValue(
             [{_id: "testroomid1", name: "testroom1"}, {_id: "testroomid2", name: "testroom2"}]
         );
-        function countInstances(string, word) {
-            var substrings = string.split(word);
-            return substrings.length - 1;
-        }
+
         var message = '#testroom1#testroom1#testroom2#notatestroom';
         var parsedMessage = parseRoomLinks(message);
         expect(countInstances(parsedMessage,'testroomid1')).toBe(2);
@@ -37,3 +35,38 @@ describe('parseRoomLinks', function () {
         expect(countInstances(parsedMessage,'class="roomLink"')).toBe(3);
     });
 });
+
+describe('parseUserMentions',function(){
+    it('should handle unexpected values',function(){
+        expect(parseUserMentions("")).toBe("");
+        expect(parseUserMentions(null)).toBe(null);
+    });
+    it('should replace user mentions', function () {
+        spyOn(window, "getUserNamesAndColors").and.returnValue(
+            [{_id: "id1", username:"user1", color:"#FF0000"}, {_id: "id2", username: "user2"}]
+        );
+
+        var message = '@user1@user2@user3@user2';
+        var parsedMessage = parseUserMentions(message);
+
+        expect(countInstances(parsedMessage,'id1')).toBe(1);
+        expect(countInstances(parsedMessage,'id2')).toBe(2);
+        expect(countInstances(parsedMessage,'class="message-user-mention"')).toBe(3);
+    });
+    it('should handle usernames that are substrings of other usernames',function(){
+        spyOn(window, "getUserNamesAndColors").and.returnValue(
+            [{_id: "id1", username:"blah", color:"#FF0000"}, {_id: "id2", username: "blahblah"}]
+        );
+        var message = '@blah@blahblah';
+        var parsedMessage = parseUserMentions(message);
+
+        expect(countInstances(parsedMessage,'id1')).toBe(1);
+        expect(countInstances(parsedMessage,'id2')).toBe(1);
+        expect(countInstances(parsedMessage,'class="message-user-mention"')).toBe(2);
+    });
+});
+
+function countInstances(string, word) {
+    var substrings = string.split(word);
+    return substrings.length - 1;
+}

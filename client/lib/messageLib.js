@@ -40,9 +40,9 @@ getRoomNames = function(){
  * @param message
  * @returns message with html name replacements
  */
-parseNameMentions = function (message) {
+parseUserMentions = function (message) {
     if (!message) {return message;}
-    var users = Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
+    var users = getUserNamesAndColors();
     users = _(users).sortBy(function (user) {
         return -user.username.length;
     }); // TODO: Not this every message
@@ -66,6 +66,15 @@ parseNameMentions = function (message) {
 };
 
 /**
+ * Factored out username and color query
+ * @returns [{_id,username,profile:{color}}]
+ *
+ */
+getUserNamesAndColors = function(){
+    return Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
+};
+
+/**
  * Determines if message contains current users username
  * @param message
  * @returns true if message contains current username, false otherwise
@@ -80,6 +89,6 @@ hasUserMentions = function (message) {
 
 renderMessage = function (message){
     check(message,String);
-    var emojiString = emojify.replace(parseNameMentions(parseRoomLinks(_s.escapeHTML(message))));
+    var emojiString = emojify.replace(parseUserMentions(parseRoomLinks(_s.escapeHTML(message))));
     return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
 }
