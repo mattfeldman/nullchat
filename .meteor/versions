@@ -116,7 +116,7 @@ retry@1.0.3
 routepolicy@1.0.5
 rubaxa:sortable@1.1.1
 sacha:spin@2.0.4
-sanjo:jasmine@0.13.4
+sanjo:jasmine@0.13.6
 sanjo:karma@1.5.1
 sanjo:long-running-child-process@1.0.3
 sanjo:meteor-files-helpers@1.1.0_4
@@ -134,12 +134,12 @@ tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
 url@1.0.4
-velocity:chokidar@0.12.6_1
+velocity:chokidar@1.0.1_1
 velocity:console-reporter@0.1.1
-velocity:core@0.6.1
+velocity:core@0.6.5
 velocity:html-reporter@0.5.3
 velocity:meteor-internals@1.1.0_7
-velocity:meteor-stubs@1.0.3
+velocity:meteor-stubs@1.1.0
 velocity:shim@0.1.0
 webapp@1.2.0
 webapp-hashing@1.0.3
