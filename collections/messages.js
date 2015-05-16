@@ -39,7 +39,7 @@ Meteor.methods({
             if (!user) {
                 throw new Meteor.Error(401, "You need to login to send messages");
             }
-            if (!messageStub.message) //TODO: Empty Stringss
+            if (_s.isBlank(messageStub.message))
             {
                 throw new Meteor.Error(401, "You must specify a message");
             }
@@ -57,7 +57,7 @@ Meteor.methods({
         }
         catch (e) {
             if (e.errorType === "Meteor.Error") {
-                sendFeedback(e.error, user, room);
+                sendFeedback(e.message || e.error, user, room);
             }
             return;
         }
