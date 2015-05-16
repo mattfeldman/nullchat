@@ -6,7 +6,7 @@ Meteor.users.deny({
 
 Meteor.methods({
     'updateTypingActivity': function (room) {
-        //TODO: Validate room
+        check(room, String);
         var timestamp = new Date();
         Meteor.users.update({_id: Meteor.userId()}, {
             $set: {

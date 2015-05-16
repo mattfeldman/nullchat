@@ -7,7 +7,7 @@ var sendMessage = function (e) {
     };
     Meteor.call('message', messageStub);
     $("#message").val('');
-    scrollChatToBottom(); //TODO: This looks like an ugly hack
+    scrollChatToBottom();
 };
 
 

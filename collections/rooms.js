@@ -122,7 +122,7 @@ Meteor.methods({
         if (room.ownerId !== user._id) {
             throw new Meteor.Error("you must be owner");
         }
-        // TODO: Consider if moderators should be able to set privacy
+
         var updateQuery = {$set:{isPrivate: isPrivate}};
         if (isPrivate) {
             updateQuery.$addToSet = {invited: {$each:room.users}};

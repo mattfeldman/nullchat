@@ -31,7 +31,7 @@ Template.pasteImageContent.events({
             };
 
             Meteor.call('message', messageStub);
-            scrollChatToBottom(); //TODO: This looks like an ugly hack
+            scrollChatToBottom();
         });
     },
 });
