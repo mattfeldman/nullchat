@@ -1,13 +1,13 @@
-ServiceConfiguration.configurations.remove({
-    service : 'github'
-});
-
-// TODO: Flagged for secret in source
-ServiceConfiguration.configurations.insert({
-    service : 'github',
-    clientId: '81a5fecb4a53f7266e46',
-    secret  : '37ef5469e216803de55933d389661d2a288708bf'
-});
+if(Meteor.settings.githubLogin) {
+    ServiceConfiguration.configurations.remove({
+        service : 'github'
+    });
+    ServiceConfiguration.configurations.insert({
+        service: 'github',
+        clientId: Meteor.settings.githubLogin.clientId,
+        secret: Meteor.settings.githubLogin.secret
+    });
+}
 
 Accounts.onCreateUser(function(options, user) {
     if (options.profile) {

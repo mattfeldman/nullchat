@@ -6,5 +6,9 @@
     "S3" : {
 	"appId": "key",
     	"appSecret": "secret"
+    },
+    "githubLogin":{
+        "clientId" : "key",
+        "secret" : "secret"
     }
 }
