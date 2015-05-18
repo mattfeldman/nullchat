@@ -15,11 +15,15 @@ if (Meteor.isServer) {
 }
 Meteor.methods({
     'createMeme':function(memeStub){
+        if(!Meteor.settings.imgFlip){
+            throw new Meteor.Error("ImgFlip credentials not set to create meme.");
+        }
+
         var response = Meteor.http.post("https://api.imgflip.com/caption_image", {
             params: {
                 template_id:memeStub.id,
-                username: "decaprime",
-                password: "9pSajDXjYTLh",
+                username: Meteor.settings.imgFlip.username,
+                password: Meteor.settings.imgFlip.password,
                 text0: memeStub.topLine,
                 text1: memeStub.bottomLine
             }

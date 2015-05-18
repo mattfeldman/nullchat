@@ -1,7 +1,8 @@
 {
     "twilio": {
 	"appId": "key",
-	"appSecret": "secret"
+	"appSecret": "secret",
+	"fromNumber": "number"
     },
     "S3" : {
 	"appId": "key",
@@ -10,5 +11,9 @@
     "githubLogin":{
         "clientId" : "key",
         "secret" : "secret"
+    },
+    "imgFlip":{
+        "username" : "username",
+        "password" : "password"
     }
 }
