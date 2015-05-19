@@ -92,8 +92,12 @@ Router.map(function () {
         where: "server",
         path: 'messageSms',
         action: function () {
-            console.log(this.request.headers['x-twilio-signature']);
-            if (this.request.body) {
+            var token = Meteor.settings.twilio.appSecret;
+            var header = this.request.headers['x-twilio-signature'];
+            var url = Meteor.absoluteUrl("messageSms",{secure: true});
+            var params = this.request.body;
+            var twilio = Meteor.npmRequire('twilio');
+            if (this.request.body && twilio.validateRequest(token,header,url,params)) {
                 var fromNumber = this.request.body.From;
                 if (fromNumber) {
                     var user = Meteor.users.findOne({"profile.number": fromNumber});
