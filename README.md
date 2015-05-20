@@ -1,19 +1,30 @@
 nullchat
 ========
-## Working in Windows
-- [Meteor for Windows Preview](https://github.com/meteor/meteor/wiki/Preview-of-Meteor-on-Windows)
 
-## Working in OS X
-- `curl https://install.meteor.com/ | sh`
+an open source meteor chat application
+currently beta - use at your own risk
 
-## Running the app locally
-- `meteor --settings example-settings.json`
-- Navigate to http://localhost:3000
+# Demo
+You can see the application deployed at http://null.space
 
-## Other resources
+# Screenshots
+
+![image](https://cloud.githubusercontent.com/assets/121500/7719719/1c8c0efe-fe79-11e4-894d-74017b0cb6a3.png)
+![image](https://cloud.githubusercontent.com/assets/121500/7719648/4b820c78-fe78-11e4-86ef-b4594e82c2c6.png)
+![image](https://cloud.githubusercontent.com/assets/121500/7719672/9de0e214-fe78-11e4-95dd-ed4d6319e56c.png)
+
+# Contributing
+### Ways to Contribute
+TODO: a write up of ways to contribute :wink:
+### Resources
+- [Meteor Style Guide](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide)
 - Meteor Security (http://www.slideshare.net/emilystark/meteor-meets-mallory)
 
-## Hosting Resources
-- Automation: [Meteor up (Mup)] (https://github.com/arunoda/meteor-up)
-- VPS: [Digital Ocean] (www.digitalocean.com/?refcode=64d2cfb5b19d)
-- DB: [MongoLab] (www.mongolab.com)
+# Feature List
+TODO
+
+# LICENSE
+See [LICENSE](/LICENSE)
+
+---
+Copyright © 2015 Matt Feldman
