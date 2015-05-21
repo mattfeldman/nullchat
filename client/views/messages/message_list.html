@@ -2,16 +2,9 @@
     {{#if shouldShowLoadMore}}
       <a href="#" class="loadMore">load more</a>
     {{/if}}
-
-    {{#if inSmallView}}
-        <div class="ui threaded comments smallMessageList">
-            {{#each messages}}
-                {{> smallMessage}}
-            {{/each}}
-        </div>
-    {{else}}
+    <div class="ui threaded comments smallMessageList">
         {{#each messages}}
-            {{> message}}
+            {{> smallMessage}}
         {{/each}}
-    {{/if}}
+    </div>
 </template>
