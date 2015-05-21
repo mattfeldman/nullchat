@@ -4,7 +4,7 @@
             <h1 class="">Starred Messages</h1>
         </div>
         <div class="content">
-            <div class="ui {{#unless ready}}active inverted dimmer{{/unless}}">
+            <div class="ui {{#unless Template.subscriptionsReady}}active inverted dimmer{{/unless}}">
               {{#if ready}}
                 {{>starsModalContent}}
               {{else}}
