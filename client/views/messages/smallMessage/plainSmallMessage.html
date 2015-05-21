@@ -25,6 +25,14 @@
                     {{#if hasEdits}}
                         <span class="lastEditTime">Edited {{lastEditTime}}</span>
                     {{/if}}
+                    <span class="ui horizontal divided link list actionLinks">
+                        {{#if canEdit}}
+                            <a href="#" class="item editMessageButton">edit</a>
+                            <a href="#" class="item removeMessageButton">remove</a>
+                        {{/if}}
+                        <!-- TODO: Re-enable permalink once the view is useful
+                        <a class="item messagePermaLink" href="/message/{{_id}}">permalink</a> -->
+                    </span>
                 </div>
             </div>
             <div class="text">
@@ -37,18 +45,6 @@
                         {{{finalMessageBody}}}
                     </span>
                 {{/if}}
-            </div>
-            <div class="ui accordion actions">
-                <div class="title">
-                    Actions
-                </div>
-                <div class="ui segment content">
-                    {{#if canEdit}}
-                        <a href="#" class="ui button editMessageButton">edit</a>
-                        <a href="#" class="ui button removeMessageButton">remove</a>
-                    {{/if}}
-                    <a class="ui button messagePermaLink" href="/message/{{_id}}">permalink</a>
-                </div>
             </div>
         </div>
     </div>

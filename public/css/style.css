@@ -345,3 +345,9 @@ html, body { height: 100%; }
     overflow-y: auto;
     overflow-x: hidden;
 }
+.comment .actionLinks{
+    visibility: hidden;
+}
+.comment:hover .actionLinks{
+    visibility: visible;
+}
