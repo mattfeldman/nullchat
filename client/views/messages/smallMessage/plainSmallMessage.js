@@ -49,22 +49,24 @@ Template.plainSmallMessage.helpers({
     starIcon: function () {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     },
-    starSizingStyle: function () {
+    fontSizePercent: function () {
         var parentContext = Template.instance().parentTemplate();
         if (parentContext && parentContext.supressStarSizing) {
-            return "";
+            return 100;
         }
         if (this.likedBy.length === 0) {
-            return "";
+            return 100;
         }
         var room = Rooms.findOne({_id: this.roomId}, {fields: {users: 1}});
         if (!room || !room.users || room.users.length < 1) {
-            return "";
+            return 100;
         }
-        var scale = this.likedBy.length / (room.users.length / 1.5);
-        var bonus = 400;
-        var total = 100 + _.min([bonus * scale, 400]);
-        return "font-size: " + total + "%;";
+        switch (this.likedBy.length || 0){
+            case 0: return 100;
+            case 1: return 166;
+            case 2: return 232;
+            default: return 300;
+        }
     }
 });
 
