@@ -5,7 +5,7 @@ an open source meteor chat application
 currently beta - use at your own risk
 
 # Demo
-You can see the application deployed at http://null.space
+You can see the application deployed at http://nullchat.space
 
 # Screenshots
 ![image](https://cloud.githubusercontent.com/assets/121500/7750933/e48a6bb8-ff8b-11e4-934d-604c3d36b1b5.png)
