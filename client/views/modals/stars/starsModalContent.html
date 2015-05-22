@@ -3,7 +3,9 @@
         <input type="text" placeholder="Search..." class="search" value="{{search}}">
         <i class="search icon"></i>
     </div>
-    {{#each starredMessages}}
-        {{> message this}}
-    {{/each}}
+    <div class="ui threaded comments smallMessageList">
+        {{#each starredMessages}}
+            {{> smallMessage}}
+        {{/each}}
+    </div>
 </template>

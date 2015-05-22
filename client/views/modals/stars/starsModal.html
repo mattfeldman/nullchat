@@ -5,7 +5,7 @@
         </div>
         <div class="content">
             <div class="ui {{#unless Template.subscriptionsReady}}active inverted dimmer{{/unless}}">
-              {{#if ready}}
+              {{#if Template.subscriptionsReady}}
                 {{>starsModalContent}}
               {{else}}
                   <div class="ui text loader">Loading</div>
