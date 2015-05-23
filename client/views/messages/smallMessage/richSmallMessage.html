@@ -9,7 +9,15 @@
                 <span class="date">{{showTimestamp}}</span>
             </div>
             <div class="text">
-                {{> UI.dynamic template=layoutName data=data}}
+                <div class="ui fluid accordion">
+                    <div class="active title">
+                        <i class="icon dropdown"></i>
+                        {{layout}}
+                    </div>
+                    <div class="active content field">
+                        {{> UI.dynamic template=layoutName data=data}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
