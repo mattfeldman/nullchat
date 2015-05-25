@@ -124,3 +124,9 @@ Meteor.publish('starredMessages', function () {
 Meteor.publish('changelogs', function () {
     return Changelogs.find({});
 });
+
+// Indexes
+Meteor.startup(function(){
+    // Supports newMessages, newMessagesForRoom, and messages subscriptions
+   Messages._ensureIndex({"roomId": 1, "timestamp": -1, "type": 1});
+});
