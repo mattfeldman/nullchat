@@ -49,8 +49,8 @@ Meteor.publish('users', function () {
         fields: {
             _id: 1,
             username: 1,
-            "profile.avatar":1,
-            "profile.color":1,
+            "profile.avatar": 1,
+            "profile.color": 1,
             "status.idle": 1,
             "status.offline": 1,
             "status.online": 1,
@@ -126,7 +126,10 @@ Meteor.publish('changelogs', function () {
 });
 
 // Indexes
-Meteor.startup(function(){
+Meteor.startup(function () {
     // Supports newMessages, newMessagesForRoom, and messages subscriptions
-   Messages._ensureIndex({"roomId": 1, "timestamp": -1, "type": 1});
+    Messages._ensureIndex({"roomId": 1, "timestamp": -1, "type": 1});
+
+    // Supports notifications subscription
+    Notifications._ensureIndex({"roomId": 1, "seen": 1, "userId": 1});
 });
