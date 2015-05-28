@@ -58,3 +58,6 @@ sanjo:jasmine
 velocity:html-reporter
 velocity:console-reporter
 
+
+
+npm-container
