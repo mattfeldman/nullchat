@@ -43,7 +43,6 @@ lbee:lunr
 chuangbo:marked
 semantic:ui-css
 http
-accounts-ui
 accounts-ui-unstyled
 
 
@@ -61,3 +60,4 @@ velocity:console-reporter
 
 
 npm-container
+useraccounts:semantic-ui

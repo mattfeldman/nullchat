@@ -128,11 +128,4 @@ Router.map(function () {
     });
 });
 
-Router.onBeforeAction(function (pause) {
-    if (!Meteor.userId()) {
-        return this.render('login');
-    }
-    else {
-        this.next();
-    }
-}, {except: ['messageSms']});
+Router.plugin('ensureSignedIn', {except: ['messageSms']});
