@@ -90,5 +90,5 @@ hasUserMentions = function (message) {
 renderMessage = function (message){
     check(message,String);
     var emojiString = emojify.replace(parseUserMentions(parseRoomLinks(_s.escapeHTML(message))));
-    return Autolinker.link(emojiString, {twitter: false, className: "message-link"});
+    return marked(emojiString);
 }
