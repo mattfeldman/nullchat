@@ -164,7 +164,11 @@ Template.roomView.created = function () {
 
         var currentRoomString = '';
 
-        if (currentRoom) {
+        if (currentRoom.direct) {
+            var otherUserId= UserHelpers.otherUserId(currentRoom.users);
+            currentRoomString = "@" + UserHelpers.usernameForUserId(otherUserId) + ' ';
+        }
+        else{
             currentRoomString = '#' + currentRoom.name + ' ';
         }
 

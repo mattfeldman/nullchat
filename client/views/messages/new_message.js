@@ -74,10 +74,7 @@ Template.newMessage.helpers({
                     token: '/meme ',
                     matchAll: true
                 }
-            ],
-            rooms: function () {
-                return Rooms.find();
-            }
+            ]
         };
     }
 });

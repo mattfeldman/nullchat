@@ -11,10 +11,7 @@ Template.joinRoom.helpers({
                     matchAll: true
 
                 }
-            ],
-            rooms: function () {
-                return Rooms.find();
-            }
+            ]
         };
     }
 });

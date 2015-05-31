@@ -1,7 +1,7 @@
 Template.discoverRoomsContent.helpers({
     'rooms': function () {
         var queryParams = Template.instance().hideMyRooms.get() ? {users:{$ne:Meteor.userId()}} : {};
-        console.log(queryParams);
+        queryParams.direct = {$ne:true};
         var rooms = Rooms.find(queryParams).fetch();
         rooms = _(rooms).sortBy(function (room) {
             return -room.users.length;

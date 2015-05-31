@@ -202,3 +202,6 @@
     });
 
 })(jQuery || this.jQuery || window.jQuery);
+
+jQuery.hotkeys.options.filterInputAcceptingElements = false;
+jQuery.hotkeys.options.filterTextInputs = false;

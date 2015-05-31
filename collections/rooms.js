@@ -27,6 +27,24 @@ Meteor.methods({
         }
         return room._id;
     },
+    'getDirectMessageRoom': function(targetUserId){
+        check(targetUserId, String);
+        var users = [targetUserId, Meteor.userId()];
+        var currentRoom = Rooms.findOne({users:{$all:users}, direct: true});
+        if(!currentRoom) {
+            currentRoom = Rooms.insert({
+                name: null,
+                topic: null,
+                isPrivate: true,
+                ownerId: null,
+                invited: users,
+                users: users,
+                moderators: users,
+                direct: true
+            });
+        }
+        return currentRoom;
+    },
     'leaveRoom': function (id) {
         var room = Rooms.findOne({_id: id});
         var userId = Meteor.userId();

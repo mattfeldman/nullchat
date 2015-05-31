@@ -1,0 +1,7 @@
+<template name="directMessageItem">
+    <div class="ui green {{activeRoomFromId _id}} compact item">
+        {{#with otherUserId users}}
+            {{> userPill userFromId this}}
+        {{/with}}
+    </div>
+</template>

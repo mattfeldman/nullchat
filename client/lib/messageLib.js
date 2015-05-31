@@ -32,7 +32,7 @@ parseRoomLinks = function (message) {
  * @returns array of room id's and names
  */
 getRoomNames = function(){
-    return Rooms.find({}, {'_id': 1, 'name': 1}).fetch();
+    return Rooms.find({direct: {$ne: true}}, {'_id': 1, 'name': 1}).fetch();
 };
 
 /**

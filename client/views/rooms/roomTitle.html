@@ -1,0 +1,15 @@
+<template name="roomTitle">
+    {{#if name}}
+        {{#if isPrivate}}
+            <i class="ui lock icon"></i>
+        {{/if}}
+        #{{name}}
+    {{else}}
+        <div style="display:inline">
+            {{#with otherUserId users}}
+                <img src="{{avatarForUserId this}}" class="ui middle aligned mini image" style="width: 35px; height:35px;"/>
+                {{usernameForUserId this}}
+            {{/with}}
+        </div>
+    {{/if}}
+</template>

@@ -1,11 +1,13 @@
 <template name="roomList">
     <div class="ui vertical fluid menu">
-        <div class="header item">
+        <div class="ui teal segment header item">
+            <i class="university icon"></i>
             rooms
+            {{> createRoom }}
         </div>
         <div class="item">
             <div class="ui fluid icon input">
-                {{> joinRoom availableRooms}}
+                {{> joinRoom}}
                 <i class="search icon"></i>
             </div>
         </div>
@@ -14,9 +16,19 @@
                 {{>roomListItem this}}
             {{/each}}
         </div>
-        <div class="item">
-            {{> createRoom }}
+        <div class="ui header green item">
+            <i class="comments icon"></i>
+            direct messages
         </div>
+        <div class="item">
+            <div class="ui fluid icon input">
+                {{> directMessageUserSearch }}
+                <i class="search icon"></i>
+            </div>
+        </div>
+        {{#each currentDirectMessages}}
+            {{>directMessageItem this}}
+        {{/each}}
     </div>
     <div class="ui vertical vertically fitted red active fluid text menu">
         <div class="header item">
