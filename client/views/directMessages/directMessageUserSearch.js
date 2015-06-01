@@ -20,7 +20,7 @@ Template.directMessageUserSearch.events({
     'autocompleteselect input': function (event, template, doc) {
         Meteor.call('getDirectMessageRoom', doc._id, function (err, data) {
             if (!err) {
-                setCurrentRoom(data._id);
+                setCurrentRoom(data);
                 template.$('input').val('');
                 $("#message").focus();
             }

@@ -32,7 +32,7 @@ Meteor.methods({
         var users = [targetUserId, Meteor.userId()];
         var currentRoom = Rooms.findOne({users:{$all:users}, direct: true});
         if(!currentRoom) {
-            currentRoom = Rooms.insert({
+            return Rooms.insert({
                 name: null,
                 topic: null,
                 isPrivate: true,
@@ -43,7 +43,7 @@ Meteor.methods({
                 direct: true
             });
         }
-        return currentRoom;
+        return currentRoom._id;
     },
     'leaveRoom': function (id) {
         var room = Rooms.findOne({_id: id});
