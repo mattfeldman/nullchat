@@ -7,6 +7,9 @@ currently beta - use at your own risk
 # Demo
 You can see the application deployed at http://nullchat.space
 
+# roadmap
+[nullchat public trello board](https://trello.com/b/rO5HnI6t/nullchat)
+
 # Screenshots
 ![image](https://cloud.githubusercontent.com/assets/121500/7750933/e48a6bb8-ff8b-11e4-934d-604c3d36b1b5.png)
 ![image](https://cloud.githubusercontent.com/assets/121500/7719719/1c8c0efe-fe79-11e4-894d-74017b0cb6a3.png)
