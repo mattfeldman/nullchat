@@ -3,7 +3,7 @@
         <a class="avatar">
             <img src="{{avatarForUserId authorId}}"/>
         </a>
-        <div class="content smallMessage" style="border-color: {{colorForUserId authorId}};">
+        <div class="content {{myMessageFromId authorId}} smallMessage" style="border-color: {{colorForUserId authorId}};">
             <a class="author">{{usernameForUserId authorId}}</a>
 
             <div class="metadata">
@@ -37,9 +37,17 @@
             </div>
             <div class="text">
                 {{#if isUnderEdit}}
-                    <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
-                    <button class="messageEditSubmit">save</button>
-                    <button class="canceleEditSubmit">cancel</button>
+                    <div class="ui fluid left icon action input">
+                        <input type="text" name="newMessageText" class="messageEditInput" value="{{message}}"/>
+                        <div class="ui buttons">
+                            <div class="ui green gif button messageEditSubmit">
+                                save
+                            </div>
+                            <div class="ui meme button canceleEditSubmit">
+                                cancel
+                            </div>
+                        </div>
+                    </div>
                 {{else}}
                     <span class="clickableMessageBody" style="font-size: {{fontSizePercent}}%">
                         {{{finalMessageBody}}}

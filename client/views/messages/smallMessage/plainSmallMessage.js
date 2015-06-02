@@ -16,9 +16,6 @@ function createTimestampPopup(target, timestamp) {
 }
 
 Template.plainSmallMessage.helpers({
-    myMessage: function () {
-        return this.authorId === Meteor.userId() ? "my-message" : "";
-    },
     hasEdits: function () {
         return this.lastedited;
     },
