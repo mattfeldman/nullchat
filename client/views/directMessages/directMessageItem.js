@@ -4,3 +4,10 @@ Template.directMessageItem.events({
         setCurrentRoom(template.data._id);
     }
 });
+
+Template.directMessageItem.helpers({
+    unreadCount:function(){
+        return Session.get('unread_'+this._id);
+    }
+});
+
