@@ -79,7 +79,7 @@ Template.plainSmallMessage.events({
         }
 
     },
-    "click .editMessageButton": function (event, template) {
+    "dblclick, click .editMessageButton": function (event, template) {
         if (template.data.authorId === Meteor.userId()) {
             Session.set('editingId', template.data._id);
         }
@@ -108,7 +108,7 @@ Template.plainSmallMessage.events({
     'click .removeMessageButton': function (event, template) {
         event.preventDefault();
         Meteor.call('removeMessage', template.data._id);
-    },
+    }
 });
 Template.plainSmallMessage.onRendered(function(){
     this.$('.ui.accordion').accordion();
