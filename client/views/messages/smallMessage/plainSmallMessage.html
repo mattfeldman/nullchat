@@ -4,8 +4,7 @@
             <img src="{{avatarForUserId authorId}}"/>
         </a>
         <div class="content {{myMessageFromId authorId}} smallMessage" style="border-color: {{colorForUserId authorId}};">
-            <a class="author">{{usernameForUserId authorId}}</a>
-
+            {{>messageAuthor authorId}}
             <div class="metadata">
                 <span class="date">{{showTimestamp}}</span>
                 <span class="rating">
