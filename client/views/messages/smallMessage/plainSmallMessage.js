@@ -107,7 +107,9 @@ Template.plainSmallMessage.events({
     },
     'click .removeMessageButton': function (event, template) {
         event.preventDefault();
-        Meteor.call('removeMessage', template.data._id);
+        if(confirm("Are you sure you want to delete this message?")) {
+            Meteor.call('removeMessage', template.data._id);
+        }
     }
 });
 Template.plainSmallMessage.onRendered(function(){
