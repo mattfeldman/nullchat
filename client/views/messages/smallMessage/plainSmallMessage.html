@@ -36,17 +36,15 @@
             </div>
             <div class="text">
                 {{#if isUnderEdit}}
-                    <div class="ui fluid left icon action input">
+                    <form class="ui fluid left icon action input editForm">
                         <input type="text" name="newMessageText" class="messageEditInput" style="padding-left: 0 !important;" value="{{message}}"/>
                         <div class="ui buttons">
-                            <div class="ui green gif button messageEditSubmit">
-                                save
-                            </div>
+                            <button type="submit" class="ui green gif button messageEditSubmit">save</button>
                             <div class="ui meme button canceleEditSubmit">
                                 cancel
                             </div>
                         </div>
-                    </div>
+                    </form>
                 {{else}}
                     <span class="clickableMessageBody" style="font-size: {{fontSizePercent}}%">
                         {{{finalMessageBody}}}

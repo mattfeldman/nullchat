@@ -84,7 +84,7 @@ Template.plainSmallMessage.events({
             Session.set('editingId', template.data._id);
         }
     },
-    "click .messageEditSubmit": function (event, template) {
+    "submit .editForm": function (event, template) {
         event.preventDefault();
         var newMessage = template.find('input[name=newMessageText]').value;
 
