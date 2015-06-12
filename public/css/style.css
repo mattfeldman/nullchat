@@ -16,7 +16,6 @@
 .message-extras {
     display: none;
 }
-
 .message:hover .message-extras {
     display: inline-block;
 }
@@ -215,7 +214,7 @@
     background: transparent;    
 }
 .selected-room .room-notification-count {
-  min-width: 0px;
+  min-width: 0;
   transition: 0.4s;
   -webkit-transition: 0.4s;
 }

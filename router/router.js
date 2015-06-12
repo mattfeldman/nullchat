@@ -8,7 +8,7 @@ Router.configure({
 Router.map(function () {
     this.route('/room/:_id', {
         subscriptions: function(){
-            return [Meteor.subscribe('availableRooms'), Meteor.subscribe('currentRooms')]
+            return [Meteor.subscribe('availableRooms'), Meteor.subscribe('currentRooms')];
         },
         onBeforeAction: function () {
             var room = Rooms.findOne({_id: this.params._id});
