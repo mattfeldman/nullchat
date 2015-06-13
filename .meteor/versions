@@ -115,10 +115,10 @@ retry@1.0.3
 routepolicy@1.0.5
 rubaxa:sortable@1.1.1
 sacha:spin@2.0.4
-sanjo:jasmine@0.13.6
+sanjo:jasmine@0.14.0
 sanjo:karma@1.5.1
 sanjo:long-running-child-process@1.0.3
-sanjo:meteor-files-helpers@1.1.0_4
+sanjo:meteor-files-helpers@1.1.0_6
 sanjo:meteor-version@1.0.0
 sdecima:javascript-detect-element-resize@0.5.3
 semantic:ui-css@1.12.2
@@ -130,6 +130,8 @@ spacebars@1.0.6
 spacebars-compiler@1.0.6
 srp@1.0.3
 templating@1.1.1
+tomi:upload-jquery@2.1.5
+tomi:upload-server@1.2.4
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
@@ -139,7 +141,7 @@ useraccounts:semantic-ui@1.10.0
 velocity:chokidar@1.0.1_1
 velocity:console-reporter@0.1.1
 velocity:core@0.6.5
-velocity:html-reporter@0.5.3
+velocity:html-reporter@0.6.2
 velocity:meteor-internals@1.1.0_7
 velocity:meteor-stubs@1.1.0
 velocity:shim@0.1.0

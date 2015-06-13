@@ -172,6 +172,9 @@ Template.newMessage.events({
     },
     'click .meme.button':function(event,template){
         showModal("memeModal");
+    },
+    'click .upload.button':function(event,template){
+        showModal("uploadModal");
     }
 });
 
