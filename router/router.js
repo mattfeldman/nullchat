@@ -70,23 +70,6 @@ Router.map(function () {
         }
     });
 
-    this.route('messageContext', {
-        name: 'messageContext',
-        path: 'message/:messageId',
-        subscriptions: function () {
-            return [
-                Meteor.subscribe('availableRooms'),
-                Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('notifications'),
-                Meteor.subscribe('emojis'),
-                Meteor.subscribe('memes')
-            ];
-        },
-        data: function () {
-            return {messageId: this.params.messageId};
-        }
-    });
-
     this.route('messageSms', {
         name: 'messageSms',
         where: "server",
