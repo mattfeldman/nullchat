@@ -15,7 +15,7 @@ function createTimestampPopup(target, timestamp) {
     }).popup('show');
 }
 
-Template.plainSmallMessage.helpers({
+Template.plainMessage.helpers({
     hasEdits: function () {
         return this.lastedited;
     },
@@ -67,7 +67,7 @@ Template.plainSmallMessage.helpers({
     }
 });
 
-Template.plainSmallMessage.events({
+Template.plainMessage.events({
     "click .likeMessageLink": function (event, template) {
         event.preventDefault();
 
@@ -112,6 +112,6 @@ Template.plainSmallMessage.events({
         }
     }
 });
-Template.plainSmallMessage.onRendered(function(){
+Template.plainMessage.onRendered(function(){
     this.$('.ui.accordion').accordion();
 });

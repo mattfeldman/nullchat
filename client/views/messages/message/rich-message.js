@@ -1,8 +1,8 @@
-Template.richSmallMessage.helpers({
+Template.richMessage.helpers({
     layoutName: function () {
         return this.layout + "Message";
     }
 });
-Template.richSmallMessage.onRendered(function(){
+Template.richMessage.onRendered(function(){
     this.$('.ui.accordion').accordion();
 });

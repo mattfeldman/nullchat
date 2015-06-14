@@ -1,13 +1,13 @@
-Template.smallMessage.helpers({
+Template.message.helpers({
     'messageTemplate': function () {
         if (this.type === "plain") {
-            return "plainSmallMessage";
+            return "plainMessage";
         }
         else if (this.type === "feedback") {
             return "feedbackMessage";
         }
         else if (this.type === "rich") {
-            return "richSmallMessage";
+            return "richMessage";
         }
     }
 });
