@@ -35,7 +35,8 @@
                 {{>roomTitle room}}
             </span>
             <span class="room-header-topic">{{room.topic}}</span>
-            {{>roomPreferences}}
+            {{> roomPreferences}}
+            {{> roomUsers}}
         </div>
         <div id="roomContainer" class="room-container">
             {{#if currentRoom}}
