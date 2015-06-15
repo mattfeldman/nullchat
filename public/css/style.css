@@ -171,15 +171,6 @@
     width:75px;
     float:right;
 }
-
-.message-timestamp {
-    position: absolute;
-    vertical-align: middle;
-    display: inline-block;
-    right: 10px;
-    line-height: 50px;;
-}
-
 .message-user-mention{
     padding: 3px;
 }
