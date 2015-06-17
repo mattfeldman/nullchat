@@ -1,10 +1,9 @@
-nullchat
+nullchat [![Build Status](https://travis-ci.org/mattfeldman/nullchat.svg?branch=master)](https://travis-ci.org/mattfeldman/nullchat)
 ========
 
 an open source meteor chat application
 currently beta - use at your own risk
 
-# Demo
 You can see the application deployed at http://nullchat.space
 
 # roadmap
