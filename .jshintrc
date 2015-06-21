@@ -139,6 +139,11 @@
       "RoomInvitations":false,
       "Schemas":false,
       "Changelogs":false,
+      
+      // Helpers
+      "UserHelpers": false,
+      "MessageHelpers": false,
+      "RoomHelpers": false,
 
       // packages
       "emojify":false,
