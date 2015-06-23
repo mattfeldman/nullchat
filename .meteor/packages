@@ -61,3 +61,4 @@ npm-container
 useraccounts:semantic-ui
 tomi:upload-server
 tomi:upload-jquery
+meteorhacks:kadira-debug
