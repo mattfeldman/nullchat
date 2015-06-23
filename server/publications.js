@@ -72,17 +72,6 @@ Meteor.publish('emojis', function () {
 Meteor.publish('memes', function () {
     return Memes.find();
 });
-
-Meteor.publish('newMessages', function () {
-    // TODO: Reactivity
-    var rooms = Rooms.find({users: this.userId}).fetch();
-    var roomIds = _(rooms).map(function (room) {
-        return room._id;
-    });
-    var now = new Date().getTime();
-    return Messages.find({roomId: {$in: roomIds}, type: {$ne: 'feedback'}, timestamp: {$gt: now}});
-});
-
 Meteor.publish('newMessagesForRoom', function (roomId) {
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
@@ -111,7 +100,7 @@ Meteor.publish('changelogs', function () {
 
 // Indexes
 Meteor.startup(function () {
-    // Supports newMessages, newMessagesForRoom, and messages subscriptions
+    // Supports newMessagesForRoom, and messages subscriptions
     Messages._ensureIndex({"roomId": 1, "timestamp": -1, "type": 1});
 
     // Supports notifications subscription
