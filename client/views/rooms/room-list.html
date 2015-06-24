@@ -11,9 +11,11 @@
                 <i class="search icon"></i>
             </div>
         </div>
-        {{#each currentRooms}}
-            {{>roomListItem this}}
-        {{/each}}
+        <div class="room-list">
+            {{#sortable items=currentRooms options=opts}}
+                {{>roomListItem this}}
+            {{/sortable}}
+        </div>
         <div class="ui header green item">
             <i class="comments icon"></i>
             direct messages

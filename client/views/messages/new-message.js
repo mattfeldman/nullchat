@@ -98,11 +98,6 @@ var recallMessageWithNewOffset = function (offsetDelta) {
         }
     }
 };
-Template.newMessage.gestures({
-    'tap .smile':function(event,template){
-        showPopup(event.target, "emojiPopup");
-    }
-});
 Template.newMessage.events({
     'mouseover .smile':function(event, template){
         showPopup(event.target, "emojiPopup");

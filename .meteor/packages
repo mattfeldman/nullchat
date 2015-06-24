@@ -24,22 +24,18 @@ service-configuration
 aldeed:autoform
 linto:fontawesome
 reactive-var
-anti:modals
 aramk:tinycolor
 meteorhacks:aggregate
 maazalik:highcharts
 
 
-rubaxa:sortable
 cfs:s3
 meteorhacks:kadira
-meteorhacks:zones
-
+# meteorhacks:zones - incompatable with sortable
 lbee:lunr
 
 
 chuangbo:marked
-semantic:ui-css
 http
 accounts-ui-unstyled
 
@@ -62,3 +58,5 @@ useraccounts:semantic-ui
 tomi:upload-server
 tomi:upload-jquery
 meteorhacks:kadira-debug
+rubaxa:sortable
+semantic:ui-css
