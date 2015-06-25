@@ -1,49 +1,42 @@
-# Meteor packages used by this project, one per line.
-#
-# 'meteor add' and 'meteor remove' will edit this file for you,
-# but you can also edit it by hand.
-
-meteor-platform
+# Application Packages
+accounts-github
 accounts-password
+accounts-ui-unstyled
+aldeed:autoform
+aramk:tinycolor
+brentjanderson:buzz
+cfs:filesystem
+cfs:s3
+cfs:standard-packages
+chriswessels:hammer
+chuangbo:marked
+gadicohen:reactive-window
+http
 iron:router
-sacha:spin
+jparker:gravatar
+lbee:lunr
+linto:fontawesome
+maazalik:highcharts
+meteor-platform
+meteorhacks:aggregate
+meteorhacks:kadira
+meteorhacks:npm
 mizzao:autocomplete
 mizzao:user-status
 mrt:moment
-meteorhacks:npm
-
 mrt:underscore-string-latest
-cfs:standard-packages
-cfs:filesystem
-
-
-brentjanderson:buzz
-jparker:gravatar
-accounts-github
-service-configuration
-aldeed:autoform
-linto:fontawesome
 reactive-var
-aramk:tinycolor
-meteorhacks:aggregate
-maazalik:highcharts
+rubaxa:sortable
+sacha:spin
+semantic:ui-css
+service-configuration
+tomi:upload-jquery
+tomi:upload-server
+useraccounts:semantic-ui
 
-
-cfs:s3
-meteorhacks:kadira
-# meteorhacks:zones - incompatable with sortable
-lbee:lunr
-
-
-chuangbo:marked
-http
-accounts-ui-unstyled
-
-
-
-
-gadicohen:reactive-window
-chriswessels:hammer
+# Debug Packages
+# meteorhacks:zones ### incompatable with sortable
+meteorhacks:kadira-debug
 
 # Test Packages
 sanjo:karma
@@ -51,12 +44,4 @@ sanjo:jasmine
 velocity:html-reporter
 velocity:console-reporter
 
-
-
 npm-container
-useraccounts:semantic-ui
-tomi:upload-server
-tomi:upload-jquery
-meteorhacks:kadira-debug
-rubaxa:sortable
-semantic:ui-css
