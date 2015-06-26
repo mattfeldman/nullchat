@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mattfeldman/nullchat.png?label=ready&title=Ready)](https://waffle.io/mattfeldman/nullchat)
 nullchat [![Build Status](https://travis-ci.org/mattfeldman/nullchat.svg?branch=master)](https://travis-ci.org/mattfeldman/nullchat) [![Code Climate](https://codeclimate.com/github/mattfeldman/nullchat/badges/gpa.svg)](https://codeclimate.com/github/mattfeldman/nullchat)
 ========
 
