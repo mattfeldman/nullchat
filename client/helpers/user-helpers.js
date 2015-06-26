@@ -18,7 +18,7 @@ UserHelpers = {
         var otherUsersId = _(users).without(Meteor.userId());
         return otherUsersId && otherUsersId[0] || "";
     }
-}
+};
 Template.registerHelper('usernameForUserId', UserHelpers.usernameForUserId);
 Template.registerHelper('avatarForUserId', UserHelpers.avatarForUserId);
 Template.registerHelper('colorForUserId', UserHelpers.colorForUserId);
