@@ -1,50 +1,46 @@
 describe('UserHelpers', function () {
     describe('usernameForUserId', function () {
+        var testWithUser = function (returnUser, expected) {
+            spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
+            expect(UserHelpers.usernameForUserId()).toBe(expected);
+        };
         it('should retrive users name', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({username: "foo"});
-            expect(UserHelpers.usernameForUserId()).toBe("foo");
+            testWithUser({username: "foo"}, "foo");
         });
         it('should return a default value', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({});
-            expect(UserHelpers.usernameForUserId()).toBe("[not found]");
+            testWithUser({}, "[not found]");
         });
     });
 
     describe('avatarForUserId', function () {
+        var testWithUser = function (returnUser, expected) {
+            spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
+            expect(UserHelpers.avatarForUserId()).toBe(expected);
+        };
         it('should retrive users avatar', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({profile: {avatar: "some-avatar"}});
-            expect(UserHelpers.avatarForUserId()).toBe("some-avatar");
+            testWithUser({profile: {avatar: "some-avatar"}}, "some-avatar");
         });
         it('should return a default value with no profile', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({});
-            expect(UserHelpers.avatarForUserId()).toBe("/images/logo128.png");
+            testWithUser({}, "/images/logo128.png");
         });
         it('should return a default value with no avatar in profile', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({profile:{other:"stuff"}});
-            expect(UserHelpers.avatarForUserId()).toBe("/images/logo128.png");
+            testWithUser({profile: {other: "stuff"}}, "/images/logo128.png");
         });
     });
 
     describe('colorForUserId', function () {
-        it('should retrive users avatar', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({profile: {color: "#FF0000"}});
-            expect(UserHelpers.colorForUserId()).toBe("#FF0000");
+        var testWithUser = function (returnUser, expected) {
+            spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
+            expect(UserHelpers.colorForUserId()).toBe(expected);
+        };
+        it('should retrive users color', function () {
+            testWithUser({profile: {color: "#FF0000"}}, "#FF0000");
         });
         it('should return a default value with no profile', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({});
-            expect(UserHelpers.colorForUserId()).toBe("transparent");
+            testWithUser({}, "transparent");
         });
         it('should return a default value with no color in profile', function () {
-            var mock = spyOn(Meteor.users, 'findOne');
-            mock.and.returnValue({profile:{other:"stuff"}});
-            expect(UserHelpers.colorForUserId()).toBe("transparent");
+            testWithUser({profile: {notColor: "#FF0000"}}, "transparent");
         });
     });
 
@@ -57,12 +53,12 @@ describe('UserHelpers', function () {
     });
     describe('otherUserId', function () {
         it('should remove current user from list', function () {
-            spyOn(Meteor,'userId').and.returnValue('myId');
-            expect(UserHelpers.otherUserId(['foo','myId'])).toBe('foo');
+            spyOn(Meteor, 'userId').and.returnValue('myId');
+            expect(UserHelpers.otherUserId(['foo', 'myId'])).toBe('foo');
         });
 
         it('should return a default value', function () {
-            spyOn(Meteor,'userId').and.returnValue('myId');
+            spyOn(Meteor, 'userId').and.returnValue('myId');
             expect(UserHelpers.otherUserId(['myId'])).toBe('');
         });
     });
