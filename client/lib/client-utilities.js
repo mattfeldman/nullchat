@@ -95,3 +95,16 @@ addTextToInput = function(text){
     var currentInput = $("#message").val();
     $("#message").val(currentInput + text);
 }
+
+freezeGif = function(i) {
+    
+    var c = document.createElement('canvas');
+    var w = c.width = i.width;
+    var h = c.height = i.height;
+    c.getContext('2d').drawImage(i, 0, 0, w, h);
+
+    for (var j = 0, a; a = i.attributes[j]; j++)
+        c.setAttribute(a.name, a.value);
+    i.parentNode.replaceChild(c, i);
+}
+
