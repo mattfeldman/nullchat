@@ -17,12 +17,12 @@ You can see the application deployed at http://nullchat.space
 - Create an issue, feature requests are welcome
 - Send a PR
 - Should be simple to dive in and fix some [Code Climate Issues](https://codeclimate.com/github/mattfeldman/nullchat/issues)
+
+### roadmap [![Stories in Ready](https://badge.waffle.io/mattfeldman/nullchat.png?label=ready&title=Ready)](https://waffle.io/mattfeldman/nullchat)
+Everything is tracked in github issues, you can view the roadmap as a board here using https://waffle.io/mattfeldman/nullchat
 ### Resources
 - [Meteor Style Guide](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide)
 - Meteor Security (http://www.slideshare.net/emilystark/meteor-meets-mallory)
-
-# roadmap
-[nullchat public trello board](https://trello.com/b/rO5HnI6t/nullchat)
 
 # Feature List
 TODO
