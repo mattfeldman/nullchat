@@ -6,6 +6,30 @@ currently beta - use at your own risk
 
 You can see the application deployed at http://nullchat.space
 
+# Feature List
+- Create Public or Private Rooms
+- Direct Messages
+- Per-room configurable Notifications
+- Audio Notifications
+- Desktop Notifications
+- Twilio SMS Integration
+- User @mentions
+- Room mentions/tags with #room
+- Star Messages and Recall / Search them later
+- Paste images directly into chat
+- Rich Inline Embeds for
+  - Images
+  - Youtube
+  - GitHub
+  - 50+ more providers
+- Gravatars
+- Custom user color
+- Hotkeys like **Ctrl+Q** to quickly switch or join a room
+- File uploads
+- Meme generation
+- Giphy search
+- Slash Commands (e.g /topic, /kick, /invite, /moderator, ...)
+
 # Screenshots
 ![image](https://cloud.githubusercontent.com/assets/121500/7750933/e48a6bb8-ff8b-11e4-934d-604c3d36b1b5.png)
 ![image](https://cloud.githubusercontent.com/assets/121500/7719719/1c8c0efe-fe79-11e4-894d-74017b0cb6a3.png)
@@ -23,9 +47,6 @@ Everything is tracked in github issues, you can view the roadmap as a board here
 ### Resources
 - [Meteor Style Guide](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide)
 - Meteor Security (http://www.slideshare.net/emilystark/meteor-meets-mallory)
-
-# Feature List
-TODO
 
 # LICENSE
 See [LICENSE](/LICENSE)
