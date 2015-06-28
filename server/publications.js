@@ -1,4 +1,9 @@
 Meteor.publish('messages', function (roomId, limit) {
+    check(roomId, String);
+    check(limit, Match.Integer);
+    if(limit < 1 || limit > 100){
+        throw new Meteor.Error("Specify limit between 1 and 100");
+    }
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
         var query = {roomId: roomId, type: {$ne: 'feedback'}};
@@ -13,6 +18,7 @@ Meteor.publish('messages', function (roomId, limit) {
     }
 });
 Meteor.publish('feedbackMessages', function (roomId) {
+    check(roomId, String);
     var now = new Date().getTime();
     return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId, timestamp: {$gt: now}}, {
         limit: 10,
@@ -73,6 +79,7 @@ Meteor.publish('memes', function () {
     return Memes.find();
 });
 Meteor.publish('newMessagesForRoom', function (roomId) {
+    check(roomId, String);
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
         var query = {roomId: roomId, type: {$ne: 'feedback'}};

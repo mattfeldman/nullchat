@@ -34,6 +34,7 @@ Meteor.methods({
         Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile': profile}});
     },
     'updateRoomOrder': function (roomOrderArr) {
+        check(roomOrderArr, [String]);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"preferences.roomOrder": roomOrderArr}});
     },
     'updateRoomPreferences': function (roomPreference) {
