@@ -30,7 +30,6 @@ Template.plainMessage.helpers({
         var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
-
     isUnderEdit: function () {
         return Session.get('editingId') === this._id;
     },
