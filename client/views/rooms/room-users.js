@@ -20,6 +20,16 @@ Template.roomUsers.helpers({
         return users && users.length;
     }
 });
+
+Template.roomUsers.onRendered(function () {
+    this.$('.room-users').popup({
+        inline: true,
+        hoverable: true,
+        position: 'bottom left',
+        delay: {show: 100, hide: 300}
+    });
+    this.$('.ui.checkbox').checkbox();
+});
 function getRoomUserIds() {
     var room = Rooms.find({_id: Session.get('currentRoom')}, {fields: {users: 1}}).fetch()[0];
     return room.users || [];

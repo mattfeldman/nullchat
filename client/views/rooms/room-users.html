@@ -1,3 +1,11 @@
 <template name="roomUsers">
-    {{ roomOnlineUsers }} / {{ roomTotalUsers}} <i class="ui user icon"></i>
+            <div class="ui dropdown item room-users">
+                {{ roomOnlineUsers }} / {{ roomTotalUsers}} <i class="ui user icon"></i>
+            </div>
+            <div class="ui wide large popup">
+                <div class="header">Users</div>
+                <div class="content ui list">
+                    {{> userList}}
+                </div>
+            </div>
 </template>
