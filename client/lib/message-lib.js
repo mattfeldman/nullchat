@@ -89,6 +89,6 @@ hasUserMentions = function (message) {
 
 renderMessage = function (message){
     check(message,String);
-    var emojiString = emojify.replace(parseUserMentions(parseRoomLinks(_s.escapeHTML(message))));
+    var emojiString =  emojione.toImage(parseUserMentions(parseRoomLinks(_s.escapeHTML(message))));
     return marked(emojiString);
 }

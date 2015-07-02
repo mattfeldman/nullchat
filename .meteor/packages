@@ -1,7 +1,6 @@
 # Application Packages
 accounts-github
 accounts-password
-accounts-ui-unstyled
 aldeed:autoform
 aramk:tinycolor
 brentjanderson:buzz
@@ -33,6 +32,7 @@ service-configuration
 tomi:upload-jquery
 tomi:upload-server
 useraccounts:semantic-ui
+grigio:babel
 
 # Debug Packages
 # meteorhacks:zones ### incompatable with sortable
@@ -45,3 +45,6 @@ velocity:html-reporter
 velocity:console-reporter
 
 npm-container
+
+audit-argument-checks
+qnub:emojione
