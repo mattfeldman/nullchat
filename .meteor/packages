@@ -3,6 +3,7 @@ accounts-github
 accounts-password
 aldeed:autoform
 aramk:tinycolor
+audit-argument-checks
 brentjanderson:buzz
 cfs:filesystem
 cfs:s3
@@ -10,6 +11,7 @@ cfs:standard-packages
 chriswessels:hammer
 chuangbo:marked
 gadicohen:reactive-window
+grigio:babel
 http
 iron:router
 jparker:gravatar
@@ -24,6 +26,7 @@ mizzao:autocomplete
 mizzao:user-status
 mrt:moment
 mrt:underscore-string-latest
+qnub:emojione
 reactive-var
 rubaxa:sortable
 sacha:spin
@@ -32,7 +35,6 @@ service-configuration
 tomi:upload-jquery
 tomi:upload-server
 useraccounts:semantic-ui
-grigio:babel
 
 # Debug Packages
 # meteorhacks:zones ### incompatable with sortable
@@ -46,5 +48,4 @@ velocity:console-reporter
 
 npm-container
 
-audit-argument-checks
-qnub:emojione
+
