@@ -3,6 +3,8 @@ Rooms = new Meteor.Collection('rooms'); // jshint ignore:line
 
 Meteor.methods({
     'joinRoom': function (id) {
+        check(id, String);
+
         var room = Rooms.findOne({_id: id});
         var userId = Meteor.userId();
 
@@ -29,6 +31,7 @@ Meteor.methods({
     },
     'getDirectMessageRoom': function(targetUserId){
         check(targetUserId, String);
+
         var users = [targetUserId, Meteor.userId()];
         var currentRoom = Rooms.findOne({users:{$all:users}, direct: true});
         if(!currentRoom) {
@@ -61,6 +64,8 @@ Meteor.methods({
         return room._id;
     },
     'setCurrentRoom': function (roomId) {
+        check(roomId, String);
+
         var room = Rooms.findOne({_id: roomId});
         if (!room) {
             throw new Meteor.Error("Can not find room with id " + roomId);
