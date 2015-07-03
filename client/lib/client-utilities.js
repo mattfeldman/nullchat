@@ -78,8 +78,8 @@ showPopup = function (targetNode, templateName, data, options) {
         closable: true,
         movePopup: true,
         delay: {
-            show: 300,
-            hide: 500
+            show: 100,
+            hide: 100
         }
     });
 
