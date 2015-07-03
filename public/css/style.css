@@ -311,10 +311,11 @@ span.room-tile-count {
     max-width: 100%;
     max-height: 300px;
 }
-.emoji{
-    height: 2.5em;
-    width: 2.5em;
+.emojione{
+    height: 2.0em;
+    width: 2.0em;
 }
+
 
 /* Informal Semantic UI Dev Overrides */
 html, body { height: 100%; }
