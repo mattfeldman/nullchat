@@ -1,10 +1,7 @@
 Template.emojiPopupContent.helpers({
     emojisForCategory(category){
         check(category, String);
-        return _.chain(emojis)
-                        .filter(e=>{return e.category === category;})
-                        .sortBy(e=>{return parseInt(e.category_order);})
-                        .value();
+        return emojis[category] || [];
     },
     emojiDisplay:function(emoji){
         return emojione.toImage(emoji);
