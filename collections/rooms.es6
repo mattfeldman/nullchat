@@ -1,7 +1,7 @@
 Rooms = new Meteor.Collection('rooms'); // jshint ignore:line
 
 Meteor.methods({
-    'joinRoom': function (id) {
+    joinRoom(id) {
         check(id, String);
 
         var room = Rooms.findOne({_id: id});
@@ -28,7 +28,7 @@ Meteor.methods({
         }
         return room._id;
     },
-    'getDirectMessageRoom': function(targetUserId){
+    getDirectMessageRoom(targetUserId){
         check(targetUserId, String);
 
         var users = [targetUserId, Meteor.userId()];
@@ -47,7 +47,7 @@ Meteor.methods({
         }
         return currentRoom._id;
     },
-    'leaveRoom': function (id) {
+    leaveRoom(id) {
         var room = Rooms.findOne({_id: id});
         var userId = Meteor.userId();
 
@@ -62,12 +62,12 @@ Meteor.methods({
         Rooms.update({_id: room._id}, {$pull: {users: userId}});
         return room._id;
     },
-    'setCurrentRoom': function (roomId) {
+    setCurrentRoom(roomId) {
         check(roomId, String);
 
         var room = Rooms.findOne({_id: roomId});
         if (!room) {
-            throw new Meteor.Error("Can not find room with id " + roomId);
+            throw new Meteor.Error(`Can not find room with id ${roomId}`);
         }
 
         if (!_.contains(room.users, Meteor.userId())) {
@@ -79,7 +79,7 @@ Meteor.methods({
         }
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"status.currentRoom": roomId}});
     },
-    'createRoom': function (roomStub) {
+    createRoom(roomStub) {
         check(roomStub, Schemas.createRoom);
 
         var roomName = roomStub.name;
@@ -107,7 +107,7 @@ Meteor.methods({
             moderators: [Meteor.userId()]
         });
     },
-    'kickUserFromRoom': function (targetUserId, targetRoomId) {
+    kickUserFromRoom(targetUserId, targetRoomId) {
         check(targetUserId, String);
         check(targetRoomId, String);
 
@@ -136,7 +136,7 @@ Meteor.methods({
 
         Rooms.update({_id: room._id}, {$pull: {users: targetUser._id}});
     },
-    'setRoomPrivacy': function (targetRoomId, isPrivate) {
+    setRoomPrivacy(targetRoomId, isPrivate) {
         check(targetRoomId, String);
         check(isPrivate, Boolean);
 
