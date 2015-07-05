@@ -1,7 +1,10 @@
 RoomInvitations = new Meteor.Collection('room_invitations');
 
 Meteor.methods({
-    'roomInvitation': function (targetUserId, targetRoomId) {
+    roomInvitation(targetUserId, targetRoomId) {
+        check(targetUserId, String);
+        check(targetRoomId, String);
+
         var targetUser = Meteor.users.findOne(targetUserId);
         var room = Rooms.findOne(targetRoomId);
 
@@ -11,7 +14,7 @@ Meteor.methods({
         if (!targetUser) {
             throw new Meteor.Error("User could not be found.");
         }
-        if (room.direct){
+        if (room.direct) {
             throw new Meteor.Error("Can not invite to direct message rooms.");
         }
 
@@ -19,7 +22,7 @@ Meteor.methods({
         if (room.isPrivate && !_(room.invited).contains(Meteor.userId())) {
             throw new Meteor.Error("You don't have permission to invite to that room.");
         }
-        if (_(room.users).contains(targetUser._id)){
+        if (_(room.users).contains(targetUser._id)) {
             throw new Meteor.Error("User in that room.");
         }
 
@@ -44,20 +47,22 @@ Meteor.methods({
         RoomInvitations.insert(roomInvitation);
         Rooms.update({_id: room._id}, {$addToSet: {invited: targetUser._id}});
     },
-    'acceptRoomInvitation': function (roomInvitationId) {
+    acceptRoomInvitation(roomInvitationId) {
+        check(roomInvitationId, String);
         updateRoomInvitation(roomInvitationId, true);
     },
-    'dismissRoomInvitation': function (roomInvitationId) {
-        updateRoomInvitation(roomInvitationId,false);
+    dismissRoomInvitation(roomInvitationId) {
+        check(roomInvitationId, String);
+        updateRoomInvitation(roomInvitationId, false);
     }
 });
-function updateRoomInvitation(id,accepted){
-    var roomInvitation = RoomInvitations.findOne({_id:id});
+function updateRoomInvitation(id, accepted) {
+    var roomInvitation = RoomInvitations.findOne({_id: id});
 
-    if(!roomInvitation){
+    if (!roomInvitation) {
         throw new Meteor.Error("Can't find room invitation.");
     }
-    if(roomInvitation.invitedUser !== Meteor.userId()){
+    if (roomInvitation.invitedUser !== Meteor.userId()) {
         throw new Meteor.Error("Can only update your own invitations.");
     }
 
@@ -68,8 +73,8 @@ function updateRoomInvitation(id,accepted){
             active: false
         }
     });
-    if(accepted){
-        Meteor.call('joinRoom',roomInvitation.roomId);
+    if (accepted) {
+        Meteor.call('joinRoom', roomInvitation.roomId);
     }
 }
 Schemas.roomInvitation = new SimpleSchema({
