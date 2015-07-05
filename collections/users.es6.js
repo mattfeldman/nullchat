@@ -70,7 +70,7 @@ Meteor.methods({
     punchcard(userId) {
         check(userId, String);
 
-        var userId = userId || Meteor.userId();
+        userId = userId || Meteor.userId();
         if (Meteor.isServer) {
             var milisecondsInWeek = 60 * 1000 * 60 * 24;
             var milisecondsIn5Minutes = 60 * 1000 * 5;
