@@ -1,6 +1,5 @@
 Rooms = new Meteor.Collection('rooms'); // jshint ignore:line
 
-
 Meteor.methods({
     'joinRoom': function (id) {
         check(id, String);
@@ -109,6 +108,9 @@ Meteor.methods({
         });
     },
     'kickUserFromRoom': function (targetUserId, targetRoomId) {
+        check(targetUserId, String);
+        check(targetRoomId, String);
+
         var targetUser = Meteor.users.findOne(targetUserId);
         var room = Rooms.findOne(targetRoomId);
 
@@ -135,6 +137,9 @@ Meteor.methods({
         Rooms.update({_id: room._id}, {$pull: {users: targetUser._id}});
     },
     'setRoomPrivacy': function (targetRoomId, isPrivate) {
+        check(targetRoomId, String);
+        check(isPrivate, Boolean);
+
         var room = Rooms.findOne(targetRoomId);
         var user = Meteor.user();
 
