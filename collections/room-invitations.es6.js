@@ -11,7 +11,7 @@ Meteor.methods({
         if (!targetUser) {
             throw new Meteor.Error("User could not be found.");
         }
-        if(room.direct){
+        if (room.direct){
             throw new Meteor.Error("Can not invite to direct message rooms.");
         }
 
