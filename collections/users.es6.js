@@ -1,11 +1,11 @@
 Meteor.users.deny({
-    update: function() {
+    update(){
         return true;
     }
 });
 
 Meteor.methods({
-    'updateTypingActivity': function (room) {
+    updateTypingActivity(room) {
         check(room, String);
         var timestamp = new Date();
         Meteor.users.update({_id: Meteor.userId()}, {
@@ -15,7 +15,7 @@ Meteor.methods({
             }
         });
     },
-    'updateUsername': function (username) {
+    updateUsername(username) {
         check(username, String);
         var usernameRegex = new RegExp("$" + username + "^", "i");
         var user = Meteor.users.findOne({username: usernameRegex});
@@ -29,15 +29,15 @@ Meteor.methods({
             Meteor.users.update({_id: Meteor.userId()}, {$set: {'username': username}});
         }
     },
-    'updateProfile': function (profile) {
+    updateProfile(profile) {
         check(profile, Schemas.userProfile);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {'profile': profile}});
     },
-    'updateRoomOrder': function (roomOrderArr) {
+    updateRoomOrder(roomOrderArr) {
         check(roomOrderArr, [String]);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"preferences.roomOrder": roomOrderArr}});
     },
-    'updateRoomPreferences': function (roomPreference) {
+    updateRoomPreferences(roomPreference) {
         if (!Match.test(roomPreference, Schemas.roomPreference)) {
             throw new Meteor.Error(roomPreference + " did not match schema.");
         }
@@ -67,7 +67,9 @@ Meteor.methods({
         preferences.room = roomPreferences;
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"preferences": preferences}});
     },
-    'punchcard': function (userId) {
+    punchcard(userId) {
+        check(userId, String);
+
         var userId = userId || Meteor.userId();
         if (Meteor.isServer) {
             var milisecondsInWeek = 60 * 1000 * 60 * 24;
@@ -89,7 +91,7 @@ Meteor.methods({
             return Messages.aggregate(pipeline);
         }
     },
-    'roomPunchcard': function (options) {
+    roomPunchcard(options) {
         if (!options.roomId) {
             throw new Meteor.Error("Need room id");
         }
