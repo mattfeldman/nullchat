@@ -1,13 +1,16 @@
 Messages = new Meteor.Collection('messages'); // jshint ignore:line
 
 Meteor.methods({
-    'likeMessage': function (id) {
+    likeMessage(id) {
+        check(id, String);
         Messages.update({_id: id}, {$addToSet: {likedBy: Meteor.userId()}});
     },
-    'unlikeMessage': function (id) {
+    unlikeMessage(id) {
+        check(id, String);
         Messages.update({_id: id}, {$pull: {likedBy: Meteor.userId()}});
     },
-    'editMessage': function (editMessageStub) {
+    editMessage(editMessageStub) {
+        check(editMessageStub, {_id: String, message: String});
         var message = Messages.findOne({_id: editMessageStub._id});
         if (!message) {
             throw new Meteor.Error("Couldn't find message to edit.");
@@ -22,7 +25,8 @@ Meteor.methods({
             }
         });
     },
-    'removeMessage': function (id) {
+    removeMessage(id) {
+        check(id, String);
         var message = Messages.findOne({_id: id});
         if (!message) {
             throw new Meteor.Error("Couldn't find message to edit.");
@@ -32,7 +36,8 @@ Meteor.methods({
         }
         Messages.remove({_id: id});
     },
-    'message': function (messageStub) {
+    message(messageStub) {
+        check(messageStub, {message: String, roomId: String});
         var user = Meteor.user();
         var room = Rooms.findOne(messageStub.roomId);
         try {
