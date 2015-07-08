@@ -5,5 +5,8 @@ ratings:
   paths:
   - "client/**"
   - "server/**"
+  - "collections/**"
+  - "lib/**"
+  - "tests/**"
 exclude_paths:
 - "packages/**" #Paths that you want excluded from our analysis.
