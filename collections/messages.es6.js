@@ -11,7 +11,7 @@ Meteor.methods({
     },
     editMessage(editMessageStub) {
         check(editMessageStub, {_id: String, message: String});
-        var message = Messages.findOne({_id: editMessageStub._id});
+        const message = Messages.findOne({_id: editMessageStub._id});
         if (!message) {
             throw new Meteor.Error("Couldn't find message to edit.");
         }
@@ -27,7 +27,7 @@ Meteor.methods({
     },
     removeMessage(id) {
         check(id, String);
-        var message = Messages.findOne({_id: id});
+        const message = Messages.findOne({_id: id});
         if (!message) {
             throw new Meteor.Error("Couldn't find message to edit.");
         }
@@ -38,14 +38,13 @@ Meteor.methods({
     },
     message(messageStub) {
         check(messageStub, {message: String, roomId: String});
-        var user = Meteor.user();
-        var room = Rooms.findOne(messageStub.roomId);
+        const user = Meteor.user();
+        const room = Rooms.findOne(messageStub.roomId);
         try {
             if (!user) {
                 throw new Meteor.Error(401, "You need to login to send messages");
             }
-            if (_s.isBlank(messageStub.message))
-            {
+            if (_s.isBlank(messageStub.message)) {
                 throw new Meteor.Error(401, "You must specify a message");
             }
             if (!room) {
@@ -66,12 +65,12 @@ Meteor.methods({
             }
             return;
         }
-        insertMessage(user,room,messageStub);
+        insertMessage(user, room, messageStub);
     }
 });
 
 function sendFeedback(message, user, room) {
-    //TODO: Global feedback when feedback is about room? Maybe default to current room?
+    // TODO: Global feedback when feedback is about room? Maybe default to current room?
     if (!room || !message || !user) {
         return;
     }
