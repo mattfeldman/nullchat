@@ -60,6 +60,7 @@
     "RoomInvitations":false,
     "Schemas":false,
     "Changelogs":false,
+    "Images":false,
 
     // Helpers
     "UserHelpers": false,
@@ -184,7 +185,7 @@
     "vars-on-top": 2,                // http://eslint.org/docs/rules/vars-on-top
     "wrap-iife": [2, "any"],         // http://eslint.org/docs/rules/wrap-iife
     "yoda": 2,                       // http://eslint.org/docs/rules/yoda
-    "max-len": [2, 80, 2],           // http://eslint.org/docs/rules/max-len
+    "max-len": [2, 160, 4],           // http://eslint.org/docs/rules/max-len
 
     /**
      * Style
