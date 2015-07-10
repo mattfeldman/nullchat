@@ -1,8 +1,8 @@
 Meteor.publish('messages', function (roomId, limit) {
     check(roomId, String);
     check(limit, Match.Integer);
-    if(limit < 1 || limit > 100){
-        throw new Meteor.Error("Specify limit between 1 and 100");
+    if(limit < 1 || limit > 1000){
+        throw new Meteor.Error("Specify limit between 1 and 1000");
     }
     var room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
