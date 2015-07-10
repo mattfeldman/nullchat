@@ -16,36 +16,36 @@ function createTimestampPopup(target, timestamp) {
 }
 
 Template.plainMessage.helpers({
-    hasEdits: function () {
+    hasEdits() {
         return this.lastedited;
     },
-    lastEditTime: function () {
+    lastEditTime() {
         if (!this.lastedited) {
             return;
         }
         return moment(this.lastedited).format("h:mm:ss a");
     },
-    showTimestamp: function () {
+    showTimestamp() {
         var m = moment(new Date(this.timestamp));
         var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
-    isUnderEdit: function () {
+    isUnderEdit() {
         return Session.get('editingId') === this._id;
     },
-    canEdit: function () {
+    canEdit() {
         return this.authorId === Meteor.userId();
     },
-    hasMention: function () {
+    hasMention() {
         return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
     },
-    finalMessageBody: function () {
+    finalMessageBody() {
         return renderMessage(this.message);
     },
-    starIcon: function () {
+    starIcon() {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     },
-    fontSizePercent: function () {
+    fontSizePercent() {
         var parentContext = Template.instance().parentTemplate();
         if (parentContext && parentContext.supressStarSizing) {
             return 100;
@@ -57,7 +57,7 @@ Template.plainMessage.helpers({
         if (!room || !room.users || room.users.length < 1) {
             return 100;
         }
-        switch (this.likedBy.length || 0){
+        switch (this.likedBy.length || 0) {
             case 0: return 100;
             case 1: return 166;
             case 2: return 232;
@@ -67,7 +67,7 @@ Template.plainMessage.helpers({
 });
 
 Template.plainMessage.events({
-    "click .likeMessageLink": function (event, template) {
+    "click .likeMessageLink"(event, template) {
         event.preventDefault();
 
         if (!_(this.likedBy).contains(Meteor.userId())) {
@@ -78,29 +78,29 @@ Template.plainMessage.events({
         }
 
     },
-    "dblclick, click .editMessageButton": function (event, template) {
+    "dblclick, click .editMessageButton"(event, template) {
         if (template.data.authorId === Meteor.userId()) {
             Session.set('editingId', template.data._id);
         }
     },
-    "submit .editForm": function (event, template) {
+    "submit .editForm"(event, template) {
         event.preventDefault();
         var newMessage = template.find('input[name=newMessageText]').value;
 
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
         Session.set('editingId', "");
     },
-    "click .canceleEditSubmit": function () {
+    "click .canceleEditSubmit"() {
         Session.set('editingId', "");
     },
-    'mouseenter .message-timestamp': function (event, template) {
+    'mouseenter .message-timestamp'(event, template) {
         createTimestampPopup(event.target, template.data.timestamp);
     },
-    'mouseenter .message-user-mention': function (event, template) {
+    'mouseenter .message-user-mention'(event, template) {
         var userId = $(event.target).data("userid");
         showPopup(event.target, "userProfileCard", userId);
     },
-    'mouseenter .likeMessageLink' : function(event, template) {
+    'mouseenter .likeMessageLink'(event, template) {
         var userId = $(event.target).data("userid");
         showPopup(event.target, "starredByListPopup", template.data._id);
     },
@@ -111,6 +111,6 @@ Template.plainMessage.events({
         }
     }
 });
-Template.plainMessage.onRendered(function(){
+Template.plainMessage.onRendered(()=> {
     this.$('.ui.accordion').accordion();
 });

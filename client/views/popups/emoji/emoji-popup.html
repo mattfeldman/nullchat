@@ -1,5 +1,47 @@
 <template name="emojiPopup">
-    <div class="ui emojiPopup fluid popup">
-        {{>emojiPopupContent}}
+    <div class="ui  inverted orange emoji icon button">
+        <i class="ui smile icon"></i>
+    </div>
+    <div class="ui fluid popup hidden">
+        <div class="content">
+            <a class="header">emojis</a>
+            <div class="meta">
+                <span class="date">click to add</span>
+            </div>
+            <div class="description emojiSelector">
+                <div class="ui active tab segment emojiCategory" data-tab="Emoticons">
+                    {{#each emojisForCategory "emoticons"}}
+                        <span data-emoji="{{shortname}}">{{{emojiDisplay shortname}}}</span>
+                    {{/each}}
+                </div>
+                <div class="ui tab segment emojiCategory" data-tab="Nature">
+                    {{#each emojisForCategory "nature"}}
+                        <span data-emoji="{{shortname}}">{{{emojiDisplay shortname}}}</span>
+                    {{/each}}
+                </div>
+                <div class="ui tab segment emojiCategory" data-tab="Objects">
+                    {{#each emojisForCategory "objects"}}
+                        <span data-emoji="{{shortname}}">{{{emojiDisplay shortname}}}</span>
+                    {{/each}}
+                </div>
+                <div class="ui tab segment emojiCategory" data-tab="Places">
+                    {{#each emojisForCategory "places"}}
+                        <span data-emoji="{{shortname}}">{{{emojiDisplay shortname}}}</span>
+                    {{/each}}
+                </div>
+                <div class="ui tab segment emojiCategory" data-tab="Other">
+                    {{#each emojisForCategory "other"}}
+                        <span data-emoji="{{shortname}}">{{{emojiDisplay shortname}}}</span>
+                    {{/each}}
+                </div>
+                <div class="ui pointing secondary menu">
+                    <a class="active item" data-tab="Emoticons">Emoticons</a>
+                    <a class="item" data-tab="Nature">Nature</a>
+                    <a class="item" data-tab="Objects">Objects</a>
+                    <a class="item" data-tab="Places">Places</a>
+                    <a class="item" data-tab="Other">Other</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

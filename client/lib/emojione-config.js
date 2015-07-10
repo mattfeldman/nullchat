@@ -1,0 +1,1 @@
+emojione.ascii = true;
