@@ -156,9 +156,9 @@ Template.newMessage.events({
         if(doc.searchName){
             template.$(event.target).val("/meme " + doc.id + " ");
         }
-        else if(doc.html){
+        else if(doc.shortname){
             var text = template.$(event.target).val();
-            var newText = text.replace(':' + doc.name + ' ', ':' + doc.name + ': '); // Add trailing :
+            var newText = text.replace(':' + doc.name + ' ', doc.shortname+' '); // Add trailing :
             template.$(event.target).val(newText);
         }
     },

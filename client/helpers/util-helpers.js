@@ -14,3 +14,7 @@ Template.registerHelper('debugDisplay',function(){
 Template.registerHelper('inSmallView',function(){
     return rwindow.$width() <= 768;
 });
+
+Template.registerHelper('emojiDisplay', function(emoji){
+    return emojione.toImage(emoji);
+});
