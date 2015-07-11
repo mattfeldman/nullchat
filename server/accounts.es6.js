@@ -1,6 +1,6 @@
-if(Meteor.settings.githubLogin) {
+if (Meteor.settings.githubLogin) {
     ServiceConfiguration.configurations.remove({
-        service : 'github'
+        service: 'github'
     });
     ServiceConfiguration.configurations.insert({
         service: 'github',
@@ -9,22 +9,19 @@ if(Meteor.settings.githubLogin) {
     });
 }
 
-Accounts.onCreateUser(function(options, user) {
+Accounts.onCreateUser((options, user) => {
     if (options.profile) {
         user.profile = options.profile;
     }
 
-    if(user.services && user.services.github)
-    {
-        var result = Meteor.http.get('https://api.github.com/user',{
-            params : {
-                access_token : user.services.github.accessToken
-            },
-            headers: {"User-Agent": "Meteor/1.0"}
-        });
+    if (user.services && user.services.github) {
+        const result = Meteor.http.get('https://api.github.com/user',
+            {
+                params: {'access_token': user.services.github.accessToken},
+                headers: {'User-Agent': 'Meteor/1.0'}
+            });
 
-        if(!result.error)
-        {
+        if (!result.error) {
             user.profile.avatar = result.data.avatar_url;
         }
         user.username = user.services.github.username;
