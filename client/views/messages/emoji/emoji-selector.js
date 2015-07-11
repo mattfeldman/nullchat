@@ -1,4 +1,4 @@
-Template.emojiPopup.onRendered(function() {
+Template.emojiSelector.onRendered(function() {
     this.$(".menu .item").tab();
     this.$('.emoji.button').popup({
         on: 'click',
@@ -9,14 +9,14 @@ Template.emojiPopup.onRendered(function() {
     });
 });
 
-Template.emojiPopup.helpers({
+Template.emojiSelector.helpers({
     emojisForCategory: function(category) {
         check(category, String);
         return Emojis.find({category: category}, {sort: {category_order: 1}});
     }
 });
 
-Template.emojiPopup.events({
+Template.emojiSelector.events({
     'click .emojione': function(event, target) {
         // TODO: Less Hacky jQuery
         addTextToInput($(event.target).parent().data('emoji'));
