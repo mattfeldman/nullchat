@@ -15,12 +15,12 @@ Schemas.changelog = new SimpleSchema({
 });
 
 Meteor.methods({
-    'updateChangelogCursor': function () {
+    updateChangelogCursor() {
         Meteor.users.update({_id: Meteor.userId()}, {$set: {'cursors.changelog': new Date()}});
     },
-    'addChangelog': function (message) {
-        if(Meteor.user().admin !== true) throw new Meteor.Error("TODO: Better Admin roles, but in anycase you don't have permission.");
-        var changelog = {
+    addChangelog(message) {
+        if (Meteor.user().admin !== true) throw new Meteor.Error("TODO: Better Admin roles, but in anycase you don't have permission.");
+        const changelog = {
             message: message,
             authorId: Meteor.userId(),
             timestamp: new Date()
@@ -28,5 +28,4 @@ Meteor.methods({
         check(changelog, Schemas.changelog);
         Changelogs.insert(changelog);
     }
-    //TODO: More CRUD
 });
