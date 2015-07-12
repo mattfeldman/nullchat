@@ -73,7 +73,8 @@
     "Sortable":false,
     "moment": false,
     "Autolinker": false,
-    "tinycolor": false
+    "tinycolor": false,
+    "ServiceConfiguration": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
