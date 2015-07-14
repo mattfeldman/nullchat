@@ -74,7 +74,8 @@
     "moment": false,
     "Autolinker": false,
     "tinycolor": false,
-    "ServiceConfiguration": false
+    "ServiceConfiguration": false,
+    "UploadServer": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
