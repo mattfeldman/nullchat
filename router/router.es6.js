@@ -1,56 +1,51 @@
 Router.configure({
     layoutTemplate: 'layout',
     loadingTemplate: 'loading',
-    waitOn: function () {
-        return [Meteor.subscribe('users'),Meteor.subscribe('myPreferences')];
+    waitOn() {
+        return [Meteor.subscribe('users'), Meteor.subscribe('myPreferences')];
     }
 });
 Router.map(function () {
     this.route('/room/:_id', {
-        subscriptions: function(){
+        subscriptions() {
             return [Meteor.subscribe('availableRooms'), Meteor.subscribe('currentRooms')];
         },
-        onBeforeAction: function () {
-            var room = Rooms.findOne({_id: this.params._id});
+        onBeforeAction() {
+            const room = Rooms.findOne({_id: this.params._id});
             if (!room) {
                 Router.go('roomList');
             }
-            Meteor.call('setCurrentRoom',this.params._id);
+            Meteor.call('setCurrentRoom', this.params._id);
             this.next();
         },
-        action:function(){
+        action() {
             Router.go('chat');
         }
     });
     this.route('userMetrics', {
         path: '/user/:userId/metrics',
-        subscriptions: function () {
-        },
-        data: function () {
+        data() {
             return {userId: this.params.userId};
         },
-        action: function () {
+        action() {
             this.render('userMetrics');
         }
     });
     this.route('roomMetrics', {
         path: '/room/:roomId/metrics',
-        subscriptions: function () {
-            return [
-                Meteor.subscribe('availableRooms'),
-                Meteor.subscribe('currentRooms')
-            ];
+        subscriptions() {
+            return [Meteor.subscribe('availableRooms'), Meteor.subscribe('currentRooms')];
         },
-        data: function () {
+        data() {
             return {roomId: this.params.roomId};
         },
-        action: function () {
+        action() {
             this.render('roomMetrics');
         }
     });
     this.route('chat', {
         path: '/',
-        subscriptions: function () {
+        subscriptions() {
             return [
                 Meteor.subscribe('availableRooms'),
                 Meteor.subscribe('currentRooms'),
@@ -59,8 +54,8 @@ Router.map(function () {
                 Meteor.subscribe('memes')
             ];
         },
-        action: function () {
-            var currentRoom = Meteor.user().status.currentRoom;
+        action() {
+            let currentRoom = Meteor.user().status.currentRoom;
             if (!currentRoom) {
                 currentRoom = Rooms.findOne({name: "welcome"})._id;
                 Meteor.call('joinRoom', currentRoom);
@@ -69,27 +64,26 @@ Router.map(function () {
             this.render('roomView');
         }
     });
-
     this.route('messageSms', {
         name: 'messageSms',
         where: "server",
         path: 'messageSms',
-        action: function () {
-            var token = Meteor.settings.twilio.appSecret;
-            var header = this.request.headers['x-twilio-signature'];
-            var url = Meteor.absoluteUrl("messageSms",{secure: true});
-            var params = this.request.body;
-            var twilio = Meteor.npmRequire('twilio');
-            if (this.request.body && twilio.validateRequest(token,header,url,params)) {
-                var fromNumber = this.request.body.From;
+        action() {
+            const token = Meteor.settings.twilio.appSecret;
+            const header = this.request.headers['x-twilio-signature'];
+            const url = Meteor.absoluteUrl("messageSms", {secure: true});
+            const params = this.request.body;
+            const twilio = Meteor.npmRequire('twilio');
+            if (this.request.body && twilio.validateRequest(token, header, url, params)) {
+                const fromNumber = this.request.body.From;
                 if (fromNumber) {
-                    var user = Meteor.users.findOne({"profile.number": fromNumber});
+                    const user = Meteor.users.findOne({"profile.number": fromNumber});
                     if (user) {
-                        var message = this.request.body.Body;
-                        var roomMatch = /#([\w]+)/.exec(message);
+                        const message = this.request.body.Body;
+                        const roomMatch = /#([\w]+)/.exec(message);
                         if (roomMatch && roomMatch[1]) {
-                            var roomName = roomMatch[1];
-                            var room = Rooms.findOne({name: roomName});
+                            const roomName = roomMatch[1];
+                            const room = Rooms.findOne({name: roomName});
                             if (room) {
                                 console.log("From " + fromNumber + " : " + message + " for " + room.name);
                                 insertMessage(user, room, {message: message, roomId: room._id}, {fromMobile: true});
