@@ -146,7 +146,6 @@
       "RoomHelpers": false,
 
       // packages
-      "emojify":false,
       "SimpleSchema":false,
       "Sortable":false,
       "moment": false,
