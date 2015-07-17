@@ -74,7 +74,8 @@
     "Autolinker": false,
     "tinycolor": false,
     "ServiceConfiguration": false,
-    "UploadServer": false
+    "UploadServer": false,
+    "AccountsTemplates": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
