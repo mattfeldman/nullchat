@@ -33,3 +33,10 @@ Template.userPill.helpers({
         }
     }
 });
+
+Template.userPill.onRendered(function() {
+    var img = this.find('img');
+    $(img).on("load", function(){
+        freezeGif(img);
+    });
+});

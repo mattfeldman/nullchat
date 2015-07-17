@@ -11,3 +11,10 @@ Template.message.helpers({
         }
     }
 });
+
+Template.message.onRendered(function() {
+    var img = this.find("a.avatar img");
+    $(img).on("load", function(){
+        freezeGif(img);
+    });
+});
