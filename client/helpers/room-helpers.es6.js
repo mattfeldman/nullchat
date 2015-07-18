@@ -1,5 +1,5 @@
 RoomHelpers = {
-    activeRoomFromId: function(id){
+    activeRoomFromId(id) {
         return id && id === Session.get("currentRoom") ? "active" : "";
     }
 };

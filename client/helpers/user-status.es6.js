@@ -1,4 +1,4 @@
-Deps.autorun(function (c) {
+Deps.autorun(c => {
     try {
         UserStatus.startMonitor({
             threshold: 30000,

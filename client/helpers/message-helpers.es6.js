@@ -1,5 +1,5 @@
 MessageHelpers = {
-    myMessageFromId: function(id){
+    myMessageFromId(id) {
         return id && id === Meteor.userId() ? "my-message" : "";
     }
 };
