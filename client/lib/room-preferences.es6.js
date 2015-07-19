@@ -1,8 +1,6 @@
-var currentUserRoomPreferences = [];
-roomPreferencesOrDefault = function (roomId) {
-    var currentPreferences = _(currentUserRoomPreferences).find(function (p) {
-        return p.roomId === roomId;
-    });
+let currentUserRoomPreferences = [];
+roomPreferencesOrDefault = function(roomId) {
+    const currentPreferences = _(currentUserRoomPreferences).find(p => p.roomId === roomId);
     if (currentPreferences) {
         return currentPreferences;
     }
@@ -11,8 +9,8 @@ roomPreferencesOrDefault = function (roomId) {
     }
 };
 
-Deps.autorun(function () {
-    var prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
+Deps.autorun(function() {
+    const prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
     if (prefUser && prefUser.preferences && prefUser.preferences.room) {
         currentUserRoomPreferences = prefUser.preferences.room;
     }

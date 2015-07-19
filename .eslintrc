@@ -75,7 +75,8 @@
     "tinycolor": false,
     "ServiceConfiguration": false,
     "UploadServer": false,
-    "AccountsTemplates": false
+    "AccountsTemplates": false,
+    "emojione": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
