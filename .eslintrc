@@ -66,6 +66,8 @@
     "UserHelpers": false,
     "MessageHelpers": false,
     "RoomHelpers": false,
+    "Client": false,
+    "MessageLib": false,
 
     // packages
     "SimpleSchema":false,
