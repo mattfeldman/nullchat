@@ -3,9 +3,9 @@ Client = {
         $("#roomContainer").scrollTop($("#scrollContainer").height());
     },
     scrollToMessage(messageId) {
-        var message = $("#" + messageId);
+        const message = $("#" + messageId);
         if (message) {
-            var container = $("#roomContainer");
+            const container = $("#roomContainer");
             container.scrollTop(container.scrollTop() + message.offset().top);
         }
     },
@@ -20,7 +20,7 @@ Client = {
         Session.set("messageLimit", Session.get("messageLimit") + inc);
     },
     incRoomUnread(roomId) {
-        var key = 'unread_' + roomId;
+        const key = 'unread_' + roomId;
         Session.set(key, (Session.get(key) || 0) + 1);
     },
     /**
@@ -32,18 +32,18 @@ Client = {
      * Assumes .templateName.modal modal container naming
      */
     showModal(templateName, data, options) {
-        var ModalContainer = $('.modal-container')[0];
-        var modal = Blaze.renderWithData(Template[templateName], data, ModalContainer);
-        options = _.extend(options || {}, {
-            onHidden: function () {
+        const ModalContainer = $('.modal-container')[0];
+        const modal = Blaze.renderWithData(Template[templateName], data, ModalContainer);
+        const modalSettings = _.extend(options || {}, {
+            onHidden() {
                 Blaze.remove(modal);
             },
-            onVisible: function () {
+            onVisible() {
                 // Hack for scroll height from: https://github.com/Semantic-Org/Semantic-UI/issues/165
-                $('.' + templateName + '.modal').modal("refresh");
+                $(`.${templateName}.modal`).modal("refresh");
             }
         });
-        $('.' + templateName + '.modal').modal(options).modal('show');
+        $(`.${templateName}.modal`).modal(modalSettings).modal('show');
     },
     /**
      * Shows a popup
@@ -53,14 +53,14 @@ Client = {
      * @param options - options to render the popup with
      */
     showPopup(targetNode, templateName, data, options) {
-        var PopupContainer = this.$('.popup-container')[0];
+        const PopupContainer = $('.popup-container')[0];
 
         $("." + templateName).remove();
-        var popup = Blaze.renderWithData(Template[templateName], data, PopupContainer);
+        const popup = Blaze.renderWithData(Template[templateName], data, PopupContainer);
 
-        options = _.extend(options || {}, {
+        const popupSettings = _.extend(options || {}, {
             popup: '.' + templateName,
-            onHidden: function () {
+            onHidden() {
                 Blaze.remove(popup);
             },
             content: 'Loading...',
@@ -73,7 +73,7 @@ Client = {
             }
         });
 
-        $(targetNode).popup(options).popup('show');
+        $(targetNode).popup(popupSettings).popup('show');
     },
     /**
      * Adds text to the message input
@@ -81,12 +81,14 @@ Client = {
      *
      */
     addTextToInput(text) {
-        var currentInput = $("#message").val();
+        const currentInput = $("#message").val();
         $("#message").val(currentInput + text);
     }
 };
 
 // Set up a now session variable to allow for easy reactivity for date calculations involving 'now'
-Meteor.setInterval(function() {
-    Session.set("now", new Date());
-}, 500);
+Meteor.startup(()=> {
+    Meteor.setInterval(()=> {
+        Session.set("now", new Date());
+    }, 500);
+});
