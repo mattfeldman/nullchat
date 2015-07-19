@@ -4,14 +4,11 @@
  * @param timestamp is the timestamp to use for the popup
  */
 function createTimestampPopup(target, timestamp) {
-    var m = moment(timestamp);
+    const m = moment(timestamp);
     $(target).popup({
         title: m.fromNow(),
         content: m.format("dddd, MMMM Do YYYY"),
-        //popup: '.timestampPopup',
         position: "top right"
-        //hoverable: true,
-        //movePopup: true
     }).popup('show');
 }
 
@@ -26,8 +23,8 @@ Template.plainMessage.helpers({
         return moment(this.lastedited).format("h:mm:ss a");
     },
     showTimestamp() {
-        var m = moment(new Date(this.timestamp));
-        var user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
+        const m = moment(new Date(this.timestamp));
+        const user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.use24HrTime": 1}});
         return user && user.profile && user.profile.use24HrTime ? m.format("HH:mm:ss") : m.format("hh:mm:ss a");
     },
     isUnderEdit() {
@@ -46,14 +43,14 @@ Template.plainMessage.helpers({
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";
     },
     fontSizePercent() {
-        var parentContext = Template.instance().parentTemplate();
+        const parentContext = Template.instance().parentTemplate();
         if (parentContext && parentContext.supressStarSizing) {
             return 100;
         }
         if (this.likedBy.length === 0) {
             return 100;
         }
-        var room = Rooms.findOne({_id: this.roomId}, {fields: {users: 1}});
+        const room = Rooms.findOne({_id: this.roomId}, {fields: {users: 1}});
         if (!room || !room.users || room.users.length < 1) {
             return 100;
         }
@@ -67,7 +64,7 @@ Template.plainMessage.helpers({
 });
 
 Template.plainMessage.events({
-    "click .likeMessageLink"(event, template) {
+    'click .likeMessageLink'(event, template) {
         event.preventDefault();
 
         if (!_(this.likedBy).contains(Meteor.userId())) {
@@ -76,41 +73,40 @@ Template.plainMessage.events({
         else {
             Meteor.call('unlikeMessage', template.data._id);
         }
-
     },
-    "dblclick, click .editMessageButton"(event, template) {
+    'dblclick, click .editMessageButton'(event, template) {
         if (template.data.authorId === Meteor.userId()) {
             Session.set('editingId', template.data._id);
         }
     },
-    "submit .editForm"(event, template) {
+    'submit .editForm'(event, template) {
         event.preventDefault();
-        var newMessage = template.find('input[name=newMessageText]').value;
+        const newMessage = template.find('input[name=newMessageText]').value;
 
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
         Session.set('editingId', "");
     },
-    "click .canceleEditSubmit"() {
+    'click .canceleEditSubmit'() {
         Session.set('editingId', "");
     },
     'mouseenter .message-timestamp'(event, template) {
         createTimestampPopup(event.target, template.data.timestamp);
     },
     'mouseenter .message-user-mention'(event, template) {
-        var userId = $(event.target).data("userid");
+        const userId = $(event.target).data("userid");
         Client.showPopup(event.target, "userProfileCard", userId);
     },
     'mouseenter .likeMessageLink'(event, template) {
-        var userId = $(event.target).data("userid");
+        const userId = $(event.target).data("userid");
         Client.showPopup(event.target, "starredByListPopup", template.data._id);
     },
-    'click .removeMessageButton': function (event, template) {
+    'click .removeMessageButton'(event, template) {
         event.preventDefault();
-        if(confirm("Are you sure you want to delete this message?")) {
+        if (confirm("Are you sure you want to delete this message?")) {
             Meteor.call('removeMessage', template.data._id);
         }
     }
 });
-Template.plainMessage.onRendered(()=> {
+Template.plainMessage.onRendered(function() {
     this.$('.ui.accordion').accordion();
 });

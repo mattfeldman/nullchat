@@ -1,5 +1,5 @@
 Template.message.helpers({
-    'messageTemplate': function () {
+    messageTemplate() {
         if (this.type === "plain") {
             return "plainMessage";
         }

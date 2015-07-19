@@ -1,17 +1,18 @@
 Template.messageList.helpers({
-    messages: function() {
+    messages() {
         return Messages.find({roomId: Session.get('currentRoom')}, {sort: {timestamp: 1}});
     },
-    shouldShowLoadMore: function(){
-        return Session.get('messageLimit') === Messages.find({roomId: Session.get('currentRoom'),type:'plain'}).count();
+    shouldShowLoadMore() {
+        return Session.get('messageLimit') === Messages.find({roomId: Session.get('currentRoom'), type: 'plain'}).count();
     }
 });
 
-Template.messageList.created = function(){
+Template.messageList.onCreated(function() {
     Client.scrollChatToBottom();
-};
+});
+
 Template.messageList.events({
-   'click .loadMore':function(event,template){
-       Session.set('messageLimit',Session.get('messageLimit')+20);
+   'click .loadMore'(event, template) {
+       Session.set('messageLimit', Session.get('messageLimit') + 20);
    }
 });

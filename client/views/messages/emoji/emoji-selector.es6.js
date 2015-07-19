@@ -10,14 +10,14 @@ Template.emojiSelector.onRendered(function() {
 });
 
 Template.emojiSelector.helpers({
-    emojisForCategory: function(category) {
+    emojisForCategory(category) {
         check(category, String);
         return Emojis.find({category: category}, {sort: {category_order: 1}});
     }
 });
 
 Template.emojiSelector.events({
-    'click .emojione': function(event, target) {
+    'click .emojione'(event, target) {
         // TODO: Less Hacky jQuery
         Client.addTextToInput($(event.target).parent().data('emoji'));
     }

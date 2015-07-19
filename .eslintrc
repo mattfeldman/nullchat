@@ -78,7 +78,8 @@
     "ServiceConfiguration": false,
     "UploadServer": false,
     "AccountsTemplates": false,
-    "emojione": false
+    "emojione": false,
+    "FS": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,

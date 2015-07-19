@@ -1,20 +1,19 @@
 Template.imageMessage.events({
-    "error .image-message-image": function (event, template) {
+    'error .image-message-image'(event, template) {
+        let timesRetried = 0;
+        const currentSource = event.currentTarget.src;
+        const lastPoundIndex = currentSource.lastIndexOf("#");
 
-        var timesRetried = 0;
-        var currentSource = event.currentTarget.src;
-        var lastPoundIndex = currentSource.lastIndexOf("#");
+        if (lastPoundIndex > 0) {
+            const countString = currentSource.substr(lastPoundIndex + 1);
+            const count = parseInt(countString);
 
-        if(lastPoundIndex > 0) {
-            var countString = currentSource.substr(lastPoundIndex + 1);
-            var count = parseInt(countString);
-
-            if(!isNaN(count)) {
+            if (!isNaN(count)) {
                 timesRetried = count;
             }
         }
 
-        if(timesRetried < 20) {
+        if (timesRetried < 20) {
             timesRetried++;
             Meteor.setTimeout(function() {
                 // We store the number of retries in the # after the url
@@ -23,6 +22,5 @@ Template.imageMessage.events({
                 event.currentTarget.src = template.data + "#" + timesRetried;
             }, 500);
         }
-
     }
 });

@@ -1,6 +1,6 @@
 Template.userPill.helpers({
     statusColor() {
-        var status = this.status;
+        const status = this.status;
         if (!status) {
             return "unknown";
         }

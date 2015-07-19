@@ -1,9 +1,9 @@
 Template.messageAuthor.events({
-    'click': function (event, template) {
-        var authorId = template.data;
+    'click'(event, template) {
+        const authorId = template.data;
         if (!authorId || authorId === Meteor.userId()) return;
-        Meteor.call('getDirectMessageRoom', authorId, function (err, data) {
-            if (!err && data && !Session.equals('currentRoom',data)) {
+        Meteor.call('getDirectMessageRoom', authorId, (err, data) => {
+            if (!err && data && !Session.equals('currentRoom', data)) {
                 Client.setCurrentRoom(data);
             }
         });

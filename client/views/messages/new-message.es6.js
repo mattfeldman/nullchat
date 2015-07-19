@@ -13,28 +13,26 @@ var sendMessage = function (e) {
 
 var _typingDep = new Deps.Dependency;
 Template.newMessage.helpers({
-    typingUsers: function () {
+    typingUsers() {
         _typingDep.depend();
-        var cutoff = new Date(new Date().getTime() - 5 * 1000);
-        var typingUsers = Meteor.users.find({
+        const cutoff = new Date(new Date().getTime() - 5 * 1000);
+        const typingUsers = Meteor.users.find({
             "status.lastActiveRoom": Session.get("currentRoom"),
             "status.lastTyping": {$gte: cutoff},
             "_id": {$ne: Meteor.userId()}
         }).fetch();
 
-        var users = _.map(typingUsers, function (user) {
-            return user.username;
-        }).join(',');
+        const users = _.map(typingUsers, user => user.username).join(',');
 
         if (users) {
-            Meteor.setTimeout(function () {
+            Meteor.setTimeout(function() {
                 _typingDep.changed();
             }, 5000);
 
             return users + " currently typing...";
         }
     },
-    settings: function () {
+    settings() {
         return {
             position: "top",
             limit: 5,
@@ -79,19 +77,19 @@ Template.newMessage.helpers({
     }
 });
 
-var recallMessageWithNewOffset = function (offsetDelta) {
-    var messageElement = $("#message");
+const recallMessageWithNewOffset = function(offsetDelta) {
+    const messageElement = $("#message");
 
-    var offset = Session.get("offset") || 0;
-    var findParams = {authorId: Meteor.userId(), type: 'plain'};
+    let offset = Session.get("offset") || 0;
+    const findParams = {authorId: Meteor.userId(), type: 'plain'};
     if ((offset !== Messages.find(findParams).count() && offsetDelta > 0) || (offset !== 0 && offsetDelta < 0)) {
         offset = offset + offsetDelta;
     }
     Session.set("offset", offset);
 
-    var message = Messages.findOne(findParams, {skip: offset, limit: 1, sort: {timestamp: -1}});
+    const message = Messages.findOne(findParams, {skip: offset, limit: 1, sort: {timestamp: -1}});
     if (message) {
-        var currentVal = messageElement.val();
+        const currentVal = messageElement.val();
         if (Session.equals('lastmessage', currentVal) || currentVal === "") {
             messageElement.val(message.message);
             Session.set('lastmessage', message.message);
@@ -99,13 +97,13 @@ var recallMessageWithNewOffset = function (offsetDelta) {
     }
 };
 Template.newMessage.events({
-    'mouseover .smile':function(event, template){
+    'mouseover .smile'(event, template) {
         Client.showPopup(event.target, "emojiPopup");
     },
-    'click .send': function (e) {
+    'click .send'(e) {
         sendMessage(e);
     },
-    'keydown input': function (e) {
+    'keydown input'(e) {
         throttledLastTyping();
 
         switch (e.keyCode) {
@@ -122,21 +120,17 @@ Template.newMessage.events({
                 break;
         }
     },
-    'focus': function (e) {
+    'focus'(e) {
         Session.set('unreadMessages', 0);
     },
-    'paste': function (e) {
-        var items = (e.clipboardData || e.originalEvent.clipboardData).items;
-        var blob;
-
-        var blobItem = _(items).find(function (item) {
-            return item.type.indexOf("image") === 0;
-        });
+    'paste'(e) {
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        const blobItem = _(items).find(item => item.type.indexOf("image") === 0);
 
         if (blobItem) {
-            blob = blobItem.getAsFile();
+            const blob = blobItem.getAsFile();
             var reader = new FileReader();
-            reader.onload = function (event) {
+            reader.onload = function(event) {
                 var options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;
@@ -146,37 +140,33 @@ Template.newMessage.events({
             reader.readAsDataURL(blob);
         }
     },
-    'autocompleteselect input':function(event, template, doc) {
+    'autocompleteselect input'(event, template, doc) {
         // This is a hack that uses unique properties to sort callbacks
         // because mizzao:meteor-autocomplete removed support for explicit callbacks
         // For now it seems all of the callbacks get shoved into this single event
         //
         // doc.searchName is defined IFF the callback is a meme autocomplete
         // doc.html is defined IFF the callback is a emoji autocomplete
-        if(doc.searchName){
+        if (doc.searchName) {
             template.$(event.target).val("/meme " + doc.id + " ");
         }
-        else if(doc.shortname){
-            var text = template.$(event.target).val();
-            var newText = text.replace(':' + doc.name + ' ', doc.shortname+' '); // Add trailing :
+        else if(doc.shortname) {
+            const text = template.$(event.target).val();
+            const newText = text.replace(':' + doc.name + ' ', doc.shortname + ' '); // Add trailing :
             template.$(event.target).val(newText);
         }
     },
-    'click .gif.button':function(event,template){
+    'click .gif.button'(event, template) {
         Client.showModal("giphyModal");
     },
-    'click .meme.button':function(event,template){
+    'click .meme.button'(event, template) {
         Client.showModal("memeModal");
     },
-    'click .upload.button':function(event,template){
+    'click .upload.button'(event, template) {
         Client.showModal("uploadModal");
     }
 });
 
-var throttledLastTyping = _.throttle(function () {
+const throttledLastTyping = _.throttle(function () {
     Meteor.call('updateTypingActivity', Session.get('currentRoom'));
 }, 1000, {trailing: false});
-
-Template.newMessage.created = function () {
-    Session.get("offset");
-}
