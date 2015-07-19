@@ -23,7 +23,7 @@ Client = {
         const key = 'unread_' + roomId;
         Session.set(key, (Session.get(key) || 0) + 1);
     },
-    /**
+    /*
      * Shows a modal
      * @param templateName - template to render and make modal
      * @param data - data for template
@@ -45,7 +45,7 @@ Client = {
         });
         $(`.${templateName}.modal`).modal(modalSettings).modal('show');
     },
-    /**
+    /*
      * Shows a popup
      * @param targetNode - node to trigger and spawnpopup from
      * @param templateName - template to render as popup
@@ -75,7 +75,7 @@ Client = {
 
         $(targetNode).popup(popupSettings).popup('show');
     },
-    /**
+    /*
      * Adds text to the message input
      * @param {string} text - text to append
      *

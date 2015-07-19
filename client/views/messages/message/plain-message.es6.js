@@ -37,10 +37,10 @@ Template.plainMessage.helpers({
         return this.authorId === Meteor.userId();
     },
     hasMention() {
-        return this.authorId !== Meteor.userId() && hasUserMentions(this.message) ? "has-mention" : "";
+        return this.authorId !== Meteor.userId() && MessageLib.hasUserMentions(this.message) ? "has-mention" : "";
     },
     finalMessageBody() {
-        return renderMessage(this.message);
+        return MessageLib.renderMessage(this.message);
     },
     starIcon() {
         return _(this.likedBy).contains(Meteor.userId()) ? "fa-star" : "fa-star-o";

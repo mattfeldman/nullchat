@@ -1,14 +1,14 @@
 MessageLib = {
-    /**
+    /*
      * Parses out #room mentions in message
      * @param message
      * @returns message with html room replacements
      */
-        parseRoomLinks(message) {
+    parseRoomLinks(message) {
         if (!message) {
             return message;
         }
-        var rooms = getRoomNames();
+        var rooms = this.getRoomNames();
         rooms = _.sortBy(rooms, function (room) {
             return -room.name.length;
         }); // TODO: Not this every message
@@ -45,7 +45,7 @@ MessageLib = {
         if (!message) {
             return message;
         }
-        var users = getUserNamesAndColors();
+        var users = this.getUserNamesAndColors();
         users = _(users).sortBy(function (user) {
             return -user.username.length;
         }); // TODO: Not this every message
@@ -75,12 +75,12 @@ MessageLib = {
     getUserNamesAndColors() {
         return Meteor.users.find({}, {fields: {'_id': 1, 'username': 1, 'profile.color': 1}}).fetch();
     },
-    /**
+    /*
      * Determines if message contains current users username
      * @param message
      * @returns true if message contains current username, false otherwise
      */
-        hasUserMentions(message) {
+    hasUserMentions(message) {
         if (!message || typeof  message !== "string") {
             return false;
         }
@@ -91,7 +91,7 @@ MessageLib = {
     },
     renderMessage(message) {
         check(message, String);
-        var emojiString = emojione.toImage(parseUserMentions(parseRoomLinks(_s.escapeHTML(message))));
+        var emojiString = emojione.toImage(MessageLib.parseUserMentions(MessageLib.parseRoomLinks(_s.escapeHTML(message))));
         return marked(emojiString);
     }
 };
