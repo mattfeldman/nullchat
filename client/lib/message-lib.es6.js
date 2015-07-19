@@ -8,19 +8,17 @@ MessageLib = {
         if (!message) {
             return message;
         }
-        var rooms = this.getRoomNames();
-        rooms = _.sortBy(rooms, function (room) {
-            return -room.name.length;
-        }); // TODO: Not this every message
-        var loc = -1;
+        let rooms = this.getRoomNames();
+        rooms = _.sortBy(rooms, room => -room.name.length); // TODO: Not this every message
+        let loc = -1;
         while ((loc = message.indexOf("#", loc + 1)) >= 0) {
-            for (var i = 0; i < rooms.length; i++) {
-                var roomName = rooms[i].name;
-                var roomNameLowercase = rooms[i].name.toLowerCase();
+            for (let i = 0; i < rooms.length; i++) {
+                const roomName = rooms[i].name;
+                const roomNameLowercase = rooms[i].name.toLowerCase();
                 if (message.toLowerCase().indexOf(roomNameLowercase, loc) === loc + 1) {
-                    var leftHalf = message.substring(0, loc);
-                    var middle = '<a href="room/' + rooms[i]._id + '" class="roomLink" >#' + roomName + '</a>';
-                    var rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
+                    const leftHalf = message.substring(0, loc);
+                    const middle = `<a href="room/${rooms[i]._id}" class="roomLink" >#${roomName}</a>`;
+                    const rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
                     message = leftHalf + middle + rightHalf;
                     loc = loc + middle.length - 1;
                     break;
@@ -45,20 +43,19 @@ MessageLib = {
         if (!message) {
             return message;
         }
-        var users = this.getUserNamesAndColors();
-        users = _(users).sortBy(function (user) {
-            return -user.username.length;
-        }); // TODO: Not this every message
-        var loc = -1;
+        let users = this.getUserNamesAndColors();
+        users = _(users).sortBy(user => -user.username.length); // TODO: Not this every message
+        let loc = -1;
         while ((loc = message.indexOf("@", loc + 1)) >= 0) {
-            for (var i = 0; i < users.length; i++) {
-                var userName = users[i].username;
+            for (let i = 0; i < users.length; i++) {
+                const userName = users[i].username;
                 if (message.toLowerCase().indexOf(userName.toLowerCase(), loc) === loc + 1) {
-                    var leftHalf = message.substring(0, loc);
-                    var userColor = (users[i].profile && users[i].profile.color) || "black";
-                    var styleString = 'style="border-bottom: 2px solid ' + userColor + ';' + 'background: ' + tinycolor(userColor).setAlpha(0.075).toRgbString() + ';"';
-                    var middle = '<span class="message-user-mention" ' + styleString + ' data-userId="' + users[i]._id + '">@' + userName + '</span>';
-                    var rightHalf = message.substring(loc + userName.length + 1, message.length + middle.length);
+                    const leftHalf = message.substring(0, loc);
+                    const userColor = (users[i].profile && users[i].profile.color) || "black";
+                    const userBackgroundColor = tinycolor(userColor).setAlpha(0.075).toRgbString();
+                    const styleString = `style="border-bottom: 2px solid ${userColor}; background: ${userBackgroundColor};"`;
+                    const middle = `<span class="message-user-mention" ${styleString} data-userId="${users[i]._id}">@${userName}</span>`;
+                    const rightHalf = message.substring(loc + userName.length + 1, message.length + middle.length);
                     message = leftHalf + middle + rightHalf;
                     loc = loc + middle.length - 1;
                     break;
@@ -81,17 +78,20 @@ MessageLib = {
      * @returns true if message contains current username, false otherwise
      */
     hasUserMentions(message) {
-        if (!message || typeof  message !== "string") {
+        if (!message || typeof message !== "string") {
             return false;
         }
-        var regex = new RegExp("[@\\s]+(" + Meteor.user({}, {fields: {'username': 1}}).username + ")($|[\\s!.?]+)");
-        var regexMatch = message.match(regex);
+        const regex = new RegExp("[@\\s]+(" + Meteor.user({}, {fields: {'username': 1}}).username + ")($|[\\s!.?]+)");
+        const regexMatch = message.match(regex);
 
         return regexMatch && regexMatch.length > 0 ? true : false;
     },
     renderMessage(message) {
         check(message, String);
-        var emojiString = emojione.toImage(MessageLib.parseUserMentions(MessageLib.parseRoomLinks(_s.escapeHTML(message))));
+        const emojiString = emojione.toImage(
+            this.parseUserMentions(
+                this.parseRoomLinks(
+                    _s.escapeHTML(message))));
         return marked(emojiString);
     }
 };
