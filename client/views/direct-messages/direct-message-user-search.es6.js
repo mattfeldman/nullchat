@@ -1,5 +1,5 @@
 Template.directMessageUserSearch.helpers({
-    settings: function () {
+    settings() {
         return {
             position: "bottom",
             limit: 5,
@@ -7,7 +7,7 @@ Template.directMessageUserSearch.helpers({
                 {
                     collection: Meteor.users,
                     field: "username",
-                    filter: {_id:{$ne:Meteor.userId()}},
+                    filter: {_id: {$ne: Meteor.userId()}},
                     template: Template.userPill,
                     matchAll: true
 
@@ -17,8 +17,8 @@ Template.directMessageUserSearch.helpers({
     }
 });
 Template.directMessageUserSearch.events({
-    'autocompleteselect input': function (event, template, doc) {
-        Meteor.call('getDirectMessageRoom', doc._id, function (err, data) {
+    'autocompleteselect input'(event, template, doc) {
+        Meteor.call('getDirectMessageRoom', doc._id, (err, data) => {
             if (!err) {
                 Client.setCurrentRoom(data);
                 template.$('input').val('');
@@ -29,8 +29,5 @@ Template.directMessageUserSearch.events({
 });
 
 Template.directMessageUserSearch.onRendered(function() {
-    var self = this;
-    $(document).bind('keydown','ctrl+m',function(){
-        self.$('input').focus();
-    });
+    $(document).bind('keydown', 'ctrl+m', () => { this.$('input').focus(); });
 });
