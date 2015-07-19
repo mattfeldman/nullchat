@@ -8,7 +8,7 @@ Template.messageList.helpers({
 });
 
 Template.messageList.created = function(){
-    scrollChatToBottom();
+    Client.scrollChatToBottom();
 };
 Template.messageList.events({
    'click .loadMore':function(event,template){

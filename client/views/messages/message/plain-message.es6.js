@@ -98,11 +98,11 @@ Template.plainMessage.events({
     },
     'mouseenter .message-user-mention'(event, template) {
         var userId = $(event.target).data("userid");
-        showPopup(event.target, "userProfileCard", userId);
+        Client.showPopup(event.target, "userProfileCard", userId);
     },
     'mouseenter .likeMessageLink'(event, template) {
         var userId = $(event.target).data("userid");
-        showPopup(event.target, "starredByListPopup", template.data._id);
+        Client.showPopup(event.target, "starredByListPopup", template.data._id);
     },
     'click .removeMessageButton': function (event, template) {
         event.preventDefault();

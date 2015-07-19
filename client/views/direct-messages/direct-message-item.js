@@ -1,7 +1,7 @@
 Template.directMessageItem.events({
     'click': function (event, template) {
         event.preventDefault();
-        setCurrentRoom(template.data._id);
+        Client.setCurrentRoom(template.data._id);
     }
 });
 
@@ -10,4 +10,3 @@ Template.directMessageItem.helpers({
         return Session.get('unread_'+this._id);
     }
 });
-

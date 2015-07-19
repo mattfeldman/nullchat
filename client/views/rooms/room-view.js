@@ -22,7 +22,7 @@ Template.roomView.events({
         if (room.scrollTop() < 50 && !scroll.needScroll && isReady.messages) {
             scroll.needScroll = true;
             scroll.previousHeight = $("#scrollContainer").height();
-            incMessageLimit(20);
+            Client.incMessageLimit(20);
         }
     },
     'click .launch':function(event,template){
@@ -57,7 +57,7 @@ Template.roomView.created = function () {
                     room.scrollTop(room.scrollTop() + offset);
                 }
                 else {
-                    scrollChatToBottom();
+                    Client.scrollChatToBottom();
                 }
             }
         });
@@ -127,14 +127,14 @@ Template.roomView.created = function () {
                     }
 
                     if (doc.roomId !== Session.get('currentRoom')) {
-                        incRoomUnread(doc.roomId);
+                        Client.incRoomUnread(doc.roomId);
                     }
                 }
             }
             if (!scroll.needScroll) {
                 // rougly percentage towards the top fo the scrollbar; less than 5% sticky scroll to bottom
                 if ((($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height()) < 0.05) {
-                    setTimeout(scrollChatToBottom, 100);
+                    setTimeout(Client.scrollChatToBottom, 100);
                 }
             }
         }

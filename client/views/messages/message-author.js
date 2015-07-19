@@ -4,7 +4,7 @@ Template.messageAuthor.events({
         if (!authorId || authorId === Meteor.userId()) return;
         Meteor.call('getDirectMessageRoom', authorId, function (err, data) {
             if (!err && data && !Session.equals('currentRoom',data)) {
-                setCurrentRoom(data);
+                Client.setCurrentRoom(data);
             }
         });
     }

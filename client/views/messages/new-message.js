@@ -7,7 +7,7 @@ var sendMessage = function (e) {
     };
     Meteor.call('message', messageStub);
     $("#message").val('');
-    scrollChatToBottom();
+    Client.scrollChatToBottom();
 };
 
 
@@ -100,7 +100,7 @@ var recallMessageWithNewOffset = function (offsetDelta) {
 };
 Template.newMessage.events({
     'mouseover .smile':function(event, template){
-        showPopup(event.target, "emojiPopup");
+        Client.showPopup(event.target, "emojiPopup");
     },
     'click .send': function (e) {
         sendMessage(e);
@@ -140,7 +140,7 @@ Template.newMessage.events({
                 var options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;
-                showModal("pasteImage", options.data);
+                Client.showModal("pasteImage", options.data);
             };
 
             reader.readAsDataURL(blob);
@@ -163,13 +163,13 @@ Template.newMessage.events({
         }
     },
     'click .gif.button':function(event,template){
-        showModal("giphyModal");
+        Client.showModal("giphyModal");
     },
     'click .meme.button':function(event,template){
-        showModal("memeModal");
+        Client.showModal("memeModal");
     },
     'click .upload.button':function(event,template){
-        showModal("uploadModal");
+        Client.showModal("uploadModal");
     }
 });
 

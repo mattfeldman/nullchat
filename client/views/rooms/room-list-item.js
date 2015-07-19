@@ -30,13 +30,13 @@ Template.roomListItem.events({
                         return;
                     }
                 }
-                setCurrentRoom(newRoom._id);
+                Client.setCurrentRoom(newRoom._id);
             }
             Meteor.call('leaveRoom', leaveRoomId);
         }
     },
     'click .setRoomLink':function(event,template){
         event.preventDefault();
-        setCurrentRoom(template.data._id);
+        Client.setCurrentRoom(template.data._id);
     }
 })

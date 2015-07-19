@@ -4,7 +4,7 @@ Template.notificationButton.onCreated(function () {
 
 Template.notificationButton.events({
     'click .notification-button': function (event, template) {
-        showModal("notifications");
+        Client.showModal("notifications");
     }
 });
 

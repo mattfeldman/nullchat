@@ -19,6 +19,6 @@ Template.emojiSelector.helpers({
 Template.emojiSelector.events({
     'click .emojione': function(event, target) {
         // TODO: Less Hacky jQuery
-        addTextToInput($(event.target).parent().data('emoji'));
+        Client.addTextToInput($(event.target).parent().data('emoji'));
     }
 });

@@ -10,6 +10,6 @@ Template.discoverRoomsButton.helpers({
 
 Template.discoverRoomsButton.events({
     'click #discoverRooms': function (event, template) {
-        showModal("discoverRooms");
+        Client.showModal("discoverRooms");
     }
 });

@@ -13,7 +13,7 @@ Template.changelogButton.onCreated(function () {
 Template.changelogButton.events({
     'click .changelogButton': function (event, template) {
         event.preventDefault();
-        showModal("changelogModal");
+        Client.showModal("changelogModal");
         Meteor.call('updateChangelogCursor');
     }
 });
