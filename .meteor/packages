@@ -10,6 +10,7 @@ cfs:s3
 cfs:standard-packages
 chriswessels:hammer
 chuangbo:marked
+flemay:less-autoprefixer
 gadicohen:reactive-window
 grigio:babel
 http
@@ -30,6 +31,7 @@ qnub:emojione
 reactive-var
 rubaxa:sortable
 sacha:spin
+semantic:ui
 semantic:ui-css
 service-configuration
 tomi:upload-jquery
