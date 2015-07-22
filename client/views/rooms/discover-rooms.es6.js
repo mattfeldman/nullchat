@@ -1,8 +1,8 @@
 Template.discoverRooms.helpers({
-    'roomInvitations':function(){
-        return RoomInvitations.find({},{sort:{timestamp:-1}});
+    roomInvitations() {
+        return RoomInvitations.find({}, {sort: {timestamp: -1}});
     },
-    'invitationCount':function(){
+    invitationCount() {
         return RoomInvitations.find({}).count();
     }
 });

@@ -1,5 +1,5 @@
 Template.joinRoom.helpers({
-    settings: function () {
+    settings() {
         return {
             position: "bottom",
             limit: 5,
@@ -9,15 +9,15 @@ Template.joinRoom.helpers({
                     field: "name",
                     template: Template.roomPill,
                     matchAll: true
-
                 }
             ]
         };
     }
 });
+
 Template.joinRoom.events({
-    'autocompleteselect input': function (event, template, doc) {
-        Meteor.call('joinRoom', doc._id, function (err, data) {
+    'autocompleteselect input'(event, template, doc) {
+        Meteor.call('joinRoom', doc._id, (err, data) => {
             if (!err) {
                 Client.setCurrentRoom(data);
                 template.$('input').val('');
@@ -27,12 +27,11 @@ Template.joinRoom.events({
     }
 });
 
-Template.joinRoom.rendered = function() {
+Template.joinRoom.onRendered(function() {
     jQuery.hotkeys.options.filterInputAcceptingElements = false;
     jQuery.hotkeys.options.filterTextInputs = false;
 
-    var self = this;
-    $(document).bind('keydown','ctrl+q',function(){
-        self.$('input').focus();
+    $(document).bind('keydown', 'ctrl+q', () => {
+        this.$('input').focus();
     });
-}
+});

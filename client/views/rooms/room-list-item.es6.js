@@ -1,32 +1,33 @@
 Template.roomListItem.helpers({
-    locked: function () {
+    locked() {
         return this.isPrivate ? "[LOCKED] -" : "";
     },
-    isSelectedClass: function () {
+    isSelectedClass() {
         return this._id === Session.get("currentRoom") ? "active" : "";
     },
-    notificationCount: function () {
-        var count = Notifications.find({userId: Meteor.userId(), roomId: this._id, seen: false}).count();
+    notificationCount() {
+        const count = Notifications.find({userId: Meteor.userId(), roomId: this._id, seen: false}).count();
         return count || "";
     },
-    leaveLinkEnabled: function(){
+    leaveLinkEnabled() {
         return this.ownerId !== Meteor.userId() ? "room-leave-link-enabled" : "";
     },
-    unreadCount:function(){
-        return Session.get('unread_'+this._id);
+    unreadCount() {
+        return Session.get('unread_' + this._id);
     }
 });
+
 Template.roomListItem.events({
-    'click .room-leave-link-enabled':function(event, template){
+    'click .room-leave-link-enabled'(event, template) {
         event.preventDefault();
-        var leaveRoomId =template.data._id;
-        if(leaveRoomId) {
-            if(Session.equals('currentRoom',leaveRoomId)){
+        const leaveRoomId = template.data._id;
+        if (leaveRoomId) {
+            if (Session.equals('currentRoom', leaveRoomId)) {
                 // Find a different room
-                var newRoom = Rooms.findOne({_id:{$ne:leaveRoomId},users:Meteor.userId()});
-                if(!newRoom){
-                    newRoom = Rooms.findOne({name:"welcome"});
-                    if(!newRoom){
+                let newRoom = Rooms.findOne({_id: {$ne: leaveRoomId}, users: Meteor.userId()});
+                if (!newRoom) {
+                    newRoom = Rooms.findOne({name: "welcome"});
+                    if (!newRoom) {
                         return;
                     }
                 }
@@ -35,8 +36,8 @@ Template.roomListItem.events({
             Meteor.call('leaveRoom', leaveRoomId);
         }
     },
-    'click .setRoomLink':function(event,template){
+    'click .setRoomLink'(event, template) {
         event.preventDefault();
         Client.setCurrentRoom(template.data._id);
     }
-})
+});

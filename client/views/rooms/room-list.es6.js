@@ -1,22 +1,22 @@
 Template.roomList.helpers({
-    currentRooms: function () {
+    currentRooms() {
         return Rooms.find({users: Meteor.userId(), direct: {$ne: true}});
     },
-    opts: function () {
+    opts() {
         return {
             group: "roomOrder",
-            store:{
-                get:function(sortable){
-                    var userPreferences = Meteor.user().preferences;
+            store: {
+                get(sortable) {
+                    const userPreferences = Meteor.user().preferences;
                     return userPreferences && userPreferences.roomOrder ? userPreferences.roomOrder : [];
                 },
-                set:function(sortable){
-                    Meteor.call('updateRoomOrder',sortable.toArray());
+                set(sortable) {
+                    Meteor.call('updateRoomOrder', sortable.toArray());
                 }
             }
         };
     },
-    currentDirectMessages: function () {
+    currentDirectMessages() {
         return Rooms.find({users: Meteor.userId(), direct: true});
     }
 });

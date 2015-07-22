@@ -1,6 +1,6 @@
 Template.roomUsers.helpers({
-    roomOnlineUsers: function () {
-        var users = getRoomUserIds();
+    roomOnlineUsers() {
+        const users = getRoomUserIds();
         return Meteor.users.find(
             {
                 _id: {$in: users},
@@ -15,13 +15,13 @@ Template.roomUsers.helpers({
                 }
             }).count();
     },
-    roomTotalUsers: function () {
-        var users = getRoomUserIds();
+    roomTotalUsers() {
+        const users = getRoomUserIds();
         return users && users.length;
     }
 });
 
-Template.roomUsers.onRendered(function () {
+Template.roomUsers.onRendered(function() {
     this.$('.room-users').popup({
         inline: true,
         hoverable: true,
@@ -31,6 +31,6 @@ Template.roomUsers.onRendered(function () {
     this.$('.ui.checkbox').checkbox();
 });
 function getRoomUserIds() {
-    var room = Rooms.find({_id: Session.get('currentRoom')}, {fields: {users: 1}}).fetch()[0];
+    const room = Rooms.find({_id: Session.get('currentRoom')}, {fields: {users: 1}}).fetch()[0];
     return room.users || [];
 }

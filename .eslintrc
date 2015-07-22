@@ -79,7 +79,8 @@
     "UploadServer": false,
     "AccountsTemplates": false,
     "emojione": false,
-    "FS": false
+    "FS": false,
+    "notify": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,

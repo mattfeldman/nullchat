@@ -1,16 +1,16 @@
 Template.roomTile.events({
-    'click .join': function (event, template) {
+    'click .join'(event, template) {
         Meteor.call('joinRoom', template.data._id);
     },
-    'click .leave': function (event, template) {
+    'click .leave'(event, template) {
         Meteor.call('leaveRoom', template.data._id);
     }
 });
 Template.roomTile.helpers({
-    'myRoomClass': function () {
+    myRoomClass() {
         return _(this.users).contains(Meteor.userId()) ? "my-room" : "";
     },
-    'inRoom': function () {
+    inRoom() {
         return _(this.users).contains(Meteor.userId());
     }
 });
