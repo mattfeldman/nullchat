@@ -80,7 +80,8 @@
     "AccountsTemplates": false,
     "emojione": false,
     "FS": false,
-    "notify": false
+    "notify": false,
+    "buzz": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
@@ -199,7 +200,7 @@
      */
     "indent": [2, 4],                // http://eslint.org/docs/rules/indent
     "brace-style": [2,               // http://eslint.org/docs/rules/brace-style
-      "1tbs", {
+      "stroustrup", {
         "allowSingleLine": true
       }],
     "quotes": [

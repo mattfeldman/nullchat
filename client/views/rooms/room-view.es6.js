@@ -1,59 +1,60 @@
 Template.roomView.helpers({
-    room: function () {
+    room() {
         return Rooms.findOne({_id: Session.get('currentRoom')});
     },
-    currentRoom: function () {
+    currentRoom() {
         return Session.get('currentRoom');
     },
-    availableRooms: function () {
+    availableRooms() {
         return Rooms.find();
     },
-    messageLimit: function () {
+    messageLimit() {
         return Session.get('messageLimit');
     }
 });
+
+const isReady = {};
+const scroll = {};
+
 Template.roomView.events({
-    'click #loadMore': function (e) {
+    'click #loadMore'(e) {
         Session.set('messageLimit', Session.get('messageLimit') + 20);
         e.preventDefault();
     },
-    'scroll #roomContainer': function (e) {
-        var room = $("#roomContainer");
+    'scroll #roomContainer'(e) {
+        const room = $("#roomContainer");
         if (room.scrollTop() < 50 && !scroll.needScroll && isReady.messages) {
             scroll.needScroll = true;
             scroll.previousHeight = $("#scrollContainer").height();
             Client.incMessageLimit(20);
         }
     },
-    'click .launch':function(event,template){
+    'click .launch'(event, template) {
         $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
     },
-    'click, scroll':function(){
+    'click, scroll'() {
         Session.set('unreadMessages', 0);
     }
 });
 
-Template.roomView.rendered = function () {
+Template.roomView.onRendered(function() {
     Meteor.call('setSeen', Session.get('currentRoom'));
-};
+});
 
-var isReady = {};
-var scroll = {};
-
-Template.roomView.created = function () {
+Template.roomView.onCreated(function() {
     isReady.notifications = false;
     isReady.messages = false;
-    var nowTimestamp;
+    let nowTimestamp;
     Session.setDefault('messageLimit', 10);
-    Deps.autorun(function () {
+    Deps.autorun(function() {
         nowTimestamp = new Date().getTime();
         Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'), {
-            onReady: function () {
+            onReady() {
                 isReady.messages = true;
                 if (scroll.needScroll) {
-                    var room = $("#roomContainer");
+                    const room = $("#roomContainer");
                     scroll.needScroll = false;
-                    var offset = $("#scrollContainer").height() - scroll.previousHeight;
+                    const offset = $("#scrollContainer").height() - scroll.previousHeight;
                     room.scrollTop(room.scrollTop() + offset);
                 }
                 else {
@@ -64,10 +65,10 @@ Template.roomView.created = function () {
         Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
     });
 
-    var clickSound = new buzz.sound('/sounds/click_04.wav');
-    var chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
+    const clickSound = new buzz.sound('/sounds/click_04.wav');
+    const chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
-    var permission = notify.permissionLevel();
+    const permission = notify.permissionLevel();
     if (permission === notify.PERMISSION_DEFAULT) {
         notify.requestPermission();
     }
@@ -75,16 +76,16 @@ Template.roomView.created = function () {
 
 
     Notifications.find({timestamp: {$gt: nowTimestamp}}).observe({
-        added: function (document) {
+        added(document) {
             if (isReady.notifications) {
                 // HACK: should be replaced by a full 'seen' message sub system
-                if((new Date().getTime() - document.timestamp) < 10000) {
+                if ((new Date().getTime() - document.timestamp) < 10000) {
                     chimeSound.play();
                     if (roomPreferencesOrDefault(document.roomId).desktopNotificationMention) {
                         if (permission === notify.PERMISSION_GRANTED) {
-                            var title = document.authorName + "(#" + document.roomName + ")";
-                            var user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
-                            var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                            const title = `${document.authorName}(#${document.roomName})`;
+                            const user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
+                            const avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
                             notify.createNotification(title, {
                                 body: document.message,
                                 icon: avatar,
@@ -97,31 +98,31 @@ Template.roomView.created = function () {
         }
     });
     Messages.find({timestamp: {$gt: nowTimestamp}}).observe({
-        added: function (doc) {
+        added(doc) {
             if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
                 // HACK: should be replaced by a full 'seen' message sub system
-                if((new Date().getTime() - doc.timestamp) < 10000) {
+                if ((new Date().getTime() - doc.timestamp) < 10000) {
                     if (roomPreferencesOrDefault(doc.roomId).playMessageSound) {
                         clickSound.play();
                     }
 
                     if (roomPreferencesOrDefault(doc.roomId).desktopNotificationAllMessages && doc.type !== 'rich') {
                         if (permission === notify.PERMISSION_GRANTED) {
-                            var user = Meteor.users.findOne({_id: doc.authorId}, {
+                            const user = Meteor.users.findOne({_id: doc.authorId}, {
                                 fields: {
                                     "profile.avatar": 1,
                                     "username": 1
                                 }
                             });
-                            var room = Rooms.findOne({_id: doc.roomId});
-                            var title = user.username + "(#" + room.name + ")";
-                            var avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                            const room = Rooms.findOne({_id: doc.roomId});
+                            const title = user.username + "(#" + room.name + ")";
+                            const avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
                             notify.createNotification(title, {body: doc.message, icon: avatar, tag: doc._id});
                         }
                     }
 
                     if (!document.hasFocus()) {
-                        var currentUnreadMessageCount = Session.get('unreadMessages');
+                        let currentUnreadMessageCount = Session.get('unreadMessages');
                         currentUnreadMessageCount += 1;
                         Session.set('unreadMessages', currentUnreadMessageCount);
                     }
@@ -132,8 +133,9 @@ Template.roomView.created = function () {
                 }
             }
             if (!scroll.needScroll) {
-                // rougly percentage towards the top fo the scrollbar; less than 5% sticky scroll to bottom
-                if ((($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height()) < 0.05) {
+                // rough percentage toward the top of the scroll view
+                const perctentToTop = ($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height();
+                if (perctentToTop < 0.05) {
                     setTimeout(Client.scrollChatToBottom, 100);
                 }
             }
@@ -141,16 +143,16 @@ Template.roomView.created = function () {
     });
 
     Messages.find({authorId: Meteor.userId()}).observe({
-        changed: function (newDoc, oldDoc) {
+        changed(newDoc, oldDoc) {
             if (newDoc.likedBy.length - oldDoc.likedBy.length === 1) {
-                var likedBy = _.difference(newDoc.likedBy, oldDoc.likedBy)[0];
+                const likedBy = _.difference(newDoc.likedBy, oldDoc.likedBy)[0];
                 if (likedBy === Meteor.userId()) {return;}
                 if (permission === notify.PERMISSION_GRANTED) {
-                    var user = Meteor.users.findOne({_id: likedBy}, {fields: {"profile.avatar": 1, "username": 1}});
-                    if (!user) {return;}
-                    var avatar = user.profile && user.profile.avatar || '/images/logo64.png';
-                    var title = user.username + " gave you a star.";
-                    var body = "For \"" + newDoc.message + "\"";
+                    const user = Meteor.users.findOne({_id: likedBy}, {fields: {"profile.avatar": 1, "username": 1}});
+                    if (!user) { return; }
+                    const avatar = user.profile && user.profile.avatar || '/images/logo64.png';
+                    const title = user.username + " gave you a star.";
+                    const body = `For "${newDoc.message}"`;
                     notify.createNotification(title, {body: body, icon: avatar, tag: newDoc._id});
                 }
             }
@@ -158,17 +160,17 @@ Template.roomView.created = function () {
     });
 
     Session.set('unreadMessages', 0);
-    Deps.autorun(function () {
-        var numberOfUnreadMessages = Session.get('unreadMessages');
-        var currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
+    Deps.autorun(function() {
+        const numberOfUnreadMessages = Session.get('unreadMessages');
+        const currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
 
-        var currentRoomString = '';
+        let currentRoomString = '';
 
         if (currentRoom.direct) {
-            var otherUserId= UserHelpers.otherUserId(currentRoom.users);
+            const otherUserId = UserHelpers.otherUserId(currentRoom.users);
             currentRoomString = "@" + UserHelpers.usernameForUserId(otherUserId) + ' ';
         }
-        else{
+        else {
             currentRoomString = '#' + currentRoom.name + ' ';
         }
 
@@ -180,18 +182,19 @@ Template.roomView.created = function () {
         }
     });
 
-    Deps.autorun(function(){
-        var rooms = Rooms.find({users:Meteor.userId()},{fields:{_id:1}}).fetch();
-        if(rooms){
-            for(var i=0;i<rooms.length;i++){
-                var roomId = rooms[i]._id;
+    Deps.autorun(function() {
+        const rooms = Rooms.find({users: Meteor.userId()}, {fields: {_id: 1}}).fetch();
+        if (rooms) {
+            for (let i = 0; i < rooms.length; i++) {
+                const roomId = rooms[i]._id;
                 Meteor.subscribe('newMessagesForRoom', roomId);
             }
         }
     });
     isReady.notifications = true;
-};
-Template.roomView.destroyed = function () {
+});
+
+Template.roomView.destroyed = function() {
     isReady.notifications = false;
     isReady.messages = false;
 }
