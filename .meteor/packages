@@ -10,7 +10,6 @@ cfs:s3
 cfs:standard-packages
 chriswessels:hammer
 chuangbo:marked
-flemay:less-autoprefixer
 gadicohen:reactive-window
 grigio:babel
 http
