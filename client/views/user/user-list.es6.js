@@ -1,27 +1,22 @@
 Template.userList.helpers({
-    'filteredUsers': function () {
-        var room = Rooms.findOne({_id: Session.get('currentRoom'),});
+    filteredUsers() {
+        const room = Rooms.findOne({_id: Session.get('currentRoom'),});
         if (room) {
-            var query = {_id: {$in: room.users}};
-            if(!Session.get('showOfflineUsers')){
-                query['status.online']=true;
+            const query = {_id: {$in: room.users}};
+            if (!Session.get('showOfflineUsers')) {
+                query['status.online'] = true;
             }
             return Meteor.users.find(query);
         }
-        else {
-            return [];
-        }
+        return [];
     },
-    'isChecked': function () {
+    isChecked() {
         return Session.get('showOfflineUsers') ? " checked" : "";
     }
 });
 
 Template.userList.events({
-    'change .show-offline-users': function (event, template) {
+    'change .show-offline-users'(event, template) {
         Session.set('showOfflineUsers', $(event.target).prop('checked'));
     }
 });
-
-
-
