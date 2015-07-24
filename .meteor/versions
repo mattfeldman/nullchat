@@ -116,7 +116,7 @@ routepolicy@1.0.5
 rubaxa:sortable@1.2.0
 sacha:spin@2.3.1
 sanjo:jasmine@0.14.0
-sanjo:karma@1.6.0
+sanjo:karma@1.5.1
 sanjo:long-running-child-process@1.0.3
 sanjo:meteor-files-helpers@1.1.0_6
 sanjo:meteor-version@1.0.0
@@ -142,7 +142,7 @@ useraccounts:semantic-ui@1.11.1
 velocity:chokidar@1.0.3_1
 velocity:console-reporter@0.1.2
 velocity:core@0.7.1
-velocity:html-reporter@0.7.0
+velocity:html-reporter@0.6.2
 velocity:meteor-internals@1.1.0_7
 velocity:meteor-stubs@1.1.0
 velocity:shim@0.1.0
