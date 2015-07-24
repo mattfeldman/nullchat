@@ -1,12 +1,11 @@
 Template.notificationsModalContent.helpers({
-    'unseenNotifications': function () {
+    unseenNotifications() {
         return Notifications.find({seen: false});
     }
 });
 
 Template.notificationsModalContent.events({
-    'click .notificatpions-dismiss-all': function (event, template) {
+    'click .notificatpions-dismiss-all'(event, template) {
         Meteor.call("setAllNotificationsSeen");
     }
 });
-

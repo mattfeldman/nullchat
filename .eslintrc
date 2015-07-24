@@ -81,7 +81,8 @@
     "emojione": false,
     "FS": false,
     "notify": false,
-    "buzz": false
+    "buzz": false,
+    "lunr": false
   },
   "ecmaFeatures": {
     "arrowFunctions": true,

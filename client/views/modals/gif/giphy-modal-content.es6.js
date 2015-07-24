@@ -1,37 +1,36 @@
-Template.giphyModalContent.created = function () {
-    var instance = this;
+Template.giphyModalContent.onCreated(function() {
+    const instance = this;
     instance.searchText = new ReactiveVar("");
     instance.searchResults = new ReactiveVar([]);
-};
+});
 
 Template.giphyModalContent.helpers({
-    searchResults:function(){
+    searchResults() {
         return Template.instance().searchResults.get();
     }
 });
 
-var debouncedSearch = _.debounce(function(search,template) {
+const debouncedSearch = _.debounce((search, template) => {
     template.searchResults.set([]);
-    HTTP.get("https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, function (error, result) {
+    HTTP.get("https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=dc6zaTOxFJmzC&limit=20", {}, (error, result) => {
         if (!error) {
             template.searchResults.set(result.data.data);
-            Meteor.setTimeout(function() {
+            Meteor.setTimeout(() => {
                 $('.giphyModal.modal').modal('refresh');
             }, 0);
         }
     });
-},300);
+}, 300);
 
 Template.giphyModalContent.events({
-    //update the search session when the search input changes
-    'keyup .search, change .search': function (event, template) {
-        var search;
-        search = event.target.value;
+    // update the search session when the search input changes
+    'keyup .search, change .search'(event, template) {
+        const search = event.target.value;
 
         // Prevent unneeded recomputation
-        if(template.searchText.get() === search) { return; }
+        if (template.searchText.get() === search) { return; }
 
         template.searchText.set(search);
-        debouncedSearch(search,template);
+        debouncedSearch(search, template);
     }
 });

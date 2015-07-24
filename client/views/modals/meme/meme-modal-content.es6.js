@@ -1,29 +1,28 @@
-Template.memeModalContent.created = function () {
-    var instance = this;
+Template.memeModalContent.onCreated(function() {
+    const instance = this;
     instance.selectedMeme = new ReactiveVar(false);
     instance.currentMemeUrl = new ReactiveVar(false);
+});
 
-};
-Template.memeModalContent.rendered = function () {
+Template.memeModalContent.onRendered(function() {
     $('.dropdown').dropdown();
-};
-
+});
 
 Template.memeModalContent.helpers({
-    memes: function () {
+    memes() {
         return Memes.find({}).fetch();
     },
-    selectedMeme: function () {
-        var selectedMeme = Template.instance().selectedMeme.get();
+    selectedMeme() {
+        const selectedMeme = Template.instance().selectedMeme.get();
         return selectedMeme || false;
     },
-    currentMemeUrl: function () {
+    currentMemeUrl() {
         return Template.instance().currentMemeUrl.get() || false;
     }
 });
 
-var debouncedUpdate = _.throttle(function (params, template) {
-    Meteor.call('createMeme', params, function (error, result) {
+const debouncedUpdate = _.throttle((params, template) => {
+    Meteor.call('createMeme', params, (error, result) => {
         if (!error) {
             template.currentMemeUrl.set(result);
         }
@@ -31,27 +30,25 @@ var debouncedUpdate = _.throttle(function (params, template) {
 }, 750);
 
 Template.memeModalContent.events({
-    //update the search session when the search input changes
-    'keyup .search, change .search': function (event, template) {
-        var meme = Memes.findOne({_id: event.target.value});
+    // update the search session when the search input changes
+    'keyup .search, change .search'(event, template) {
+        const meme = Memes.findOne({_id: event.target.value});
         if (meme) {
             template.selectedMeme.set(meme);
             template.currentMemeUrl.set(meme.url);
         }
     },
-    'keyup input': function (event, template) {
-        var top = template.$('input[name=top]').val();
-        var bottom = template.$('input[name=bottom]').val();
-        var selectedMeme = template.selectedMeme.get();
-        var params = {id: selectedMeme.id, topLine: top, bottomLine: bottom};
-
+    'keyup input'(event, template) {
+        const top = template.$('input[name=top]').val();
+        const bottom = template.$('input[name=bottom]').val();
+        const selectedMeme = template.selectedMeme.get();
+        const params = {id: selectedMeme.id, topLine: top, bottomLine: bottom};
         debouncedUpdate(params, template);
-
     },
-    'click .insert': function (event, template) {
-        var currentMemeUrl = template.currentMemeUrl.get();
+    'click .insert'(event, template) {
+        const currentMemeUrl = template.currentMemeUrl.get();
         event.preventDefault();
-        if (!currentMemeUrl) { return;}
+        if (!currentMemeUrl) { return; }
         Meteor.call('message', {
             roomId: Session.get('currentRoom'),
             message: currentMemeUrl

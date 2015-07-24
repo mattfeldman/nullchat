@@ -1,5 +1,5 @@
 Template.memeTile.events({
-    'click .memeTile': function (event, template) {
+    'click .memeTile'(event, template) {
         event.preventDefault();
         Meteor.call('message', {
             roomId: Session.get('currentRoom'),
@@ -7,21 +7,20 @@ Template.memeTile.events({
         });
         $(".memeModal").modal('hide');
     },
-    'mouseenter .memeTile': function (event, template) {
-        Template.instance().imgSrc.set(this.images.fixed_height.url);HN
+    'mouseenter .memeTile'(event, template) {
+        Template.instance().imgSrc.set(this.images.fixed_height.url);
     },
-    'mouseout .memeTile': function (event, template) {
+    'mouseout .memeTile'(event, template) {
         Template.instance().imgSrc.set(this.images.fixed_height_still.url);
     }
 });
 
 Template.memeTile.helpers({
-    'imgSrc' :function(){
+    imgSrc() {
         return Template.instance().imgSrc.get();
     }
 });
 
-Template.memeTile.created = function(){
-    var instance = this;
-    instance.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
-};
+Template.memeTile.onCreated(function() {
+    this.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
+});

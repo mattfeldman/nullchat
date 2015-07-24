@@ -1,14 +1,14 @@
 Template.uploadModalContent.helpers({
-    'uploadCallback': function () {
+    uploadCallback() {
         return {
-            finished: function (index, fileInfo, context) {
+            finished(index, fileInfo, context) {
                 check(fileInfo, Match.ObjectIncluding({
                     size: Match.Integer,
                     url: String
                 }));
                 Meteor.call('message', {
                     roomId: Session.get('currentRoom'),
-                    message: '**Uploaded:** ' + fileInfo.url + ' (' + fileInfo.size / 1000000 + 'mb)'
+                    message: `**Upload: **${fileInfo.url} (${fileInfo.size / 1000000}mb)`
                 });
                 $(".uploadModal").modal('hide');
             }

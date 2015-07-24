@@ -1,5 +1,5 @@
 Template.starsModalButton.events({
-    'click .starsModalButton': function (e,t) {
+    'click .starsModalButton'(e, t) {
         e.preventDefault();
         Client.showModal('starsModal');
     }

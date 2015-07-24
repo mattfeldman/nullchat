@@ -1,16 +1,16 @@
-Template.notificationButton.onCreated(function () {
+Template.notificationButton.onCreated(function() {
     this.subscribe('notifications');
 });
 
 Template.notificationButton.events({
-    'click .notification-button': function (event, template) {
+    'click .notification-button'(event, template) {
         Client.showModal("notifications");
     }
 });
 
 Template.notificationButton.helpers({
-    'unreadCount': function () {
-        var count = Notifications.find({seen: false}).count();
+    unreadCount() {
+        const count = Notifications.find({seen: false}).count();
         return count ? count : false;
     }
 });

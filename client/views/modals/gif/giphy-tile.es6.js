@@ -1,5 +1,5 @@
 Template.giphyTile.events({
-    'click .giphyTile': function (event, template) {
+    'click .giphyTile'(event, template) {
         event.preventDefault();
         Meteor.call('message', {
             roomId: Session.get('currentRoom'),
@@ -7,21 +7,20 @@ Template.giphyTile.events({
         });
         $(".giphyModal").modal('hide');
     },
-    'mouseenter .giphyTile': function (event, template) {
+    'mouseenter .giphyTile'(event, template) {
         Template.instance().imgSrc.set(this.images.fixed_height.url);
     },
-    'mouseout .giphyTile': function (event, template) {
+    'mouseout .giphyTile'(event, template) {
         Template.instance().imgSrc.set(this.images.fixed_height_still.url);
     }
 });
 
 Template.giphyTile.helpers({
-    'imgSrc' :function(){
+    imgSrc() {
         return Template.instance().imgSrc.get();
     }
 });
 
-Template.giphyTile.created = function(){
-    var instance = this;
-    instance.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
-};
+Template.giphyTile.onCreated(function() {
+    this.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
+});
