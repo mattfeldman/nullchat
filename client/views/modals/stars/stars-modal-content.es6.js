@@ -33,6 +33,7 @@ Template.starsModalContent.helpers({
         const search = Template.instance().searchText.get();
         const results = [];
         const docs = Messages.find({likedBy: Meteor.userId()}).fetch();
+
         if (!search) {
             return docs;
         }
