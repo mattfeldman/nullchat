@@ -13,9 +13,9 @@
             </div>
         </div>
     {{else}}
-        <div class="ui red basic compact labeled icon button room-settings-button"><i class="settings icon"></i>Room Settings</div>
+        <div class="ui red basic compact icon button room-settings-button"><i class="bell icon"></i></div>
         <div class="ui wide large popup">
-            <div class="header">Room Settings</div>
+            <div class="header">Notifications for #<u>{{currentRoomName}}</u></div>
             <div class="content ui list">
                 <div class="ui checkbox item"><input id="playMessageSound" type="checkbox" {{playMessageSound}}><label for="playMessageSound">Play Message Click</label></div>
                 <div class="ui checkbox item"><input id="desktopNotificationMention" type="checkbox" {{desktopNotificationMention}}><label for="desktopNotificationMention">Desktop Notifications for @mentions</label></div>
