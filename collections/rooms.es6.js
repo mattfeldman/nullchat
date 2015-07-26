@@ -4,8 +4,8 @@ Meteor.methods({
     joinRoom(id) {
         check(id, String);
 
-        var room = Rooms.findOne({_id: id});
-        var userId = Meteor.userId();
+        const room = Rooms.findOne({_id: id});
+        const userId = Meteor.userId();
 
         if (!room) {
             throw new Meteor.Error("room missing");
@@ -18,22 +18,22 @@ Meteor.methods({
         }
         if (!_.contains(room.users, userId)) {
             Rooms.update({_id: room._id}, {$addToSet: {users: userId}});
-            RoomInvitations.update({invitedUser: userId, roomId:room._id, active:true}, {
+            RoomInvitations.update({invitedUser: userId, roomId: room._id, active: true}, {
                 $set: {
                     didAccept: true,
                     completedTime: new Date(),
                     active: false
                 }
-            },{multi:true});
+            }, {multi: true});
         }
         return room._id;
     },
-    getDirectMessageRoom(targetUserId){
+    getDirectMessageRoom(targetUserId) {
         check(targetUserId, String);
 
-        var users = [targetUserId, Meteor.userId()];
-        var currentRoom = Rooms.findOne({users:{$all:users}, direct: true});
-        if(!currentRoom) {
+        const users = [targetUserId, Meteor.userId()];
+        const currentRoom = Rooms.findOne({users: {$all: users}, direct: true});
+        if (!currentRoom) {
             return Rooms.insert({
                 name: null,
                 topic: null,
@@ -48,8 +48,8 @@ Meteor.methods({
         return currentRoom._id;
     },
     leaveRoom(id) {
-        var room = Rooms.findOne({_id: id});
-        var userId = Meteor.userId();
+        const room = Rooms.findOne({_id: id});
+        const userId = Meteor.userId();
 
         if (!room) {
             throw new Meteor.Error("Room invalid");
@@ -65,13 +65,13 @@ Meteor.methods({
     setCurrentRoom(roomId) {
         check(roomId, String);
 
-        var room = Rooms.findOne({_id: roomId});
+        const room = Rooms.findOne({_id: roomId});
         if (!room) {
             throw new Meteor.Error(`Can not find room with id ${roomId}`);
         }
 
         if (!_.contains(room.users, Meteor.userId())) {
-            Meteor.call('joinRoom', room._id, function (err, id) {
+            Meteor.call('joinRoom', room._id, (err, id) => {
                 if (err) {
                     throw new Meteor.Error("User not allowed in to join this room.");
                 }
@@ -82,8 +82,8 @@ Meteor.methods({
     createRoom(roomStub) {
         check(roomStub, Schemas.createRoom);
 
-        var roomName = roomStub.name;
-        var roomNameRegex = new RegExp("^" + roomName + "$", "i"); // case insensitivity
+        const roomName = roomStub.name;
+        const roomNameRegex = new RegExp("^" + roomName + "$", "i"); // case insensitivity
 
         if (!Schemas.regex.room.test(roomName)) {
             throw new Meteor.Error("room name must be alphanumeric");
@@ -111,8 +111,8 @@ Meteor.methods({
         check(targetUserId, String);
         check(targetRoomId, String);
 
-        var targetUser = Meteor.users.findOne(targetUserId);
-        var room = Rooms.findOne(targetRoomId);
+        const targetUser = Meteor.users.findOne(targetUserId);
+        const room = Rooms.findOne(targetRoomId);
 
         if (!room) {
             throw new Meteor.Error("Room could not be found.");
@@ -140,8 +140,8 @@ Meteor.methods({
         check(targetRoomId, String);
         check(isPrivate, Boolean);
 
-        var room = Rooms.findOne(targetRoomId);
-        var user = Meteor.user();
+        const room = Rooms.findOne(targetRoomId);
+        const user = Meteor.user();
 
         if (!room) {
             throw new Meteor.Error("Room could not be found.");
@@ -151,9 +151,9 @@ Meteor.methods({
             throw new Meteor.Error("you must be owner");
         }
 
-        var updateQuery = {$set:{isPrivate: isPrivate}};
+        const updateQuery = {$set:{isPrivate: isPrivate}};
         if (isPrivate) {
-            updateQuery.$addToSet = {invited: {$each:room.users}};
+            updateQuery.$addToSet = {invited: {$each: room.users}};
         }
         Rooms.update({_id: room._id}, updateQuery);
     }
