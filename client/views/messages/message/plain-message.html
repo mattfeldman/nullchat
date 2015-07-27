@@ -1,56 +1,7 @@
 <template name="plainMessage">
-    <div id="{{_id}}" class="ui comment">
-        <a class="avatar">
-            <img src="{{avatarForUserId authorId}}"/>
-        </a>
-        <div class="content {{myMessageFromId authorId}} smallMessage" style="border-color: {{colorForUserId authorId}};">
-            {{>messageAuthor authorId}}
-            <div class="metadata">
-                <span class="date message-timestamp">{{showTimestamp}}</span>
-                <span class="rating">
-                    <a class="likeMessageLink" href="#">
-                        <i class="fa {{starIcon}} fa-lg message-star-icon"></i>
-                        <span class="likedBy">{{likedBy.length}}</span>
-                    </a>
-                </span>
-                <div class="author">
-                    {{#if fromMobile}}
-                        <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
-                    {{/if}}
-                    {{#if crosspost}}
-                        <i class="fa fa-random fa-lg message-crosspost-indicator"
-                           title="Message was cross posted using #tags"></i>
-                    {{/if}}
-                    {{#if hasEdits}}
-                        <span class="lastEditTime">Edited {{lastEditTime}}</span>
-                    {{/if}}
-                    <span class="ui horizontal divided link list actionLinks">
-                        {{#if canEdit}}
-                            <a href="#" class="item editMessageButton">edit</a>
-                            <a href="#" class="item removeMessageButton">remove</a>
-                        {{/if}}
-                        <!-- TODO: Re-enable permalink once the view is useful
-                        <a class="item messagePermaLink" href="/message/{{_id}}">permalink</a> -->
-                    </span>
-                </div>
-            </div>
-            <div class="text">
-                {{#if isUnderEdit}}
-                    <form class="ui fluid left icon action input editForm">
-                        <input type="text" name="newMessageText" class="messageEditInput" style="padding-left: 0 !important;" value="{{message}}"/>
-                        <div class="ui buttons">
-                            <button type="submit" class="ui green gif button messageEditSubmit">save</button>
-                            <div class="ui meme button canceleEditSubmit">
-                                cancel
-                            </div>
-                        </div>
-                    </form>
-                {{else}}
-                    <span class="clickableMessageBody" style="font-size: {{fontSizePercent}}%">
-                        {{{finalMessageBody}}}
-                    </span>
-                {{/if}}
-            </div>
-        </div>
-    </div>
+    <a class="item item-avatar" href="#">
+        <img src="{{avatarForUserId authorId}}"/>
+        <h2>{{>messageAuthor authorId}}</h2>
+        {{{finalMessageBody}}}
+    </a>
 </template>

@@ -355,3 +355,7 @@ html, body { height: 100%; }
 .ui.comments {
     max-width: 100%;
 }
+
+.has-footer{
+    bottom: 45px;
+}

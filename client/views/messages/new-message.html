@@ -1,9 +1,8 @@
 <template name="newMessage">
-    <div class="new-message-outer-container">
+<!--    <div class="new-message-outer-container">
         <div class="item">
             <div class="ui fluid left icon action input">
                 {{>emojiSelector}}
-                {{>inputAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
                 <div class="ui buttons">
                     <div class="ui send button">Send</div>
                     <div class="ui purple gif button">
@@ -21,5 +20,9 @@
                 {{typingUsers}}
             </div>
         </div>
-    </div>
+    </div>-->
+    <label class="item-input-wrapper">
+        {{>inputAutocomplete settings=settings name="message" id="message" placeholder="don't be shy..."}}
+    </label>
+    <button class="button button-positive send pull-right">Send</button>
 </template>

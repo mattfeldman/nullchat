@@ -1,45 +1,48 @@
 <template name="roomList">
-    <div class="ui vertical fluid menu">
-        <div class="ui teal segment header item">
-            <i class="university icon"></i>
-            rooms
-            {{> createRoom }}
-        </div>
-        <div class="item">
-            <div class="ui transparent fluid icon input">
-                {{> joinRoom}}
-                <i class="search icon"></i>
-            </div>
-        </div>
-        <div class="room-list">
-            {{#sortable items=currentRooms options=opts}}
-                {{>roomListItem this}}
-            {{/sortable}}
-        </div>
-        <div class="ui header green item">
-            <i class="comments icon"></i>
-            direct messages
-        </div>
-        <div class="item">
-            <div class="ui transparent fluid icon input">
-                {{> directMessageUserSearch }}
-                <i class="search icon"></i>
-            </div>
-        </div>
-        {{#each currentDirectMessages}}
-            {{>directMessageItem this}}
-        {{/each}}
-    </div>
-    <div class="ui vertical vertically fitted red active fluid text menu">
-        <div class="header item">
-            actions
-        </div>
-        {{> starsModalButton }}
-        {{> discoverRoomsButton}}
-        {{> notificationButton}}
-        {{> userProfileButton}}
-        {{> changelogButton}}
-        {{> userLogoutButton}}
-        <a class="ui icon link item" href="https://github.com/mattfeldman/nullchat" target="_blank"><i class="ui help icon"></i>About</a>
-    </div>
+    {{#sortable items=currentRooms options=opts}}
+        {{>roomListItem this}}
+    {{/sortable}}
+    <!--<div class="ui vertical fluid menu">-->
+        <!--<div class="ui teal segment header item">-->
+            <!--<i class="university icon"></i>-->
+            <!--rooms-->
+            <!--{{> createRoom }}-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<div class="ui transparent fluid icon input">-->
+                <!--{{> joinRoom}}-->
+                <!--<i class="search icon"></i>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="room-list">-->
+            <!--{{#sortable items=currentRooms options=opts}}-->
+                <!--{{>roomListItem this}}-->
+            <!--{{/sortable}}-->
+        <!--</div>-->
+        <!--<div class="ui header green item">-->
+            <!--<i class="comments icon"></i>-->
+            <!--direct messages-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<div class="ui transparent fluid icon input">-->
+                <!--{{> directMessageUserSearch }}-->
+                <!--<i class="search icon"></i>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--{{#each currentDirectMessages}}-->
+            <!--{{>directMessageItem this}}-->
+        <!--{{/each}}-->
+    <!--</div>-->
+    <!--<div class="ui vertical vertically fitted red active fluid text menu">-->
+        <!--<div class="header item">-->
+            <!--actions-->
+        <!--</div>-->
+        <!--{{> starsModalButton }}-->
+        <!--{{> discoverRoomsButton}}-->
+        <!--{{> notificationButton}}-->
+        <!--{{> userProfileButton}}-->
+        <!--{{> changelogButton}}-->
+        <!--{{> userLogoutButton}}-->
+        <!--<a class="ui icon link item" href="https://github.com/mattfeldman/nullchat" target="_blank"><i class="ui help icon"></i>About</a>-->
+    <!--</div>-->
 </template>

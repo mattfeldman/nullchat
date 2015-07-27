@@ -1,44 +1,46 @@
 <template name="roomView">
-<!--        <div class="container">
-            <div class="ui sticky fixed bottom">
-                {{ newMessage}}
-            </div>
-        </div>
-        <div class="ui fixed main menu">
-            <div class="container">
-                <div class="title item">
-                    {{>roomTitle room}}
-                </div>
-                {{#if room.topic}}
-                    <div class="title item">
-                        {{room.topic}}
+        {{#ionSideMenuContainer}}
+            {{#ionSideMenus}}
+                {{#ionSideMenu}}
+                    <div class="bar bar-header bar-dark">
+                        <h1 class="title">Rooms</h1>
                     </div>
-                {{/if}}
-                {{>roomPreferences}}
-                <div class="right menu">
-                    <a class="launch item">
-                        Rooms
-                        <i class="content icon"></i>
-                    </a>
+                    <div class="content has-header">
+                        <div class="list">
+                            {{> roomList }}
+                        </div>
+                    </div>
+                {{/ionSideMenu}}
+                {{#ionSideMenu side="right"}}
+                    <div class="bar bar-header bar-dark">
+                        <h1 class="title">Actions</h1>
+                    </div>
+                    <div class="content has-header">
+                        <div class="list">
+                            <div class="item item-icon-left" data-ion-menu-close>
+                                {{> ionIcon icon="ios-arrow-left"}} Close Me
+                            </div>
+                        </div>
+                    </div>
+                {{/ionSideMenu}}
+            {{/ionSideMenus}}
+            {{#ionSideMenuContent}}
+                {{> ionNavBar class="bar-positive"}}
+                <!--{{#contentFor "headerButtonLeft"}}-->
+                    <!--{{>ionNavBackButton}}-->
+                <!--{{/contentFor}}-->
+
+                {{#contentFor "headerTitle"}}
+                    <h1 class="title">#{{currentRoomName}}</h1>
+                {{/contentFor}}
+                {{#ionNavView}}
+                    {{#ionContent class="has-footer"}}
+                        {{> messageList messages}}
+                    {{/ionContent}}
+                {{/ionNavView}}
+                <div class="bar bar-stable bar-footer">
+                    {{> newMessage }}
                 </div>
-            </div>
-        </div>
-        <div class="ui threaded comments room-container" id="roomContainer">
-            <div id="scrollContainer" class="scroll-container">
-                {{> messageList messages}}
-            </div>
-        </div>-->
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton}}
-    {{/contentFor}}
-
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Notifications</h1>
-    {{/contentFor}}
-
-    {{#ionView}}
-        {{#ionContent}}
-            Content goes here
-        {{/ionContent}}
-    {{/ionView}}
+            {{/ionSideMenuContent}}
+        {{/ionSideMenuContainer}}
 </template>
