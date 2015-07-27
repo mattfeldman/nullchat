@@ -4,7 +4,6 @@ accounts-oauth@1.1.5
 accounts-password@1.1.1
 aldeed:autoform@5.3.2
 aldeed:simple-schema@1.1.0
-amplify@1.0.0
 aramk:tinycolor@1.1.0_1
 audit-argument-checks@1.0.3
 autoupdate@1.2.1
@@ -106,9 +105,6 @@ oauth@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.6
 ordered-dict@1.0.3
-package-version-parser@3.0.3
-practicalmeteor:chai@1.9.2_3
-practicalmeteor:loglevel@1.1.0_3
 qnub:emojione@0.0.3
 raix:eventemitter@0.1.2
 random@1.0.3
@@ -119,11 +115,6 @@ retry@1.0.3
 routepolicy@1.0.5
 rubaxa:sortable@1.2.0
 sacha:spin@2.3.1
-sanjo:jasmine@0.15.1
-sanjo:karma@1.6.1
-sanjo:long-running-child-process@1.0.3
-sanjo:meteor-files-helpers@1.1.0_7
-sanjo:meteor-version@1.0.0
 service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
@@ -140,12 +131,5 @@ underscore@1.0.3
 url@1.0.4
 useraccounts:core@1.11.1
 useraccounts:semantic-ui@1.11.1
-velocity:chokidar@1.0.3_1
-velocity:console-reporter@0.1.2
-velocity:core@0.7.1
-velocity:html-reporter@0.7.2
-velocity:meteor-internals@1.1.0_7
-velocity:meteor-stubs@1.1.0
-velocity:shim@0.1.0
 webapp@1.2.0
 webapp-hashing@1.0.3

@@ -41,10 +41,10 @@ useraccounts:semantic-ui
 meteorhacks:kadira-debug
 
 # Test Packages
-sanjo:karma@1.5.1
-sanjo:jasmine
-velocity:html-reporter@0.6.2
-velocity:console-reporter
+#sanjo:karma@1.5.1
+#sanjo:jasmine
+#velocity:html-reporter@0.6.2
+#velocity:console-reporter
 
 # Mobile Packages
 fourseven:scss
