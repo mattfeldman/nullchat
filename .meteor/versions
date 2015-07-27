@@ -2,7 +2,7 @@ accounts-base@1.2.0
 accounts-github@1.0.4
 accounts-oauth@1.1.5
 accounts-password@1.1.1
-aldeed:autoform@4.2.2
+aldeed:autoform@5.3.2
 aldeed:simple-schema@1.1.0
 amplify@1.0.0
 aramk:tinycolor@1.1.0_1
@@ -49,7 +49,7 @@ fourseven:scss@2.1.1
 gadicohen:reactive-window@1.0.6
 geojson-utils@1.0.3
 github@1.1.3
-grigio:babel@0.1.4
+grigio:babel@0.1.6
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
@@ -81,10 +81,10 @@ meteor-platform@1.2.2
 meteorhacks:aggregate@1.2.1
 meteorhacks:async@1.0.0
 meteorhacks:collection-utils@1.2.0
-meteorhacks:kadira@2.22.0
+meteorhacks:kadira@2.22.1
 meteorhacks:kadira-debug@1.3.3
 meteorhacks:meteorx@1.3.1
-meteorhacks:npm@1.3.0
+meteorhacks:npm@1.4.0
 meteoric:ionic@0.1.17
 meteoric:ionic-sass@0.1.9
 meteoric:ionicons-sass@0.1.6
@@ -101,7 +101,7 @@ mrt:isolate-value@2.0.2
 mrt:moment@2.8.1
 mrt:underscore-string-latest@2.3.3
 npm-bcrypt@0.7.8_2
-npm-container@1.0.0
+npm-container@1.1.0
 oauth@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.6
@@ -119,14 +119,11 @@ retry@1.0.3
 routepolicy@1.0.5
 rubaxa:sortable@1.2.0
 sacha:spin@2.3.1
-sanjo:jasmine@0.14.0
-sanjo:karma@1.5.1
+sanjo:jasmine@0.15.1
+sanjo:karma@1.6.1
 sanjo:long-running-child-process@1.0.3
-sanjo:meteor-files-helpers@1.1.0_6
+sanjo:meteor-files-helpers@1.1.0_7
 sanjo:meteor-version@1.0.0
-semantic:ui@2.0.4
-semantic:ui-css@2.0.4
-semantic:ui-data@2.0.4
 service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
@@ -146,7 +143,7 @@ useraccounts:semantic-ui@1.11.1
 velocity:chokidar@1.0.3_1
 velocity:console-reporter@0.1.2
 velocity:core@0.7.1
-velocity:html-reporter@0.6.2
+velocity:html-reporter@0.7.2
 velocity:meteor-internals@1.1.0_7
 velocity:meteor-stubs@1.1.0
 velocity:shim@0.1.0

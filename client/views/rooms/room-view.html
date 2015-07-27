@@ -1,8 +1,7 @@
 <template name="roomView">
-    {{#if inSmallView}}
-        <div class="container">
+<!--        <div class="container">
             <div class="ui sticky fixed bottom">
-                {{> newMessage}}
+                {{ newMessage}}
             </div>
         </div>
         <div class="ui fixed main menu">
@@ -28,31 +27,18 @@
             <div id="scrollContainer" class="scroll-container">
                 {{> messageList messages}}
             </div>
-        </div>
-    {{else}}
-        <div class="room-header">
-            <span class="room-header-name">
-                {{>roomTitle room}}
-            </span>
-            <span class="room-header-topic">{{room.topic}}</span>
-            {{> roomPreferences}}
-            {{> roomUsers}}
-        </div>
-        <div id="roomContainer" class="room-container">
-            {{#if currentRoom}}
-                <div id="scrollContainer" class="scroll-container" style="">
-                    {{> messageList messages}}
-                </div>
-            {{else}}
-                {{> noRoom }}
-            {{/if}}
-        </div>
-        <div class="sidebar">
-            {{> roomList }}
-        </div>
-        {{> newMessage}}
-    {{/if}}
-    <div class="modal-container">
+        </div>-->
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton}}
+    {{/contentFor}}
 
-    </div>
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Notifications</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            Content goes here
+        {{/ionContent}}
+    {{/ionView}}
 </template>

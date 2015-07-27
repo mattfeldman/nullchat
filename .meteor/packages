@@ -31,8 +31,6 @@ qnub:emojione
 reactive-var
 rubaxa:sortable
 sacha:spin
-semantic:ui
-semantic:ui-css
 service-configuration
 tomi:upload-jquery
 tomi:upload-server
@@ -49,7 +47,7 @@ velocity:html-reporter@0.6.2
 velocity:console-reporter
 
 # Mobile Packages
-fourseven:scss@2.0.0
+fourseven:scss
 meteoric:ionic
 meteoric:ionic-sass
 meteoric:ionicons-sass

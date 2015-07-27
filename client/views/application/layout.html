@@ -6,19 +6,11 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <template name="layout">
-    {{#if inSmallView}}
-        <div class="ui right vertical sidebar menu">
-            {{> roomList}}
-            {{> userList }}
-        </div>
-    {{/if}}
-    <div class="pusher">
-        {{> header}}
-        <div id="main" class="row-fluid">
+    {{#ionBody}}
+        {{> ionNavBar}}
+
+        {{#ionNavView}}
             {{> yield}}
-        </div>
-    </div>
-    <div class="popup-container" style="visibility: hidden">
-        {{>timestampPopup}}
-    </div>
+        {{/ionNavView}}
+    {{/ionBody}}
 </template>
