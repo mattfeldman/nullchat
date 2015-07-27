@@ -48,4 +48,11 @@ sanjo:jasmine
 velocity:html-reporter@0.6.2
 velocity:console-reporter
 
+# Mobile Packages
+fourseven:scss@2.0.0
+meteoric:ionic
+meteoric:ionic-sass
+meteoric:ionicons-sass
+
 npm-container
+
