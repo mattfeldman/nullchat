@@ -48,20 +48,12 @@ Template.roomPreferences.onCreated(function() {
     instance.desktopNotificationAllMessages = new ReactiveVar();
     instance.smsAllMessages = new ReactiveVar();
     Deps.autorun(function() {
-        instance.playMessageSound.set(Schemas.roomPreferenceDefault.playMessageSound);
-        instance.desktopNotificationMention.set(Schemas.roomPreferenceDefault.desktopNotificationMention);
-        instance.desktopNotificationAllMessages.set(Schemas.roomPreferenceDefault.desktopNotificationAllMessages);
-        instance.smsAllMessages.set(Schemas.roomPreferenceDefault.smsAllMessages);
-        const prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
         const currentRoom = Session.get('currentRoom');
-        if (prefUser && prefUser.preferences && prefUser.preferences.room) {
-            const currentPreferences = _(prefUser.preferences.room).find(p => p.roomId === currentRoom);
-            if (currentPreferences) {
-                instance.playMessageSound.set(currentPreferences.playMessageSound);
-                instance.desktopNotificationMention.set(currentPreferences.desktopNotificationMention);
-                instance.desktopNotificationAllMessages.set(currentPreferences.desktopNotificationAllMessages);
-                instance.smsAllMessages.set(currentPreferences.smsAllMessages);
-            }
-        }
+        RoomPreferencesDep.depend();
+        const prefs = roomPreferencesOrDefault(currentRoom);
+        instance.playMessageSound.set(prefs.playMessageSound);
+        instance.desktopNotificationMention.set(prefs.desktopNotificationMention);
+        instance.desktopNotificationAllMessages.set(prefs.desktopNotificationAllMessages);
+        instance.smsAllMessages.set(prefs.smsAllMessages);
     });
 });
