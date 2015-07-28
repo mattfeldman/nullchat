@@ -3,7 +3,11 @@
                 {{ roomOnlineUsers }} / {{ roomTotalUsers}} <i class="ui user icon"></i>
             </div>
             <div class="ui wide large popup">
-                <div class="header">Users</div>
+                <div class="header">Users in <b>{{currentRoomName}}</b></div>
+                <div class="ui left icon input">
+                    <i class="users icon"></i>
+                    {{> inputAutocomplete settings=settings id="roomUserInvite" name="users" placeholder="Invite to room..."}}
+                </div>
                 <div class="content ui list">
                     {{> userList}}
                 </div>
