@@ -71,6 +71,13 @@ Template.newMessage.helpers({
                     template: Template.memePill,
                     token: '/meme ',
                     matchAll: true
+                },
+                {
+                    collection: Commands,
+                    field: "name",
+                    template: Template.commandPill,
+                    token: '/',
+                    matchAll: true
                 }
             ]
         };
