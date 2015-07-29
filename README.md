@@ -1,4 +1,4 @@
-nullchat [![Build Status](https://img.shields.io/travis/mattfeldman/nullchat/master.svg?style=flat-square)](https://travis-ci.org/mattfeldman/nullchat) [![Code Climate](https://img.shields.io/codeclimate/github/mattfeldman/nullchat.svg?style=flat-square)](https://codeclimate.com/github/mattfeldman/nullchat) [![GitHub version](https://img.shields.io/github/release/mattfeldman/nullchat.svg?style=flat-square)](https://github.com/mattfeldman/nullchat/releases)
+nullchat [![Build Status](https://img.shields.io/travis/mattfeldman/nullchat/master.svg?style=flat)](https://travis-ci.org/mattfeldman/nullchat) [![Code Climate](https://img.shields.io/codeclimate/github/mattfeldman/nullchat.svg?style=flat)](https://codeclimate.com/github/mattfeldman/nullchat) [![GitHub version](https://img.shields.io/github/release/mattfeldman/nullchat.svg?style=flat)](https://github.com/mattfeldman/nullchat/releases)
 ========
 
 an open source meteor chat application
