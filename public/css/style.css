@@ -111,7 +111,7 @@
     position: absolute;
     float: left;
     width: 80%;
-    top: 50px;
+    top: 55px;
     bottom: 60px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -354,4 +354,10 @@ html, body { height: 100%; }
 }
 .ui.comments {
     max-width: 100%;
+}
+.s-alert-info, .s-alert-success, .s-alert-warning, .s-alert-error{
+    width: 80%;
+}
+.menu {
+    border-radius: 0;
 }
