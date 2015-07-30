@@ -49,3 +49,5 @@ velocity:html-reporter@0.6.2
 velocity:console-reporter
 
 npm-container
+juliancwirko:s-alert
+juliancwirko:s-alert-flip

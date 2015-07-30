@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <template name="layout">
+    {{> sAlert}}
     {{#if inSmallView}}
         <div class="ui right vertical sidebar menu">
             {{> roomList}}
