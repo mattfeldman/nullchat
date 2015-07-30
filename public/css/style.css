@@ -62,7 +62,7 @@
 
 .new-message-outer-container {
     position: absolute;
-    width: 80%;
+    width: 100%;
     height: 60px;
     bottom: 0;
 }
@@ -110,7 +110,7 @@
 .room-container {
     position: absolute;
     float: left;
-    width: 80%;
+    width: 100%;
     top: 55px;
     bottom: 60px;
     overflow-y: auto;
@@ -126,11 +126,7 @@
 }
 
 .sidebar {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 20%;
+    background-color: rgb(250,250,250);
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -360,4 +356,9 @@ html, body { height: 100%; }
 }
 .menu {
     border-radius: 0;
+}
+.ui.visible.wide.right.sidebar ~ .fluid-sidebar {
+    transform: translate3d(0,0,0) !important;
+    margin-right: 350px !important;
+    transition: 500ms;
 }
