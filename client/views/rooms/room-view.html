@@ -30,11 +30,11 @@
             </div>
         </div>
     {{else}}
-        <div class="room-header">
-            <span class="room-header-name">
+        <div class="ui menu">
+            <h3 class="header active item">
                 {{>roomTitle room}}
-            </span>
-            <span class="room-header-topic">{{room.topic}}</span>
+            </h3>
+            {{#if room.topic}}<h4 class="header item">{{room.topic}}</h4>{{/if}}
             {{> roomPreferences}}
             {{> roomUsers}}
         </div>
