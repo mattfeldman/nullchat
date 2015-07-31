@@ -96,6 +96,9 @@
 .room-header {
     border-right: none !important;
 }
+.room-header .header{
+    height: 51px;
+}
 
 .room-header-name {
     font-size: 36px;
