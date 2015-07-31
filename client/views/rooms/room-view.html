@@ -30,7 +30,7 @@
             </div>
         </div>
     {{else}}
-        <div class="ui menu">
+        <div class="ui violet menu room-header">
             <h3 class="header active item">
                 {{>roomTitle room}}
             </h3>
@@ -46,9 +46,6 @@
             {{else}}
                 {{> noRoom }}
             {{/if}}
-        </div>
-        <div class="sidebar">
-            {{> roomList }}
         </div>
         {{> newMessage}}
     {{/if}}

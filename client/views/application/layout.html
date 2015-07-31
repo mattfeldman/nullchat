@@ -7,14 +7,8 @@
 </head>
 <template name="layout">
     {{> sAlert}}
-    {{#if inSmallView}}
-        <div class="ui right vertical sidebar menu">
-            {{> roomList}}
-            {{> userList }}
-        </div>
-    {{/if}}
-    <div class="pusher">
-        {{> header}}
+    {{> sidebar}}
+    <div class="pusher fluid-sidebar">
         <div id="main" class="row-fluid">
             {{> yield}}
         </div>
