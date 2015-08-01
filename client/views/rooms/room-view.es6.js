@@ -39,6 +39,7 @@ Template.roomView.events({
 
 Template.roomView.onRendered(function() {
     Meteor.call('setSeen', Session.get('currentRoom'));
+    $('.ui.sidebar').sidebar({dimPage: false, closable: false}).sidebar('toggle');
 });
 
 Template.roomView.onCreated(function() {
@@ -197,4 +198,5 @@ Template.roomView.onCreated(function() {
 Template.roomView.destroyed = function() {
     isReady.notifications = false;
     isReady.messages = false;
-}
+};
+
