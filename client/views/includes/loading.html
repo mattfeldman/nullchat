@@ -1,6 +1,55 @@
 <template name="loading">
-    <h2 class="ui center aligned icon header">
-        <i class="circular settings loading icon"></i>
-        Loading
-    </h2>
+    <style>
+
+        #null_loading-animation {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: 			translate(-50%, -50%);
+            -webkit-transform: 	translate(-50%, -50%);
+            -moz-transform: 	translate(-50%, -50%);
+            -o-transform: 		translate(-50%, -50%);
+        }
+    </style>
+    <div id="null_loading-animation">
+        <div class="svg-wrapper">
+            <svg version="1.1"
+                 width="100%" height="100%" viewBox="0 0 18.47 10" preserveAspectRatio="xMinYMin meet" class="svg-content">
+                <mask id="null_mask" x="0" y="0" width="100" height="100" >
+                    <path d="M0,8.92V2.76h0.91c0.19,0,0.32,0.09,0.38,0.27l0.1,0.49c0.12-0.13,0.25-0.24,0.39-0.35c0.14-0.1,0.28-0.19,0.44-0.27
+				c0.15-0.08,0.32-0.13,0.5-0.17s0.37-0.06,0.58-0.06c0.34,0,0.63,0.06,0.89,0.17c0.26,0.11,0.48,0.27,0.65,0.48s0.31,0.45,0.4,0.74
+				C5.32,4.34,5.36,4.65,5.36,5v3.92H3.88V5c0-0.38-0.09-0.67-0.26-0.87S3.19,3.82,2.84,3.82c-0.26,0-0.5,0.06-0.72,0.17
+				C1.89,4.11,1.68,4.26,1.48,4.46v4.45H0z" fill="#ffffff"/>
+                    <path d="M8.18,2.76v3.91c0,0.38,0.09,0.67,0.26,0.87s0.43,0.31,0.78,0.31c0.26,0,0.5-0.06,0.72-0.17c0.22-0.11,0.44-0.27,0.64-0.47
+				V2.76h1.48v6.16h-0.91c-0.19,0-0.32-0.09-0.38-0.27l-0.1-0.49c-0.13,0.13-0.26,0.25-0.4,0.35C10.14,8.61,10,8.7,9.84,8.77
+				c-0.15,0.07-0.32,0.13-0.5,0.17C9.17,8.99,8.98,9.01,8.77,9.01c-0.34,0-0.63-0.06-0.89-0.17C7.62,8.73,7.41,8.57,7.23,8.36
+				C7.05,8.15,6.92,7.9,6.83,7.62S6.7,7.02,6.7,6.67V2.76H8.18z" fill="#ffffff"/>
+                    <path d="M15.22,0v8.92h-1.48V0H15.22z" fill="#ffffff" />
+                    <path d="M18.47,0v8.92h-1.48V0H18.47z" fill="#ffffff" />
+                </mask>
+                <g>
+                    <path d="M0,8.92V2.76h0.91c0.19,0,0.32,0.09,0.38,0.27l0.1,0.49c0.12-0.13,0.25-0.24,0.39-0.35c0.14-0.1,0.28-0.19,0.44-0.27
+				c0.15-0.08,0.32-0.13,0.5-0.17s0.37-0.06,0.58-0.06c0.34,0,0.63,0.06,0.89,0.17c0.26,0.11,0.48,0.27,0.65,0.48s0.31,0.45,0.4,0.74
+				C5.32,4.34,5.36,4.65,5.36,5v3.92H3.88V5c0-0.38-0.09-0.67-0.26-0.87S3.19,3.82,2.84,3.82c-0.26,0-0.5,0.06-0.72,0.17
+				C1.89,4.11,1.68,4.26,1.48,4.46v4.45H0z" fill="none" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="0.01"/>
+                    <path d="M8.18,2.76v3.91c0,0.38,0.09,0.67,0.26,0.87s0.43,0.31,0.78,0.31c0.26,0,0.5-0.06,0.72-0.17c0.22-0.11,0.44-0.27,0.64-0.47
+				V2.76h1.48v6.16h-0.91c-0.19,0-0.32-0.09-0.38-0.27l-0.1-0.49c-0.13,0.13-0.26,0.25-0.4,0.35C10.14,8.61,10,8.7,9.84,8.77
+				c-0.15,0.07-0.32,0.13-0.5,0.17C9.17,8.99,8.98,9.01,8.77,9.01c-0.34,0-0.63-0.06-0.89-0.17C7.62,8.73,7.41,8.57,7.23,8.36
+				C7.05,8.15,6.92,7.9,6.83,7.62S6.7,7.02,6.7,6.67V2.76H8.18z" fill="none" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="0.01"/>
+                    <path d="M15.22,0v8.92h-1.48V0H15.22z" fill="none" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="0.01"/>
+                    <path d="M18.47,0v8.92h-1.48V0H18.47z" fill="none" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="0.01"/>
+                </g>
+                <rect id="null_fill" x="-20" y="0" width="100%" height="100%"
+                      style="fill: #444; box-shadow: 10px 10px 5px #888888; mask: url(#null_mask);"
+                        />
+            </svg>
+        </div>
+    </div>
+    <script>
+
+        $(function(){
+            $("#null_fill").animate({'x' : 0}, 2000, 'linear');
+        });
+
+    </script>
 </template>
