@@ -1,3 +1,3 @@
 Template.starsModal.onCreated(function() {
-   this.subscribe('starredMessages');
+    this.subscribe('starredMessages');
 });

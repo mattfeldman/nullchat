@@ -6,6 +6,6 @@ Meteor.startup(function() {
         uploadDir: uploadDir,
         checkCreateDirectories: true, // create the directories
         maxFileSize: 250 * 1000 * 1000, // 250mb
-        maxPostSize: 250 * 1000 * 1000, // 250mb
+        maxPostSize: 250 * 1000 * 1000 // 250mb
     });
 });

@@ -28,7 +28,7 @@ Template.roomPreferences.events({
             playMessageSound: $("#playMessageSound").is(":checked"),
             desktopNotificationMention: $("#desktopNotificationMention").is(":checked"),
             desktopNotificationAllMessages: $("#desktopNotificationAllMessages").is(":checked"),
-            smsAllMessages: $("#smsAllMessages").is(":checked"),
+            smsAllMessages: $("#smsAllMessages").is(":checked")
         };
 
         if (userPreferences.desktopNotificationMention || userPreferences.desktopNotificationAllMessages) {

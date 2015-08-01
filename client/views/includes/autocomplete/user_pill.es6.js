@@ -27,7 +27,7 @@ Template.userPill.helpers({
         if (this.status && this.status.lastActivity) {
             return moment(this.status.lastActivity).fromNow();
         }
-        else if(!this.status.online && this.status && this.status.lastLogin && this.status.lastLogin.date) {
+        else if (!this.status.online && this.status && this.status.lastLogin && this.status.lastLogin.date) {
             return moment(this.status.lastLogin.date).fromNow();
         }
     }

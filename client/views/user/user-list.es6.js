@@ -1,6 +1,6 @@
 Template.userList.helpers({
     filteredUsers() {
-        const room = Rooms.findOne({_id: Session.get('currentRoom'),});
+        const room = Rooms.findOne({_id: Session.get('currentRoom')}, {users: 1});
         if (room) {
             const query = {_id: {$in: room.users}};
             if (!Session.get('showOfflineUsers')) {
