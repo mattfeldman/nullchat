@@ -1,4 +1,4 @@
-Template.notificationButton.onCreated(function() {
+Template.notificationButton.onCreated(function () {
     this.subscribe('notifications');
 });
 

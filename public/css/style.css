@@ -16,6 +16,7 @@
 .message-extras {
     display: none;
 }
+
 .message:hover .message-extras {
     display: inline-block;
 }
@@ -23,6 +24,7 @@
 .feedback-message {
     background: lightblue;
 }
+
 .meme-pill-image {
     max-width: 50px;
     max-height: 50px;
@@ -66,6 +68,7 @@
     height: 60px;
     bottom: 0;
 }
+
 @media (max-width: 768px) {
     .new-message-outer-container {
         width: 100%;
@@ -87,7 +90,7 @@
     height: 25px;
 }
 
-.new-message-typing-users{
+.new-message-typing-users {
     top: 30px;
     left: 5px;
     position: absolute;
@@ -96,7 +99,8 @@
 .room-header {
     border-right: none !important;
 }
-.room-header .header{
+
+.room-header .header {
     height: 51px;
 }
 
@@ -118,6 +122,7 @@
     overflow-x: hidden;
     background-color: rgb(250, 250, 250);
 }
+
 @media (max-width: 768px) {
     .room-container.ui.comments {
         max-width: 100%;
@@ -128,7 +133,7 @@
 }
 
 .sidebar {
-    background-color: rgb(250,250,250);
+    background-color: rgb(250, 250, 250);
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -164,206 +169,247 @@
     height: 50px;
 }
 
-.message-user-username{
+.message-user-username {
     line-height: 50px;
-    width:75px;
-    float:right;
+    width: 75px;
+    float: right;
 }
-.message-user-mention{
+
+.message-user-mention {
     padding: 3px;
 }
-.message-user-mention:hover{
+
+.message-user-mention:hover {
     opacity: 0.8;
 }
-.clickableMessageBody{
-    line-height:normal;
+
+.clickableMessageBody {
+    line-height: normal;
     vertical-align: middle;
     display: inline-block;
     transition: 0.3s;
 }
-.message-star-icon{
+
+.message-star-icon {
     color: rgb(255, 184, 0);
 }
-.message-sms-indicator{
+
+.message-sms-indicator {
     color: rgb(0, 168, 255);
 }
-.room-notification-container{
+
+.room-notification-container {
     display: inline-block;
 }
-.room-notification-count{
+
+.room-notification-count {
     display: inline-block;
     line-height: 20px;
     margin: 2px auto;
-    height:20px;
+    height: 20px;
     text-align: center;
     background: lightgray;
     min-width: 20px;
 }
-.room-notification-count:empty{
-    background: transparent;    
+
+.room-notification-count:empty {
+    background: transparent;
 }
+
 .selected-room .room-notification-count {
-  min-width: 0;
-  transition: 0.4s;
-  -webkit-transition: 0.4s;
+    min-width: 0;
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
 }
-.discover-room-button{
-  position:relative;
+
+.discover-room-button {
+    position: relative;
 }
+
 .notification-button-unread[data-unread]:before, .room-invitation-unread[data-unread]:before {
-   content:attr(data-unread);
-   background:red;
-   color:white;  
-   display:inline-block;
-   padding:3px;
-   margin-right:2px;
-   width:18px;
-   height:18px;
-   line-height:150%;
+    content: attr(data-unread);
+    background: red;
+    color: white;
+    display: inline-block;
+    padding: 3px;
+    margin-right: 2px;
+    width: 18px;
+    height: 18px;
+    line-height: 150%;
 }
-.discover-rooms-container{
-  margin: 3%; 
-  padding: 1%;
-  background-color: #ddd
+
+.discover-rooms-container {
+    margin: 3%;
+    padding: 1%;
+    background-color: #ddd
 }
-.room-tile{
+
+.room-tile {
     padding: 1%;
     width: 21%;
-    display:inline-block;    
+    display: inline-block;
     margin: 0.5%;
     background-color: #F0F0F0;
     transition: 0.1s;
     position: relative;
 }
+
 .room-tile:hover {
     background-color: rgb(232, 226, 245);
     transition: 0.3s;
 }
+
 .room-tile:active {
     background-color: rgb(166, 64, 226);
     transition: 0.3s;
 }
+
 span.room-tile-count {
     position: absolute;
     right: 1%;
 }
-.room-tile-icon{
-    color:gray;
+
+.room-tile-icon {
+    color: gray;
     margin: 3px 0;
 }
-.room-tile-topic{
-    display:inline-block;
-    color:darkgray;
+
+.room-tile-topic {
+    display: inline-block;
+    color: darkgray;
 }
-.my-room{
+
+.my-room {
     border: 1px solid #333;
     background-color: #aaa;
-    transition:0.3s;
+    transition: 0.3s;
 }
 
 /*div, body, html {
     padding: 0;
     margin: 0;
 }*/
-.room-element{
-  line-height: 200%;
+.room-element {
+    line-height: 200%;
 }
-.room-element:hover{
-  background: lightblue;
+
+.room-element:hover {
+    background: lightblue;
 }
-.room-element:hover .room-leave-link{
-  display:inline-block;  
+
+.room-element:hover .room-leave-link {
+    display: inline-block;
 }
-.room-leave-link{
-  display:none;
-  position: absolute;
-  right: 3px;
-  cursor:default;
-  color:grey;
+
+.room-leave-link {
+    display: none;
+    position: absolute;
+    right: 3px;
+    cursor: default;
+    color: grey;
 }
-.room-leave-link-enabled{
-  cursor:pointer;
-  color:black;
+
+.room-leave-link-enabled {
+    cursor: pointer;
+    color: black;
 }
-.room-leave-link-enabled:hover{
-  color:red;
-  transform: scale(1.3);  
-  transition-duration: 0.2s;  
+
+.room-leave-link-enabled:hover {
+    color: red;
+    transform: scale(1.3);
+    transition-duration: 0.2s;
 }
-.notification-container{
-  margin: 5% 10%; 
-  padding: 1%;
-  background-color: #ddd;
+
+.notification-container {
+    margin: 5% 10%;
+    padding: 1%;
+    background-color: #ddd;
 }
-.notification-item{
-  background-color:white;
-  padding: 1em;
-  margin: 1em;
+
+.notification-item {
+    background-color: white;
+    padding: 1em;
+    margin: 1em;
 }
+
 .notification-item-author {
     font-weight: 900;
 }
+
 #img-upload-preview {
     display: block;
     margin: 0;
     max-width: 100%;
     max-height: 300px;
 }
-.emojione{
+
+.emojione {
     height: 2.0em;
     width: 2.0em;
 }
 
-
 /* Informal Semantic UI Dev Overrides */
-html, body { height: 100%; }
-.popup{
-    line-height:initial;
+html, body {
+    height: 100%;
+}
+
+.popup {
+    line-height: initial;
     z-index: 500;
 }
 
-.smallMessageList{
+.smallMessageList {
     padding-bottom: 60px;
 }
-.smallMessage{
+
+.smallMessage {
     border-left: 2px solid transparent;;
     padding-left: 2px;
 }
-.emojiCategory{
+
+.emojiCategory {
     max-height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-.comment .actionLinks{
+
+.comment .actionLinks {
     visibility: hidden;
 }
-.comment:hover .actionLinks{
+
+.comment:hover .actionLinks {
     visibility: visible;
 }
 
-.ui.comments .comment .text{
+.ui.comments .comment .text {
     /* move comment text to padding for background*/
     margin: 0;
     padding: 0.25em 0em 0.5em;
 }
+
 .ui.comments .comment {
     margin: 0;
     padding: 0;
 }
+
 .ui.comments {
     max-width: 100%;
 }
-.s-alert-info, .s-alert-success, .s-alert-warning, .s-alert-error{
+
+.s-alert-info, .s-alert-success, .s-alert-warning, .s-alert-error {
     width: 80%;
 }
+
 .menu {
     border-radius: 0 !important;
 }
+
 .ui.visible.wide.right.sidebar ~ .fluid-sidebar {
-    transform: translate3d(0,0,0) !important;
+    transform: translate3d(0, 0, 0) !important;
     margin-right: 350px !important;
     transition: 500ms;
 }
+
 .sidebar {
     box-shadow: none !important;
 }

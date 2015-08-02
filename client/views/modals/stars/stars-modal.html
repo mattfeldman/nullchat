@@ -5,11 +5,11 @@
         </div>
         <div class="content">
             <div class="ui {{#unless Template.subscriptionsReady}}active inverted dimmer{{/unless}}">
-              {{#if Template.subscriptionsReady}}
-                {{>starsModalContent}}
-              {{else}}
-                  <div class="ui text loader">Loading</div>
-              {{/if}}
+                {{#if Template.subscriptionsReady}}
+                    {{>starsModalContent}}
+                {{else}}
+                    <div class="ui text loader">Loading</div>
+                {{/if}}
             </div>
         </div>
         <div class="actions">

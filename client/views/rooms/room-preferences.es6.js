@@ -1,4 +1,4 @@
-Template.roomPreferences.onRendered(function() {
+Template.roomPreferences.onRendered(function () {
     this.$('.room-settings-button').popup({
         inline: true,
         hoverable: true,
@@ -41,13 +41,13 @@ Template.roomPreferences.events({
         Meteor.call('updateRoomPreferences', userPreferences);
     }
 });
-Template.roomPreferences.onCreated(function() {
+Template.roomPreferences.onCreated(function () {
     const instance = this;
     instance.playMessageSound = new ReactiveVar();
     instance.desktopNotificationMention = new ReactiveVar();
     instance.desktopNotificationAllMessages = new ReactiveVar();
     instance.smsAllMessages = new ReactiveVar();
-    Deps.autorun(function() {
+    Deps.autorun(function () {
         const currentRoom = Session.get('currentRoom');
         RoomPreferencesDep.depend();
         const prefs = roomPreferencesOrDefault(currentRoom);

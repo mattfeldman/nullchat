@@ -1,4 +1,4 @@
-Template.userMetrics.onCreated(function() {
+Template.userMetrics.onCreated(function () {
     const self = this;
     Deps.autorun(() => {
         const userId = self.data.userId === "current" ? Meteor.userId() : self.data.userId;

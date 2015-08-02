@@ -23,7 +23,7 @@ Template.pasteImageContent.events({
         const file = new FS.File(blob);
         file.name("nullchat.png");
 
-        Images.insert(file, function(err, fileObj) {
+        Images.insert(file, function (err, fileObj) {
             const fileKey = `https://s3-us-west-2.amazonaws.com/nullchat/${fileObj.collectionName}/${fileObj._id}-${fileObj.name()}`;
             const messageStub = {
                 message: fileKey,

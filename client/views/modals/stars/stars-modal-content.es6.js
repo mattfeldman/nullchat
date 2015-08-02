@@ -1,10 +1,10 @@
-Template.starsModalContent.onCreated(function() {
+Template.starsModalContent.onCreated(function () {
     const instance = this;
     instance.searchText = new ReactiveVar(Meteor.user().username);
     instance.supressStarSizing = true;
 });
 
-Template.starsModalContent.onRendered(function() {
+Template.starsModalContent.onRendered(function () {
     const instance = this;
     Meteor.setTimeout(()=> {
         instance.searchText.set("");
@@ -12,7 +12,7 @@ Template.starsModalContent.onRendered(function() {
 });
 // function that returns a created index
 function createIndex() {
-    return lunr(function() {
+    return lunr(function () {
         this.ref('_id');
         this.field('message');
         this.field('username', {boost: 2});

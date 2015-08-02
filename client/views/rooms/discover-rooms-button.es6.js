@@ -1,4 +1,4 @@
-Template.discoverRoomsButton.onCreated(function() {
+Template.discoverRoomsButton.onCreated(function () {
     this.subscribe("roomInvitations");
 });
 

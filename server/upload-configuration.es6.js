@@ -1,4 +1,4 @@
-Meteor.startup(function() {
+Meteor.startup(function () {
     // Windows Path Voodoo from https://github.com/tomitrescak/meteor-uploads/issues/49
     const uploadDir = process.env.PWD ? process.env.PWD + '/uploads/' : "..\\..\\..\\..\\..\\uploads\\";
     UploadServer.init({

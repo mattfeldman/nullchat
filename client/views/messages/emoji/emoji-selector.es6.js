@@ -1,4 +1,4 @@
-Template.emojiSelector.onRendered(function() {
+Template.emojiSelector.onRendered(function () {
     this.$(".menu .item").tab();
     this.$('.emoji.button').popup({
         on: 'click',

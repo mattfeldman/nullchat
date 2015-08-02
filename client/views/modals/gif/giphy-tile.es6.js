@@ -21,6 +21,6 @@ Template.giphyTile.helpers({
     }
 });
 
-Template.giphyTile.onCreated(function() {
+Template.giphyTile.onCreated(function () {
     this.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
 });

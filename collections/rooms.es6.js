@@ -151,7 +151,7 @@ Meteor.methods({
             throw new Meteor.Error("you must be owner");
         }
 
-        const updateQuery = {$set:{isPrivate: isPrivate}};
+        const updateQuery = {$set: {isPrivate: isPrivate}};
         if (isPrivate) {
             updateQuery.$addToSet = {invited: {$each: room.users}};
         }

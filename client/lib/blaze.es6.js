@@ -4,7 +4,7 @@
  * @returns {Blaze.TemplateInstance}
  */
 
-Blaze.TemplateInstance.prototype.parentTemplate = function(levels) {
+Blaze.TemplateInstance.prototype.parentTemplate = function (levels) {
     let view = Blaze.currentView;
     let currentLevel = levels;
     if (typeof levels === "undefined") {

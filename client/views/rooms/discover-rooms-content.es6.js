@@ -14,6 +14,6 @@ Template.discoverRoomsContent.events({
     }
 });
 
-Template.discoverRoomsContent.onCreated(function() {
+Template.discoverRoomsContent.onCreated(function () {
     this.hideMyRooms = new ReactiveVar(false);
 });

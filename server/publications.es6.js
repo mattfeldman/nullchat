@@ -1,4 +1,4 @@
-Meteor.publish('messages', function(roomId, limit) {
+Meteor.publish('messages', function (roomId, limit) {
     check(roomId, String);
     check(limit, Match.Integer);
     if (limit < 1 || limit > 1000) {
@@ -17,7 +17,7 @@ Meteor.publish('messages', function(roomId, limit) {
         throw new Meteor.Error(503, 'No soup for you hackerpants.');
     }
 });
-Meteor.publish('feedbackMessages', function(roomId) {
+Meteor.publish('feedbackMessages', function (roomId) {
     check(roomId, String);
     const now = new Date().getTime();
     return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId, timestamp: {$gt: now}}, {
@@ -25,17 +25,17 @@ Meteor.publish('feedbackMessages', function(roomId) {
         sort: {timestamp: -1}
     });
 });
-Meteor.publish('message', function(messageId) {
+Meteor.publish('message', function (messageId) {
     check(messageId, String);
     return Messages.find({_id: messageId});
 });
-Meteor.publish('currentRooms', function() {
+Meteor.publish('currentRooms', function () {
     return Rooms.find({users: this.userId});
 });
-Meteor.publish('availableRooms', function() {
+Meteor.publish('availableRooms', function () {
     return Rooms.find({$or: [{isPrivate: false}, {isPrivate: true, invited: this.userId}]});
 });
-Meteor.publish('users', function() {
+Meteor.publish('users', function () {
     return Meteor.users.find({}, {
         fields: {
             _id: 1,
@@ -53,7 +53,7 @@ Meteor.publish('users', function() {
         }
     });
 });
-Meteor.publish('myPreferences', function() {
+Meteor.publish('myPreferences', function () {
     return Meteor.users.find({_id: this.userId}, {
         fields: {
             _id: 1,
@@ -62,7 +62,7 @@ Meteor.publish('myPreferences', function() {
         }
     });
 });
-Meteor.publish('myCursors', function() {
+Meteor.publish('myCursors', function () {
     return Meteor.users.find({_id: this.userId}, {
         fields: {
             _id: 1,
@@ -71,7 +71,7 @@ Meteor.publish('myCursors', function() {
     });
 });
 
-Meteor.publish('newMessagesForRoom', function(roomId) {
+Meteor.publish('newMessagesForRoom', function (roomId) {
     check(roomId, String);
     const room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
@@ -83,14 +83,14 @@ Meteor.publish('newMessagesForRoom', function(roomId) {
     }
 });
 
-Meteor.publish('roomInvitations', function() {
+Meteor.publish('roomInvitations', function () {
     return RoomInvitations.find({
         active: true,
         invitedUser: this.userId
     });
 });
 
-Meteor.publish('starredMessages', function() {
+Meteor.publish('starredMessages', function () {
     return Messages.find({likedBy: this.userId}); // TODO: Security check
 });
 
@@ -101,7 +101,7 @@ Meteor.publish('memes', ()=> Memes.find());
 Meteor.publish('notifications', ()=> Notifications.find({userId: this.userId}));
 
 // Indexes
-Meteor.startup(function() {
+Meteor.startup(function () {
     // Supports newMessagesForRoom, and messages subscriptions
     Messages._ensureIndex({"roomId": 1, "timestamp": -1, "type": 1});
 

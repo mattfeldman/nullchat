@@ -1,18 +1,18 @@
 <template name="changelogModalContent">
     <div class="ui grid">
         {{#if debugDisplay}}
-        <div class="row">
-            <div class="ui column form">
-                <div class="field">
-                    <label>Change</label>
-                    <textarea class="markdownInput"></textarea>
+            <div class="row">
+                <div class="ui column form">
+                    <div class="field">
+                        <label>Change</label>
+                        <textarea class="markdownInput"></textarea>
                     <span class="markdown">
 
                     </span>
+                    </div>
+                    <div class="ui primary post button">Post</div>
                 </div>
-                <div class="ui primary post button">Post</div>
             </div>
-        </div>
         {{/if}}
         {{#each changelogs}}
             <div class="row">

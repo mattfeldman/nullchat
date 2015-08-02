@@ -1,10 +1,10 @@
-Template.memeModalContent.onCreated(function() {
+Template.memeModalContent.onCreated(function () {
     const instance = this;
     instance.selectedMeme = new ReactiveVar(false);
     instance.currentMemeUrl = new ReactiveVar(false);
 });
 
-Template.memeModalContent.onRendered(function() {
+Template.memeModalContent.onRendered(function () {
     $('.dropdown').dropdown();
 });
 

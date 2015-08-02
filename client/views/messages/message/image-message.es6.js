@@ -15,7 +15,7 @@ Template.imageMessage.events({
 
         if (timesRetried < 20) {
             timesRetried++;
-            Meteor.setTimeout(function() {
+            Meteor.setTimeout(function () {
                 // We store the number of retries in the # after the url
                 // This tricks the browser into reloading the image, but without changing the image received
                 // It also gives us a handy way to track the number of attempts, so we don't retry forever

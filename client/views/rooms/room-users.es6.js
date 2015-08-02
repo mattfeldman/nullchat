@@ -37,7 +37,7 @@ Template.roomUsers.helpers({
     }
 });
 
-Template.roomUsers.onRendered(function() {
+Template.roomUsers.onRendered(function () {
     this.$('.room-users').popup({
         inline: true,
         hoverable: true,

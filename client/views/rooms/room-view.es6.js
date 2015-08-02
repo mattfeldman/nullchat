@@ -37,17 +37,17 @@ Template.roomView.events({
     }
 });
 
-Template.roomView.onRendered(function() {
+Template.roomView.onRendered(function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
     $('.ui.sidebar').sidebar({dimPage: false, closable: false}).sidebar('toggle');
 });
 
-Template.roomView.onCreated(function() {
+Template.roomView.onCreated(function () {
     isReady.notifications = false;
     isReady.messages = false;
     let nowTimestamp;
     Session.setDefault('messageLimit', 10);
-    Deps.autorun(function() {
+    Deps.autorun(function () {
         nowTimestamp = new Date().getTime();
         Meteor.subscribe('messages', Session.get('currentRoom'), Session.get('messageLimit'), {
             onReady() {
@@ -161,7 +161,7 @@ Template.roomView.onCreated(function() {
     });
 
     Session.set('unreadMessages', 0);
-    Deps.autorun(function() {
+    Deps.autorun(function () {
         const numberOfUnreadMessages = Session.get('unreadMessages');
         const currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
 
@@ -183,7 +183,7 @@ Template.roomView.onCreated(function() {
         }
     });
 
-    Deps.autorun(function() {
+    Deps.autorun(function () {
         const rooms = Rooms.find({users: Meteor.userId()}, {fields: {_id: 1}}).fetch();
         if (rooms) {
             for (let i = 0; i < rooms.length; i++) {
@@ -195,7 +195,7 @@ Template.roomView.onCreated(function() {
     isReady.notifications = true;
 });
 
-Template.roomView.destroyed = function() {
+Template.roomView.destroyed = function () {
     isReady.notifications = false;
     isReady.messages = false;
 };

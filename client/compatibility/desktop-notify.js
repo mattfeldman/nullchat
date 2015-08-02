@@ -54,7 +54,7 @@
         /**
          * Dojo Mixin
          */
-        mixin = function (target, source) {
+            mixin = function (target, source) {
             var name, s;
             for (name in source) {
                 s = source[name];
@@ -66,18 +66,19 @@
         },
         noop = function () {},
         settings = defaultSetting;
+
     function getNotification(title, options) {
         var notification;
         if (win.Notification) { /* Safari 6, Chrome (23+) */
-            notification =  new win.Notification(title, {
+            notification = new win.Notification(title, {
                 /* The notification's icon - For Chrome in Windows, Linux & Chrome OS */
                 icon: isString(options.icon) ? options.icon : options.icon.x32,
                 /* The notification’s subtitle. */
                 body: options.body || emptyString,
                 /*
-                    The notification’s unique identifier.
-                    This prevents duplicate entries from appearing if the user has multiple instances of your website open at once.
-                */
+                 The notification’s unique identifier.
+                 This prevents duplicate entries from appearing if the user has multiple instances of your website open at once.
+                 */
                 tag: options.tag || emptyString
             });
         } else if (win.webkitNotifications) { /* FF with html5Notifications plugin installed */
@@ -97,6 +98,7 @@
         }
         return notification;
     }
+
     function getWrapper(notification) {
         return {
             close: function () {
@@ -116,6 +118,7 @@
             }
         };
     }
+
     function requestPermission(callback) {
         if (!isSupported) { return; }
         var callbackFunction = isFunction(callback) ? callback : noop;
@@ -133,6 +136,7 @@
             win.Notification.requestPermission(callbackFunction);
         }
     }
+
     function permissionLevel() {
         var permission;
         if (!isSupported) { return; }
@@ -154,6 +158,7 @@
         }
         return permission;
     }
+
     /**
      *
      */
@@ -163,18 +168,20 @@
         }
         return settings;
     }
+
     function isDocumentHidden() {
         return settings.pageVisibility ? (document.hidden || document.msHidden || document.mozHidden || document.webkitHidden) : true;
     }
+
     function createNotification(title, options) {
         var notification,
             notificationWrapper;
         /*
-            Return undefined if notifications are not supported.
+         Return undefined if notifications are not supported.
 
-            Return undefined if no permissions for displaying notifications.
+         Return undefined if no permissions for displaying notifications.
 
-            Title and icons are required. Return undefined if not set.
+         Title and icons are required. Return undefined if not set.
          */
         if (isSupported && isDocumentHidden() && isString(title) && (options && (isString(options.icon) || isObject(options.icon))) && (permissionLevel() === PERMISSION_GRANTED)) {
             notification = getNotification(title, options);
@@ -191,6 +198,7 @@
         }
         return notificationWrapper;
     }
+
     win.notify = {
         PERMISSION_DEFAULT: PERMISSION_DEFAULT,
         PERMISSION_GRANTED: PERMISSION_GRANTED,

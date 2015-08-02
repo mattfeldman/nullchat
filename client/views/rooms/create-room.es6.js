@@ -15,6 +15,6 @@ Template.createRoom.events({
     }
 });
 
-Template.createRoom.onCreated(function() {
+Template.createRoom.onCreated(function () {
     this.creatingRoom = new ReactiveVar(false);
 });

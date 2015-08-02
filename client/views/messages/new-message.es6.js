@@ -25,7 +25,7 @@ Template.newMessage.helpers({
         const users = _.map(typingUsers, user => user.username).join(',');
 
         if (users) {
-            Meteor.setTimeout(function() {
+            Meteor.setTimeout(function () {
                 _typingDep.changed();
             }, 5000);
 
@@ -84,7 +84,7 @@ Template.newMessage.helpers({
     }
 });
 
-const recallMessageWithNewOffset = function(offsetDelta) {
+const recallMessageWithNewOffset = function (offsetDelta) {
     const messageElement = $("#message");
 
     let offset = Session.get("offset") || 0;
@@ -137,7 +137,7 @@ Template.newMessage.events({
         if (blobItem) {
             const blob = blobItem.getAsFile();
             var reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 var options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;
@@ -157,7 +157,7 @@ Template.newMessage.events({
         if (doc.searchName) {
             template.$(event.target).val("/meme " + doc.id + " ");
         }
-        else if(doc.shortname) {
+        else if (doc.shortname) {
             const text = template.$(event.target).val();
             const newText = text.replace(':' + doc.name + ' ', doc.shortname + ' '); // Add trailing :
             template.$(event.target).val(newText);

@@ -1,4 +1,4 @@
-Template.giphyModalContent.onCreated(function() {
+Template.giphyModalContent.onCreated(function () {
     const instance = this;
     instance.searchText = new ReactiveVar("");
     instance.searchResults = new ReactiveVar([]);

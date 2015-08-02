@@ -21,6 +21,6 @@ Template.memeTile.helpers({
     }
 });
 
-Template.memeTile.onCreated(function() {
+Template.memeTile.onCreated(function () {
     this.imgSrc = new ReactiveVar(this.data.images.fixed_height_still.url);
 });

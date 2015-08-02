@@ -28,6 +28,6 @@ Template.directMessageUserSearch.events({
     }
 });
 
-Template.directMessageUserSearch.onRendered(function() {
+Template.directMessageUserSearch.onRendered(function () {
     $(document).bind('keydown', 'ctrl+m', () => { this.$('input').focus(); });
 });

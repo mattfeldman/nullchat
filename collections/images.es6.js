@@ -1,5 +1,5 @@
 var imageStore;
-if(Meteor.isServer) {
+if (Meteor.isServer) {
     var s3Key = Meteor.settings.S3 && Meteor.settings.S3.appId || "appKey";
     var s3Secret = Meteor.settings.S3 && Meteor.settings.S3.appSecret || "appSecret";
     imageStore = new FS.Store.S3("nullchat", {
@@ -17,16 +17,16 @@ Images = new FS.Collection("images", {
 });
 
 Images.allow({
-    insert: function(userId, doc) {
+    insert: function (userId, doc) {
         return userId;
     },
-    update: function(userId, doc, fields, modifier) {
+    update: function (userId, doc, fields, modifier) {
         return userId;
     },
-    remove: function(userId, doc) {
+    remove: function (userId, doc) {
         return userId;
     },
-    download: function(userId, doc) {
+    download: function (userId, doc) {
         return userId;
     }
 });

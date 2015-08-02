@@ -1,6 +1,6 @@
 RoomPreferencesDep = new Tracker.Dependency;
 let currentUserRoomPreferences = [];
-roomPreferencesOrDefault = function(roomId) {
+roomPreferencesOrDefault = function (roomId) {
     const currentPreferences = _(currentUserRoomPreferences).find(p => p.roomId === roomId);
     if (currentPreferences) {
         return currentPreferences;
@@ -12,14 +12,14 @@ roomPreferencesOrDefault = function(roomId) {
     }
 };
 
-function getFieldOrDefault(collection, selector, fieldName, defaultValue){
+function getFieldOrDefault(collection, selector, fieldName, defaultValue) {
     const fieldSelector = {};
     fieldSelector[fieldName] = 1;
     const result = collection.findOne(selector, fieldSelector);
     return result && result[fieldName] || defaultValue;
 }
 
-Deps.autorun(function() {
+Deps.autorun(function () {
     const prefUser = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"preferences": 1}});
     if (prefUser && prefUser.preferences && prefUser.preferences.room) {
         currentUserRoomPreferences = prefUser.preferences.room;

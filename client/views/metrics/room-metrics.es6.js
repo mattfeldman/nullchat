@@ -1,4 +1,4 @@
-Template.roomMetrics.onCreated(function() {
+Template.roomMetrics.onCreated(function () {
     const self = this;
     Deps.autorun(() => {
         const currentRoomUser = Meteor.users.findOne({_id: Meteor.userId()}, {"status.currentRoom": 1});

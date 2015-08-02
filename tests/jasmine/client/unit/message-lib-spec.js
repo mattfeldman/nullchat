@@ -30,39 +30,39 @@ describe('parseRoomLinks', function () {
 
         var message = '#testroom1#testroom1#testroom2#notatestroom';
         var parsedMessage = MessageLib.parseRoomLinks(message);
-        expect(countInstances(parsedMessage,'testroomid1')).toBe(2);
+        expect(countInstances(parsedMessage, 'testroomid1')).toBe(2);
         expect(parsedMessage.indexOf('testroomid2')).not.toBe(-1);
-        expect(countInstances(parsedMessage,'class="roomLink"')).toBe(3);
+        expect(countInstances(parsedMessage, 'class="roomLink"')).toBe(3);
     });
 });
 
-describe('parseUserMentions',function(){
-    it('should handle unexpected values',function(){
+describe('parseUserMentions', function () {
+    it('should handle unexpected values', function () {
         expect(MessageLib.parseUserMentions("")).toBe("");
         expect(MessageLib.parseUserMentions(null)).toBe(null);
     });
     it('should replace user mentions', function () {
         spyOn(MessageLib, "getUserNamesAndColors").and.returnValue(
-            [{_id: "id1", username:"user1", color:"#FF0000"}, {_id: "id2", username: "user2"}]
+            [{_id: "id1", username: "user1", color: "#FF0000"}, {_id: "id2", username: "user2"}]
         );
 
         var message = '@user1@user2@user3@user2';
         var parsedMessage = MessageLib.parseUserMentions(message);
 
-        expect(countInstances(parsedMessage,'id1')).toBe(1);
-        expect(countInstances(parsedMessage,'id2')).toBe(2);
-        expect(countInstances(parsedMessage,'class="message-user-mention"')).toBe(3);
+        expect(countInstances(parsedMessage, 'id1')).toBe(1);
+        expect(countInstances(parsedMessage, 'id2')).toBe(2);
+        expect(countInstances(parsedMessage, 'class="message-user-mention"')).toBe(3);
     });
-    it('should handle usernames that are substrings of other usernames',function(){
+    it('should handle usernames that are substrings of other usernames', function () {
         spyOn(MessageLib, "getUserNamesAndColors").and.returnValue(
-            [{_id: "id1", username:"blah", color:"#FF0000"}, {_id: "id2", username: "blahblah"}]
+            [{_id: "id1", username: "blah", color: "#FF0000"}, {_id: "id2", username: "blahblah"}]
         );
         var message = '@blah@blahblah';
         var parsedMessage = MessageLib.parseUserMentions(message);
 
-        expect(countInstances(parsedMessage,'id1')).toBe(1);
-        expect(countInstances(parsedMessage,'id2')).toBe(1);
-        expect(countInstances(parsedMessage,'class="message-user-mention"')).toBe(2);
+        expect(countInstances(parsedMessage, 'id1')).toBe(1);
+        expect(countInstances(parsedMessage, 'id2')).toBe(1);
+        expect(countInstances(parsedMessage, 'class="message-user-mention"')).toBe(2);
     });
 });
 

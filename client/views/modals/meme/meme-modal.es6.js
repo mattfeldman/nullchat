@@ -1,3 +1,3 @@
-Template.memeModal.onCreated(function() {
+Template.memeModal.onCreated(function () {
     this.subscribe('memes');
 });

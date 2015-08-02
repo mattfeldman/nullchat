@@ -1,4 +1,4 @@
-Template.changelogButton.onCreated(function() {
+Template.changelogButton.onCreated(function () {
     this.subscribe("changelogs");
     this.subscribe("myCursors", {
         onReady() {
@@ -27,7 +27,7 @@ Template.changelogButton.helpers({
     }
 });
 
-Template.changelogButton.onDestroyed(function() {
+Template.changelogButton.onDestroyed(function () {
     const self = this;
     if (self.changelogSubscription) {
         self.changelogSubscription.stop();

@@ -1,9 +1,10 @@
 describe('UserHelpers', function () {
     describe('usernameForUserId', function () {
-        var testWithUser = function (returnUser, expected) {
+        function testWithUser(returnUser, expected) {
             spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
             expect(UserHelpers.usernameForUserId()).toBe(expected);
-        };
+        }
+
         it('should retrive users name', function () {
             testWithUser({username: "foo"}, "foo");
         });
@@ -13,10 +14,11 @@ describe('UserHelpers', function () {
     });
 
     describe('avatarForUserId', function () {
-        var testWithUser = function (returnUser, expected) {
+        function testWithUser(returnUser, expected) {
             spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
             expect(UserHelpers.avatarForUserId()).toBe(expected);
-        };
+        }
+
         it('should retrive users avatar', function () {
             testWithUser({profile: {avatar: "some-avatar"}}, "some-avatar");
         });
@@ -29,10 +31,11 @@ describe('UserHelpers', function () {
     });
 
     describe('colorForUserId', function () {
-        var testWithUser = function (returnUser, expected) {
+        function testWithUser(returnUser, expected) {
             spyOn(Meteor.users, 'findOne').and.returnValue(returnUser);
             expect(UserHelpers.colorForUserId()).toBe(expected);
-        };
+        }
+
         it('should retrive users color', function () {
             testWithUser({profile: {color: "#FF0000"}}, "#FF0000");
         });

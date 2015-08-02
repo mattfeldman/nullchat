@@ -27,7 +27,7 @@ Template.joinRoom.events({
     }
 });
 
-Template.joinRoom.onRendered(function() {
+Template.joinRoom.onRendered(function () {
     jQuery.hotkeys.options.filterInputAcceptingElements = false;
     jQuery.hotkeys.options.filterTextInputs = false;
 

@@ -18,7 +18,7 @@
  * Might be useful, when you want to pass some other data to your handler
  */
 
-(function(jQuery) {
+(function (jQuery) {
 
     jQuery.hotkeys = {
         version: "0.8",
@@ -142,7 +142,7 @@
         var origHandler = handleObj.handler,
             keys = handleObj.data.keys.toLowerCase().split(" ");
 
-        handleObj.handler = function(event) {
+        handleObj.handler = function (event) {
             //      Don't fire in text-accepting inputs that we didn't directly bind to
             if (this !== event.target &&
                 (jQuery.hotkeys.options.filterInputAcceptingElements &&
@@ -158,7 +158,7 @@
                 modif = "",
                 possible = {};
 
-            jQuery.each(["alt", "ctrl", "shift"], function(index, specialKey) {
+            jQuery.each(["alt", "ctrl", "shift"], function (index, specialKey) {
 
                 if (event[specialKey + 'Key'] && special !== specialKey) {
                     modif += specialKey + '+';
@@ -195,7 +195,7 @@
         };
     }
 
-    jQuery.each(["keydown", "keyup", "keypress"], function() {
+    jQuery.each(["keydown", "keyup", "keypress"], function () {
         jQuery.event.special[this] = {
             add: keyHandler
         };
