@@ -42,6 +42,10 @@ You can see the application deployed at http://nullchat.space
 - Send a PR
 - Should be simple to dive in and fix some [Code Climate Issues](https://codeclimate.com/github/mattfeldman/nullchat/issues)
 
+### Style
+- Use the projects [.eslintrc](https://github.com/mattfeldman/nullchat/blob/master/.eslintrc) to lint javascript
+- Refer to [Meteor Style Guidelines](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide) for direction
+
 ### roadmap [![Stories in Ready](https://badge.waffle.io/mattfeldman/nullchat.png?label=ready&title=Ready)](https://waffle.io/mattfeldman/nullchat)
 Everything is tracked in github issues, you can view the roadmap as a board here using https://waffle.io/mattfeldman/nullchat
 ### Resources
