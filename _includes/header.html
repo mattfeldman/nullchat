@@ -1,0 +1,25 @@
+<div class="ui vertical masthead center aligned segment">
+  <div class="ui container">
+    <div class="ui large secondary pointing menu">
+      <a class="toc item">
+        <i class="sidebar icon"></i>
+      </a>
+      {% for link in site.data.nav %}
+          <a class="item" href="{{link.href}}">{{ link.title }}</a>
+      {% endfor %}
+      <div class="right item">
+        <a class="ui basic button">Log in</a>
+        <a class="ui basic button">Sign Up</a>
+      </div>
+    </div>
+  </div>
+  <div class="ui text container">
+    <h1 class="ui inverted title stars">
+       nullchat
+    </h1>
+    <div class="subtitle">an open source meteor chat application</div>
+    <div class="buylink"><a href="http://null.chat" class="ui basic black button"><i class="github icon"></i><span>Fork on Github</span></a>
+      <div class="ui basic blue button"><i class="play icon"></i><span>Try Demo</span></div>
+    </div>
+  </div>
+</div>

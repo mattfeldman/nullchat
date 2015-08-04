@@ -1,3 +1,7 @@
+---
+layout: null
+title: nullchat
+---
 <html >
   <head>
     <meta charset="UTF-8">
@@ -17,10 +21,9 @@
     <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
+    {% for link in site.data.nav %}
+        <a class="item" href="{{link.href}}">{{ link.title }}</a>
+    {% endfor %}
     <div class="right menu">
       <div class="item">
         <a class="ui button">Log in</a>
@@ -45,164 +48,15 @@
 
 <!-- Page Contents -->
 <div class="pusher">
-  <div class="ui vertical masthead center aligned segment">
-    <div class="ui container">
-      <div class="ui large secondary pointing menu">
-        <a class="toc item">
-          <i class="sidebar icon"></i>
-        </a>
-        <a class="active item">Home</a>
-        <a class="item">Work</a>
-        <a class="item">Company</a>
-        <a class="item">Careers</a>
-        <div class="right item">
-          <a class="ui basic button">Log in</a>
-          <a class="ui basic button">Sign Up</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="ui text container">
-      <h1 class="ui inverted title stars">
-         nullchat
-      </h1>
-      <div class="subtitle">an open source meteor chat application</div>
-      <div class="buylink"><a href="http://null.chat" class="ui basic black button"><i class="github icon"></i><span>Fork on Github</span></a>
-        <div class="ui basic blue button"><i class="play icon"></i><span>Try Demo</span></div>
-      </div>
-    </div>
-
-  </div>
-  <div class="ui inverted vertical stripe segment">
-    <h1 class="ui large centered header">So. Much. Chat</h1>
-    <img src="https://s3-us-west-2.amazonaws.com/nullchat/images/eJSFKbwgnrBvGspNF-nullchat.png#4" class="ui huge rounded centered image">
-  </div>
-    <div class="ui vertical stripe segment">
-      <div class="ui internally celled three column center aligned stackable page relaxed grid">
-        <div class="row">
-          <div class="column">
-            <div class="ui icon header"><i class="browser icon"></i><span>rooms</span></div>
-            <p>Create public and private rooms</p>
-          </div>
-          <div class="column">
-            <div class="ui icon header"><i class="send icon"></i><span>direct messages</span></div>
-            <p>1:1 chats with the same features</p>
-          </div>
-          <div class="column">
-            <div class="ui icon header"><i class="announcement icon"></i><span>notifications</span></div>
-            <p>Highly configurable with per-room settings, Audio, Desktop, and SMS notifications.</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column">
-            <div class="ui icon header"><i class="at icon"></i><span>mentions</span></div>
-            <p>Callout to @user or #room with highlighting and notifications.</p>
-          </div>
-          <div class="column">
-            <div class="ui icon header"><i class="star half empty icon"></i><span>starring</span></div>
-            <p>Star a message to flag it for later and give the author a kudos.</p>
-          </div>
-          <div class="column">
-            <div class="ui icon header"><i class="film icon"></i><span>embeds</span></div>
-            <p>Rich embeds for Images, Youtube, GitHub and 50+ more providers</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui vertical inverted stripe segment">
-      <div class="ui middle aligned stackable grid relaxed container">
-        <div class="row">
-          <div class="eight wide column">
-            <h3 class="ui inverted header">Built with Meteor</h3>
-            <p>Built from the ground up with Meteor, this project follows the style guidelines. It's a great first meteor project!</p>
-          </div>
-          <div class="six wide right floated column">
-            <img src="http://studiointeract.com/sites/default/files/logo-meteor_0.png" class="ui medium centered bordered rounded image">
-          </div>
-        </div>
-        <div class="row">
-          <div class="eight wide column">
-            <h3 class="ui inverted header">Javascript from the future</h3>
-            <p>nullchat is built with ECMAScript 2015 via the <a href="#TODO">babel</a> package</p>
-          </div>
-          <div class="six wide right floated column">
-            <img src="http://www.devbattles.com/images/upload/1434611057.jpg" class="ui medium centered bordered rounded image">
-          </div>
-        </div>
-        <div class="row">
-          <div class="eight wide column">
-            <h3 class="ui inverted header">Of course it's open source</h3>
-            <p>The source code is available on <a href="http://null.chat">github</a></p>
-          </div>
-          <div class="six wide right floated column">
-            <img src="https://camo.githubusercontent.com/dd94921ada4ebde4ecbeb01d5dfbd52c4bc6e8f0/687474703a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f632f63332f4c6963656e73655f69636f6e2d6d69742e737667" class="ui small centered bordered rounded image">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui vertical stripe quote segment">
-      <div class="ui equal width stackable internally celled grid">
-        <div class="center aligned row">
-          <div class="column">
-            <h3>"This is really awesome"</h3>
-            <p>- Someone Official</p>
-          </div>
-          <div class="column">
-            <h3>"Lots of chat."</h3>
-            <p>
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui vertical stripe segment">
-      <div class="ui text container">
-        <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
-        <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-        <a class="ui large button">Read More</a>
-        <h4 class="ui horizontal header divider">
-        <a href="#">Case Studies</a>
-      </h4>
-        <h3 class="ui header">Did We Tell You About Our Bananas?</h3>
-        <p>Yes I know you probably disregarded the earlier boasts as non-sequitor filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-        <a class="ui large button">I'm Still Quite Interested</a>
-      </div>
-    </div>
-
-
-    <div class="ui inverted vertical footer segment">
-      <div class="ui container">
-        <div class="ui stackable inverted divided equal height stackable grid">
-          <div class="three wide column">
-            <h4 class="ui inverted header">About</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Sitemap</a>
-              <a href="#" class="item">Contact Us</a>
-              <a href="#" class="item">Religious Ceremonies</a>
-              <a href="#" class="item">Gazebo Plans</a>
-            </div>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Services</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Banana Pre-Order</a>
-              <a href="#" class="item">DNA FAQ</a>
-              <a href="#" class="item">How To Access</a>
-              <a href="#" class="item">Favorite X-Men</a>
-            </div>
-          </div>
-          <div class="seven wide column">
-            <h4 class="ui inverted header">Footer Header</h4>
-            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-      <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-6c99970ade81e43be51fa877be0f7600.js"></script>
-
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  {% include header.html %}
+  {% include screenshots.html %}
+  {% include features.html %}
+  {% include about.html %}
+  {% include quotes.html %}
+  {% include example.html %}
+  {% include footer.html %}
+</div>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.7/semantic.min.js'></script>
 
         <script>
@@ -228,21 +82,32 @@ $(document).ready(function () {
         mouseY = e.pageY;
         traX = 4 * mouseX / 570 + 40;
         traY = 4 * mouseY / 570 + 50;
-        console.log(traX);
         $('.stars').css({ 'background-position': traX + '%' + traY + '%' });
     });
 });
-      //@ sourceURL=pen.js
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
     </script>
 
-    
+
     <script>
   if (document.location.search.match(/type=embed/gi)) {
     window.parent.postMessage("resize", "*");
   }
 </script>
 
-    
+
   </body>
 </html>
- 
