@@ -69,14 +69,14 @@ Template.newMessage.helpers({
                     collection: Memes,
                     field: "searchName",
                     template: Template.memePill,
-                    token: '/meme ',
+                    token: '^/meme ',
                     matchAll: true
                 },
                 {
                     collection: Commands,
                     field: "name",
                     template: Template.commandPill,
-                    token: '/',
+                    token: '^/',
                     matchAll: true
                 }
             ]
@@ -154,6 +154,7 @@ Template.newMessage.events({
         //
         // doc.searchName is defined IFF the callback is a meme autocomplete
         // doc.html is defined IFF the callback is a emoji autocomplete
+        // doc.usage is defined IFF the callback is from a command
         if (doc.searchName) {
             template.$(event.target).val("/meme " + doc.id + " ");
         }
@@ -161,6 +162,9 @@ Template.newMessage.events({
             const text = template.$(event.target).val();
             const newText = text.replace(':' + doc.name + ' ', doc.shortname + ' '); // Add trailing :
             template.$(event.target).val(newText);
+        }
+        else if (doc.usage) {
+            template.$(event.target).val(`/${doc.name} `);
         }
     },
     'click .gif.button'(event, template) {
