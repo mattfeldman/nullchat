@@ -1,4 +1,8 @@
-<div id="Screenshots" class="ui inverted vertical stripe segment">
+<div id="Screenshots" class="ui inverted black vertical stripe segment">
   <h1 class="ui large centered header">So. Much. Chat</h1>
-  <img src="https://s3-us-west-2.amazonaws.com/nullchat/images/eJSFKbwgnrBvGspNF-nullchat.png#4" class="ui huge rounded centered image">
+  <div class="screenshots ui container">
+  {% for image in site.data.screenshots %}
+      <img src="{{image}}" class="ui huge rounded centered image">
+  {% endfor %}
+  </div>
 </div>
