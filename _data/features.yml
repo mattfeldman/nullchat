@@ -1,0 +1,23 @@
+- title: rooms
+  icon: "browser"
+  description: "Create public and private rooms"
+
+- title: direct messages
+  icon: "send"
+  description: "1:1 chats with the same features"
+
+- title: notifications
+  icon: "announcement"
+  description: "Highly configurable with per-room settings, Audio, Desktop, and SMS notifications."
+
+- title: mentions
+  icon: "at"
+  description: "Callout to @user or #room with highlighting and notifications."
+
+- title: starring
+  icon: "star half open"
+  description: "Star a message to flag it for later and give the author a kudos."
+
+- title: embeds
+  icon: "film"
+  description: "Rich embeds for Images, Youtube, GitHub and 50+ more providers"

@@ -1,32 +1,10 @@
 <div id="Features" class="ui vertical stripe segment">
-    <div class="ui internally celled three column center aligned stackable page relaxed grid">
-      <div class="row">
+    <div class="ui three column center aligned stackable page relaxed grid">
+        {% for feature in site.data.features %}
         <div class="column">
-          <div class="ui icon header"><i class="browser icon"></i><span>rooms</span></div>
-          <p>Create public and private rooms</p>
+          <div class="ui icon header">{{feature.title}}<i class="{{feature.icon}} icon"></i><span></span></div>
+          <p>{{feature.description}}</p>
         </div>
-        <div class="column">
-          <div class="ui icon header"><i class="send icon"></i><span>direct messages</span></div>
-          <p>1:1 chats with the same features</p>
-        </div>
-        <div class="column">
-          <div class="ui icon header"><i class="announcement icon"></i><span>notifications</span></div>
-          <p>Highly configurable with per-room settings, Audio, Desktop, and SMS notifications.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <div class="ui icon header"><i class="at icon"></i><span>mentions</span></div>
-          <p>Callout to @user or #room with highlighting and notifications.</p>
-        </div>
-        <div class="column">
-          <div class="ui icon header"><i class="star half empty icon"></i><span>starring</span></div>
-          <p>Star a message to flag it for later and give the author a kudos.</p>
-        </div>
-        <div class="column">
-          <div class="ui icon header"><i class="film icon"></i><span>embeds</span></div>
-          <p>Rich embeds for Images, Youtube, GitHub and 50+ more providers</p>
-        </div>
-      </div>
+        {% endfor %}
     </div>
   </div>
