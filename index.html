@@ -14,8 +14,9 @@ title: nullchat
   window.open = function(){ console.log("window.open is disabled."); };
     </script>
 
-    <link rel="stylesheet" type="text/css" href="slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/animate.css"/>
   </head>
   <body>
 
@@ -59,64 +60,21 @@ title: nullchat
 </div>
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.7/semantic.min.js'></script>
-<script src="unslider.min.js"></script>
-        <script>
-$(document).ready(function () {
-    $('.masthead').visibility({
-        once: false,
-        onBottomPassed: function () {
-            $('.fixed.menu').transition('fade in');
-        },
-        onBottomPassedReverse: function () {
-            $('.fixed.menu').transition('fade out');
-        }
+<script src='scripts/jquery.waypoints.min.js'></script>
+<script src="scripts/slick.min.js"></script>
+<script>
+    $(document).ready(function () {
+        {% include scripts/masthead.js %}
+        {% include scripts/slick.js %}
+        {% include scripts/title-animation.js %}
+        {% include scripts/waypoints.js %}
+        {% include scripts/scroll-to-waypoint.js %}
     });
-
-    $('.screenshots').slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      fade: true,
-      cssEase: 'linear'
-    });
-
-});
-$(document).ready(function () {
-    var mouseX, mouseY;
-    var ww = $(window).width();
-    var wh = $(window).height();
-    var traX, traY;
-    $(document).mousemove(function (e) {
-        mouseX = e.pageX;
-        mouseY = e.pageY;
-        traX = 4 * mouseX / 570 + 40;
-        traY = 4 * mouseY / 570 + 50;
-        $('.stars').css({ 'background-position': traX + '%' + traY + '%' });
-    });
-});
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 1000);
-        return false;
-      }
-    }
-  });
-});
-    </script>
-
-
-    <script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
 </script>
-
-    <script type="text/javascript" src="slick.min.js"></script>
-  </body>
+<script>
+    if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+    }
+</script>
+    </body>
 </html>
