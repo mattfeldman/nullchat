@@ -74,12 +74,13 @@ function sendFeedback(message, user, room) {
     if (!room || !message || !user) {
         return;
     }
-
+    const feedback = Feedback[message];
+    const content = feedback && feedback.message || message;
     var feedbackMessage = {
         roomId: room._id,
         timestamp: new Date().getTime(),
         type: "feedback",
-        message: message,
+        message: content,
         userId: user._id
     };
     Messages.insert(feedbackMessage);
