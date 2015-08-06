@@ -40,49 +40,23 @@ Meteor.methods({
         check(messageStub, {message: String, roomId: String});
         const user = Meteor.user();
         const room = Rooms.findOne(messageStub.roomId);
-        try {
-            if (!user) {
-                throw new Meteor.Error(401, "You need to login to send messages");
-            }
-            if (_s.isBlank(messageStub.message)) {
-                throw new Meteor.Error(401, "You must specify a message");
-            }
-            if (!room) {
-                throw new Meteor.Error(401, "You must specify a valid room");
-            }
-            if (room.isPrivate === true && !_.contains(room.invited, user._id)) {
-                throw new Meteor.Error(401, "You must be invited to send a message to this room.");
-            }
-
-            // Process commands
-            if (messageStub.message[0] === '/') {
-                return processCommand({message: messageStub.message, room: room});
-            }
+        if (!user) {
+            throw new Meteor.Error(401, "You need to login to send messages");
         }
-        catch (e) {
-            if (e.errorType === "Meteor.Error") {
-                sendFeedback(e.message || e.error, user, room);
-            }
-            return;
+        if (_s.isBlank(messageStub.message)) {
+            throw new Meteor.Error(401, "You must specify a message");
+        }
+        if (!room) {
+            throw new Meteor.Error(401, "You must specify a valid room");
+        }
+        if (room.isPrivate === true && !_.contains(room.invited, user._id)) {
+            throw new Meteor.Error(401, "You must be invited to send a message to this room.");
+        }
+
+        // Process commands
+        if (messageStub.message[0] === '/') {
+            return processCommand({message: messageStub.message, room: room});
         }
         insertMessage(user, room, messageStub);
     }
 });
-
-function sendFeedback(message, user, room) {
-    // TODO: Global feedback when feedback is about room? Maybe default to current room?
-    if (!room || !message || !user) {
-        return;
-    }
-    const feedback = Feedback[message];
-    const content = feedback && feedback.message || message;
-    var feedbackMessage = {
-        roomId: room._id,
-        timestamp: new Date().getTime(),
-        type: "feedback",
-        message: content,
-        userId: user._id
-    };
-    Messages.insert(feedbackMessage);
-}
-
