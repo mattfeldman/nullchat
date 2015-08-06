@@ -1,4 +1,4 @@
-Template.joinRoom.helpers({
+Template.roomSearch.helpers({
     settings() {
         return {
             position: "bottom",
@@ -15,7 +15,7 @@ Template.joinRoom.helpers({
     }
 });
 
-Template.joinRoom.events({
+Template.roomSearch.events({
     'autocompleteselect input'(event, template, doc) {
         Meteor.call('joinRoom', doc._id, (err, data) => {
             if (!err) {
@@ -27,7 +27,7 @@ Template.joinRoom.events({
     }
 });
 
-Template.joinRoom.onRendered(function () {
+Template.roomSearch.onRendered(function () {
     jQuery.hotkeys.options.filterInputAcceptingElements = false;
     jQuery.hotkeys.options.filterTextInputs = false;
 
