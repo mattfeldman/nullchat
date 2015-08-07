@@ -18,7 +18,7 @@ Meteor.methods({
     updateUsername(username) {
         check(username, String);
         var usernameRegex = new RegExp("$" + username + "^", "i");
-        var user = Meteor.users.findOne({username: usernameRegex});
+        var user = Meteor.users.findOne({username: {$regex: usernameRegex}});
         if (user) {
             throw new Meteor.Error("username-taken");
         }
