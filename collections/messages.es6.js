@@ -41,16 +41,16 @@ Meteor.methods({
         const user = Meteor.user();
         const room = Rooms.findOne(messageStub.roomId);
         if (!user) {
-            throw new Meteor.Error(401, "You need to login to send messages");
+            throw new Meteor.Error("user-not-found");
         }
         if (_s.isBlank(messageStub.message)) {
-            throw new Meteor.Error(401, "You must specify a message");
+            throw new Meteor.Error("message-blank");
         }
         if (!room) {
-            throw new Meteor.Error(401, "You must specify a valid room");
+            throw new Meteor.Error("room-not-found");
         }
         if (room.isPrivate === true && !_.contains(room.invited, user._id)) {
-            throw new Meteor.Error(401, "You must be invited to send a message to this room.");
+            throw new Meteor.Error("message-not-invited");
         }
 
         // Process commands

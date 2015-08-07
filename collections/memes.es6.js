@@ -15,7 +15,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     createMeme(memeStub) {
         if (!Meteor.settings.imgFlip) {
-            throw new Meteor.Error("ImgFlip credentials not set to create meme.");
+            throw new Meteor.Error("meme-error-creating");
         }
 
         const response = Meteor.http.post("https://api.imgflip.com/caption_image", {
@@ -29,11 +29,11 @@ Meteor.methods({
         });
 
         if (!response || response.statusCode !== 200) {
-            throw new Meteor.Error("Error creating meme.");
+            throw new Meteor.Error("meme-error-creating");
         }
         const responseContent = JSON.parse(response.content);
         if (!responseContent.success) {
-            throw new Meteor.Error("Error creating meme.");
+            throw new Meteor.Error("meme-error-creating");
         }
         return responseContent.data.url;
     }
