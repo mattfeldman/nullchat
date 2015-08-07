@@ -71,7 +71,8 @@ Meteor.methods({
         }
 
         if (!_.contains(room.users, Meteor.userId())) {
-            Meteor.call('joinRoom', room._id, (err, id) => {
+            Meteor.call('joinRoom', room._id, (err, data) => {
+                AlertFeedback(err, data);
                 if (err) {
                     throw new Meteor.Error("room-join-no-permission");
                 }

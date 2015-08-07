@@ -33,7 +33,7 @@ Template.roomListItem.events({
                 }
                 Client.setCurrentRoom(newRoom._id);
             }
-            Meteor.call('leaveRoom', leaveRoomId);
+            Meteor.call('leaveRoom', leaveRoomId, AlertFeedback);
         }
     },
     'click .setRoomLink'(event, template) {

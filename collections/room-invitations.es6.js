@@ -74,7 +74,7 @@ function updateRoomInvitation(id, accepted) {
         }
     });
     if (accepted) {
-        Meteor.call('joinRoom', roomInvitation.roomId);
+        Meteor.call('joinRoom', roomInvitation.roomId, AlertFeedback);
     }
 }
 Schemas.roomInvitation = new SimpleSchema({

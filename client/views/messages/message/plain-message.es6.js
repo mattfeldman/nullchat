@@ -72,10 +72,10 @@ Template.plainMessage.events({
         event.preventDefault();
 
         if (!_(this.likedBy).contains(Meteor.userId())) {
-            Meteor.call('likeMessage', template.data._id);
+            Meteor.call('likeMessage', template.data._id, AlertFeedback);
         }
         else {
-            Meteor.call('unlikeMessage', template.data._id);
+            Meteor.call('unlikeMessage', template.data._id, AlertFeedback);
         }
     },
     'dblclick, click .editMessageButton'(event, template) {

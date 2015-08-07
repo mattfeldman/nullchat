@@ -18,6 +18,7 @@ Template.joinRoom.helpers({
 Template.joinRoom.events({
     'autocompleteselect input'(event, template, doc) {
         Meteor.call('joinRoom', doc._id, (err, data) => {
+            AlertFeedback(err, data);
             if (!err) {
                 Client.setCurrentRoom(data);
                 template.$('input').val('');

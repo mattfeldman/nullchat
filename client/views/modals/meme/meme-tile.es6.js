@@ -4,7 +4,7 @@ Template.memeTile.events({
         Meteor.call('message', {
             roomId: Session.get('currentRoom'),
             message: template.data.images.original.url
-        });
+        }, AlertFeedback);
         $(".memeModal").modal('hide');
     },
     'mouseenter .memeTile'(event, template) {

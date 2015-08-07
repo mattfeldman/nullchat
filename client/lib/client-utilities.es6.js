@@ -12,7 +12,7 @@ Client = {
     setCurrentRoom(roomId) {
         Session.set('messageLimit', 10);
         Session.set('currentRoom', roomId);
-        Meteor.call('setCurrentRoom', roomId);
+        Meteor.call('setCurrentRoom', roomId, AlertFeedback);
         Meteor.call('setSeen', roomId);
         Session.set('unread_' + roomId, "");
     },
