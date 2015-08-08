@@ -14,9 +14,9 @@ deployment:
     branch: [master, daily-deployment]
     owner: mattfeldman
     commands:
-      - <
+      - |
         meteor login << END_TEXT
-        username
-        password
+        ${deploy_user}
+        ${deploy_password}
         END_TEXT
       - meteor deploy nullchat-daily
