@@ -1,0 +1,21 @@
+<template name="helpModal">
+    <div class="ui helpModal modal">
+        <div class="header">
+            <h1 >Command Listing</h1>
+            <h4>Spaces between parameters. [?param] Denotes optional parameters.</h4>
+        </div>
+        <div class="content ui divided list">
+            {{#each commands}}
+                <div class="item">
+                    <div class="content">
+                        <div class="header">{{name}}</div> <em>{{usage}}</em>
+                        <div class="description">{{description}}</div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="actions">
+            <div class="ui close button">close</div>
+        </div>
+    </div>
+</template>
