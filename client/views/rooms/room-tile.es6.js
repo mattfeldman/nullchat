@@ -1,9 +1,9 @@
 Template.roomTile.events({
     'click .join'(event, template) {
-        Meteor.call('joinRoom', template.data._id);
+        Meteor.call('joinRoom', template.data._id, AlertFeedback);
     },
     'click .leave'(event, template) {
-        Meteor.call('leaveRoom', template.data._id);
+        Meteor.call('leaveRoom', template.data._id, AlertFeedback);
     }
 });
 Template.roomTile.helpers({

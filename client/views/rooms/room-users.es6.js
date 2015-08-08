@@ -50,7 +50,7 @@ Template.roomUsers.onRendered(function () {
 Template.roomUsers.events({
     'autocompleteselect input'(event, template, doc) {
         const input = template.$('input');
-        Meteor.call('roomInvitation', doc._id, Session.get('currentRoom'));
+        Meteor.call('roomInvitation', doc._id, Session.get('currentRoom'), AlertFeedback);
         input.val('');
         input.focus();
     }

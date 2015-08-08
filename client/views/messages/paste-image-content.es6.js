@@ -30,7 +30,7 @@ Template.pasteImageContent.events({
                 roomId: Session.get('currentRoom')
             };
 
-            Meteor.call('message', messageStub);
+            Meteor.call('message', messageStub, AlertFeedback);
             Client.scrollChatToBottom();
         });
     }),

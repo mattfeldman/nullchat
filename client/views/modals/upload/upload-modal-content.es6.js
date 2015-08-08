@@ -9,7 +9,7 @@ Template.uploadModalContent.helpers({
                 Meteor.call('message', {
                     roomId: Session.get('currentRoom'),
                     message: `**Upload: **${fileInfo.url} (${fileInfo.size / 1000000}mb)`
-                });
+                }, AlertFeedback);
                 $(".uploadModal").modal('hide');
             }
         };

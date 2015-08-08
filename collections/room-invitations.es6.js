@@ -9,21 +9,21 @@ Meteor.methods({
         var room = Rooms.findOne(targetRoomId);
 
         if (!room) {
-            throw new Meteor.Error("Room could not be found.");
+            throw new Meteor.Error("room-not-found");
         }
         if (!targetUser) {
-            throw new Meteor.Error("User could not be found.");
+            throw new Meteor.Error("user-not-found");
         }
         if (room.direct) {
-            throw new Meteor.Error("Can not invite to direct message rooms.");
+            throw new Meteor.Error("invite-to-direct");
         }
 
         // currentUser has to have permission on targetRoom
         if (room.isPrivate && !_(room.invited).contains(Meteor.userId())) {
-            throw new Meteor.Error("You don't have permission to invite to that room.");
+            throw new Meteor.Error("invite-no-permission");
         }
         if (_(room.users).contains(targetUser._id)) {
-            throw new Meteor.Error("User in that room.");
+            throw new Meteor.Error("invite-already");
         }
 
         var roomInvitation = {
@@ -42,7 +42,7 @@ Meteor.methods({
             active: true // NOTE: This could be harassed, reconsider later
         });
         if (existingInvitation) {
-            throw new Meteor.Error("You've already invited that user to that room.");
+            throw new Meteor.Error("invite-already");
         }
         RoomInvitations.insert(roomInvitation);
         Rooms.update({_id: room._id}, {$addToSet: {invited: targetUser._id}});
@@ -74,7 +74,7 @@ function updateRoomInvitation(id, accepted) {
         }
     });
     if (accepted) {
-        Meteor.call('joinRoom', roomInvitation.roomId);
+        Meteor.call('joinRoom', roomInvitation.roomId, AlertFeedback);
     }
 }
 Schemas.roomInvitation = new SimpleSchema({

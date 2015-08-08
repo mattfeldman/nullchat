@@ -5,7 +5,7 @@ var sendMessage = function (e) {
         message: $("#message").val(),
         roomId: Session.get('currentRoom')
     };
-    Meteor.call('message', messageStub);
+    Meteor.call('message', messageStub, AlertFeedback);
     $("#message").val('');
     Client.scrollChatToBottom();
 };

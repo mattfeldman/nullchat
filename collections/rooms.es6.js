@@ -8,13 +8,13 @@ Meteor.methods({
         const userId = Meteor.userId();
 
         if (!room) {
-            throw new Meteor.Error("room missing");
+            throw new Meteor.Error("room-not-found");
         }
         if (!userId) {
-            throw new Meteor.Error("user not logged in");
+            throw new Meteor.Error("user-not-found");
         }
         if (room.isPrivate && !_.contains(room.invited, userId) && room.ownerId !== userId) {
-            throw new Meteor.Error("you are not allowed in this room");
+            throw new Meteor.Error("room-join-no-permission");
         }
         if (!_.contains(room.users, userId)) {
             Rooms.update({_id: room._id}, {$addToSet: {users: userId}});
@@ -52,11 +52,11 @@ Meteor.methods({
         const userId = Meteor.userId();
 
         if (!room) {
-            throw new Meteor.Error("Room invalid");
+            throw new Meteor.Error("room-not-found");
         }
 
         if (room.ownerId === userId) {
-            throw new Meteor.Error("You can't leave a room you own. Sorry bub.");
+            throw new Meteor.Error("room-leave-owner");
         }
 
         Rooms.update({_id: room._id}, {$pull: {users: userId}});
@@ -67,13 +67,14 @@ Meteor.methods({
 
         const room = Rooms.findOne({_id: roomId});
         if (!room) {
-            throw new Meteor.Error(`Can not find room with id ${roomId}`);
+            throw new Meteor.Error("room-not-found");
         }
 
         if (!_.contains(room.users, Meteor.userId())) {
-            Meteor.call('joinRoom', room._id, (err, id) => {
+            Meteor.call('joinRoom', room._id, (err, data) => {
+                AlertFeedback(err, data);
                 if (err) {
-                    throw new Meteor.Error("User not allowed in to join this room.");
+                    throw new Meteor.Error("room-join-no-permission");
                 }
             });
         }
@@ -86,15 +87,15 @@ Meteor.methods({
         const roomNameRegex = new RegExp("^" + roomName + "$", "i"); // case insensitivity
 
         if (!Schemas.regex.room.test(roomName)) {
-            throw new Meteor.Error("room name must be alphanumeric");
+            throw new Meteor.Error("room-create-alphanumeric");
         }
 
         if (Rooms.findOne({name: roomNameRegex})) {
-            throw new Meteor.Error("room exists");
+            throw new Meteor.Error("room-create-exists");
         }
 
         if (!Meteor.userId()) {
-            throw new Meteor.Error("Must be logged in");
+            throw new Meteor.Error("user-not-found");
         }
 
         Rooms.insert({
@@ -115,23 +116,23 @@ Meteor.methods({
         const room = Rooms.findOne(targetRoomId);
 
         if (!room) {
-            throw new Meteor.Error("Room could not be found.");
+            throw new Meteor.Error("room-not-found");
         }
 
         if (!targetUser) {
-            throw new Meteor.Error("User could not be found.");
+            throw new Meteor.Error("user-not-found.");
         }
 
         if (room.ownerId !== Meteor.userId() && !_(room.moderators).contains(Meteor.userId())) {
-            throw new Meteor.Error("You do not have permission to kick in this room.");
+            throw new Meteor.Error("kick-no-permission");
         }
 
         if (!_(room.users).contains(targetUser._id)) {
-            throw new Meteor.Error("Room does not contain target user.");
+            throw new Meteor.Error("user-not-found");
         }
 
         if (room.ownerId === targetUser._id) {
-            throw new Meteor.Error("Can not kick the owner of a room.");
+            throw new Meteor.Error("kick-no-permission");
         }
 
         Rooms.update({_id: room._id}, {$pull: {users: targetUser._id}});
@@ -144,11 +145,11 @@ Meteor.methods({
         const user = Meteor.user();
 
         if (!room) {
-            throw new Meteor.Error("Room could not be found.");
+            throw new Meteor.Error("room-not-found");
         }
 
         if (room.ownerId !== user._id) {
-            throw new Meteor.Error("you must be owner");
+            throw new Meteor.Error("room-privacy-not-owner");
         }
 
         const updateQuery = {$set: {isPrivate: isPrivate}};

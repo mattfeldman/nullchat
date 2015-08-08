@@ -20,10 +20,10 @@ Meteor.methods({
         var usernameRegex = new RegExp("$" + username + "^", "i");
         var user = Meteor.users.findOne({username: {$regex: usernameRegex}});
         if (user) {
-            throw new Meteor.Error("username taken");
+            throw new Meteor.Error("username-taken");
         }
         else if (!Schemas.regex.username.test(username)) {
-            throw new Meteor.Error("username must be alphanumeric");
+            throw new Meteor.Error("username-alphanumeric");
         }
         else {
             Meteor.users.update({_id: Meteor.userId()}, {$set: {'username': username}});

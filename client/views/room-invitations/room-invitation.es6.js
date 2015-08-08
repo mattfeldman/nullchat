@@ -11,11 +11,11 @@ Template.roomInvitation.helpers({
 });
 Template.roomInvitation.events({
     'click .room-invitation-accept'(event, template) {
-        Meteor.call('acceptRoomInvitation', template.data._id);
+        Meteor.call('acceptRoomInvitation', template.data._id, AlertFeedback);
         event.preventDefault();
     },
     'click .room-invitation-dismiss'(event, template) {
-        Meteor.call('dismissRoomInvitation', template.data._id);
+        Meteor.call('dismissRoomInvitation', template.data._id, AlertFeedback);
         event.preventDefault();
     }
 });

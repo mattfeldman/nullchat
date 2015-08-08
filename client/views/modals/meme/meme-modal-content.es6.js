@@ -23,6 +23,7 @@ Template.memeModalContent.helpers({
 
 const debouncedUpdate = _.throttle((params, template) => {
     Meteor.call('createMeme', params, (error, result) => {
+        AlertFeedback(error, result);
         if (!error) {
             template.currentMemeUrl.set(result);
         }
@@ -52,7 +53,7 @@ Template.memeModalContent.events({
         Meteor.call('message', {
             roomId: Session.get('currentRoom'),
             message: currentMemeUrl
-        });
+        }, AlertFeedback);
         $(".memeModal").modal('hide');
     }
 });
