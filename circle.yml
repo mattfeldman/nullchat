@@ -1,0 +1,22 @@
+## Customize dependencies
+dependencies:
+  override:
+    - curl https://install.meteor.com/ | sh
+
+## Customize test commands
+test:
+  override:
+    - meteor --test
+
+## Customize deployment commands
+deployment:
+  staging:
+    branch: [master, daily-deployment]
+    owner: mattfeldman
+    commands:
+      - |
+        meteor login << END_TEXT
+        ${deploy_user}
+        ${deploy_password}
+        END_TEXT
+      - meteor deploy nullchat-daily
