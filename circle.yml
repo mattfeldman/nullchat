@@ -13,10 +13,10 @@ deployment:
   staging:
     branch: [master, daily-deployment]
     owner: mattfeldman
-      commands:
-        - <
-          meteor login << END_TEXT
-          username
-          password
-          END_TEXT
-        - meteor deploy nullchat-daily
+    commands:
+      - <
+        meteor login << END_TEXT
+        username
+        password
+        END_TEXT
+      - meteor deploy nullchat-daily
