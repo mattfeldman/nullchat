@@ -2,7 +2,7 @@ accounts-base@1.2.0
 accounts-github@1.0.4
 accounts-oauth@1.1.5
 accounts-password@1.1.1
-aldeed:autoform@4.2.2
+aldeed:autoform@5.1.2
 aldeed:simple-schema@1.1.0
 amplify@1.0.0
 aramk:tinycolor@1.1.0_1
@@ -43,6 +43,7 @@ ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 email@1.0.6
+fabienb4:autoform-semantic-ui@0.3.7
 fastclick@1.0.3
 flemay:less-autoprefixer@1.1.0
 gadicohen:reactive-window@1.0.6

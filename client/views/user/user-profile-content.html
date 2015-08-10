@@ -1,19 +1,17 @@
 <template name="userProfileContent">
-    <i class="close icon"></i>
-
-    <div class="header">
-        Edit User Profile
-    </div>
-    {{#autoForm schema="Schemas.userProfile" doc=this id="userProfileForm" type="method" meteormethod="updateProfile"}}
-        <div class="content">
-            {{> afQuickField name='color'}}
-            {{> afQuickField name='avatar'}}
-            {{> afQuickField name='number'}}
-            {{> afQuickField name='use24HrTime'}}
-        </div>
-        <div class="actions">
-            <button type="submit" class="ui left labeled icon green button ">Save <i class="checkmark icon"></i>
-            </button>
-        </div>
-    {{/autoForm}}
+            <div class="header">
+                <h1>Edit User Profile</h1>
+            </div>
+            <div class="content">
+                {{#autoForm schema="Schemas.userProfile" doc=this id="userProfileForm" type="method" meteormethod="updateProfile" errorsInLabels=true}}
+                            {{> afQuickField name='color'}}
+                            {{> afQuickField name='avatar'}}
+                            {{> afQuickField name='number'}}
+                            {{> afQuickField name='use24HrTime'}}
+                {{/autoForm}}
+            </div>
+            <div class="actions">
+                <div class="ui left labeled icon green button save">Save <i class="checkmark icon"></i></div>
+                <div class="ui left labeled grey button cancel">Cancel</div>
+            </div>
 </template>

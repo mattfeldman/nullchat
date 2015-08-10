@@ -10,12 +10,15 @@ cfs:s3
 cfs:standard-packages
 chriswessels:hammer
 chuangbo:marked
+fabienb4:autoform-semantic-ui
 flemay:less-autoprefixer
 gadicohen:reactive-window
 grigio:babel
 http
 iron:router
 jparker:gravatar
+juliancwirko:s-alert
+juliancwirko:s-alert-flip
 lbee:lunr
 linto:fontawesome
 maazalik:highcharts
@@ -49,5 +52,3 @@ velocity:html-reporter@0.6.2
 velocity:console-reporter
 
 npm-container
-juliancwirko:s-alert
-juliancwirko:s-alert-flip
