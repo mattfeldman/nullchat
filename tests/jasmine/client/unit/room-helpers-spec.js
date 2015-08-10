@@ -34,5 +34,9 @@ describe('RoomHelpers', function () {
         it('should return default if room name not found', function () {
             test({prop: '123'}, '[unknown]');
         });
+        it('should return direct users name instead of room name', function () {
+            spyOn(UserHelpers, "usernameForUserId").and.returnValue("directUser");
+            test({direct: true, users: [Meteor.userId(), "someuser"]}, 'directUser');
+        });
     });
 });
