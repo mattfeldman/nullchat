@@ -136,6 +136,7 @@ Meteor.methods({
         }
 
         Rooms.update({_id: room._id}, {$pull: {users: targetUser._id}});
+        Meteor.users.update({_id: targetUser._id}, {$set: {"status.currentRoom": ''}});
     },
     setRoomPrivacy(targetRoomId, isPrivate) {
         check(targetRoomId, String);
