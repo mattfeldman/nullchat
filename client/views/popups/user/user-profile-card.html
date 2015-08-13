@@ -1,24 +1,5 @@
 <template name="userProfileCard">
     <div class="ui userProfileCard popup" style="line-height:initial; z-index: 500;padding:0.0em;">
-        <div class="ui card" style="z-index:501">
-            <div class="image">
-                <img src="{{avatarForUserId this}}">
-            </div>
-            <div class="content">
-                <a class="header">{{usernameForUserId this}}</a>
-
-                <div class="meta">
-                    <span class="date">more info to go here</span>
-                </div>
-                <div class="description">
-                </div>
-            </div>
-            <div class="extra content">
-                <a href="/user/{{this}}/metrics" target="_blank" class="ui tiny primary compact labeled icon button">
-                    <i class="line chart icon"></i>
-                    Trend
-                </a>
-            </div>
-        </div>
+        {{> userProfileCardContent this}}
     </div>
 </template>
