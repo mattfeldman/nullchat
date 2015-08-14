@@ -109,6 +109,9 @@ Template.plainMessage.events({
         if (confirm("Are you sure you want to delete this message?")) {
             Meteor.call('removeMessage', template.data._id);
         }
+    },
+    'mouseenter .avatar'(event, template) {
+        Client.showPopup(event.target, "userProfileCard", template.data.authorId);
     }
 });
 Template.plainMessage.onRendered(function () {
