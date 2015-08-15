@@ -1,7 +1,5 @@
 <template name="messageList">
-    {{#if shouldShowLoadMore}}
-        <a href="#" class="loadMore">load more</a>
-    {{/if}}
+    <a href="#" class="ui inverted violet fluid button loadMore">Load More</a>
     <div class="ui threaded comments smallMessageList">
         {{#each messages}}
             {{> message}}

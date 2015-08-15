@@ -18,16 +18,8 @@ const scroll = {};
 
 Template.roomView.events({
     'click #loadMore'(e) {
-        Session.set('messageLimit', Session.get('messageLimit') + 20);
+        Session.set('messageLimit', Session.get('messageLimit') + 50);
         e.preventDefault();
-    },
-    'scroll #roomContainer'(e) {
-        const room = $("#roomContainer");
-        if (room.scrollTop() < 50 && !scroll.needScroll && isReady.messages) {
-            scroll.needScroll = true;
-            scroll.previousHeight = $("#scrollContainer").height();
-            Client.incMessageLimit(20);
-        }
     },
     'click .launch'(event, template) {
         $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
