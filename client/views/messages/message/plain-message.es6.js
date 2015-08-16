@@ -80,7 +80,7 @@ Template.plainMessage.events({
     },
     'dblclick, click .editMessageButton'(event, template) {
         if (template.data.authorId === Meteor.userId()) {
-            Session.set('editingId', template.data._id);
+            Client.editMessage(template.data._id);
         }
     },
     'submit .editForm'(event, template) {
@@ -88,10 +88,10 @@ Template.plainMessage.events({
         const newMessage = template.find('input[name=newMessageText]').value;
 
         Meteor.call('editMessage', {_id: template.data._id, message: newMessage});
-        Session.set('editingId', "");
+        Client.stopEditing();
     },
-    'click .canceleEditSubmit'() {
-        Session.set('editingId', "");
+    'click .cancelEditSubmit'() {
+        Client.stopEditing();
     },
     'mouseenter .message-timestamp'(event, template) {
         createTimestampPopup(event.target, template.data.timestamp);

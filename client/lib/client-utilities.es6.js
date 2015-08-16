@@ -83,6 +83,28 @@ Client = {
     addTextToInput(text) {
         const currentInput = $("#message").val();
         $("#message").val(currentInput + text);
+    },
+    editLatestMessage() {
+        const lastMessage = Messages.findOne(
+            {
+                roomId: Session.get('currentRoom'),
+                authorId: Meteor.userId()
+            },
+            {
+                sort: {timestamp: -1},
+                fields: {'_id': 1}
+            }
+        );
+        Client.editMessage(lastMessage._id);
+    },
+    editMessage(id) {
+        check(id, String);
+        Session.set('editingId', id);
+        Meteor.defer(() => $('.messageEditInput').focus());
+    },
+    stopEditing() {
+        Session.set('editingId', '');
+        Meteor.defer(() => $('#message').focus());
     }
 };
 
