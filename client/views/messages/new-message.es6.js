@@ -118,12 +118,7 @@ Template.newMessage.events({
                 sendMessage(e);
                 break;
             case 38: // Up Arrow Key
-                if (e.ctrlKey) {
-                    Client.editLatestMessage();
-                }
-                else {
-                    recallMessageWithNewOffset(1);
-                }
+                recallMessageWithNewOffset(1);
                 break;
             case 40: // Down Arrow Key
                 recallMessageWithNewOffset(-1);

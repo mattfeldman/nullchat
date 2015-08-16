@@ -113,4 +113,5 @@ Meteor.startup(()=> {
     Meteor.setInterval(()=> {
         Session.set("now", new Date());
     }, 500);
+    $(document).bind('keydown', 'Ctrl+up', Client.editLatestMessage);
 });

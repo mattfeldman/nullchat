@@ -112,6 +112,12 @@ Template.plainMessage.events({
     },
     'mouseenter .avatar'(event, template) {
         Client.showPopup(event.target, "userProfileCard", template.data.authorId);
+    },
+    'keydown .editForm'(event, template) {
+        if(event.keyCode === 27) {
+            Client.stopEditing();
+            event.preventDefault();
+        }
     }
 });
 Template.plainMessage.onRendered(function () {
