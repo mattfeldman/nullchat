@@ -4,23 +4,25 @@
             <img src="{{avatarForUserId this}}">
         </div>
         <div class="content">
-            <a class="header">{{usernameForUserId this}}</a>
-
+            <div class="right floated meta">{{idleTextForUserId this}}</div>
+            <a class="header">@{{usernameForUserId this}}</a>
+        </div>
+        <div class="content">
             <div class="meta">
                 <span class="date">more info to go here</span>
             </div>
             <div class="description">
             </div>
         </div>
-        <div class="extra content">
-            <a href="/user/{{this}}/metrics" target="_blank" class="ui tiny primary compact labeled icon button">
+        <div class="ui two bottom attached labeled buttons">
+            <a href="/user/{{this}}/metrics" target="_blank" class="ui primary labeled icon button">
                 <i class="line chart icon"></i>
                 Trend
             </a>
             {{#if shouldShowMessageButton}}
-            <a href="#" class="ui tiny green compact labeled icon button direct-message">
+            <a href="#" class="ui green labeled icon button direct-message">
                 <i class="conversation icon"></i>
-                Direct Message
+                Message
             </a>
             {{/if}}
         </div>

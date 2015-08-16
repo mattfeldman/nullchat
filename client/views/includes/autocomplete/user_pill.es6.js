@@ -21,14 +21,5 @@ Template.userPill.helpers({
         else {
             return "border-right: 3px solid transparent";
         }
-    },
-    idleTime() {
-        const now = Session.get("now"); // Time reactivity hack
-        if (this.status && this.status.lastActivity) {
-            return moment(this.status.lastActivity).fromNow();
-        }
-        else if (!this.status.online && this.status && this.status.lastLogin && this.status.lastLogin.date) {
-            return moment(this.status.lastLogin.date).fromNow();
-        }
     }
 });
