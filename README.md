@@ -4,7 +4,7 @@ nullchat [![Build Status](https://img.shields.io/travis/mattfeldman/nullchat/mas
 an open source meteor chat application
 currently beta - use at your own risk
 
-You can see the application deployed at http://nullchat.space
+You can see the application deployed at http://nullchat.space, or check out the latest continous deployment at http://nullchat-daily.meteor.com
 
 # Feature List
 - Create Public or Private Rooms
