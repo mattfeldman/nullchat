@@ -39,7 +39,7 @@ Client = {
                 Blaze.remove(modal);
             },
             onVisible() {
-                // Hack for scroll height from: https://github.com/Semantic-Org/Semantic-UI/issues/165
+                // Hack for scroll height from: 1https://github.com/Semantic-Org/Semantic-UI/issues/165
                 $(`.${templateName}.modal`).modal("refresh");
             }
         });

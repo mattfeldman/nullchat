@@ -19,7 +19,6 @@ const scroll = {};
 Template.roomView.events({
     'click #loadMore'(e) {
         Session.set('messageLimit', Session.get('messageLimit') + 50);
-        e.preventDefault();
     },
     'click .launch'(event, template) {
         $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
@@ -149,29 +148,6 @@ Template.roomView.onCreated(function () {
                     notify.createNotification(title, {body: body, icon: avatar, tag: newDoc._id});
                 }
             }
-        }
-    });
-
-    Session.set('unreadMessages', 0);
-    Deps.autorun(function () {
-        const numberOfUnreadMessages = Session.get('unreadMessages');
-        const currentRoom = Rooms.findOne({_id: Session.get('currentRoom')});
-
-        let currentRoomString = '';
-
-        if (currentRoom.direct) {
-            const otherUserId = UserHelpers.otherUserId(currentRoom.users);
-            currentRoomString = "@" + UserHelpers.usernameForUserId(otherUserId) + ' ';
-        }
-        else {
-            currentRoomString = '#' + currentRoom.name + ' ';
-        }
-
-        if (numberOfUnreadMessages > 0) {
-            document.title = "(" + numberOfUnreadMessages + ")" + " " + currentRoomString + window.location.hostname;
-        }
-        else {
-            document.title = currentRoomString + window.location.hostname;
         }
     });
 
