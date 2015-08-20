@@ -60,13 +60,6 @@ Template.roomView.onCreated(function () {
     const clickSound = new buzz.sound('/sounds/click_04.wav');
     const chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
-    const permission = notify.permissionLevel();
-    if (permission === notify.PERMISSION_DEFAULT) {
-        notify.requestPermission();
-    }
-    notify.config({pageVisibility: false, autoClose: 5000});
-
-
     Notifications.find({timestamp: {$gt: nowTimestamp}}).observe({
         added(document) {
             if (isReady.notifications) {
@@ -134,22 +127,6 @@ Template.roomView.onCreated(function () {
         }
     });
 
-    Messages.find({authorId: Meteor.userId()}).observe({
-        changed(newDoc, oldDoc) {
-            if (newDoc.likedBy.length - oldDoc.likedBy.length === 1) {
-                const likedBy = _.difference(newDoc.likedBy, oldDoc.likedBy)[0];
-                if (likedBy === Meteor.userId()) {return;}
-                if (permission === notify.PERMISSION_GRANTED) {
-                    const user = Meteor.users.findOne({_id: likedBy}, {fields: {"profile.avatar": 1, "username": 1}});
-                    if (!user) { return; }
-                    const avatar = user.profile && user.profile.avatar || '/images/logo64.png';
-                    const title = user.username + " gave you a star.";
-                    const body = `For "${newDoc.message}"`;
-                    notify.createNotification(title, {body: body, icon: avatar, tag: newDoc._id});
-                }
-            }
-        }
-    });
 
     Deps.autorun(function () {
         const rooms = Rooms.find({users: Meteor.userId()}, {fields: {_id: 1}}).fetch();
