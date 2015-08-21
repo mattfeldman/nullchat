@@ -6,7 +6,6 @@ Template.body.onCreated(function(){
     Notifications.find({timestamp: {$gt: now}}).observe({
         added(document) {
             if (self.subscriptionsReady) {
-                console.log('fuck2');
                 // HACK: should be replaced by a full 'seen' message sub system
                 if ((now - document.timestamp) < 10000) {
                     chimeSound.play();
