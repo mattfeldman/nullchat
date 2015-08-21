@@ -1,10 +1,4 @@
 Meteor.startup(function(){
-    const permission = notify.permissionLevel();
-    if (permission === notify.PERMISSION_DEFAULT) {
-        notify.requestPermission();
-    }
-    notify.config({pageVisibility: false, autoClose: 5000});
-
     Deps.autorun(function() {
         let userId = Meteor.userId();
         if(!userId){ return; }
@@ -15,7 +9,7 @@ Meteor.startup(function(){
                     if (likedBy === userId) {
                         return;
                     }
-                    if (notify && permission === notify.PERMISSION_GRANTED) {
+                    if (notify && hasDesktopPermission()) {
                         const user = Meteor.users.findOne({_id: likedBy}, {fields: {"profile.avatar": 1, "username": 1}});
 
                         if (!user) {

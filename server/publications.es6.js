@@ -98,7 +98,7 @@ Meteor.publish('starredMessages', function () {
 Meteor.publish('changelogs', () => Changelogs.find({}));
 Meteor.publish('emojis', ()=> Emojis.find());
 Meteor.publish('memes', ()=> Memes.find());
-Meteor.publish('notifications', ()=> Notifications.find({userId: this.userId}));
+Meteor.publish('notifications', function(){ return Notifications.find({userId: this.userId})});
 
 // Indexes
 Meteor.startup(function () {

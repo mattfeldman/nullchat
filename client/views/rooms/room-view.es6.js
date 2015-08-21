@@ -60,28 +60,6 @@ Template.roomView.onCreated(function () {
     const clickSound = new buzz.sound('/sounds/click_04.wav');
     const chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
-    Notifications.find({timestamp: {$gt: nowTimestamp}}).observe({
-        added(document) {
-            if (isReady.notifications) {
-                // HACK: should be replaced by a full 'seen' message sub system
-                if ((new Date().getTime() - document.timestamp) < 10000) {
-                    chimeSound.play();
-                    if (roomPreferencesOrDefault(document.roomId).desktopNotificationMention) {
-                        if (permission === notify.PERMISSION_GRANTED) {
-                            const title = `${document.authorName}(#${document.roomName})`;
-                            const user = Meteor.users.findOne({_id: document.authorId}, {fields: {"profile.avatar": 1}});
-                            const avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
-                            notify.createNotification(title, {
-                                body: document.message,
-                                icon: avatar,
-                                tag: document.messageId
-                            });
-                        }
-                    }
-                }
-            }
-        }
-    });
     Messages.find({timestamp: {$gt: nowTimestamp}}).observe({
         added(doc) {
             if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
@@ -92,7 +70,7 @@ Template.roomView.onCreated(function () {
                     }
 
                     if (roomPreferencesOrDefault(doc.roomId).desktopNotificationAllMessages && doc.type !== 'rich') {
-                        if (permission === notify.PERMISSION_GRANTED) {
+                        if (hasDesktopPermission()) {
                             const user = Meteor.users.findOne({_id: doc.authorId}, {
                                 fields: {
                                     "profile.avatar": 1,

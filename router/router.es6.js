@@ -49,7 +49,6 @@ Router.map(function () {
             return [
                 Meteor.subscribe('availableRooms'),
                 Meteor.subscribe('currentRooms'),
-                Meteor.subscribe('notifications'),
                 Meteor.subscribe('emojis'),
                 Meteor.subscribe('memes')
             ];
