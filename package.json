@@ -1,0 +1,19 @@
+{
+  "name": "nullchat",
+  "version": "0.10.0",
+  "description": "an open source meteor chat application",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattfeldman/nullchat.git"
+  },
+  "author": "Matt Feldman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattfeldman/nullchat/issues"
+  },
+  "homepage": "https://github.com/mattfeldman/nullchat"
+}
