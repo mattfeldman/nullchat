@@ -38,8 +38,8 @@ Meteor.publish('availableRooms', function () {
 Meteor.publish('users', function () {
     return Meteor.users.find({}, {
         fields: {
-            _id: 1,
-            username: 1,
+            "_id": 1,
+            "username": 1,
             "profile.avatar": 1,
             "profile.color": 1,
             "status.idle": 1,
