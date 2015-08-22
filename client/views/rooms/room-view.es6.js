@@ -17,9 +17,6 @@ const isReady = {};
 const scroll = {};
 
 Template.roomView.events({
-    'click #loadMore'(e) {
-        Session.set('messageLimit', Session.get('messageLimit') + 50);
-    },
     'click .launch'(event, template) {
         $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
     },

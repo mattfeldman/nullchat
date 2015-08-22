@@ -13,6 +13,7 @@ Template.messageList.onCreated(function() {
 
 Template.messageList.events({
    'click .loadMore'(event, template) {
-       Session.set('messageLimit', Session.get('messageLimit') + 20);
+       Session.set('messageLimit', Session.get('messageLimit') + 50);
+       Client.focusMessageEntry();
    }
 });

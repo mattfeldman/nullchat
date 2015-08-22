@@ -104,6 +104,9 @@ Client = {
     },
     stopEditing() {
         Session.set('editingId', '');
+        Client.focusMessageEntry();
+    },
+    focusMessageEntry(){
         Meteor.defer(() => $('#message').focus());
     }
 };
