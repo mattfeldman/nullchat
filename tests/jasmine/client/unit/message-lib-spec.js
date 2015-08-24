@@ -1,3 +1,7 @@
+function countInstances(string, word) {
+    const substrings = string.split(word);
+    return substrings.length - 1;
+}
 describe('hasUserMentions', function () {
     it('should check parameters', function () {
         expect(MessageLib.hasUserMentions(undefined)).toBe(false);
@@ -20,7 +24,7 @@ describe('parseRoomLinks', function () {
         expect(MessageLib.parseRoomLinks(null)).toBe(null);
     });
     it('should return message unmodified if no room links', function () {
-        var message = 'hey @testuser some #nontestroom';
+        const message = 'hey @testuser some #nontestroom';
         expect(MessageLib.parseRoomLinks(message)).toBe(message);
     });
     it('should replace room links', function () {
@@ -28,8 +32,8 @@ describe('parseRoomLinks', function () {
             [{_id: "testroomid1", name: "testroom1"}, {_id: "testroomid2", name: "testroom2"}]
         );
 
-        var message = '#testroom1#testroom1#testroom2#notatestroom';
-        var parsedMessage = MessageLib.parseRoomLinks(message);
+        const message = '#testroom1#testroom1#testroom2#notatestroom';
+        const parsedMessage = MessageLib.parseRoomLinks(message);
         expect(countInstances(parsedMessage, 'testroomid1')).toBe(2);
         expect(parsedMessage.indexOf('testroomid2')).not.toBe(-1);
         expect(countInstances(parsedMessage, 'class="roomLink"')).toBe(3);
@@ -46,8 +50,8 @@ describe('parseUserMentions', function () {
             [{_id: "id1", username: "user1", color: "#FF0000"}, {_id: "id2", username: "user2"}]
         );
 
-        var message = '@user1@user2@user3@user2';
-        var parsedMessage = MessageLib.parseUserMentions(message);
+        const message = '@user1@user2@user3@user2';
+        const parsedMessage = MessageLib.parseUserMentions(message);
 
         expect(countInstances(parsedMessage, 'id1')).toBe(1);
         expect(countInstances(parsedMessage, 'id2')).toBe(2);
@@ -57,16 +61,11 @@ describe('parseUserMentions', function () {
         spyOn(MessageLib, "getUserNamesAndColors").and.returnValue(
             [{_id: "id1", username: "blah", color: "#FF0000"}, {_id: "id2", username: "blahblah"}]
         );
-        var message = '@blah@blahblah';
-        var parsedMessage = MessageLib.parseUserMentions(message);
+        const message = '@blah@blahblah';
+        const parsedMessage = MessageLib.parseUserMentions(message);
 
         expect(countInstances(parsedMessage, 'id1')).toBe(1);
         expect(countInstances(parsedMessage, 'id2')).toBe(1);
         expect(countInstances(parsedMessage, 'class="message-user-mention"')).toBe(2);
     });
 });
-
-function countInstances(string, word) {
-    var substrings = string.split(word);
-    return substrings.length - 1;
-}

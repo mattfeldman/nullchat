@@ -1,7 +1,7 @@
 describe('RoomHelpers', function () {
     describe('activeRoomFromId', function () {
         function test(actual, room, expected) {
-            Session.set("currentRoom", actual)
+            Session.set("currentRoom", actual);
             expect(RoomHelpers.activeRoomFromId(room)).toBe(expected);
         }
 
@@ -22,7 +22,7 @@ describe('RoomHelpers', function () {
         it('should return room\'s name', function () {
             Session.set('currentRoom', 'foo');
             test({name: '123'}, '123');
-            var arg = Rooms.findOne.calls.mostRecent().args[0];
+            const arg = Rooms.findOne.calls.mostRecent().args[0];
             expect(_.isEqual(arg, {_id: 'foo'})).toBeTruthy();
         });
         it('should return room\'s name', function () {

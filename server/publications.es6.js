@@ -94,11 +94,14 @@ Meteor.publish('starredMessages', function () {
     return Messages.find({likedBy: this.userId}); // TODO: Security check
 });
 
+Meteor.publish('notifications', function () {
+    return Notifications.find({userId: this.userId});
+});
+
 // Publish All
 Meteor.publish('changelogs', () => Changelogs.find({}));
 Meteor.publish('emojis', ()=> Emojis.find());
 Meteor.publish('memes', ()=> Memes.find());
-Meteor.publish('notifications', function(){ return Notifications.find({userId: this.userId})});
 
 // Indexes
 Meteor.startup(function () {
