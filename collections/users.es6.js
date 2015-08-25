@@ -1,5 +1,5 @@
 Meteor.users.deny({
-    update(){
+    update() {
         return true;
     }
 });
@@ -7,7 +7,7 @@ Meteor.users.deny({
 Meteor.methods({
     updateTypingActivity(room) {
         check(room, String);
-        var timestamp = new Date();
+        const timestamp = new Date();
         Meteor.users.update({_id: Meteor.userId()}, {
             $set: {
                 "status.lastTyping": timestamp,
@@ -17,8 +17,8 @@ Meteor.methods({
     },
     updateUsername(username) {
         check(username, String);
-        var usernameRegex = new RegExp("$" + username + "^", "i");
-        var user = Meteor.users.findOne({username: {$regex: usernameRegex}});
+        const usernameRegex = new RegExp("$" + username + "^", "i");
+        const user = Meteor.users.findOne({username: {$regex: usernameRegex}});
         if (user) {
             throw new Meteor.Error("username-taken");
         }
@@ -42,9 +42,9 @@ Meteor.methods({
             throw new Meteor.Error(roomPreference + " did not match schema.");
         }
 
-        var preferenceUser = Meteor.user();
-        var preferences = {};
-        var roomPreferences = [];
+        const preferenceUser = Meteor.user();
+        let preferences = {};
+        let roomPreferences = [];
         if (preferenceUser && preferenceUser.preferences) {
             preferences = preferenceUser.preferences;
             if (preferenceUser.preferences.room) {
@@ -52,7 +52,7 @@ Meteor.methods({
             }
         }
 
-        var i;
+        let i;
         for (i = 0; i < roomPreferences.length; i++) {
             if (roomPreferences[i].roomId === roomPreference.roomId) {
                 roomPreferences[i] = roomPreference;
@@ -70,23 +70,23 @@ Meteor.methods({
     punchcard(userId) {
         check(userId, String);
 
-        userId = userId || Meteor.userId();
+        const metricUser = userId || Meteor.userId();
         if (Meteor.isServer) {
-            var milisecondsInWeek = 60 * 1000 * 60 * 24;
-            var milisecondsIn5Minutes = 60 * 1000 * 5;
-            var pipeline = [
-                {$match: {authorId: userId, type: "plain"}},
+            const milisecondsInWeek = 60 * 1000 * 60 * 24;
+            const milisecondsIn5Minutes = 60 * 1000 * 5;
+            const pipeline = [
+                {$match: {authorId: metricUser, type: "plain"}},
                 {
                     $project: {
-                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn5Minutes]},
+                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn5Minutes]}
                     }
                 },
                 {
                     $project: {
-                        "timestamp": {"$subtract": ["$timestamp", {"$mod": ["$timestamp", 1]}]},
+                        "timestamp": {"$subtract": ["$timestamp", {"$mod": ["$timestamp", 1]}]}
                     }
                 },
-                {$group: {"_id": "$timestamp", count: {$sum: 1}}}
+                {$group: {_id: "$timestamp", count: {$sum: 1}}}
             ];
             return Messages.aggregate(pipeline);
         }
@@ -95,24 +95,24 @@ Meteor.methods({
         if (!options.roomId) {
             throw new Meteor.Error("Need room id");
         }
-        var userId = options.userId || Meteor.userId();
-        var roomId = options.roomId;
+        const userId = options.userId || Meteor.userId();
+        const roomId = options.roomId;
         if (Meteor.isServer) {
-            var milisecondsInWeek = 60 * 1000 * 60 * 24;
-            var milisecondsIn15Minutes = 60 * 1000 * 15;
-            var pipeline = [
+            const milisecondsInWeek = 60 * 1000 * 60 * 24;
+            const milisecondsIn15Minutes = 60 * 1000 * 15;
+            const pipeline = [
                 {$match: {authorId: userId, type: "plain", roomId: roomId}},
                 {
                     $project: {
-                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn15Minutes]},
+                        "timestamp": {"$divide": [{"$mod": ["$timestamp", milisecondsInWeek]}, milisecondsIn15Minutes]}
                     }
                 },
                 {
                     $project: {
-                        "timestamp": {"$subtract": ["$timestamp", {"$mod": ["$timestamp", 1]}]},
+                        "timestamp": {"$subtract": ["$timestamp", {"$mod": ["$timestamp", 1]}]}
                     }
                 },
-                {$group: {"_id": "$timestamp", count: {$sum: 1}}}
+                {$group: {_id: "$timestamp", count: {$sum: 1}}}
             ];
             return Messages.aggregate(pipeline);
         }

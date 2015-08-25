@@ -9,11 +9,11 @@ Meteor.methods({
             roomId: roomId
         }, {$set: {seen: true}}, {multi: true});
     },
-    setNotificationSeen(notificationId){
+    setNotificationSeen(notificationId) s{
         check(notificationId, String);
         Notifications.update({seen: false, userId: Meteor.userId(), _id: notificationId}, {$set: {seen: true}});
     },
-    setAllNotificationsSeen(){
+    setAllNotificationsSeen() {
         Notifications.update({seen: false, userId: Meteor.userId()}, {$set: {seen: true}}, {multi: true});
     }
 });
