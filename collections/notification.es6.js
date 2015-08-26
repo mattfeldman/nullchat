@@ -9,7 +9,7 @@ Meteor.methods({
             roomId: roomId
         }, {$set: {seen: true}}, {multi: true});
     },
-    setNotificationSeen(notificationId) s{
+    setNotificationSeen(notificationId) {
         check(notificationId, String);
         Notifications.update({seen: false, userId: Meteor.userId(), _id: notificationId}, {$set: {seen: true}});
     },
