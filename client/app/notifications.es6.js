@@ -1,4 +1,4 @@
-Template.body.onCreated(function(){
+Template.body.onCreated(function () {
     const self = this;
     const chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
     let now = new Date().getTime();

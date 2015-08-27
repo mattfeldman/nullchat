@@ -39,10 +39,11 @@ semantic:ui-css
 service-configuration
 tomi:upload-jquery
 tomi:upload-server
+useraccounts:iron-routing
 useraccounts:semantic-ui
 
 # Debug Packages
-# meteorhacks:zones ### incompatable with sortable
+# meteorhacks:zones ### incompatible with sortable
 meteorhacks:kadira-debug
 
 # Test Packages
