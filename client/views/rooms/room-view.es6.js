@@ -31,7 +31,6 @@ Template.roomView.onRendered(function () {
 });
 
 Template.roomView.onCreated(function () {
-    isReady.notifications = false;
     isReady.messages = false;
     let nowTimestamp;
     Session.setDefault('messageLimit', 10);
@@ -68,15 +67,8 @@ Template.roomView.onCreated(function () {
 
                     if (roomPreferencesOrDefault(doc.roomId).desktopNotificationAllMessages && doc.type !== 'rich') {
                         if (hasDesktopPermission()) {
-                            const user = Meteor.users.findOne({_id: doc.authorId}, {
-                                fields: {
-                                    "profile.avatar": 1,
-                                    "username": 1
-                                }
-                            });
-                            const room = Rooms.findOne({_id: doc.roomId});
-                            const title = user.username + "(#" + room.name + ")";
-                            const avatar = user && user.profile && user.profile.avatar || '/images/logo64.png';
+                            const title = UserHelpers.usernameForUserId(doc.authorId) + "(#" + RoomHelpers.roomNameFromRoomId(doc.roomId) + ")";
+                            const avatar = UserHelpers.avatarForUserId(doc.authorId);
                             notify.createNotification(title, {body: doc.message, icon: avatar, tag: doc._id});
                         }
                     }
@@ -112,11 +104,9 @@ Template.roomView.onCreated(function () {
             }
         }
     });
-    isReady.notifications = true;
 });
 
 Template.roomView.destroyed = function () {
-    isReady.notifications = false;
     isReady.messages = false;
 };
 

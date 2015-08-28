@@ -101,7 +101,6 @@ Template.plainMessage.events({
         Client.showPopup(event.target, "userProfileCard", userId);
     },
     'mouseenter .likeMessageLink'(event, template) {
-        const userId = $(event.target).data("userid");
         Client.showPopup(event.target, "starredByListPopup", template.data._id);
     },
     'click .removeMessageButton'(event, template) {
