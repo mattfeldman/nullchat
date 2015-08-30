@@ -1,4 +1,4 @@
-Meteor.startup(function() {
+Meteor.startup(function () {
     AutoForm.setDefaultTemplate("semanticUI");
 
     AutoForm.addHooks(null, {

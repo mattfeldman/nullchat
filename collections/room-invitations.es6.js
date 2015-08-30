@@ -1,12 +1,32 @@
 RoomInvitations = new Meteor.Collection('room_invitations');
+function updateRoomInvitation(id, accepted) {
+    const roomInvitation = RoomInvitations.findOne({_id: id});
 
+    if (!roomInvitation) {
+        throw new Meteor.Error("Can't find room invitation.");
+    }
+    if (roomInvitation.invitedUser !== Meteor.userId()) {
+        throw new Meteor.Error("Can only update your own invitations.");
+    }
+
+    RoomInvitations.update({_id: id}, {
+        $set: {
+            didAccept: accepted,
+            completedTime: new Date(),
+            active: false
+        }
+    });
+    if (accepted) {
+        Meteor.call('joinRoom', roomInvitation.roomId, AlertFeedback);
+    }
+}
 Meteor.methods({
     roomInvitation(targetUserId, targetRoomId) {
         check(targetUserId, String);
         check(targetRoomId, String);
 
-        var targetUser = Meteor.users.findOne(targetUserId);
-        var room = Rooms.findOne(targetRoomId);
+        const targetUser = Meteor.users.findOne(targetUserId);
+        const room = Rooms.findOne(targetRoomId);
 
         if (!room) {
             throw new Meteor.Error("room-not-found");
@@ -26,7 +46,7 @@ Meteor.methods({
             throw new Meteor.Error("invite-already");
         }
 
-        var roomInvitation = {
+        const roomInvitation = {
             invitingUser: Meteor.userId(),
             invitedUser: targetUser._id,
             roomId: room._id,
@@ -35,7 +55,7 @@ Meteor.methods({
         };
         check(roomInvitation, Schemas.roomInvitation);
 
-        var existingInvitation = RoomInvitations.findOne({
+        const existingInvitation = RoomInvitations.findOne({
             invitingUser: roomInvitation.invitingUser,
             invitedUser: roomInvitation.invitedUser,
             roomId: roomInvitation.roomId,
@@ -56,27 +76,6 @@ Meteor.methods({
         updateRoomInvitation(roomInvitationId, false);
     }
 });
-function updateRoomInvitation(id, accepted) {
-    var roomInvitation = RoomInvitations.findOne({_id: id});
-
-    if (!roomInvitation) {
-        throw new Meteor.Error("Can't find room invitation.");
-    }
-    if (roomInvitation.invitedUser !== Meteor.userId()) {
-        throw new Meteor.Error("Can only update your own invitations.");
-    }
-
-    RoomInvitations.update({_id: id}, {
-        $set: {
-            didAccept: accepted,
-            completedTime: new Date(),
-            active: false
-        }
-    });
-    if (accepted) {
-        Meteor.call('joinRoom', roomInvitation.roomId, AlertFeedback);
-    }
-}
 Schemas.roomInvitation = new SimpleSchema({
     invitingUser: {
         type: String,

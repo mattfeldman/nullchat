@@ -20,7 +20,7 @@ UserHelpers = {
     },
     idleTextForUserId(userId) {
         const user = Meteor.users.findOne({_id: userId}, {fields: {'status': 1}});
-        if(user.status.online) {
+        if (user.status.online) {
             return "online";
         }
         if (user.status && user.status.lastActivity) {

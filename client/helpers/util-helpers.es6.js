@@ -1,7 +1,6 @@
 UtilHelpers = {
     timeago(datetime) {
-        var m = moment(datetime);
-        return m.fromNow();
+        return moment(datetime).fromNow();
     },
     md(message) {
         return marked(message);

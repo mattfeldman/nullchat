@@ -1,7 +1,7 @@
-Meteor.startup(function(){
-    Deps.autorun(function() {
+Meteor.startup(function () {
+    Deps.autorun(function () {
         let userId = Meteor.userId();
-        if(!userId){ return; }
+        if (!userId) { return; }
         Messages.find({authorId: userId}).observe({
             changed(newDoc, oldDoc) {
                 if (newDoc.likedBy.length - oldDoc.likedBy.length === 1) {
