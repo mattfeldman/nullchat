@@ -1,17 +1,19 @@
-var sendMessage = function (e) {
+function sendMessage(e) {
     e.preventDefault();
-    if (!$("#message").val()) { return;}
-    var messageStub = {
+    if (!$("#message").val()) { return; }
+    const messageStub = {
         message: $("#message").val(),
         roomId: Session.get('currentRoom')
     };
     Meteor.call('message', messageStub, AlertFeedback);
     $("#message").val('');
     Client.scrollChatToBottom();
-};
+}
+const throttledLastTyping = _.throttle(function () {
+    Meteor.call('updateTypingActivity', Session.get('currentRoom'));
+}, 1000, {trailing: false});
 
-
-var _typingDep = new Deps.Dependency;
+let _typingDep = new Deps.Dependency;
 Template.newMessage.helpers({
     typingUsers() {
         _typingDep.depend();
@@ -84,7 +86,7 @@ Template.newMessage.helpers({
     }
 });
 
-const recallMessageWithNewOffset = function (offsetDelta) {
+function recallMessageWithNewOffset(offsetDelta) {
     const messageElement = $("#message");
 
     let offset = Session.get("offset") || 0;
@@ -102,7 +104,7 @@ const recallMessageWithNewOffset = function (offsetDelta) {
             Session.set('lastmessage', message.message);
         }
     }
-};
+}
 Template.newMessage.events({
     'mouseover .smile'(event, template) {
         Client.showPopup(event.target, "emojiPopup");
@@ -114,17 +116,17 @@ Template.newMessage.events({
         throttledLastTyping();
 
         switch (e.keyCode) {
-            case 13: // Return Key
-                sendMessage(e);
-                break;
-            case 38: // Up Arrow Key
-                recallMessageWithNewOffset(1);
-                break;
-            case 40: // Down Arrow Key
-                recallMessageWithNewOffset(-1);
-                break;
-            default:
-                break;
+        case 13: // Return Key
+            sendMessage(e);
+            break;
+        case 38: // Up Arrow Key
+            recallMessageWithNewOffset(1);
+            break;
+        case 40: // Down Arrow Key
+            recallMessageWithNewOffset(-1);
+            break;
+        default:
+            break;
         }
     },
     'focus'(e) {
@@ -136,9 +138,9 @@ Template.newMessage.events({
 
         if (blobItem) {
             const blob = blobItem.getAsFile();
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function (event) {
-                var options = {};
+                const options = {};
                 options.data = {};
                 options.data.pasteImageUrl = event.target.result;
                 Client.showModal("pasteImage", options.data);
@@ -177,7 +179,3 @@ Template.newMessage.events({
         Client.showModal("uploadModal");
     }
 });
-
-const throttledLastTyping = _.throttle(function () {
-    Meteor.call('updateTypingActivity', Session.get('currentRoom'));
-}, 1000, {trailing: false});

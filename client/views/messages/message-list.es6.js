@@ -7,13 +7,13 @@ Template.messageList.helpers({
     }
 });
 
-Template.messageList.onCreated(function() {
+Template.messageList.onCreated(function () {
     Client.scrollChatToBottom();
 });
 
 Template.messageList.events({
-   'click .loadMore'(event, template) {
-       Session.set('messageLimit', Session.get('messageLimit') + 50);
-       Client.focusMessageEntry();
-   }
+    'click .loadMore'(event, template) {
+        Session.set('messageLimit', Session.get('messageLimit') + 50);
+        Client.focusMessageEntry();
+    }
 });

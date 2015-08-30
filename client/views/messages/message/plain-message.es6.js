@@ -55,14 +55,14 @@ Template.plainMessage.helpers({
             return 100;
         }
         switch (this.likedBy.length || 0) {
-            case 0:
-                return 100;
-            case 1:
-                return 166;
-            case 2:
-                return 232;
-            default:
-                return 300;
+        case 0:
+            return 100;
+        case 1:
+            return 166;
+        case 2:
+            return 232;
+        default:
+            return 300;
         }
     }
 });
