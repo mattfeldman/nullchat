@@ -1,3 +1,8 @@
+function getRoomUserIds() {
+    const room = Rooms.find({_id: Session.get('currentRoom')}, {fields: {users: 1}}).fetch()[0];
+    return room.users || [];
+}
+
 Template.roomUsers.helpers({
     roomOnlineUsers() {
         const users = getRoomUserIds();
@@ -55,7 +60,3 @@ Template.roomUsers.events({
         input.focus();
     }
 });
-function getRoomUserIds() {
-    const room = Rooms.find({_id: Session.get('currentRoom')}, {fields: {users: 1}}).fetch()[0];
-    return room.users || [];
-}

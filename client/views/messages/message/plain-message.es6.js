@@ -113,7 +113,7 @@ Template.plainMessage.events({
         Client.showPopup(event.target, "userProfileCard", template.data.authorId);
     },
     'keydown .editForm'(event, template) {
-        if(event.keyCode === 27) {
+        if (event.keyCode === 27) {
             Client.stopEditing();
             event.preventDefault();
         }
