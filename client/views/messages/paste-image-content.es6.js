@@ -33,5 +33,5 @@ Template.pasteImageContent.events({
             Meteor.call('message', messageStub, AlertFeedback);
             Client.scrollChatToBottom();
         });
-    }),
+    })
 });

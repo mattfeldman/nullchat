@@ -79,19 +79,19 @@ Meteor.methods({
 Schemas.roomInvitation = new SimpleSchema({
     invitingUser: {
         type: String,
-        label: "Inviting User",
+        label: "Inviting User"
     },
     invitedUser: {
         type: String,
-        label: "Invited User",
+        label: "Invited User"
     },
     roomId: {
         type: String,
-        label: "Room Id",
+        label: "Room Id"
     },
     timestamp: {
         type: Date,
-        label: "Timestamp",
+        label: "Timestamp"
     },
     active: {
         type: Boolean,

@@ -14,7 +14,7 @@ else {
 }
 
 Images = new FS.Collection("images", {
-    stores: [imageStore],
+    stores: [imageStore]
 });
 
 Images.allow({

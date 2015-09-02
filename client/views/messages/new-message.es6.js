@@ -51,21 +51,21 @@ Template.newMessage.helpers({
                     field: "username",
                     template: Template.userPill,
                     token: '@',
-                    matchAll: false,
+                    matchAll: false
                 },
                 {
                     collection: Rooms,
                     field: "name",
                     template: Template.roomPill,
                     token: '#',
-                    matchAll: false,
+                    matchAll: false
                 },
                 {
                     collection: Rooms,
                     field: "name",
                     template: Template.roomPill,
                     token: '@#',
-                    matchAll: false,
+                    matchAll: false
                 },
                 {
                     collection: Memes,

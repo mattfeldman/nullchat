@@ -13,5 +13,5 @@ Template.uploadModalContent.helpers({
                 $(".uploadModal").modal('hide');
             }
         };
-    },
+    }
 });

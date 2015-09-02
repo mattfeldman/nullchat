@@ -2,15 +2,15 @@ Changelogs = new Meteor.Collection('changelogs');
 Schemas.changelog = new SimpleSchema({
     message: {
         type: String,
-        label: "Change Message",
+        label: "Change Message"
     },
     authorId: {
         type: String,
-        label: "Author Id",
+        label: "Author Id"
     },
     timestamp: {
         type: Date,
-        label: "Timestamp",
+        label: "Timestamp"
     }
 });
 
