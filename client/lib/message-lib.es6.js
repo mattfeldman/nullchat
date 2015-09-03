@@ -5,12 +5,12 @@ MessageLib = {
      * @returns message with html room replacements
      */
     parseRoomLinks(message) {
-        check(message, String);
+        if (!message) return message;
         let roomLinkedMessage = message;
         let rooms = this.getRoomNames();
         rooms = _.sortBy(rooms, room => -room.name.length); // TODO: Not this every message
         let loc = -1;
-        while ((loc = message.indexOf("#", loc + 1)) >= 0) {
+        while ((loc = roomLinkedMessage.indexOf("#", loc + 1)) >= 0) {
             for (let i = 0; i < rooms.length; i++) {
                 const roomName = rooms[i].name;
                 const roomNameLowercase = rooms[i].name.toLowerCase();
@@ -39,7 +39,7 @@ MessageLib = {
      * @returns message with html name replacements
      */
     parseUserMentions(message) {
-        check(message, String);
+        if (!message) return message;
         let users = this.getUserNamesAndColors();
         let userLinkedMessage = message;
         users = _(users).sortBy(user => -user.username.length); // TODO: Not this every message
