@@ -8,6 +8,7 @@ MessageLib = {
         if (!message) {
             return message;
         }
+        let roomLinkedMessage = message;
         let rooms = this.getRoomNames();
         rooms = _.sortBy(rooms, room => -room.name.length); // TODO: Not this every message
         let loc = -1;
@@ -19,13 +20,13 @@ MessageLib = {
                     const leftHalf = message.substring(0, loc);
                     const middle = `<a href="room/${rooms[i]._id}" class="roomLink" >#${roomName}</a>`;
                     const rightHalf = message.substring(loc + roomName.length + 1, message.length + middle.length);
-                    message = leftHalf + middle + rightHalf;
+                    roomLinkedMessage = leftHalf + middle + rightHalf;
                     loc = loc + middle.length - 1;
                     break;
                 }
             }
         }
-        return message;
+        return roomLinkedMessage;
     },
     /*
      * Factored out room name query
@@ -44,6 +45,7 @@ MessageLib = {
             return message;
         }
         let users = this.getUserNamesAndColors();
+        let userLinkedMessage = message;
         users = _(users).sortBy(user => -user.username.length); // TODO: Not this every message
         let loc = -1;
         while ((loc = message.indexOf("@", loc + 1)) >= 0) {
@@ -56,13 +58,13 @@ MessageLib = {
                     const styleString = `style="border-bottom: 2px solid ${userColor}; background: ${userBackgroundColor};"`;
                     const middle = `<span class="message-user-mention" ${styleString} data-userId="${users[i]._id}">@${userName}</span>`;
                     const rightHalf = message.substring(loc + userName.length + 1, message.length + middle.length);
-                    message = leftHalf + middle + rightHalf;
+                    userLinkedMessage = leftHalf + middle + rightHalf;
                     loc = loc + middle.length - 1;
                     break;
                 }
             }
         }
-        return message;
+        return userLinkedMessage;
     },
     /*
      * Factored out username and color query
