@@ -1,3 +1,12 @@
+function getEarliestMessageId() {
+    const message = Messages.findOne({roomId: Session.get('currentRoom')}, {
+        fields: {"_id": 1},
+        sort: {timestamp: 1}
+    });
+
+    return message && message._id;
+}
+
 Template.roomView.helpers({
     room() {
         return Rooms.findOne({_id: Session.get('currentRoom')});
@@ -10,6 +19,12 @@ Template.roomView.helpers({
     },
     messageLimit() {
         return Session.get('messageLimit');
+    },
+    messages() {
+        return Messages.find({roomId: Session.get('currentRoom')}, {sort: {timestamp: 1}});
+    },
+    shouldShowLoadMore() {
+        return Session.get('messageLimit') === Messages.find({roomId: Session.get('currentRoom'), type: 'plain'}).count();
     }
 });
 
@@ -22,6 +37,12 @@ Template.roomView.events({
     },
     'click, scroll'() {
         Session.set('unreadMessages', 0);
+    },
+    'click .loadMore'(event, template) {
+        scroll.needScroll = true;
+        scroll.previousMessage = getEarliestMessageId();
+        Client.incMessageLimit(25);
+        Client.focusMessageEntry();
     }
 });
 
@@ -40,10 +61,10 @@ Template.roomView.onCreated(function () {
             onReady() {
                 isReady.messages = true;
                 if (scroll.needScroll) {
-                    const room = $("#roomContainer");
                     scroll.needScroll = false;
-                    const offset = $("#scrollContainer").height() - scroll.previousHeight;
-                    room.scrollTop(room.scrollTop() + offset);
+                    if (scroll.previousMessage) {
+                        Client.scrollToMessage(scroll.previousMessage);
+                    }
                 }
                 else {
                     Client.scrollChatToBottom();
@@ -54,7 +75,6 @@ Template.roomView.onCreated(function () {
     });
 
     const clickSound = new buzz.sound('/sounds/click_04.wav');
-    const chimeSound = new buzz.sound('/sounds/chime_bell_ding.wav');
 
     Messages.find({timestamp: {$gt: nowTimestamp}}).observe({
         added(doc) {

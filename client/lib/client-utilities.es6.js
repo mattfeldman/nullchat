@@ -6,7 +6,7 @@ Client = {
         const message = $("#" + messageId);
         if (message) {
             const container = $("#roomContainer");
-            container.scrollTop(container.scrollTop() + message.offset().top);
+            container.scrollTop(container.scrollTop() + message.offset().top - message.height() - 3);
         }
     },
     setCurrentRoom(roomId) {

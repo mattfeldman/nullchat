@@ -1,7 +1,6 @@
 <template name="messageList">
-    <a href="#" class="ui inverted violet fluid button loadMore">Load More</a>
     <div class="ui threaded comments smallMessageList">
-        {{#each messages}}
+        {{#each this}}
             {{> message}}
         {{/each}}
     </div>
