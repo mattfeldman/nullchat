@@ -384,7 +384,14 @@ html, body {
 .ui.comments .comment .text {
     /* move comment text to padding for background*/
     margin: 0;
-    padding: 0.25em 0em 0.5em;
+    padding: 0.25em 0 0 0;
+}
+.ui.comments .comment
+{
+    padding: 0 0 0 0.5em;
+}
+.ui.comments .continued .text {
+    padding: 0;
 }
 
 .ui.comments .comment {
