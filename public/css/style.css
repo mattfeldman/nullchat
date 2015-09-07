@@ -420,3 +420,6 @@ html, body {
 .sidebar {
     box-shadow: none !important;
 }
+.continued.metadata {
+    float: right;
+}

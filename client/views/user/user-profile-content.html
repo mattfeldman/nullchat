@@ -4,10 +4,11 @@
             </div>
             <div class="content">
                 {{#autoForm schema="Schemas.userProfile" doc=this id="userProfileForm" type="method" meteormethod="updateProfile" errorsInLabels=true}}
-                            {{> afQuickField name='color'}}
-                            {{> afQuickField name='avatar'}}
-                            {{> afQuickField name='number'}}
-                            {{> afQuickField name='use24HrTime'}}
+                    {{> afQuickField name='color'}}
+                    {{> afQuickField name='avatar'}}
+                    {{> afQuickField name='number'}}
+                    {{> afQuickField name='use24HrTime'}}
+                    {{> afQuickField name='continueMessages'}}
                 {{/autoForm}}
             </div>
             <div class="actions">

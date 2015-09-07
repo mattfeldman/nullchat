@@ -66,7 +66,11 @@ Template.plainMessage.helpers({
         }
     },
     continuedMessage() {
-        return Template.instance().continuedMessage.get();
+        const user = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"profile.continueMessages": 1}});
+        return  user &&
+                user.profile &&
+                user.profile.continueMessages &&
+                Template.instance().continuedMessage.get();
     }
 });
 
