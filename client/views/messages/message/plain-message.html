@@ -2,14 +2,14 @@
     <div id="{{_id}}" class="ui comment plain-message {{#if continuedMessage}}continued{{/if}}">
         <a class="avatar">
             {{#if continuedMessage}}
-                <span class="rating">
+                <span class="rating actionLinks">
                     <a class="likeMessageLink" href="#">
                         <i class="fa {{starIcon}} fa-lg message-star-icon"></i>
                         <span class="likedBy">{{likedBy.length}}</span>
                     </a>
                 </span>
             {{else}}
-                <img src="{{avatarForUserId authorId}}"/>
+                <img class="user-popup" src="{{avatarForUserId authorId}}"/>
             {{/if}}
         </a>
         <div class="content {{myMessageFromId authorId}} smallMessage" style="border-color: {{colorForUserId authorId}};">

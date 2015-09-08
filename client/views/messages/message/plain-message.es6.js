@@ -116,7 +116,7 @@ Template.plainMessage.events({
             Meteor.call('removeMessage', template.data._id);
         }
     },
-    'mouseenter .avatar'(event, template) {
+    'mouseenter .user-popup'(event, template) {
         Client.showPopup(event.target, "userProfileCard", template.data.authorId);
     },
     'keydown .editForm'(event, template) {
