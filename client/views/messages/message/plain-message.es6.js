@@ -130,7 +130,7 @@ function shouldContinue(message, previousMessageId) {
 
     const prevMessage = Messages.findOne({_id: previousMessageId});
     return prevMessage && message && prevMessage.authorId === message.authorId &&
-        (message.timestamp - prevMessage.timestamp) < 5000;
+        (message.timestamp - prevMessage.timestamp) < 60000;
 }
 Template.plainMessage.onCreated(function () {
     this.continuedMessage = new ReactiveVar(false);
