@@ -127,7 +127,6 @@ Template.plainMessage.events({
     }
 });
 function shouldContinue(message, previousMessageId) {
-
     const prevMessage = Messages.findOne({_id: previousMessageId});
     return prevMessage && message && prevMessage.authorId === message.authorId &&
         (message.timestamp - prevMessage.timestamp) < 60000;
@@ -140,7 +139,6 @@ Template.plainMessage.onRendered(function () {
     Meteor.defer(() => {
         const prevId = this.$('.comment').prev().attr("id");
         this.continuedMessage.set(shouldContinue(this.data, prevId));
-
     });
-
 });
+
