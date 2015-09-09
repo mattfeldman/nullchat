@@ -47,8 +47,13 @@
             {{/unless}}
             {{#if continuedMessage}}
                 <div class="metadata continued">
-                    <span class="date message-timestamp">{{showTimestamp}}</span>
                     <div class="author">
+                        <span class="ui horizontal divided link list actionLinks">
+                            {{#if canEdit}}
+                                <a href="#" class="item editMessageButton">edit</a>
+                                <a href="#" class="item removeMessageButton">remove</a>
+                            {{/if}}
+                        </span>
                         {{#if fromMobile}}
                             <i class="fa fa-mobile fa-lg message-sms-indicator" title="Message was submitted via sms"></i>
                         {{/if}}
@@ -59,13 +64,8 @@
                         {{#if hasEdits}}
                             <span class="lastEditTime">Edited {{lastEditTime}}</span>
                         {{/if}}
-                        <span class="ui horizontal divided link list actionLinks">
-                            {{#if canEdit}}
-                                <a href="#" class="item editMessageButton">edit</a>
-                                <a href="#" class="item removeMessageButton">remove</a>
-                            {{/if}}
-                        </span>
                     </div>
+                    <span class="date message-timestamp">{{showTimestamp}}</span>
                 </div>
             {{/if}}
             <div class="text">
