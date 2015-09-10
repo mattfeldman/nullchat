@@ -30,6 +30,7 @@ mizzao:autocomplete
 mizzao:user-status
 mrt:moment
 mrt:underscore-string-latest
+percolate:migrations
 qnub:emojione
 reactive-var
 rubaxa:sortable

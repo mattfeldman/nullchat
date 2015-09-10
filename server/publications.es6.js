@@ -6,7 +6,7 @@ Meteor.publish('messages', function (roomId, limit) {
     }
     const room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
-        let query = {roomId: roomId, type: {$ne: 'feedback'}};
+        let query = {roomId: roomId};
         const thresholdMessage = Messages.findOne(query, {skip: limit, sort: {timestamp: -1}});
         if (thresholdMessage && thresholdMessage.timestamp) {
             query.timestamp = {$gt: thresholdMessage.timestamp};
@@ -16,14 +16,6 @@ Meteor.publish('messages', function (roomId, limit) {
     else {
         throw new Meteor.Error(503, 'No soup for you hackerpants.');
     }
-});
-Meteor.publish('feedbackMessages', function (roomId) {
-    check(roomId, String);
-    const now = new Date().getTime();
-    return Messages.find({roomId: roomId, type: 'feedback', userId: this.userId, timestamp: {$gt: now}}, {
-        limit: 10,
-        sort: {timestamp: -1}
-    });
 });
 Meteor.publish('message', function (messageId) {
     check(messageId, String);
@@ -75,7 +67,7 @@ Meteor.publish('newMessagesForRoom', function (roomId) {
     check(roomId, String);
     const room = Rooms.findOne({_id: roomId});
     if (room && (!room.isPrivate || _(room.invited).contains(this.userId))) {
-        const query = {roomId: roomId, type: {$ne: 'feedback'}};
+        const query = {roomId: roomId};
         return Messages.find(query, {sort: {timestamp: -1}, limit: 5});
     }
     else {

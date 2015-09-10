@@ -71,14 +71,13 @@ Template.roomView.onCreated(function () {
                 }
             }
         });
-        Meteor.subscribe('feedbackMessages', Session.get('currentRoom'));
     });
 
     const clickSound = new buzz.sound('/sounds/click_04.wav');
 
     Messages.find({timestamp: {$gt: nowTimestamp}}).observe({
         added(doc) {
-            if (isReady.messages && doc && doc.type !== 'feedback' && doc.authorId !== Meteor.userId()) {
+            if (isReady.messages && doc && doc.authorId !== Meteor.userId()) {
                 // HACK: should be replaced by a full 'seen' message sub system
                 if ((new Date().getTime() - doc.timestamp) < 10000) {
                     if (roomPreferencesOrDefault(doc.roomId).playMessageSound) {
