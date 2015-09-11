@@ -1,7 +1,7 @@
 <template name="roomListItem">
     <div class="draggableRoomItem link item {{isSelectedClass}} violet setRoomLink" data-id="{{_id}}">
         {{#if unreadCount}}
-            <div class="ui label">{{unreadCount}}</div>
+            <div class="ui green label">{{unreadCount}}</div>
         {{/if}}
         {{#if isPrivate}}
             <i class="fa fa-lock"></i>
