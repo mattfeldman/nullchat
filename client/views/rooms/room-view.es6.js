@@ -25,6 +25,13 @@ Template.roomView.helpers({
     },
     shouldShowLoadMore() {
         return Session.get('messageLimit') === Messages.find({roomId: Session.get('currentRoom'), type: 'plain'}).count();
+    },
+    unreadCount() {
+        return Client.getRoomUnread(Session.get('currentRoom'));
+    },
+    showScroll() {
+        console.log(Template.instance().scrolledFromBottom.get());
+        return Client.getRoomUnread(Session.get('currentRoom')) > 0 && Template.instance().scrolledFromBottom.get();
     }
 });
 
@@ -43,6 +50,18 @@ Template.roomView.events({
         scroll.previousMessage = getEarliestMessageId();
         Client.incMessageLimit(25);
         Client.focusMessageEntry();
+    },
+    'click .unread-scroll'(event, template) {
+        Client.scrollChatToBottom();
+        Client.clearRoomUnread(Session.get('currentRoom'));
+    },
+    'scroll'(event, template) {
+        const percentScrolledToTop = ($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height();
+        var scrolled =  percentScrolledToTop > 0.05;
+        template.scrolledFromBottom.set(scrolled);
+        if(!scrolled) {
+            Client.clearRoomUnread(Session.get('currentRoom'));
+        }
     }
 });
 
@@ -52,6 +71,8 @@ Template.roomView.onRendered(function () {
 });
 
 Template.roomView.onCreated(function () {
+    const self = this;
+    this.scrolledFromBottom = new ReactiveVar(false);
     isReady.messages = false;
     let nowTimestamp;
     Session.setDefault('messageLimit', 10);
@@ -98,16 +119,9 @@ Template.roomView.onCreated(function () {
                         Session.set('unreadMessages', currentUnreadMessageCount);
                     }
 
-                    if (doc.roomId !== Session.get('currentRoom')) {
+                    if (doc.roomId !== Session.get('currentRoom') || self.scrolledFromBottom.get()) {
                         Client.incRoomUnread(doc.roomId);
                     }
-                }
-            }
-            if (!scroll.needScroll) {
-                // rough percentage toward the top of the scroll view
-                const perctentToTop = ($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height();
-                if (perctentToTop < 0.05) {
-                    setTimeout(Client.scrollChatToBottom, 100);
                 }
             }
         }

@@ -14,7 +14,7 @@ Client = {
         Session.set('currentRoom', roomId);
         Meteor.call('setCurrentRoom', roomId, AlertFeedback);
         Meteor.call('setSeen', roomId);
-        Session.set('unread_' + roomId, "");
+        clearRoomUnread(roomId);
     },
     incMessageLimit(inc) {
         Session.set("messageLimit", Session.get("messageLimit") + inc);
@@ -22,6 +22,14 @@ Client = {
     incRoomUnread(roomId) {
         const key = 'unread_' + roomId;
         Session.set(key, (Session.get(key) || 0) + 1);
+    },
+    getRoomUnread(roomId) {
+        const key = 'unread_' + roomId;
+        return Session.get(key) || 0;
+    },
+    clearRoomUnread(roomId){
+        const key = 'unread_' + roomId;
+        return Session.set(key, 0);
     },
     /*
      * Shows a modal

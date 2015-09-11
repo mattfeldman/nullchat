@@ -423,3 +423,22 @@ html, body {
 .continued.metadata {
     float: right;
 }
+
+.unread-scroll {
+    position: fixed;
+    right: 2em;
+    bottom: 5em;
+    animation-name: slideIn;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035); /* easeInExpo */
+    animation-duration: 0.3s;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}

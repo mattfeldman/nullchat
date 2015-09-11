@@ -50,6 +50,9 @@
         </div>
         {{> newMessage}}
     {{/if}}
+    {{#if showScroll}}
+        <a class="ui huge purple icon label unread-scroll animated bounceInRight ">{{unreadCount}}<div class="detail">New Messages <i class="ui angle double down arrow icon"></i></div></a>
+    {{/if}}
     <div class="modal-container">
 
     </div>
