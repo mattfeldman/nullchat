@@ -2,7 +2,7 @@ accounts-base@1.2.0
 accounts-github@1.0.4
 accounts-oauth@1.1.5
 accounts-password@1.1.1
-aldeed:autoform@5.4.1
+aldeed:autoform@5.5.0
 aldeed:simple-schema@1.1.0
 amplify@1.0.0
 aramk:tinycolor@1.1.0_1
@@ -22,7 +22,7 @@ cfs:collection-filters@0.2.4
 cfs:data-man@0.0.6
 cfs:file@0.1.17
 cfs:filesystem@0.1.2
-cfs:http-methods@0.0.29
+cfs:http-methods@0.0.30
 cfs:http-publish@0.0.13
 cfs:power-queue@0.9.11
 cfs:reactive-list@0.0.9
@@ -35,7 +35,7 @@ cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.0.5
 chriswessels:hammer@4.0.2
-chuangbo:marked@0.3.5
+chuangbo:marked@0.3.5_1
 coffeescript@1.0.6
 dandv:caret-position@2.1.1
 dburles:mongo-collection-instances@0.3.4
@@ -43,7 +43,7 @@ ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 email@1.0.6
-fabienb4:autoform-semantic-ui@0.4.6
+fabienb4:autoform-semantic-ui@0.4.7
 fastclick@1.0.3
 flemay:less-autoprefixer@1.1.0
 gadicohen:reactive-window@1.0.6
@@ -84,10 +84,10 @@ meteor-platform@1.2.2
 meteorhacks:aggregate@1.3.0
 meteorhacks:async@1.0.0
 meteorhacks:collection-utils@1.2.0
-meteorhacks:kadira@2.23.0
+meteorhacks:kadira@2.23.2
 meteorhacks:kadira-debug@1.3.3
 meteorhacks:meteorx@1.3.1
-meteorhacks:npm@1.4.0
+meteorhacks:npm@1.5.0
 minifiers@1.1.5
 minimongo@1.0.8
 mizzao:autocomplete@0.5.1
@@ -125,9 +125,9 @@ sanjo:karma@1.7.0
 sanjo:long-running-child-process@1.1.3
 sanjo:meteor-files-helpers@1.1.0_7
 sanjo:meteor-version@1.0.0
-semantic:ui@2.0.8
-semantic:ui-css@2.0.8
-semantic:ui-data@2.0.8
+semantic:ui@2.1.3
+semantic:ui-css@2.1.2
+semantic:ui-data@2.1.3
 service-configuration@1.0.4
 session@1.1.0
 sha@1.0.3
@@ -137,7 +137,7 @@ spacebars-compiler@1.0.6
 srp@1.0.3
 templating@1.1.1
 tomi:upload-jquery@2.1.8
-tomi:upload-server@1.2.8
+tomi:upload-server@1.3.1
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
