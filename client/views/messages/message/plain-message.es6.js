@@ -132,7 +132,7 @@ function shouldContinue(message, previousMessageId) {
         (message.timestamp - prevMessage.timestamp) < 60000;
 }
 Template.plainMessage.onCreated(function () {
-    this.continuedMessage = new ReactiveVar(false);
+    this.continuedMessage = new ReactiveVar(true);
 });
 Template.plainMessage.onRendered(function () {
     this.$('.ui.accordion').accordion();
