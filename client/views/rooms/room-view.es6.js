@@ -48,7 +48,7 @@ Template.roomView.events({
     'click .loadMore'(event, template) {
         scroll.needScroll = true;
         scroll.previousMessage = getEarliestMessageId();
-        Client.incMessageLimit(25);
+        Client.incMessageLimit(100);
         Client.focusMessageEntry();
     },
     'click .unread-scroll'(event, template) {
