@@ -36,7 +36,7 @@ describe('parseRoomLinks', function () {
         const parsedMessage = MessageLib.parseRoomLinks(message);
         expect(countInstances(parsedMessage, 'testroomid1')).toBe(2);
         expect(parsedMessage.indexOf('testroomid2')).not.toBe(-1);
-        expect(countInstances(parsedMessage, 'class="roomLink"')).toBe(3);
+        expect(countInstances(parsedMessage, 'roomLink')).toBe(3);
     });
 });
 

@@ -16,7 +16,7 @@ MessageLib = {
                 const roomNameLowercase = rooms[i].name.toLowerCase();
                 if (roomLinkedMessage.toLowerCase().indexOf(roomNameLowercase, loc) === loc + 1) {
                     const leftHalf = roomLinkedMessage.substring(0, loc);
-                    const middle = `<a href="room/${rooms[i]._id}" class="roomLink" >#${roomName}</a>`;
+                    const middle = `<a href="room/${rooms[i]._id}" class="ui basic label roomLink" >#${roomName}</a>`;
                     const rightHalf = roomLinkedMessage.substring(loc + roomName.length + 1, roomLinkedMessage.length + middle.length);
                     roomLinkedMessage = leftHalf + middle + rightHalf;
                     loc = loc + middle.length - 1;
