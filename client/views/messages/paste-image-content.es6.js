@@ -1,8 +1,7 @@
 Template.pasteImageContent.events({
-    'click .upload': _.once((e, t) => {
+    'click .upload': _.once(function (e, t) {
         const dataURI = this.pasteImageUrl;
         // Below taken from http://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
-
         // convert base64 to raw binary data held in a string
         // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
         const byteString = atob(dataURI.split(',')[1]);
