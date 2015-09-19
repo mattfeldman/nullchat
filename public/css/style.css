@@ -297,7 +297,7 @@ span.room-tile-count {
     background: lightblue;
 }
 
-.room-element:hover .room-leave-link {
+.draggableRoomItem:hover .room-leave-link {
     display: inline-block;
 }
 
