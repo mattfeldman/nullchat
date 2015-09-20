@@ -59,7 +59,7 @@ Template.roomView.events({
         const percentScrolledToTop = ($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height();
         var scrolled =  percentScrolledToTop > 0.05;
         template.scrolledFromBottom.set(scrolled);
-        if(!scrolled) {
+        if (!scrolled) {
             Client.clearRoomUnread(Session.get('currentRoom'));
         }
     }

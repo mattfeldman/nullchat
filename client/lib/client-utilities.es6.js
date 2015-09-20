@@ -14,7 +14,7 @@ Client = {
         Session.set('currentRoom', roomId);
         Meteor.call('setCurrentRoom', roomId, AlertFeedback);
         Meteor.call('setSeen', roomId);
-        clearRoomUnread(roomId);
+        Client.clearRoomUnread(roomId);
     },
     incMessageLimit(inc) {
         Session.set("messageLimit", Session.get("messageLimit") + inc);
