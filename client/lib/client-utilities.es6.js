@@ -27,7 +27,7 @@ Client = {
         const key = 'unread_' + roomId;
         return Session.get(key) || 0;
     },
-    clearRoomUnread(roomId){
+    clearRoomUnread(roomId) {
         const key = 'unread_' + roomId;
         return Session.set(key, 0);
     },
