@@ -303,8 +303,7 @@ span.room-tile-count {
 
 .room-leave-link {
     display: none;
-    position: absolute;
-    right: 3px;
+    float: right;
     cursor: default;
     color: grey;
 }
