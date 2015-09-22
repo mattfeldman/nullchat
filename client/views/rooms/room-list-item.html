@@ -1,12 +1,17 @@
 <template name="roomListItem">
-    <div class="draggableRoomItem link item {{isSelectedClass}} violet setRoomLink" data-id="{{_id}}">
+    <div class="draggableRoomItem link item {{isSelectedClass}} violet setRoomLink" data-id="{{room._id}}">
         {{#if unreadCount}}
             <div class="ui green label">{{unreadCount}}</div>
         {{/if}}
         {{#if isPrivate}}
             <i class="fa fa-lock"></i>
         {{/if}}
-        #{{name}}
-        <a href="#" class="room-leave-link {{leaveLinkEnabled}}" alt="Leave #{{name}}."><i class="fa fa-remove"></i></a>
+        #{{room.name}}
+        {{#if pinned}}
+            <a href="#" class="unpin-room-link room-icon"><i class="hide icon"></i></a>
+        {{else}}
+            <a href="#" class="room-leave-link room-icon {{leaveLinkEnabled}}" alt="Leave #{{room.name}}."><i class="fa fa-remove"></i></a>
+            <a href="#" class="pin-room-link room-icon"><i class="pin icon"></i></a>
+        {{/if}}
     </div>
 </template>

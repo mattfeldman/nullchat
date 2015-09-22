@@ -47,7 +47,16 @@ Meteor.methods({
         }
         return currentRoom._id;
     },
+    pinRoom(id) {
+        check(id, String);
+        Meteor.users.update({_id: Meteor.userId()}, { $addToSet: {'preferences.pinnedRooms': id}});
+    },
+    unpinRoom(id) {
+        check(id, String);
+        Meteor.users.update({_id: Meteor.userId()}, { $pull: {'preferences.pinnedRooms': id}});
+    },
     leaveRoom(id) {
+        check(id, String);
         const room = Rooms.findOne({_id: id});
         const userId = Meteor.userId();
 

@@ -3,24 +3,25 @@ Template.roomListItem.helpers({
         return this.isPrivate ? "[LOCKED] -" : "";
     },
     isSelectedClass() {
-        return this._id === Session.get("currentRoom") ? "active" : "";
+        return this.room._id === Session.get("currentRoom") ? "active" : "";
     },
     notificationCount() {
-        const count = Notifications.find({userId: Meteor.userId(), roomId: this._id, seen: false}).count();
+        const count = Notifications.find({userId: Meteor.userId(), roomId: this.room._id, seen: false}).count();
         return count || "";
     },
     leaveLinkEnabled() {
         return this.ownerId !== Meteor.userId() ? "room-leave-link-enabled" : "";
     },
     unreadCount() {
-        return Session.get('unread_' + this._id);
+        return Session.get('unread_' + this.room._id);
     }
 });
 
 Template.roomListItem.events({
     'click .room-leave-link-enabled'(event, template) {
         event.preventDefault();
-        const leaveRoomId = template.data._id;
+        event.stopImmediatePropagation();
+        const leaveRoomId = template.data.room._id;
         if (leaveRoomId) {
             if (Session.equals('currentRoom', leaveRoomId)) {
                 // Find a different room
@@ -38,6 +39,17 @@ Template.roomListItem.events({
     },
     'click .setRoomLink'(event, template) {
         event.preventDefault();
-        Client.setCurrentRoom(template.data._id);
+        event.stopImmediatePropagation();
+        Client.setCurrentRoom(template.data.room._id);
+    },
+    'click .pin-room-link'(event, template) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        Meteor.call('pinRoom', template.data.room._id, AlertFeedback);
+    },
+    'click .unpin-room-link'(event, template) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        Meteor.call('unpinRoom', template.data.room._id, AlertFeedback);
     }
 });

@@ -13,9 +13,21 @@
                 </div>
             </div>
             <div class="room-list">
-                {{#sortable items=currentRooms options=opts}}
-                    {{>roomListItem this}}
-                {{/sortable}}
+                    <div class="title">Pinned</div>
+                    {{#each pinnedRooms}}
+                        {{>roomListItem room=this pinned=true}}
+                    {{/each}}
+                <div class="ui accordion">
+                    <div class="ui title">
+                        <i class="dropdown icon"></i>
+                        Unpinned
+                    </div>
+                    <div class="content">
+                        {{#each unpinnedRooms}}
+                            {{>roomListItem room=this pinned=false}}
+                        {{/each}}
+                    </div>
+                </div>
             </div>
             <div class="ui header violet item">
                 <i class="comments icon"></i>

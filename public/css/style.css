@@ -297,26 +297,31 @@ span.room-tile-count {
     background: lightblue;
 }
 
-.draggableRoomItem:hover .room-leave-link {
+.draggableRoomItem:hover .room-icon {
     display: inline-block;
 }
 
-.room-leave-link {
+.room-icon {
     display: none;
     float: right;
     cursor: default;
     color: grey;
 }
 
-.room-leave-link-enabled {
+.room-icon {
     cursor: pointer;
     color: black;
 }
-
-.room-leave-link-enabled:hover {
-    color: red;
-    transform: scale(1.3);
+.room-icon:hover {
+    transform: scale(1.5);
     transition-duration: 0.2s;
+}
+
+.room-leave-link-enabled:hover, .unpin-room-link:hover {
+    color: red;
+}
+.pin-room-link:hover{
+    color: green;
 }
 
 .notification-container {

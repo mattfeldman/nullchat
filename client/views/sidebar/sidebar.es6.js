@@ -1,6 +1,14 @@
+function getPinnedRooms() {
+    const userPinnedRooms = Meteor.users.findOne({_id: Meteor.userId()}, { fields: {"preferences.pinnedRooms": 1}});
+    return userPinnedRooms && userPinnedRooms.preferences && userPinnedRooms.preferences.pinnedRooms || [];
+}
 Template.sidebar.helpers({
-    currentRooms() {
-        return Rooms.find({users: Meteor.userId(), direct: {$ne: true}});
+    pinnedRooms() {
+        console.log(getPinnedRooms());
+        return Rooms.find({users: Meteor.userId(), direct: {$ne: true}, _id: {$in: getPinnedRooms()}});
+    },
+    unpinnedRooms() {
+        return Rooms.find({users: Meteor.userId(), direct: {$ne: true}, _id: {$nin: getPinnedRooms()}});
     },
     opts() {
         return {
@@ -19,4 +27,8 @@ Template.sidebar.helpers({
     currentDirectMessages() {
         return Rooms.find({users: Meteor.userId(), direct: true});
     }
+});
+
+Template.sidebar.onRendered(function () {
+    this.$('.ui.accordion').accordion();
 });
