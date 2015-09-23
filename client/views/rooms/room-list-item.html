@@ -8,10 +8,10 @@
         {{/if}}
         #{{room.name}}
         {{#if pinned}}
-            <a href="#" class="unpin-room-link room-icon"><i class="hide icon"></i></a>
+            <a href="#" class="unpin-room-link room-icon"><i class="clockwise rotated pin icon"></i></a>
         {{else}}
             <a href="#" class="room-leave-link room-icon {{leaveLinkEnabled}}" alt="Leave #{{room.name}}."><i class="fa fa-remove"></i></a>
-            <a href="#" class="pin-room-link room-icon"><i class="pin icon"></i></a>
+            <a href="#" class="pin-room-link room-icon"><i class="clockwise rotated pin icon"></i></a>
         {{/if}}
     </div>
 </template>

@@ -13,12 +13,12 @@
                 </div>
             </div>
             <div class="room-list">
-                    <div class="title">Pinned</div>
+                    <div class="ui title tiny purple header item">Pinned</div>
                     {{#each pinnedRooms}}
                         {{>roomListItem room=this pinned=true}}
                     {{/each}}
                 <div class="ui accordion">
-                    <div class="ui title">
+                    <div class="ui title tiny purple header item">
                         <i class="dropdown icon"></i>
                         Unpinned
                     </div>

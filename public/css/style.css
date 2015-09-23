@@ -316,8 +316,10 @@ span.room-tile-count {
     transform: scale(1.5);
     transition-duration: 0.2s;
 }
-
-.room-leave-link-enabled:hover, .unpin-room-link:hover {
+.unpin-room-link:hover {
+    transform: rotate(90deg);
+}
+.room-leave-link-enabled:hover {
     color: red;
 }
 .pin-room-link:hover{
