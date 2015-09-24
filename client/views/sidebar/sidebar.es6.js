@@ -26,6 +26,10 @@ Template.sidebar.helpers({
     },
     currentDirectMessages() {
         return Rooms.find({users: Meteor.userId(), direct: true});
+    },
+    unpinnedTotalUnread() {
+        const rooms = Rooms.find({users: Meteor.userId(), direct: {$ne: true}, _id: {$nin: getPinnedRooms()}}, {fields: {_id: 1}}).fetch();
+        return rooms && _(rooms).map(r => r && r._id && Client.getRoomUnread(r._id)).reduce((a, b) => a + b);
     }
 });
 

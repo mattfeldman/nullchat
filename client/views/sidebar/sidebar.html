@@ -21,6 +21,9 @@
                     <div class="ui title tiny purple header item">
                         <i class="dropdown icon"></i>
                         Unpinned
+                        {{#if unpinnedTotalUnread}}
+                            <div class="ui green label">{{unpinnedTotalUnread}}</div>
+                        {{/if}}
                     </div>
                     <div class="content">
                         {{#each unpinnedRooms}}
