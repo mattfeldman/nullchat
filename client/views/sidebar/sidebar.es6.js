@@ -4,7 +4,6 @@ function getPinnedRooms() {
 }
 Template.sidebar.helpers({
     pinnedRooms() {
-        console.log(getPinnedRooms());
         return Rooms.find({users: Meteor.userId(), direct: {$ne: true}, _id: {$in: getPinnedRooms()}});
     },
     unpinnedRooms() {
@@ -29,7 +28,7 @@ Template.sidebar.helpers({
     },
     unpinnedTotalUnread() {
         const rooms = Rooms.find({users: Meteor.userId(), direct: {$ne: true}, _id: {$nin: getPinnedRooms()}}, {fields: {_id: 1}}).fetch();
-        return rooms && _(rooms).map(r => r && r._id && Client.getRoomUnread(r._id)).reduce((a, b) => a + b);
+        return rooms && _(rooms).map(r => r && r._id && Client.getRoomUnread(r._id)).reduce((a, b) => a + b, 0);
     }
 });
 
