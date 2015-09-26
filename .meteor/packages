@@ -13,7 +13,6 @@ chuangbo:marked
 fabienb4:autoform-semantic-ui
 flemay:less-autoprefixer
 gadicohen:reactive-window
-grigio:babel
 http
 iron:router
 jparker:gravatar
@@ -69,3 +68,4 @@ check
 
 
 npm-container
+ecmascript
