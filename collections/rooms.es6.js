@@ -167,5 +167,16 @@ Meteor.methods({
             updateQuery.$addToSet = {invited: {$each: room.users}};
         }
         Rooms.update({_id: room._id}, updateQuery);
+    },
+    deleteRoom(targetRoomId) {
+        check(targetRoomId, String);
+        const room = Rooms.findOne(targetRoomId);
+        const user = Meteor.user();
+
+        if (room.ownerId !== user._id) {
+            throw new Meteor.Error("room-delete-not-owner");
+        }
+        Messages.remove({roomId: targetRoomId});
+        Rooms.remove({_id: targetRoomId});
     }
 });
