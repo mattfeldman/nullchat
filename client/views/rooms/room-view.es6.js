@@ -30,7 +30,6 @@ Template.roomView.helpers({
         return Client.getRoomUnread(Session.get('currentRoom'));
     },
     showScroll() {
-        console.log(Template.instance().scrolledFromBottom.get());
         return Client.getRoomUnread(Session.get('currentRoom')) > 0 && Template.instance().scrolledFromBottom.get();
     }
 });
@@ -57,7 +56,7 @@ Template.roomView.events({
     },
     'scroll'(event, template) {
         const percentScrolledToTop = ($("#scrollContainer").height() - $("#roomContainer").scrollTop() - $("#roomContainer").height()) / $("#scrollContainer").height();
-        var scrolled =  percentScrolledToTop > 0.05;
+        const scrolled =  percentScrolledToTop > 0.05;
         template.scrolledFromBottom.set(scrolled);
         if (!scrolled) {
             Client.clearRoomUnread(Session.get('currentRoom'));
