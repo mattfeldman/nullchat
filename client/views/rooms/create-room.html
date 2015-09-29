@@ -1,20 +1,15 @@
 <template name="createRoom">
     {{#if creatingRoom}}
-        {{#autoForm schema="Schemas.createRoom" class="ui form" id="createRoomForm" type="method" meteormethod="createRoom"}}
+    <form class="ui form" id="createRoomForm">
             <div class="field">
                 <label>Room Name</label>
                 <div class="ui action input">
-                    {{> afFieldInput name='name'}}
+                    <input name="roomName">
                     <button type="submit" class="ui green button create-room-button">Create</button>
                 </div>
-                {{#if afFieldIsInvalid name='name'}}
-                    <div class="ui pointing red label">
-                        {{afFieldMessage name='name'}}
-                    </div>
-                {{/if}}
             </div>
             <a href="#" class="right floated create-room-cancel">Cancel</a>
-        {{/autoForm}}
+            </form>
     {{else}}
         <a href="#" class="ui tiny basic green button create create-room-link">new</a>
     {{/if}}

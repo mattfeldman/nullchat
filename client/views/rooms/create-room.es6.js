@@ -5,6 +5,18 @@ Template.createRoom.helpers({
 });
 
 Template.createRoom.events({
+    'submit #createRoomForm'(event, template) {
+        event.preventDefault();
+        const roomName = template.$('input[name=roomName]').val();
+        if (roomName) {
+            Meteor.call('createRoom', {name: roomName}, (err, data)=> {
+                AlertFeedback(err, data);
+                if (!err) {
+                    template.$('input[name=roomName]').val('');
+                }
+            });
+        }
+    },
     'click .create-room-link'(event, template) {
         template.creatingRoom.set(true);
         event.preventDefault();
