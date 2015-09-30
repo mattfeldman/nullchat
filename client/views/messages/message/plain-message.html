@@ -12,7 +12,7 @@
                 <img class="user-popup" src="{{avatarForUserId authorId}}"/>
             {{/if}}
         </a>
-        <div class="content {{myMessageFromId authorId}} smallMessage" style="border-color: {{colorForUserId authorId}};">
+        <div class="content {{myMessageFromId authorId}} {{hasMention}} smallMessage" style="border-color: {{colorForUserId authorId}};">
             {{#unless continuedMessage}}
                 {{>messageAuthor authorId}}
                 <div class="metadata">
@@ -32,7 +32,7 @@
                                title="Message was cross posted using #tags"></i>
                         {{/if}}
                         {{#if hasEdits}}
-                            <span class="lastEditTime">Edited {{lastEditTime}}</span>
+                            <span class="ui small basic grey label">Edited {{lastEditTime}}</span>
                         {{/if}}
                         <span class="ui horizontal divided link list actionLinks">
                             {{#if canEdit}}
@@ -62,7 +62,7 @@
                                title="Message was cross posted using #tags"></i>
                         {{/if}}
                         {{#if hasEdits}}
-                            <span class="lastEditTime">Edited {{lastEditTime}}</span>
+                            <span class="ui small basic grey label">Edited {{lastEditTime}}</span>
                         {{/if}}
                     </div>
                     <span class="date message-timestamp">{{showTimestamp}}</span>
