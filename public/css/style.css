@@ -6,23 +6,12 @@
     background: lightgoldenrodyellow;
 }
 
-.lastEditTime {
-    font-size: 0.7em;
-    color: dimgray;
-    background: lightgray;
-    padding: 0.15em;
-}
-
 .message-extras {
     display: none;
 }
 
 .message:hover .message-extras {
     display: inline-block;
-}
-
-.feedback-message {
-    background: lightblue;
 }
 
 .meme-pill-image {
