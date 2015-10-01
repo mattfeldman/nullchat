@@ -9,7 +9,7 @@ UserHelpers = {
     },
     colorForUserId(userId) {
         const user = Meteor.users.findOne({_id: userId}, {fields: {'profile.color': 1}});
-        return user && user.profile && user.profile.color || "transparent";
+        return user && user.profile && user.profile.color || "grey";
     },
     userFromId(userId) {
         return Meteor.users.findOne({_id: userId});
