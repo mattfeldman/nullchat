@@ -1,17 +1,13 @@
-.my-message {
+.ui.comment.my-message {
     background-color: white;
 }
 
-.has-mention {
+.ui.comment.has-mention {
     background: lightgoldenrodyellow;
 }
 
-.message-extras {
-    display: none;
-}
-
-.message:hover .message-extras {
-    display: inline-block;
+.ui.comment:hover .content {
+    background-color: rgba(175,175,175,0.33);
 }
 
 .meme-pill-image {

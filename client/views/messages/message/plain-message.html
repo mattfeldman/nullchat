@@ -1,5 +1,5 @@
 <template name="plainMessage">
-    <div id="{{_id}}" class="ui comment plain-message {{#if continuedMessage}}continued{{/if}}">
+    <div id="{{_id}}" class="ui comment plain-message {{myMessageFromId authorId}} {{hasMention}} {{#if continuedMessage}}continued{{/if}}">
         <a class="avatar">
             {{#if continuedMessage}}
                 <span class="rating actionLinks">
@@ -12,7 +12,7 @@
                 <img class="user-popup" src="{{avatarForUserId authorId}}"/>
             {{/if}}
         </a>
-        <div class="content {{myMessageFromId authorId}} {{hasMention}} smallMessage" style="border-color: {{colorForUserId authorId}};">
+        <div class="content smallMessage" style="border-color: {{colorForUserId authorId}};">
             {{#unless continuedMessage}}
                 {{>messageAuthor authorId}}
                 <div class="metadata">
