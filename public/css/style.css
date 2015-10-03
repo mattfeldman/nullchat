@@ -75,26 +75,12 @@
     height: 25px;
 }
 
-.new-message-typing-users {
-    top: 30px;
-    left: 5px;
-    position: absolute;
-}
-
 .room-header {
     border-right: none !important;
 }
 
 .room-header .header {
     height: 51px;
-}
-
-.room-header-name {
-    font-size: 36px;
-}
-
-.room-header-topic {
-    font-size: 12px;
 }
 
 .room-container {
@@ -130,36 +116,6 @@
     padding-left: 1%;;;
 }
 
-.message {
-    border-left: 3px solid transparent;
-    display: block;
-    width: 100%;
-    min-height: 50px;
-    position: relative;;
-}
-
-.message-content {
-    padding-left: 5px;
-    min-height: 50px;
-    line-height: 50px;
-    display: inline-block;
-    position: relative;
-}
-
-.message-user {
-    display: inline-block;
-    vertical-align: middle;
-    float: left;
-    width: 125px;
-    height: 50px;
-}
-
-.message-user-username {
-    line-height: 50px;
-    width: 75px;
-    float: right;
-}
-
 .message-user-mention {
     padding: 3px;
 }
@@ -183,105 +139,11 @@
     color: rgb(0, 168, 255);
 }
 
-.room-notification-container {
-    display: inline-block;
-}
-
-.room-notification-count {
-    display: inline-block;
-    line-height: 20px;
-    margin: 2px auto;
-    height: 20px;
-    text-align: center;
-    background: lightgray;
-    min-width: 20px;
-}
-
-.room-notification-count:empty {
-    background: transparent;
-}
-
-.selected-room .room-notification-count {
-    min-width: 0;
-    transition: 0.4s;
-    -webkit-transition: 0.4s;
-}
-
-.discover-room-button {
-    position: relative;
-}
-
-.notification-button-unread[data-unread]:before, .room-invitation-unread[data-unread]:before {
-    content: attr(data-unread);
-    background: red;
-    color: white;
-    display: inline-block;
-    padding: 3px;
-    margin-right: 2px;
-    width: 18px;
-    height: 18px;
-    line-height: 150%;
-}
-
-.discover-rooms-container {
-    margin: 3%;
-    padding: 1%;
-    background-color: #ddd
-}
-
-.room-tile {
-    padding: 1%;
-    width: 21%;
-    display: inline-block;
-    margin: 0.5%;
-    background-color: #F0F0F0;
-    transition: 0.1s;
-    position: relative;
-}
-
-.room-tile:hover {
-    background-color: rgb(232, 226, 245);
-    transition: 0.3s;
-}
-
-.room-tile:active {
-    background-color: rgb(166, 64, 226);
-    transition: 0.3s;
-}
-
-span.room-tile-count {
-    position: absolute;
-    right: 1%;
-}
-
-.room-tile-icon {
-    color: gray;
-    margin: 3px 0;
-}
-
-.room-tile-topic {
-    display: inline-block;
-    color: darkgray;
-}
-
 .my-room {
     border: 1px solid #333;
     background-color: #aaa;
     transition: 0.3s;
 }
-
-/*div, body, html {
-    padding: 0;
-    margin: 0;
-}*/
-.room-element {
-    line-height: 200%;
-}
-
-.room-element:hover {
-    background: lightblue;
-}
-
 .draggableRoomItem:hover .room-icon {
     display: inline-block;
 }
@@ -309,22 +171,6 @@ span.room-tile-count {
 }
 .pin-room-link:hover{
     color: green;
-}
-
-.notification-container {
-    margin: 5% 10%;
-    padding: 1%;
-    background-color: #ddd;
-}
-
-.notification-item {
-    background-color: white;
-    padding: 1em;
-    margin: 1em;
-}
-
-.notification-item-author {
-    font-weight: 900;
 }
 
 #img-upload-preview {
@@ -392,10 +238,6 @@ html, body {
 
 .ui.comments {
     max-width: 100%;
-}
-
-.s-alert-info, .s-alert-success, .s-alert-warning, .s-alert-error {
-
 }
 
 .menu {
