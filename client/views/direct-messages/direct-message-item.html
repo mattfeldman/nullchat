@@ -2,7 +2,7 @@
     <div class="ui violet {{activeRoomFromId _id}} compact link item">
         <div>
             {{#if unreadCount}}
-                <div class="ui green label">{{unreadCount}}</div>
+                <div class="ui purple label">{{unreadCount}}</div>
             {{/if}}
             {{#with otherUserId users}}
                 <img src="{{avatarForUserId this}}" class="ui middle aligned mini image"
