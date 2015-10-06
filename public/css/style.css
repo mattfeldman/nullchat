@@ -198,6 +198,9 @@ html, body {
 .smallMessageList {
     padding-bottom: 60px;
 }
+.scroll-container{
+    padding: 0.25em;
+}
 
 .smallMessage {
     border-left: 2px solid transparent;;
