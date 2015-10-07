@@ -66,7 +66,7 @@ Template.roomView.events({
 
 Template.roomView.onRendered(function () {
     Meteor.call('setSeen', Session.get('currentRoom'));
-    $('.ui.sidebar').sidebar({dimPage: false, closable: false}).sidebar('toggle');
+    $('.ui.sidebar').sidebar({dimPage: false, closable: false}).sidebar('show');
 });
 
 Template.roomView.onCreated(function () {
