@@ -40,10 +40,10 @@ describe('UserHelpers', function () {
             testWithUser({profile: {color: "#FF0000"}}, "#FF0000");
         });
         it('should return a default value with no profile', function () {
-            testWithUser({}, "transparent");
+            testWithUser({}, "grey");
         });
         it('should return a default value with no color in profile', function () {
-            testWithUser({profile: {notColor: "#FF0000"}}, "transparent");
+            testWithUser({profile: {notColor: "#FF0000"}}, "grey");
         });
     });
 
