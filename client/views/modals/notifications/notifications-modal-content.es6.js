@@ -5,7 +5,8 @@ Template.notificationsModalContent.helpers({
 });
 
 Template.notificationsModalContent.events({
-    'click .notificatpions-dismiss-all'(event, template) {
+    'click .notifications-dismiss-all'(event, template) {
         Meteor.call("setAllNotificationsSeen");
+        $('.ui.modal').modal('hide');
     }
 });
