@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <template name="layout">
-    {{> sidebar}}
+    {{#if loggedIn}}
+        {{> sidebar}}
+    {{/if}}
     <div class="pusher fluid-sidebar">
         {{> sAlert}}
         <div id="main" class="row-fluid">
