@@ -1,12 +1,4 @@
-Meteor.startup(()=> {
-    Emojis.remove({});
-    _(emojioneRaw).each(emoji=> {
-        emoji.category_order = parseInt(emoji.category_order);
-        Emojis.insert(emoji);
-    });
-});
-
-const emojioneRaw = {
+emojioneRaw = {
     "hash": {
         "unicode": "0023-20E3",
         "unicode_alternates": ["0023-FE0F-20E3"],

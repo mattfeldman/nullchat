@@ -1,0 +1,1 @@
+Emojis = new Mongo.Collection('emojis');

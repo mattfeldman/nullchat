@@ -1,9 +1,6 @@
 Router.configure({
     layoutTemplate: 'layout',
-    loadingTemplate: 'loading',
-    waitOn() {
-        return [Meteor.subscribe('users'), Meteor.subscribe('myPreferences')];
-    }
+    loadingTemplate: 'loading'
 });
 Router.map(function () {
     this.route('/room/:_id', {
@@ -50,7 +47,9 @@ Router.map(function () {
                 Meteor.subscribe('availableRooms'),
                 Meteor.subscribe('currentRooms'),
                 Meteor.subscribe('emojis'),
-                Meteor.subscribe('memes')
+                Meteor.subscribe('memes'),
+                Meteor.subscribe('users'),
+                Meteor.subscribe('myPreferences')
             ];
         },
         action() {
