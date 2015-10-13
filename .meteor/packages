@@ -1,6 +1,25 @@
-# Application Packages
+# Meteor packages
 accounts-github
 accounts-password
+blaze-html-templates
+check
+ecmascript
+ejson
+http
+jquery
+logging
+meteor-base
+mobile-experience
+mongo
+npm-container
+random
+reload
+session
+spacebars
+standard-minifiers
+tracker
+
+# Application Packages
 aldeed:autoform
 aramk:tinycolor
 audit-argument-checks
@@ -13,7 +32,6 @@ chuangbo:marked
 fabienb4:autoform-semantic-ui
 flemay:less-autoprefixer
 gadicohen:reactive-window
-http
 iron:router
 jparker:gravatar
 juliancwirko:s-alert
@@ -29,7 +47,6 @@ mizzao:user-status
 mrt:moment
 mrt:underscore-string-latest
 percolate:migrations
-qnub:emojione
 reactive-var
 rubaxa:sortable
 sacha:spin
@@ -51,22 +68,5 @@ sanjo:jasmine
 velocity:html-reporter@0.6.2
 velocity:console-reporter
 
-standard-minifiers
-meteor-base
-mobile-experience
-mongo
-blaze-html-templates
-session
-jquery
-tracker
-logging
-reload
-random
-ejson
-spacebars
-check
-
-
-npm-container
-ecmascript
+# Nullchat Packages
 nullchat:emojione
