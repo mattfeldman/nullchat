@@ -20,7 +20,7 @@ standard-minifiers
 tracker
 
 # Application Packages
-aldeed:autoform
+aldeed:simple-schema
 aramk:tinycolor
 audit-argument-checks
 brentjanderson:buzz
@@ -29,7 +29,6 @@ cfs:s3
 cfs:standard-packages
 chriswessels:hammer
 chuangbo:marked
-fabienb4:autoform-semantic-ui
 flemay:less-autoprefixer
 gadicohen:reactive-window
 iron:router
